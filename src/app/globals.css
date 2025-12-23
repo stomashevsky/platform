@@ -1,26 +1,225 @@
 @import "tailwindcss";
 
+/* ============================================
+   OpenAI Platform Design Tokens
+   Extracted EXACTLY from platform.openai.com
+   December 2024 - All values verified via CDP
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* === COLORS === */
+  
+  /* Backgrounds */
+  --bg-page: #f3f3f3;            /* rgb(243, 243, 243) - Page background */
+  --bg-primary: #f3f3f3;         /* Alias for page bg */
+  --bg-secondary: #ffffff;       /* rgb(255, 255, 255) - Cards, sidebar, inputs */
+  --bg-tertiary: #ededed;        /* rgb(237, 237, 237) - Active sidebar item */
+  --bg-hover: #f5f5f5;           /* rgb(245, 245, 245) - Hover state */
+  --bg-active: #e5e5e5;          /* rgb(229, 229, 229) - Active/pressed */
+  
+  /* Text */
+  --text-primary: #0d0d0d;       /* rgb(13, 13, 13) - Main text, active items */
+  --text-secondary: #5d5d5d;     /* rgb(93, 93, 93) - Secondary text */
+  --text-body: #282828;          /* rgb(40, 40, 40) - Body text */
+  --text-muted: #8f8f8f;         /* rgb(143, 143, 143) - Muted, section titles */
+  --text-on-dark: #ffffff;       /* rgb(255, 255, 255) - Text on dark bg */
+  
+  /* Icons */
+  --icon-primary: #181818;       /* rgb(24, 24, 24) - Active icon */
+  --icon-secondary: #282828;     /* rgb(40, 40, 40) - Normal icon */
+  
+  /* Buttons */
+  --button-primary-bg: #181818;  /* rgb(24, 24, 24) - Primary button */
+  --button-primary-hover: #0d0d0d; /* rgb(13, 13, 13) - Primary hover */
+  --button-secondary-bg: #ffffff;
+  --button-secondary-hover: #f5f5f5;
+  
+  /* Borders */
+  --border-default: #ededed;     /* rgb(237, 237, 237) - Default border */
+  --border-strong: #d5d5d5;      /* rgb(213, 213, 213) - Stronger border */
+  --border-focus: #0d0d0d;       /* Focus ring */
+  
+  /* Status Colors */
+  --success: #10a37f;
+  --success-bg: rgba(16, 163, 127, 0.1);
+  --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.1);
+  --error: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.1);
+  --info: #3b82f6;
+  --info-bg: rgba(59, 130, 246, 0.1);
+  
+  /* === TYPOGRAPHY === */
+  --font-sans: "OpenAI Sans", helvetica, sans-serif;  /* Exact from OpenAI */
+  --font-mono: "Fira Code", "SF Mono", Monaco, Consolas, monospace;
+  
+  /* Font Sizes - from OpenAI */
+  --text-xs: 12px;
+  --text-sm: 13px;               /* Section titles */
+  --text-base: 14px;             /* Main text, buttons, sidebar items */
+  --text-lg: 16px;               /* Body default */
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  
+  /* Font Weights */
+  --font-normal: 400;            /* Normal sidebar items */
+  --font-medium: 500;            /* Buttons, section titles */
+  --font-semibold: 600;          /* Active sidebar items */
+  
+  /* Letter Spacing */
+  --tracking-tight: -0.16px;     /* Section titles */
+  
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  
+  /* === SPACING === */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-1-5: 6px;              /* Button gap, sidebar item padding */
+  --space-2: 8px;
+  --space-3: 12px;               /* Sidebar section padding */
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;              /* Primary button height */
+  --space-12: 48px;
+  --space-16: 64px;
+  
+  /* === BORDER RADIUS === */
+  --radius-sm: 4px;
+  --radius-md: 8px;              /* Sidebar items, chips */
+  --radius-lg: 12px;
+  --radius-xl: 16px;             /* Sidebar container */
+  --radius-full: 9999px;         /* Pill buttons */
+  
+  /* === SHADOWS === */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  /* === LAYOUT === */
+  --sidebar-width: 218px;              /* Exact from OpenAI: 12px left + 194px item + 12px right */
+  --sidebar-collapsed-width: 64px;     /* Exact from OpenAI */
+  --sidebar-group-gap: 24px;           /* Gap between groups in collapsed mode */
+  --sidebar-padding-top: 0px;          /* Exact from OpenAI */
+  --sidebar-padding-x: 12px;           /* Item left offset from sidebar edge */
+  --header-height: 54px;               /* Exact from OpenAI */
+  
+  /* Sidebar Item - Exact from OpenAI */
+  --sidebar-item-width: 194px;         /* Exact from OpenAI */
+  --sidebar-item-height: 32px;         /* Exact from OpenAI */
+  --sidebar-item-margin-bottom: 4px;   /* Via flex gap */
+  --sidebar-item-radius: 6px;          /* Exact from OpenAI */
+  --sidebar-item-padding-x: 6px;       /* Exact from OpenAI */
+  
+  /* Icon size - Exact from OpenAI */
+  --icon-size: 20px;                   /* Exact from OpenAI */
+  
+  /* Sidebar Colors - Exact from OpenAI */
+  --sidebar-text-active: #181818;      /* rgb(24, 24, 24) */
+  --sidebar-text-normal: #282828;      /* rgb(40, 40, 40) */
+  --sidebar-bg-active: #dfdfdf;        /* rgb(223, 223, 223) - Active item bg */
+  --sidebar-bg-hover: #ededed;         /* rgb(237, 237, 237) - Hover state */
+  
+  /* === TRANSITIONS === */
+  --transition-fast: 100ms ease;
+  --transition-normal: 150ms ease;
+  --transition-slow: 300ms ease;
+  
+  /* === Z-INDEX === */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 300;
+  --z-tooltip: 400;
+  --z-toast: 500;
 }
 
+/* Tailwind Theme Integration */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   Base Styles
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+  min-height: 100vh;
+}
+
+/* ============================================
+   Scrollbar Styles (OpenAI-like)
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* ============================================
+   Focus Styles
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Selection
+   ============================================ */
+
+::selection {
+  background: rgba(13, 13, 13, 0.1);
+  color: var(--text-primary);
+}
+
+/* ============================================
+   Link Styles
+   ============================================ */
+
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

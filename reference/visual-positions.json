@@ -1,0 +1,49 @@
+{
+  "sidebar": {
+    "left": 8,
+    "width": 210,
+    "right": 218
+  },
+  "sectionTitle": {
+    "text": "Create",
+    "elementLeft": 4,
+    "elementRight": 12,
+    "width": 194,
+    "paddingLeft": "12px",
+    "paddingRight": "12px",
+    "textStartsAt": 16
+  },
+  "activeMenuItem": {
+    "elementLeft": 4,
+    "elementRight": 12,
+    "width": 194,
+    "icon": {
+      "left": 8,
+      "marginLeft": "4px"
+    },
+    "text": {
+      "left": 42,
+      "content": "Chat"
+    }
+  },
+  "creditsCard": {
+    "elementLeft": 4,
+    "elementRight": 12,
+    "width": 194,
+    "paddingLeft": "12px",
+    "paddingRight": "12px",
+    "title": {
+      "text": "Add credits",
+      "textLeft": 17
+    }
+  },
+  "collapseButton": {
+    "left": 4,
+    "width": 40
+  },
+  "footer": {
+    "padding": "6px 12px 6px 4px",
+    "paddingLeft": "4px",
+    "paddingRight": "12px"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "layout": {
+    "width": 258.3828125,
+    "height": 54,
+    "left": 703.6171875,
+    "top": 0,
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "padding": "0px",
+    "margin": "0px -17px 0px 0px",
+    "borderRadius": "0px"
+  },
+  "projectSelector": {},
+  "sectionTitles": [],
+  "menuItems": [],
+  "dividers": [],
+  "icons": [],
+  "sidebarContainer": {
+    "width": 285.3828125,
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "padding": "0px",
+    "borderRadius": "0px",
+    "border": "0px solid rgb(40, 40, 40)",
+    "margin": "0px",
+    "gap": "16px"
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "timestamp": "2025-12-23T14:07:39.206Z",
+  "url": "https://platform.openai.com/chat",
+  "viewport": null,
+  "globalStyles": {
+    "body": {
+      "backgroundColor": "rgb(243, 243, 243)",
+      "color": "rgb(40, 40, 40)",
+      "fontFamily": "\"OpenAI Sans\", helvetica, sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "-0.16px"
+    },
+    "documentElement": {
+      "backgroundColor": "rgb(243, 243, 243)"
+    }
+  },
+  "allColors": {
+    "backgrounds": [
+      "rgb(243, 243, 243)",
+      "rgb(24, 24, 24)",
+      "rgb(237, 237, 237)",
+      "rgb(255, 255, 255)"
+    ],
+    "textColors": [
+      "rgb(40, 40, 40)",
+      "rgb(255, 255, 255)",
+      "rgb(93, 93, 93)",
+      "rgb(143, 143, 143)",
+      "rgb(13, 13, 13)",
+      "rgb(24, 24, 24)"
+    ],
+    "borderColors": [
+      "rgb(40, 40, 40)",
+      "rgb(255, 255, 255)",
+      "rgb(93, 93, 93)",
+      "rgb(143, 143, 143)",
+      "rgb(13, 13, 13)",
+      "rgb(24, 24, 24)",
+      "oklab(0.159065 0.00000723451 0.00000317395 / 0.1)",
+      "rgb(237, 237, 237)",
+      "rgba(0, 0, 0, 0.06)"
+    ]
+  },
+  "headerStyles": {
+    "element": "DIV",
+    "height": "0px",
+    "padding": "0px",
+    "paddingLeft": "0px",
+    "paddingRight": "0px",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "display": "block",
+    "alignItems": "normal",
+    "justifyContent": "normal",
+    "position": "static",
+    "zIndex": "auto"
+  },
+  "sidebarStyles": {
+    "sidebar": {
+      "width": "210px",
+      "padding": "14px 0px 0px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "position": "absolute"
+    },
+    "items": [
+      {
+        "text": "Chat",
+        "width": "194px",
+        "height": "32px",
+        "padding": "0px",
+        "margin": "0px 0px 4px",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "rgb(24, 24, 24)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderRadius": "0px",
+        "isActive": false,
+        "before": {
+          "backgroundColor": "rgb(223, 223, 223)",
+          "borderRadius": "6px",
+          "content": "\"\""
+        }
+      },
+      {
+        "text": "ChatGPT Apps",
+        "width": "194px",
+        "height": "32px",
+        "padding": "0px",
+        "margin": "0px 0px 4px",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "rgb(40, 40, 40)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderRadius": "0px",
+        "isActive": false,
+        "before": {
+          "backgroundColor": "rgb(223, 223, 223)",
+          "borderRadius": "6px",
+          "content": "\"\""
+        }
+      },
+      {
+        "text": "Agent Builder",
+        "width": "194px",
+        "height": "32px",
+        "padding": "0px",
+        "margin": "0px 0px 4px",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "rgb(40, 40, 40)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderRadius": "0px",
+        "isActive": false,
+        "before": {
+          "backgroundColor": "rgb(223, 223, 223)",
+          "borderRadius": "6px",
+          "content": "\"\""
+        }
+      },
+      {
+        "text": "Audio",
+        "width": "194px",
+        "height": "32px",
+        "padding": "0px",
+        "margin": "0px 0px 4px",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "rgb(40, 40, 40)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderRadius": "0px",
+        "isActive": false,
+        "before": {
+          "backgroundColor": "rgb(223, 223, 223)",
+          "borderRadius": "6px",
+          "content": "\"\""
+        }
+      },
+      {
+        "text": "Images",
+        "width": "194px",
+        "height": "32px",
+        "padding": "0px",
+        "margin": "0px 0px 4px",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "color": "rgb(40, 40, 40)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderRadius": "0px",
+        "isActive": false,
+        "before": {
+          "backgroundColor": "rgb(223, 223, 223)",
+          "borderRadius": "6px",
+          "content": "\"\""
+        }
+      }
+    ]
+  },
+  "buttonStyles": [
+    {
+      "text": "",
+      "height": "32px",
+      "padding": "0px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(40, 40, 40)",
+      "border": "0px none rgb(40, 40, 40)",
+      "borderRadius": "0px",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "before": {
+        "backgroundColor": "rgb(223, 223, 223)",
+        "borderRadius": "6px"
+      }
+    },
+    {
+      "text": "Create",
+      "height": "40px",
+      "padding": "0px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(255, 255, 255)",
+      "border": "0px solid rgb(255, 255, 255)",
+      "borderRadius": "9999px",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "before": {
+        "backgroundColor": "rgb(24, 24, 24)",
+        "borderRadius": "9999px"
+      }
+    },
+    {
+      "text": "Trip planner",
+      "height": "28px",
+      "padding": "0px 7.98px",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(13, 13, 13)",
+      "border": "0px solid rgb(13, 13, 13)",
+      "borderRadius": "9999px",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "before": {
+        "backgroundColor": "oklab(0.159065 0.00000723451 0.00000317395 / 0.08)",
+        "borderRadius": "9999px"
+      }
+    }
+  ],
+  "hoverStates": {
+    "element": "Create",
+    "default": {
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "color": "rgb(255, 255, 255)"
+    },
+    "note": "Hover состояния требуют эмуляции через page.hover()"
+  }
+}

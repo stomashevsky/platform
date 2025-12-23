@@ -1,0 +1,41 @@
+{
+  "sidebarParent": {
+    "left": 8,
+    "width": 793,
+    "tag": "MAIN",
+    "className": "UOJLX"
+  },
+  "sidebar": {
+    "left": 8,
+    "width": 210,
+    "right": 218
+  },
+  "activeItem": {
+    "left": 12,
+    "right": 206,
+    "width": 194,
+    "leftGapFromSidebar": 4,
+    "rightGapFromSidebar": 12,
+    "iconLeft": 16,
+    "iconLeftFromSidebar": 8,
+    "iconWidth": 32,
+    "svgLeft": 22,
+    "svgLeftFromSidebar": 14,
+    "beforeInset": "0px",
+    "beforeWidth": "194px",
+    "beforeLeft": "0px",
+    "beforeRight": "0px"
+  },
+  "contentWrapper": {
+    "left": 0,
+    "leftFromSidebar": -8,
+    "margin": "0px 0px 0px -8px",
+    "padding": "0px 12px 16px",
+    "width": 218
+  },
+  "section": {
+    "left": 12,
+    "leftFromSidebar": 4,
+    "width": 194
+  }
+}
