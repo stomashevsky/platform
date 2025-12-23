@@ -58,10 +58,11 @@ export default function Home() {
           {/* Sidebar - absolute position on desktop, overlay on mobile */}
           {/* OpenAI mobile: sidebar visibility: hidden, shown as overlay when hamburger clicked */}
           
-          {/* Mobile overlay backdrop */}
+          {/* Mobile overlay backdrop - starts below header */}
           {mobileMenuOpen && (
             <div 
-              className="fixed inset-0 bg-black/30 z-40 md:hidden"
+              className="fixed left-0 right-0 bottom-0 bg-black/30 z-40 md:hidden"
+              style={{ top: '54px' }}
               onClick={() => setMobileMenuOpen(false)}
             />
           )}
@@ -69,19 +70,16 @@ export default function Home() {
           {/* Sidebar container */}
           <div
             className={`
-              absolute transition-all duration-200
-              md:block
-              ${mobileMenuOpen ? 'fixed z-50 left-0' : 'hidden md:block'}
+              transition-all duration-200
+              ${mobileMenuOpen 
+                ? 'fixed z-50 left-0 bg-[#f3f3f3] overflow-y-auto' 
+                : 'hidden md:block absolute'}
             `}
             style={{
-              top: mobileMenuOpen ? '54px' : '0px', // On mobile, start from header bottom; desktop: 0px (sidebar has own padding)
-              left: mobileMenuOpen ? '0px' : '8px', // Always 8px - like OpenAI
+              top: mobileMenuOpen ? '54px' : '0px',
+              left: mobileMenuOpen ? '0px' : '8px',
               width: sidebarCollapsed && !mobileMenuOpen ? '64px' : '210px',
               height: mobileMenuOpen ? 'calc(100vh - 54px)' : 'calc(100% - 16px)',
-              ...(mobileMenuOpen && { 
-                backgroundColor: '#f3f3f3',
-                paddingBottom: '8px',
-              }),
             }}
           >
             <Sidebar 
