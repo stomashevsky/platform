@@ -140,3 +140,10 @@ export const SidebarCollapseIcon: React.FC<IconProps> = ({ size = '1em', ...prop
     <path d="M9 3v18" />
   </svg>
 );
+
+// Send icon (arrow up)
+export const SendIcon: React.FC<IconProps> = ({ size = '1em', ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" {...props}>
+    <path d="M12 19V5M5 12l7-7 7 7" />
+  </svg>
+);

@@ -137,7 +137,7 @@ const ExpandIcon = () => (
 // HEADER COMPONENT
 // ============================================
 
-interface HeaderProps {
+export interface HeaderProps {
   className?: string;
 }
 

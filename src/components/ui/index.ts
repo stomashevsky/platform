@@ -16,7 +16,7 @@ export type { CardProps } from './Card';
 export { Sidebar, SidebarItem, SidebarSection, AddCreditsCard } from './Sidebar';
 export type { SidebarProps } from './Sidebar';
 
-export { Header, ProjectSelector, NavItem } from './Header';
+export { Header } from './Header';
 export type { HeaderProps } from './Header';
 
 export { Select } from './Select';

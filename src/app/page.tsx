@@ -45,12 +45,7 @@ export default function Home() {
           right: '8px',
         }}
       >
-        <Header 
-          projectName="Personal"
-          projectType="Default project"
-          activeNav="dashboard"
-          onNavClick={(item) => console.log('Nav:', item)}
-        />
+        <Header />
       </div>
       
       {/* Main layout - начинается под header */}
