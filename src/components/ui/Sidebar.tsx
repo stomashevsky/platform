@@ -72,8 +72,7 @@ interface SidebarItemProps {
 function SidebarItem({ icon, label, active, collapsed, onClick }: SidebarItemProps) {
   if (collapsed) {
     // Collapsed mode - icon only button
-    // button._8xE3c: width 40px, height 32px
-    // NOT centered! Aligned left with same margin as expanded buttons
+    // button._8xE3c: width 40px, height 32px, centered icon
     return (
       <button
         onClick={onClick}
@@ -81,7 +80,7 @@ function SidebarItem({ icon, label, active, collapsed, onClick }: SidebarItemPro
         style={{
           width: '40px',
           height: '32px',
-          margin: '0px 0px 4px',  // Same as expanded, NOT centered
+          margin: '0px 0px 4px',
           padding: '0',
           background: 'transparent',
           border: 'none',
@@ -344,6 +343,7 @@ export function Sidebar({
   };
 
   // aside.JiHZk: width 210px, padding 14px 0 0, display flex column
+  // OpenAI sidebar: overflow visible, but content uses flexShrink to fit
   return (
     <aside
       style={{
@@ -351,31 +351,29 @@ export function Sidebar({
         padding: '14px 0px 0px',
         display: 'flex',
         flexDirection: 'column',
+        overflow: 'hidden', // Prevent content from extending beyond sidebar bounds
       }}
       className={cn(
         'h-full bg-transparent',
         className
       )}
     >
-      {/* div.uDpF9: flexGrow 1 (scrollable container) */}
+      {/* Scrollable menu area - OpenAI: flexGrow 1, overflow-y auto */}
+      {/* Menu items scroll while footer stays fixed at bottom */}
+      {/* Scrollbar hidden but scrolling works (like OpenAI) */}
       <div 
+        className="sidebar-scroll-area"
         style={{
           flexGrow: 1,
           flexShrink: 1,
           flexBasis: '0%',
+          minHeight: 0, // Critical for flex + overflow to work together!
+          margin: '0px 0px 0px -8px', // Constant - prevents icon jump
+          padding: '0px 12px 16px 12px', // Constant - prevents icon jump
+          overflowX: 'hidden',
+          overflowY: 'auto',
         }}
       >
-        {/* div.sQbJC: margin 0 0 0 -8px, padding 0 12px 16px, overflow auto */}
-        {/* In collapsed: padding-left 12px to position buttons at 12px from viewport */}
-        {/* overflow-x hidden to prevent horizontal scrollbar in collapsed state */}
-        <div
-          style={{
-            margin: collapsed ? '0px' : '0px 0px 0px -8px',
-            padding: collapsed ? '0px 12px 0px 12px' : '0px 12px 16px',
-            overflowX: 'hidden',
-            overflowY: 'auto',
-          }}
-        >
           {/* Create Section */}
           <SidebarSection title="Create" collapsed={collapsed}>
             <SidebarItem 
@@ -489,14 +487,21 @@ export function Sidebar({
               onClick={() => handleItemClick('fine-tuning')}
             />
           </SidebarSection>
-        </div>
       </div>
       
-      {/* div.z3hHU: padding 6px 12px 6px 4px, display flex column, flexShrink 0 */}
-      {/* In collapsed: padding-left 12px to align collapse button with menu items */}
+      {/* Border separator - full width, no padding */}
       <div 
         style={{ 
-          padding: collapsed ? '6px 12px 6px 12px' : '6px 12px 6px 4px',
+          height: '1px',
+          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+          flexShrink: 0,
+        }}
+      />
+      
+      {/* Footer: constant padding - prevents jump on collapse */}
+      <div 
+        style={{ 
+          padding: '6px 12px 6px 4px', // Constant - matches scroll container positioning
           display: 'flex',
           flexDirection: 'column',
           flexShrink: 0,

@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  basePath: '/platform',
+  // basePath: '/platform', // disabled for local development
   images: {
     unoptimized: true,
   },

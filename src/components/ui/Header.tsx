@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
@@ -17,20 +18,40 @@ import { cn } from '@/lib/utils';
 // EXTRACTED VALUES (объединены из v3 и complete)
 // ============================================
 
+/**
+ * EXTRACTED VALUES - из navbar-complete.json и header-complete.json
+ * 
+ * Все значения извлечены из platform.openai.com через CDP!
+ * Дата извлечения: 2025-12-23
+ */
 const EXTRACTED = {
-  // FONTS - from header-v3.json
+  // FONTS
   fonts: {
     family: '"OpenAI Sans", helvetica, sans-serif',
   },
   
-  // LAYOUT - from header-v3.json & header-complete.json
+  // LAYOUT - точные позиции из оригинала
   layout: {
     headerHeight: 54,
-    avatarDistanceFromLeft: 18, // rect.left аватарки от viewport
+    headerPaddingLeft: 12, // Извлечено: 0px 12px
+    headerPaddingRight: 12, // Извлечено: 0px 12px
   },
   
-  // PROJECT SELECTOR - from header-complete.json
+  // PROJECT SELECTOR - ТОЧНЫЕ значения из оригинала (2025-12-23)
   projectSelector: {
+    // Кнопка Personal (включает аватарку + текст + chevron)
+    // padding: "0px 10px 0px 6px", borderRadius: "8px", gap: "8px"
+    personalButtonContainer: {
+      padding: '0px 10px 0px 6px', // top right bottom left
+      paddingTop: '0px',
+      paddingRight: '10px',
+      paddingBottom: '0px',
+      paddingLeft: '6px',
+      borderRadius: '8px',
+      gap: 8, // между элементами внутри
+      height: 32,
+    },
+    
     avatar: {
       width: 25,
       height: 25,
@@ -41,18 +62,16 @@ const EXTRACTED = {
       fontWeight: 600,
       lineHeight: '24px',
     },
-    // Gap между avatar и personal button
-    avatarToPersonalGap: 8, // 51 - (18 + 25) = 8
     
     personalButton: {
       // Text styles
       fontSize: '14px',
-      fontWeight: 600,        // ТОЧНЫЙ вес!
-      color: '#282828',       // НЕ #0d0d0d!
+      fontWeight: 600,
+      color: '#282828',
       letterSpacing: '-0.16px',
       lineHeight: '24px',
-      // Gap между текстом и иконкой внутри кнопки
-      textToIconGap: 4,       // визуально измерено
+      // Gap между текстом и иконкой
+      textToIconGap: 8,
     },
     
     separator: {
@@ -60,8 +79,19 @@ const EXTRACTED = {
       fontSize: '14px',
       fontWeight: 400,
       color: '#8f8f8f',
-      marginLeft: 8,          // gap до separator
-      marginRight: 8,         // gap после separator
+      // marginLeft/marginRight извлечены как "0px", 
+      // но визуально есть gap - он создаётся parent flex gap
+      marginLeft: 8,
+      marginRight: 8,
+    },
+    
+    // Кнопка Default project
+    // padding: "0px 10px", borderRadius: "8px", gap: "8px", height: 32px
+    projectTypeButtonContainer: {
+      padding: '0px 10px',
+      borderRadius: '8px',
+      gap: 8,
+      height: 32,
     },
     
     projectTypeButton: {
@@ -69,11 +99,12 @@ const EXTRACTED = {
       fontWeight: 600,
       color: '#282828',
       lineHeight: '24px',
-      textToIconGap: 4,
+      letterSpacing: '-0.16px',
+      textToIconGap: 8,
     },
   },
   
-  // NAVIGATION - from header-v3.json (with hover states!)
+  // NAVIGATION - из navbar-complete.json
   navigation: {
     item: {
       fontSize: '14px',
@@ -83,28 +114,28 @@ const EXTRACTED = {
       letterSpacing: '-0.16px',
     },
     active: {
-      fontWeight: 600,        // ТОЧНО 600
+      fontWeight: 600, // Dashboard - активный элемент
       color: '#0d0d0d',
     },
     inactive: {
-      fontWeight: 400,        // ТОЧНО 400
+      fontWeight: 400, // Docs, API reference - неактивные
       color: '#5d5d5d',
     },
-    // HOVER - извлечено через page.hover()!
+    // HOVER - при наведении цвет меняется на #0d0d0d
     hover: {
-      color: '#0d0d0d',       // цвет при hover
-      backgroundColor: 'transparent', // bg остаётся прозрачным
+      color: '#0d0d0d',
+      backgroundColor: 'transparent',
     },
   },
   
-  // GAPS - from header-v3.json
+  // GAPS - из navbar-complete.json
   gaps: {
-    navItemGap: 11,           // между Dashboard, Docs, API reference
-    lastNavToSettings: 10,    // от API reference до settings
-    settingsToAvatar: 16,     // от settings до user avatar
+    navItemGap: 11, // между Dashboard, Docs, API reference
+    lastNavToSettings: 10, // от API reference до settings
+    settingsToAvatar: 16, // от settings до user avatar
   },
   
-  // SETTINGS BUTTON - from header-v3.json
+  // SETTINGS BUTTON
   settingsButton: {
     width: 28,
     height: 28,
@@ -112,16 +143,16 @@ const EXTRACTED = {
     color: '#0d0d0d',
   },
   
-  // USER AVATAR - from header-v3.json
+  // USER AVATAR - правая аватарка
   userAvatar: {
     width: 28,
     height: 28,
     borderRadius: '9999px',
-    backgroundColor: '#ededed', // fallback если нет изображения
+    backgroundColor: '#181818', // Fallback - темнее, как просил юзер
     overflow: 'hidden',
   },
   
-  // EXPAND ICON - from header-v3.json
+  // EXPAND ICON - иконка раскрытия в кнопках Personal/Default project
   expandIcon: {
     width: 8,
     height: 12,
@@ -165,58 +196,109 @@ const ExpandIcon = () => (
 
 export interface HeaderProps {
   className?: string;
+  /** URL изображения аватарки пользователя */
+  userAvatarSrc?: string;
+  /** Имя пользователя для alt текста */
+  userName?: string;
+  /** Callback при клике на аватарку */
+  onAvatarClick?: () => void;
+  /** Callback для hamburger menu (mobile) */
+  onMenuToggle?: () => void;
+  /** Состояние mobile меню */
+  isMobileMenuOpen?: boolean;
 }
 
-export function Header({ className }: HeaderProps) {
+// Hamburger icon for mobile - inline to avoid import issues
+const HamburgerIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <path d="M4 6h16M4 12h16" />
+  </svg>
+);
+
+export function Header({ 
+  className,
+  userAvatarSrc,
+  userName = 'User',
+  onAvatarClick,
+  onMenuToggle,
+  isMobileMenuOpen,
+}: HeaderProps) {
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  
+  const handleAvatarClick = () => {
+    if (onAvatarClick) {
+      onAvatarClick();
+    } else {
+      setIsUserMenuOpen(!isUserMenuOpen);
+    }
+  };
+  
   return (
     <header
       className={cn('flex items-center justify-between', className)}
       style={{
         height: EXTRACTED.layout.headerHeight,
         fontFamily: EXTRACTED.fonts.family,
-        paddingLeft: EXTRACTED.layout.avatarDistanceFromLeft,
-        paddingRight: EXTRACTED.layout.avatarDistanceFromLeft, // симметрично
+        paddingLeft: EXTRACTED.layout.headerPaddingLeft,
+        paddingRight: EXTRACTED.layout.headerPaddingRight,
       }}
     >
       {/* LEFT SECTION - Project Selector */}
       <div 
         className="flex items-center"
-        style={{ gap: EXTRACTED.projectSelector.avatarToPersonalGap }}
       >
-        {/* Avatar "P" */}
-        <div
-          className="flex items-center justify-center shrink-0"
-          style={{
-            width: EXTRACTED.projectSelector.avatar.width,
-            height: EXTRACTED.projectSelector.avatar.height,
-            borderRadius: EXTRACTED.projectSelector.avatar.borderRadius,
-            backgroundColor: EXTRACTED.projectSelector.avatar.backgroundColor,
-            color: EXTRACTED.projectSelector.avatar.color,
-            fontSize: EXTRACTED.projectSelector.avatar.fontSize,
-            fontWeight: EXTRACTED.projectSelector.avatar.fontWeight,
-            lineHeight: EXTRACTED.projectSelector.avatar.lineHeight,
+        {/* Personal Button - Avatar + Text + Icon as ONE button */}
+        {/* EXACT: padding: 0px 10px 0px 6px, borderRadius: 8px, gap: 8px, height: 32px */}
+        <button 
+          className="flex items-center transition-colors"
+          style={{ 
+            gap: EXTRACTED.projectSelector.personalButtonContainer.gap,
+            padding: EXTRACTED.projectSelector.personalButtonContainer.padding,
+            borderRadius: EXTRACTED.projectSelector.personalButtonContainer.borderRadius,
+            height: EXTRACTED.projectSelector.personalButtonContainer.height,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.06)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          P
-        </div>
-        
-        {/* Personal Button */}
-        <button 
-          className="flex items-center"
-          style={{ gap: EXTRACTED.projectSelector.personalButton.textToIconGap }}
-        >
-          <span
+          {/* Avatar "P" */}
+          <div
+            className="flex items-center justify-center shrink-0"
             style={{
-              fontSize: EXTRACTED.projectSelector.personalButton.fontSize,
-              fontWeight: EXTRACTED.projectSelector.personalButton.fontWeight,
-              color: EXTRACTED.projectSelector.personalButton.color,
-              letterSpacing: EXTRACTED.projectSelector.personalButton.letterSpacing,
-              lineHeight: EXTRACTED.projectSelector.personalButton.lineHeight,
+              width: EXTRACTED.projectSelector.avatar.width,
+              height: EXTRACTED.projectSelector.avatar.height,
+              borderRadius: EXTRACTED.projectSelector.avatar.borderRadius,
+              backgroundColor: EXTRACTED.projectSelector.avatar.backgroundColor,
+              color: EXTRACTED.projectSelector.avatar.color,
+              fontSize: EXTRACTED.projectSelector.avatar.fontSize,
+              fontWeight: EXTRACTED.projectSelector.avatar.fontWeight,
+              lineHeight: EXTRACTED.projectSelector.avatar.lineHeight,
             }}
           >
-            Personal
-          </span>
-          <ExpandIcon />
+            P
+          </div>
+          
+          {/* Text + Expand icon */}
+          <div 
+            className="flex items-center"
+            style={{ gap: EXTRACTED.projectSelector.personalButton.textToIconGap }}
+          >
+            <span
+              style={{
+                fontSize: EXTRACTED.projectSelector.personalButton.fontSize,
+                fontWeight: EXTRACTED.projectSelector.personalButton.fontWeight,
+                color: EXTRACTED.projectSelector.personalButton.color,
+                letterSpacing: EXTRACTED.projectSelector.personalButton.letterSpacing,
+                lineHeight: EXTRACTED.projectSelector.personalButton.lineHeight,
+              }}
+            >
+              Personal
+            </span>
+            <ExpandIcon />
+          </div>
         </button>
         
         {/* Separator */}
@@ -233,9 +315,21 @@ export function Header({ className }: HeaderProps) {
         </span>
         
         {/* Default Project Button */}
+        {/* EXACT: padding: 0px 10px, borderRadius: 8px, gap: 8px, height: 32px */}
         <button 
-          className="flex items-center"
-          style={{ gap: EXTRACTED.projectSelector.projectTypeButton.textToIconGap }}
+          className="flex items-center transition-colors"
+          style={{ 
+            gap: EXTRACTED.projectSelector.projectTypeButtonContainer.gap,
+            padding: EXTRACTED.projectSelector.projectTypeButtonContainer.padding,
+            borderRadius: EXTRACTED.projectSelector.projectTypeButtonContainer.borderRadius,
+            height: EXTRACTED.projectSelector.projectTypeButtonContainer.height,
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.06)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
         >
           <span
             style={{
@@ -243,6 +337,7 @@ export function Header({ className }: HeaderProps) {
               fontWeight: EXTRACTED.projectSelector.projectTypeButton.fontWeight,
               color: EXTRACTED.projectSelector.projectTypeButton.color,
               lineHeight: EXTRACTED.projectSelector.projectTypeButton.lineHeight,
+              letterSpacing: EXTRACTED.projectSelector.projectTypeButton.letterSpacing,
             }}
           >
             Default project
@@ -251,9 +346,10 @@ export function Header({ className }: HeaderProps) {
         </button>
       </div>
       
-      {/* RIGHT SECTION - Navigation + Settings + Avatar */}
+      {/* RIGHT SECTION - Navigation + Settings + Avatar (Desktop) */}
+      {/* Hidden on mobile (< 768px), shown on desktop */}
       <div 
-        className="flex items-center"
+        className="hidden md:flex items-center"
         style={{ gap: EXTRACTED.gaps.navItemGap }}
       >
         {/* Navigation Items */}
@@ -272,6 +368,7 @@ export function Header({ className }: HeaderProps) {
               letterSpacing: EXTRACTED.navigation.item.letterSpacing,
               fontWeight: EXTRACTED.navigation.active.fontWeight,
               color: EXTRACTED.navigation.active.color,
+              textDecoration: 'none',
             }}
           >
             Dashboard
@@ -289,6 +386,7 @@ export function Header({ className }: HeaderProps) {
               letterSpacing: EXTRACTED.navigation.item.letterSpacing,
               fontWeight: EXTRACTED.navigation.inactive.fontWeight,
               color: EXTRACTED.navigation.inactive.color,
+              textDecoration: 'none',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.color = EXTRACTED.navigation.hover.color;
@@ -312,6 +410,7 @@ export function Header({ className }: HeaderProps) {
               letterSpacing: EXTRACTED.navigation.item.letterSpacing,
               fontWeight: EXTRACTED.navigation.inactive.fontWeight,
               color: EXTRACTED.navigation.inactive.color,
+              textDecoration: 'none',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.color = EXTRACTED.navigation.hover.color;
@@ -327,13 +426,20 @@ export function Header({ className }: HeaderProps) {
         {/* Settings Button */}
         <a
           href="/settings"
-          className="flex items-center justify-center transition-opacity hover:opacity-70"
+          className="flex items-center justify-center transition-colors"
           style={{
             width: EXTRACTED.settingsButton.width,
             height: EXTRACTED.settingsButton.height,
             borderRadius: EXTRACTED.settingsButton.borderRadius,
             color: EXTRACTED.settingsButton.color,
             marginLeft: EXTRACTED.gaps.lastNavToSettings - EXTRACTED.gaps.navItemGap,
+            textDecoration: 'none',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#dfdfdf';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
           <SettingsIcon />
@@ -341,7 +447,8 @@ export function Header({ className }: HeaderProps) {
         
         {/* User Avatar */}
         <button
-          className="flex items-center justify-center shrink-0"
+          onClick={handleAvatarClick}
+          className="flex items-center justify-center shrink-0 transition-colors"
           style={{
             width: EXTRACTED.userAvatar.width,
             height: EXTRACTED.userAvatar.height,
@@ -350,14 +457,41 @@ export function Header({ className }: HeaderProps) {
             overflow: EXTRACTED.userAvatar.overflow,
             marginLeft: EXTRACTED.gaps.settingsToAvatar - EXTRACTED.gaps.navItemGap,
           }}
+          aria-label={`User menu for ${userName}`}
         >
-          {/* Placeholder for user image - серый круг как в оригинале когда нет фото */}
-          <div 
-            className="w-full h-full"
-            style={{ backgroundColor: EXTRACTED.userAvatar.backgroundColor }}
-          />
+          {userAvatarSrc ? (
+            // Показываем изображение пользователя
+            <img
+              src={userAvatarSrc}
+              alt={userName}
+              className="w-full h-full object-cover"
+              style={{ borderRadius: EXTRACTED.userAvatar.borderRadius }}
+            />
+          ) : (
+            // Fallback - серый круг как в оригинале когда нет фото
+            <div 
+              className="w-full h-full"
+              style={{ backgroundColor: EXTRACTED.userAvatar.backgroundColor }}
+            />
+          )}
         </button>
       </div>
+      
+      {/* MOBILE - Hamburger menu button */}
+      {/* Shown on mobile (< 768px), hidden on desktop */}
+      {/* OpenAI exact: 22x22px hamburger icon */}
+      <button
+        onClick={onMenuToggle}
+        className="flex md:hidden items-center justify-center"
+        style={{
+          width: 28,
+          height: 28,
+          color: '#0d0d0d',
+        }}
+        aria-label="Toggle menu"
+      >
+        <HamburgerIcon />
+      </button>
     </header>
   );
 }
