@@ -74,7 +74,7 @@ export default function Home() {
               ${mobileMenuOpen ? 'fixed z-50 left-0' : 'hidden md:block'}
             `}
             style={{
-              top: mobileMenuOpen ? '54px' : '8px', // On mobile, start from header bottom
+              top: mobileMenuOpen ? '54px' : '0px', // On mobile, start from header bottom; desktop: 0px (sidebar has own padding)
               left: mobileMenuOpen ? '0px' : '8px', // Always 8px - like OpenAI
               width: sidebarCollapsed && !mobileMenuOpen ? '64px' : '210px',
               height: mobileMenuOpen ? 'calc(100vh - 54px)' : 'calc(100% - 16px)',

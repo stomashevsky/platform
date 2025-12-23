@@ -351,7 +351,7 @@ export function Sidebar({
         padding: '14px 0px 0px',
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'hidden', // Prevent content from extending beyond sidebar bounds
+        overflow: 'visible', // OpenAI exact: overflow visible (allows negative margin content)
       }}
       className={cn(
         'h-full bg-transparent',
@@ -368,10 +368,13 @@ export function Sidebar({
           flexShrink: 1,
           flexBasis: '0%',
           minHeight: 0, // Critical for flex + overflow to work together!
+          width: '218px', // OpenAI exact: 218px (210 sidebar + 8px negative margin)
           margin: '0px 0px 0px -8px', // Constant - prevents icon jump
           padding: '0px 12px 16px 12px', // Constant - prevents icon jump
           overflowX: 'hidden',
           overflowY: 'auto',
+          borderBottom: '1px solid rgba(0, 0, 0, 0.1)', // OpenAI: separator is borderBottom on scroll container
+          boxSizing: 'border-box', // OpenAI uses border-box
         }}
       >
           {/* Create Section */}
@@ -488,15 +491,6 @@ export function Sidebar({
             />
           </SidebarSection>
       </div>
-      
-      {/* Border separator - full width, no padding */}
-      <div 
-        style={{ 
-          height: '1px',
-          backgroundColor: 'rgba(0, 0, 0, 0.1)',
-          flexShrink: 0,
-        }}
-      />
       
       {/* Footer: constant padding - prevents jump on collapse */}
       <div 
