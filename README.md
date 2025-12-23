@@ -6,6 +6,8 @@ Pixel-perfect копия UI компонентов OpenAI Platform (https://plat
 
 Проект развернут на GitHub Pages: **https://stomashevsky.github.io/platform/**
 
+> 📖 Если сайт не открывается, см. [инструкцию по настройке GitHub Pages](./GITHUB_PAGES_SETUP.md)
+
 ## 📦 Компоненты
 
 - `Header` - навигационная панель
