@@ -1,0 +1,91 @@
+{
+  "extractedAt": "2025-12-28T14:59:52.085Z",
+  "url": "https://openai.github.io/apps-sdk-ui/?path=/docs/foundations-colors--docs",
+  "colorNames": [],
+  "hexValues": [],
+  "swatches": [],
+  "tables": [
+    {
+      "caption": "Table 1",
+      "data": [
+        [
+          {
+            "text": "Name",
+            "bgColor": null
+          },
+          {
+            "text": "Description",
+            "bgColor": null
+          },
+          {
+            "text": "Default",
+            "bgColor": null
+          },
+          {
+            "text": "Control",
+            "bgColor": null
+          }
+        ],
+        [
+          {
+            "text": "propertyName*",
+            "bgColor": null
+          },
+          {
+            "text": "This is a short description\n          \n            summary",
+            "bgColor": null
+          },
+          {
+            "text": "defaultValue",
+            "bgColor": null
+          },
+          {
+            "text": "Set string",
+            "bgColor": null
+          }
+        ],
+        [
+          {
+            "text": "propertyName*",
+            "bgColor": null
+          },
+          {
+            "text": "This is a short description\n          \n            summary",
+            "bgColor": null
+          },
+          {
+            "text": "defaultValue",
+            "bgColor": null
+          },
+          {
+            "text": "Set string",
+            "bgColor": null
+          }
+        ],
+        [
+          {
+            "text": "propertyName*",
+            "bgColor": null
+          },
+          {
+            "text": "This is a short description\n          \n            summary",
+            "bgColor": null
+          },
+          {
+            "text": "defaultValue",
+            "bgColor": null
+          },
+          {
+            "text": "Set string",
+            "bgColor": null
+          }
+        ]
+      ]
+    }
+  ],
+  "fullExtraction": [],
+  "comprehensive": {
+    "primitives": {},
+    "semanticColors": []
+  }
+}
