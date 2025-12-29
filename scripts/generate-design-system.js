@@ -447,7 +447,7 @@ const primaryColors = {
 const createPrimitive = (value, tokenName) => ({
   "$scopes": ["ALL_SCOPES"],
   "$hiddenFromPublishing": true,
-  "$description": `--${tokenName}\n${tokenName}`,
+  "$description": `--${tokenName}`,
   "$type": "color",
   "$value": value
 });

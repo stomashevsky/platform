@@ -5557,7 +5557,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--base-white\nbase-white",
+              "$description": "--base-white",
               "$type": "color",
               "$value": "#ffffff"
             },
@@ -5566,7 +5566,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--base-black\nbase-black",
+              "$description": "--base-black",
               "$type": "color",
               "$value": "#000000"
             }
@@ -5577,7 +5577,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-0\ngray-0",
+              "$description": "--gray-0",
               "$type": "color",
               "$value": "#ffffff"
             },
@@ -5586,7 +5586,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-25\ngray-25",
+              "$description": "--gray-25",
               "$type": "color",
               "$value": "#fcfcfc"
             },
@@ -5595,7 +5595,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-50\ngray-50",
+              "$description": "--gray-50",
               "$type": "color",
               "$value": "#f9f9f9"
             },
@@ -5604,7 +5604,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-75\ngray-75",
+              "$description": "--gray-75",
               "$type": "color",
               "$value": "#f3f3f3"
             },
@@ -5613,7 +5613,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-100\ngray-100",
+              "$description": "--gray-100",
               "$type": "color",
               "$value": "#ededed"
             },
@@ -5622,7 +5622,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-150\ngray-150",
+              "$description": "--gray-150",
               "$type": "color",
               "$value": "#dfdfdf"
             },
@@ -5631,7 +5631,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-200\ngray-200",
+              "$description": "--gray-200",
               "$type": "color",
               "$value": "#cdcdcd"
             },
@@ -5640,7 +5640,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-250\ngray-250",
+              "$description": "--gray-250",
               "$type": "color",
               "$value": "#b9b9b9"
             },
@@ -5649,7 +5649,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-300\ngray-300",
+              "$description": "--gray-300",
               "$type": "color",
               "$value": "#afafaf"
             },
@@ -5658,7 +5658,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-350\ngray-350",
+              "$description": "--gray-350",
               "$type": "color",
               "$value": "#9f9f9f"
             },
@@ -5667,7 +5667,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-400\ngray-400",
+              "$description": "--gray-400",
               "$type": "color",
               "$value": "#8f8f8f"
             },
@@ -5676,7 +5676,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-450\ngray-450",
+              "$description": "--gray-450",
               "$type": "color",
               "$value": "#767676"
             },
@@ -5685,7 +5685,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-500\ngray-500",
+              "$description": "--gray-500",
               "$type": "color",
               "$value": "#5d5d5d"
             },
@@ -5694,7 +5694,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-550\ngray-550",
+              "$description": "--gray-550",
               "$type": "color",
               "$value": "#4f4f4f"
             },
@@ -5703,7 +5703,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-600\ngray-600",
+              "$description": "--gray-600",
               "$type": "color",
               "$value": "#414141"
             },
@@ -5712,7 +5712,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-650\ngray-650",
+              "$description": "--gray-650",
               "$type": "color",
               "$value": "#393939"
             },
@@ -5721,7 +5721,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-700\ngray-700",
+              "$description": "--gray-700",
               "$type": "color",
               "$value": "#303030"
             },
@@ -5730,7 +5730,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-750\ngray-750",
+              "$description": "--gray-750",
               "$type": "color",
               "$value": "#282828"
             },
@@ -5739,7 +5739,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-800\ngray-800",
+              "$description": "--gray-800",
               "$type": "color",
               "$value": "#212121"
             },
@@ -5748,7 +5748,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-850\ngray-850",
+              "$description": "--gray-850",
               "$type": "color",
               "$value": "#1c1c1c"
             },
@@ -5757,7 +5757,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-900\ngray-900",
+              "$description": "--gray-900",
               "$type": "color",
               "$value": "#181818"
             },
@@ -5766,7 +5766,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-925\ngray-925",
+              "$description": "--gray-925",
               "$type": "color",
               "$value": "#161616"
             },
@@ -5775,7 +5775,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-950\ngray-950",
+              "$description": "--gray-950",
               "$type": "color",
               "$value": "#131313"
             },
@@ -5784,7 +5784,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-975\ngray-975",
+              "$description": "--gray-975",
               "$type": "color",
               "$value": "#101010"
             },
@@ -5793,7 +5793,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--gray-1000\ngray-1000",
+              "$description": "--gray-1000",
               "$type": "color",
               "$value": "#0d0d0d"
             }
@@ -5804,7 +5804,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-00\nalpha-00",
+              "$description": "--alpha-00",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0)"
             },
@@ -5813,7 +5813,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-02\nalpha-02",
+              "$description": "--alpha-02",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.02)"
             },
@@ -5822,7 +5822,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-04\nalpha-04",
+              "$description": "--alpha-04",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.04)"
             },
@@ -5831,7 +5831,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-05\nalpha-05",
+              "$description": "--alpha-05",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.05)"
             },
@@ -5840,7 +5840,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-06\nalpha-06",
+              "$description": "--alpha-06",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.06)"
             },
@@ -5849,7 +5849,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-08\nalpha-08",
+              "$description": "--alpha-08",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.08)"
             },
@@ -5858,7 +5858,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-10\nalpha-10",
+              "$description": "--alpha-10",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.1)"
             },
@@ -5867,7 +5867,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-12\nalpha-12",
+              "$description": "--alpha-12",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.12)"
             },
@@ -5876,7 +5876,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-15\nalpha-15",
+              "$description": "--alpha-15",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.15)"
             },
@@ -5885,7 +5885,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-16\nalpha-16",
+              "$description": "--alpha-16",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.16)"
             },
@@ -5894,7 +5894,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-20\nalpha-20",
+              "$description": "--alpha-20",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.2)"
             },
@@ -5903,7 +5903,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-25\nalpha-25",
+              "$description": "--alpha-25",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.25)"
             },
@@ -5912,7 +5912,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-30\nalpha-30",
+              "$description": "--alpha-30",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.3)"
             },
@@ -5921,7 +5921,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-35\nalpha-35",
+              "$description": "--alpha-35",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.35)"
             },
@@ -5930,7 +5930,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-40\nalpha-40",
+              "$description": "--alpha-40",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.4)"
             },
@@ -5939,7 +5939,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-50\nalpha-50",
+              "$description": "--alpha-50",
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.5)"
             }
@@ -5950,7 +5950,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-00\nalpha-white-00",
+              "$description": "--alpha-white-00",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0)"
             },
@@ -5959,7 +5959,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-02\nalpha-white-02",
+              "$description": "--alpha-white-02",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.02)"
             },
@@ -5968,7 +5968,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-04\nalpha-white-04",
+              "$description": "--alpha-white-04",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.04)"
             },
@@ -5977,7 +5977,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-05\nalpha-white-05",
+              "$description": "--alpha-white-05",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.05)"
             },
@@ -5986,7 +5986,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-06\nalpha-white-06",
+              "$description": "--alpha-white-06",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.06)"
             },
@@ -5995,7 +5995,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-08\nalpha-white-08",
+              "$description": "--alpha-white-08",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.08)"
             },
@@ -6004,7 +6004,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-10\nalpha-white-10",
+              "$description": "--alpha-white-10",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.1)"
             },
@@ -6013,7 +6013,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-12\nalpha-white-12",
+              "$description": "--alpha-white-12",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.12)"
             },
@@ -6022,7 +6022,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-15\nalpha-white-15",
+              "$description": "--alpha-white-15",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.15)"
             },
@@ -6031,7 +6031,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-16\nalpha-white-16",
+              "$description": "--alpha-white-16",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.16)"
             },
@@ -6040,7 +6040,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-20\nalpha-white-20",
+              "$description": "--alpha-white-20",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.2)"
             },
@@ -6049,7 +6049,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-25\nalpha-white-25",
+              "$description": "--alpha-white-25",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.25)"
             },
@@ -6058,7 +6058,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-30\nalpha-white-30",
+              "$description": "--alpha-white-30",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.3)"
             },
@@ -6067,7 +6067,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-35\nalpha-white-35",
+              "$description": "--alpha-white-35",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.35)"
             },
@@ -6076,7 +6076,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-40\nalpha-white-40",
+              "$description": "--alpha-white-40",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.4)"
             },
@@ -6085,7 +6085,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-50\nalpha-white-50",
+              "$description": "--alpha-white-50",
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.5)"
             }
@@ -6096,7 +6096,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-25\nred-25",
+              "$description": "--red-25",
               "$type": "color",
               "$value": "#fff0f0"
             },
@@ -6105,7 +6105,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-50\nred-50",
+              "$description": "--red-50",
               "$type": "color",
               "$value": "#ffd9d9"
             },
@@ -6114,7 +6114,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-75\nred-75",
+              "$description": "--red-75",
               "$type": "color",
               "$value": "#ffc6c5"
             },
@@ -6123,7 +6123,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-100\nred-100",
+              "$description": "--red-100",
               "$type": "color",
               "$value": "#ffa4a2"
             },
@@ -6132,7 +6132,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-200\nred-200",
+              "$description": "--red-200",
               "$type": "color",
               "$value": "#ff8583"
             },
@@ -6141,7 +6141,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-300\nred-300",
+              "$description": "--red-300",
               "$type": "color",
               "$value": "#ff6764"
             },
@@ -6150,7 +6150,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-400\nred-400",
+              "$description": "--red-400",
               "$type": "color",
               "$value": "#fa423e"
             },
@@ -6159,7 +6159,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-500\nred-500",
+              "$description": "--red-500",
               "$type": "color",
               "$value": "#e02e2a"
             },
@@ -6168,7 +6168,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-600\nred-600",
+              "$description": "--red-600",
               "$type": "color",
               "$value": "#c11713"
             },
@@ -6177,7 +6177,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-700\nred-700",
+              "$description": "--red-700",
               "$type": "color",
               "$value": "#9c0600"
             },
@@ -6186,7 +6186,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-800\nred-800",
+              "$description": "--red-800",
               "$type": "color",
               "$value": "#6e0400"
             },
@@ -6195,7 +6195,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-900\nred-900",
+              "$description": "--red-900",
               "$type": "color",
               "$value": "#4a0300"
             },
@@ -6204,7 +6204,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-950\nred-950",
+              "$description": "--red-950",
               "$type": "color",
               "$value": "#340200"
             },
@@ -6213,7 +6213,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-1000\nred-1000",
+              "$description": "--red-1000",
               "$type": "color",
               "$value": "#1f0101"
             },
@@ -6222,7 +6222,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-a25\nred-a25",
+              "$description": "--red-a25",
               "$type": "color",
               "$value": "rgba(224, 46, 42, 0.08)"
             },
@@ -6231,7 +6231,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-a50\nred-a50",
+              "$description": "--red-a50",
               "$type": "color",
               "$value": "rgba(224, 46, 42, 0.16)"
             },
@@ -6240,7 +6240,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-a75\nred-a75",
+              "$description": "--red-a75",
               "$type": "color",
               "$value": "rgba(224, 46, 42, 0.24)"
             },
@@ -6249,7 +6249,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-a100\nred-a100",
+              "$description": "--red-a100",
               "$type": "color",
               "$value": "rgba(224, 46, 42, 0.32)"
             },
@@ -6258,7 +6258,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-a200\nred-a200",
+              "$description": "--red-a200",
               "$type": "color",
               "$value": "rgba(224, 46, 42, 0.48)"
             },
@@ -6267,7 +6267,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--red-a300\nred-a300",
+              "$description": "--red-a300",
               "$type": "color",
               "$value": "rgba(224, 46, 42, 0.64)"
             }
@@ -6278,7 +6278,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-25\norange-25",
+              "$description": "--orange-25",
               "$type": "color",
               "$value": "#fff3eb"
             },
@@ -6287,7 +6287,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-50\norange-50",
+              "$description": "--orange-50",
               "$type": "color",
               "$value": "#ffe0cc"
             },
@@ -6296,7 +6296,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-75\norange-75",
+              "$description": "--orange-75",
               "$type": "color",
               "$value": "#ffcfb0"
             },
@@ -6305,7 +6305,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-100\norange-100",
+              "$description": "--orange-100",
               "$type": "color",
               "$value": "#ffb384"
             },
@@ -6314,7 +6314,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-200\norange-200",
+              "$description": "--orange-200",
               "$type": "color",
               "$value": "#ff9758"
             },
@@ -6323,7 +6323,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-300\norange-300",
+              "$description": "--orange-300",
               "$type": "color",
               "$value": "#ff7b2b"
             },
@@ -6332,7 +6332,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-400\norange-400",
+              "$description": "--orange-400",
               "$type": "color",
               "$value": "#f56300"
             },
@@ -6341,7 +6341,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-500\norange-500",
+              "$description": "--orange-500",
               "$type": "color",
               "$value": "#c54f00"
             },
@@ -6350,7 +6350,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-600\norange-600",
+              "$description": "--orange-600",
               "$type": "color",
               "$value": "#9c3f00"
             },
@@ -6359,7 +6359,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-700\norange-700",
+              "$description": "--orange-700",
               "$type": "color",
               "$value": "#793100"
             },
@@ -6368,7 +6368,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-800\norange-800",
+              "$description": "--orange-800",
               "$type": "color",
               "$value": "#562300"
             },
@@ -6377,7 +6377,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-900\norange-900",
+              "$description": "--orange-900",
               "$type": "color",
               "$value": "#3a1800"
             },
@@ -6386,7 +6386,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-950\norange-950",
+              "$description": "--orange-950",
               "$type": "color",
               "$value": "#281000"
             },
@@ -6395,7 +6395,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-1000\norange-1000",
+              "$description": "--orange-1000",
               "$type": "color",
               "$value": "#180a00"
             },
@@ -6404,7 +6404,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-a25\norange-a25",
+              "$description": "--orange-a25",
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.08)"
             },
@@ -6413,7 +6413,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-a50\norange-a50",
+              "$description": "--orange-a50",
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.16)"
             },
@@ -6422,7 +6422,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-a75\norange-a75",
+              "$description": "--orange-a75",
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.24)"
             },
@@ -6431,7 +6431,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-a100\norange-a100",
+              "$description": "--orange-a100",
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.32)"
             },
@@ -6440,7 +6440,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-a200\norange-a200",
+              "$description": "--orange-a200",
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.48)"
             },
@@ -6449,7 +6449,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--orange-a300\norange-a300",
+              "$description": "--orange-a300",
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.64)"
             }
@@ -6460,7 +6460,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-25\nyellow-25",
+              "$description": "--yellow-25",
               "$type": "color",
               "$value": "#fef9eb"
             },
@@ -6469,7 +6469,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-50\nyellow-50",
+              "$description": "--yellow-50",
               "$type": "color",
               "$value": "#fcefcc"
             },
@@ -6478,7 +6478,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-75\nyellow-75",
+              "$description": "--yellow-75",
               "$type": "color",
               "$value": "#fae6af"
             },
@@ -6487,7 +6487,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-100\nyellow-100",
+              "$description": "--yellow-100",
               "$type": "color",
               "$value": "#f5d782"
             },
@@ -6496,7 +6496,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-200\nyellow-200",
+              "$description": "--yellow-200",
               "$type": "color",
               "$value": "#f0c855"
             },
@@ -6505,7 +6505,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-300\nyellow-300",
+              "$description": "--yellow-300",
               "$type": "color",
               "$value": "#eaba28"
             },
@@ -6514,7 +6514,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-400\nyellow-400",
+              "$description": "--yellow-400",
               "$type": "color",
               "$value": "#d9a800"
             },
@@ -6523,7 +6523,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-500\nyellow-500",
+              "$description": "--yellow-500",
               "$type": "color",
               "$value": "#ad8600"
             },
@@ -6532,7 +6532,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-600\nyellow-600",
+              "$description": "--yellow-600",
               "$type": "color",
               "$value": "#876900"
             },
@@ -6541,7 +6541,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-700\nyellow-700",
+              "$description": "--yellow-700",
               "$type": "color",
               "$value": "#685100"
             },
@@ -6550,7 +6550,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-800\nyellow-800",
+              "$description": "--yellow-800",
               "$type": "color",
               "$value": "#4b3b00"
             },
@@ -6559,7 +6559,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-900\nyellow-900",
+              "$description": "--yellow-900",
               "$type": "color",
               "$value": "#332800"
             },
@@ -6568,7 +6568,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-950\nyellow-950",
+              "$description": "--yellow-950",
               "$type": "color",
               "$value": "#241c00"
             },
@@ -6577,7 +6577,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-1000\nyellow-1000",
+              "$description": "--yellow-1000",
               "$type": "color",
               "$value": "#161100"
             },
@@ -6586,7 +6586,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-a25\nyellow-a25",
+              "$description": "--yellow-a25",
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.08)"
             },
@@ -6595,7 +6595,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-a50\nyellow-a50",
+              "$description": "--yellow-a50",
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.16)"
             },
@@ -6604,7 +6604,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-a75\nyellow-a75",
+              "$description": "--yellow-a75",
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.24)"
             },
@@ -6613,7 +6613,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-a100\nyellow-a100",
+              "$description": "--yellow-a100",
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.32)"
             },
@@ -6622,7 +6622,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-a200\nyellow-a200",
+              "$description": "--yellow-a200",
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.48)"
             },
@@ -6631,7 +6631,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--yellow-a300\nyellow-a300",
+              "$description": "--yellow-a300",
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.64)"
             }
@@ -6642,7 +6642,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-25\ngreen-25",
+              "$description": "--green-25",
               "$type": "color",
               "$value": "#e9fcf2"
             },
@@ -6651,7 +6651,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-50\ngreen-50",
+              "$description": "--green-50",
               "$type": "color",
               "$value": "#c7f7de"
             },
@@ -6660,7 +6660,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-75\ngreen-75",
+              "$description": "--green-75",
               "$type": "color",
               "$value": "#a8f1cb"
             },
@@ -6669,7 +6669,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-100\ngreen-100",
+              "$description": "--green-100",
               "$type": "color",
               "$value": "#76e6ac"
             },
@@ -6678,7 +6678,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-200\ngreen-200",
+              "$description": "--green-200",
               "$type": "color",
               "$value": "#45db8e"
             },
@@ -6687,7 +6687,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-300\ngreen-300",
+              "$description": "--green-300",
               "$type": "color",
               "$value": "#15cf70"
             },
@@ -6696,7 +6696,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-400\ngreen-400",
+              "$description": "--green-400",
               "$type": "color",
               "$value": "#00b85a"
             },
@@ -6705,7 +6705,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-500\ngreen-500",
+              "$description": "--green-500",
               "$type": "color",
               "$value": "#009348"
             },
@@ -6714,7 +6714,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-600\ngreen-600",
+              "$description": "--green-600",
               "$type": "color",
               "$value": "#007439"
             },
@@ -6723,7 +6723,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-700\ngreen-700",
+              "$description": "--green-700",
               "$type": "color",
               "$value": "#005a2c"
             },
@@ -6732,7 +6732,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-800\ngreen-800",
+              "$description": "--green-800",
               "$type": "color",
               "$value": "#004120"
             },
@@ -6741,7 +6741,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-900\ngreen-900",
+              "$description": "--green-900",
               "$type": "color",
               "$value": "#002c16"
             },
@@ -6750,7 +6750,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-950\ngreen-950",
+              "$description": "--green-950",
               "$type": "color",
               "$value": "#001f0f"
             },
@@ -6759,7 +6759,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-1000\ngreen-1000",
+              "$description": "--green-1000",
               "$type": "color",
               "$value": "#001309"
             },
@@ -6768,7 +6768,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-a25\ngreen-a25",
+              "$description": "--green-a25",
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.08)"
             },
@@ -6777,7 +6777,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-a50\ngreen-a50",
+              "$description": "--green-a50",
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.16)"
             },
@@ -6786,7 +6786,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-a75\ngreen-a75",
+              "$description": "--green-a75",
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.24)"
             },
@@ -6795,7 +6795,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-a100\ngreen-a100",
+              "$description": "--green-a100",
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.32)"
             },
@@ -6804,7 +6804,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-a200\ngreen-a200",
+              "$description": "--green-a200",
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.48)"
             },
@@ -6813,7 +6813,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--green-a300\ngreen-a300",
+              "$description": "--green-a300",
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.64)"
             }
@@ -6824,7 +6824,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-25\nblue-25",
+              "$description": "--blue-25",
               "$type": "color",
               "$value": "#eef6ff"
             },
@@ -6833,7 +6833,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-50\nblue-50",
+              "$description": "--blue-50",
               "$type": "color",
               "$value": "#d4eaff"
             },
@@ -6842,7 +6842,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-75\nblue-75",
+              "$description": "--blue-75",
               "$type": "color",
               "$value": "#bddeff"
             },
@@ -6851,7 +6851,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-100\nblue-100",
+              "$description": "--blue-100",
               "$type": "color",
               "$value": "#97cbff"
             },
@@ -6860,7 +6860,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-200\nblue-200",
+              "$description": "--blue-200",
               "$type": "color",
               "$value": "#70b7ff"
             },
@@ -6869,7 +6869,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-300\nblue-300",
+              "$description": "--blue-300",
               "$type": "color",
               "$value": "#4aa4ff"
             },
@@ -6878,7 +6878,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-400\nblue-400",
+              "$description": "--blue-400",
               "$type": "color",
               "$value": "#2491ff"
             },
@@ -6887,7 +6887,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-500\nblue-500",
+              "$description": "--blue-500",
               "$type": "color",
               "$value": "#0073e6"
             },
@@ -6896,7 +6896,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-600\nblue-600",
+              "$description": "--blue-600",
               "$type": "color",
               "$value": "#005bbb"
             },
@@ -6905,7 +6905,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-700\nblue-700",
+              "$description": "--blue-700",
               "$type": "color",
               "$value": "#004691"
             },
@@ -6914,7 +6914,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-800\nblue-800",
+              "$description": "--blue-800",
               "$type": "color",
               "$value": "#003269"
             },
@@ -6923,7 +6923,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-900\nblue-900",
+              "$description": "--blue-900",
               "$type": "color",
               "$value": "#002349"
             },
@@ -6932,7 +6932,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-950\nblue-950",
+              "$description": "--blue-950",
               "$type": "color",
               "$value": "#001833"
             },
@@ -6941,7 +6941,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-1000\nblue-1000",
+              "$description": "--blue-1000",
               "$type": "color",
               "$value": "#000e1f"
             },
@@ -6950,7 +6950,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-a25\nblue-a25",
+              "$description": "--blue-a25",
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.08)"
             },
@@ -6959,7 +6959,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-a50\nblue-a50",
+              "$description": "--blue-a50",
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.16)"
             },
@@ -6968,7 +6968,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-a75\nblue-a75",
+              "$description": "--blue-a75",
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.24)"
             },
@@ -6977,7 +6977,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-a100\nblue-a100",
+              "$description": "--blue-a100",
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.32)"
             },
@@ -6986,7 +6986,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-a200\nblue-a200",
+              "$description": "--blue-a200",
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.48)"
             },
@@ -6995,7 +6995,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--blue-a300\nblue-a300",
+              "$description": "--blue-a300",
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.64)"
             }
@@ -7006,7 +7006,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-25\npurple-25",
+              "$description": "--purple-25",
               "$type": "color",
               "$value": "#f8f0ff"
             },
@@ -7015,7 +7015,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-50\npurple-50",
+              "$description": "--purple-50",
               "$type": "color",
               "$value": "#eed9ff"
             },
@@ -7024,7 +7024,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-75\npurple-75",
+              "$description": "--purple-75",
               "$type": "color",
               "$value": "#e5c6ff"
             },
@@ -7033,7 +7033,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-100\npurple-100",
+              "$description": "--purple-100",
               "$type": "color",
               "$value": "#d6a4ff"
             },
@@ -7042,7 +7042,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-200\npurple-200",
+              "$description": "--purple-200",
               "$type": "color",
               "$value": "#c782ff"
             },
@@ -7051,7 +7051,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-300\npurple-300",
+              "$description": "--purple-300",
               "$type": "color",
               "$value": "#b85fff"
             },
@@ -7060,7 +7060,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-400\npurple-400",
+              "$description": "--purple-400",
               "$type": "color",
               "$value": "#a939ff"
             },
@@ -7069,7 +7069,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-500\npurple-500",
+              "$description": "--purple-500",
               "$type": "color",
               "$value": "#8d0ee3"
             },
@@ -7078,7 +7078,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-600\npurple-600",
+              "$description": "--purple-600",
               "$type": "color",
               "$value": "#6f00b8"
             },
@@ -7087,7 +7087,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-700\npurple-700",
+              "$description": "--purple-700",
               "$type": "color",
               "$value": "#55008e"
             },
@@ -7096,7 +7096,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-800\npurple-800",
+              "$description": "--purple-800",
               "$type": "color",
               "$value": "#3c0066"
             },
@@ -7105,7 +7105,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-900\npurple-900",
+              "$description": "--purple-900",
               "$type": "color",
               "$value": "#290047"
             },
@@ -7114,7 +7114,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-950\npurple-950",
+              "$description": "--purple-950",
               "$type": "color",
               "$value": "#1d0033"
             },
@@ -7123,7 +7123,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-1000\npurple-1000",
+              "$description": "--purple-1000",
               "$type": "color",
               "$value": "#11001f"
             },
@@ -7132,7 +7132,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-a25\npurple-a25",
+              "$description": "--purple-a25",
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.08)"
             },
@@ -7141,7 +7141,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-a50\npurple-a50",
+              "$description": "--purple-a50",
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.16)"
             },
@@ -7150,7 +7150,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-a75\npurple-a75",
+              "$description": "--purple-a75",
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.24)"
             },
@@ -7159,7 +7159,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-a100\npurple-a100",
+              "$description": "--purple-a100",
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.32)"
             },
@@ -7168,7 +7168,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-a200\npurple-a200",
+              "$description": "--purple-a200",
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.48)"
             },
@@ -7177,7 +7177,7 @@
                 "ALL_SCOPES"
               ],
               "$hiddenFromPublishing": true,
-              "$description": "--purple-a300\npurple-a300",
+              "$description": "--purple-a300",
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.64)"
             }
