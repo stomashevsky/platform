@@ -1716,18 +1716,17 @@ const BUTTON_SIZES = {
 };
 
 // Variable name mappings for sizing (to bind Figma variables)
-// Radius uses semantic control/radius/* tokens (added to sizing.json)
-// For 3xs/2xs, use primitives as control/radius doesn't have those sizes
+// Radius uses size-specific control/radius/* tokens (all sizes now in sizing.json)
 const BUTTON_SIZE_VARS = {
-  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/2xs', fontSize: 'control/font-size/sm' },
-  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/xs', fontSize: 'control/font-size/sm' },
-  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/sm', gap: 'button/gap/sm', radius: 'control/radius/sm', fontSize: 'control/font-size/sm' },
+  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'control/radius/3xs', fontSize: 'control/font-size/sm' },
+  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'control/radius/2xs', fontSize: 'control/font-size/sm' },
+  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/sm', gap: 'button/gap/sm', radius: 'control/radius/xs', fontSize: 'control/font-size/sm' },
   'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', iconSize: 'control/icon-size/sm', gap: 'button/gap/sm', radius: 'control/radius/sm', fontSize: 'control/font-size/sm' },
   'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'control/radius/md', fontSize: 'control/font-size/md' },
   'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'control/radius/lg', fontSize: 'control/font-size/lg' },
   'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'control/radius/xl', fontSize: 'control/font-size/lg' },
-  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/md', radius: 'control/radius/xl', fontSize: 'control/font-size/xl' },
-  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'control/radius/xl', fontSize: 'control/font-size/xl' },
+  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/md', radius: 'control/radius/2xl', fontSize: 'control/font-size/xl' },
+  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'control/radius/3xl', fontSize: 'control/font-size/xl' },
 };
 
 type ButtonSizeName = keyof typeof BUTTON_SIZES;

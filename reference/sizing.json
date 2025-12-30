@@ -494,11 +494,38 @@
               }
             },
             "radius": {
+              "3xs": {
+                "$scopes": [
+                  "CORNER_RADIUS"
+                ],
+                "$description": "--control-radius-3xs\nControl border radius for 3xs (6px)",
+                "$hiddenFromPublishing": true,
+                "$type": "float",
+                "$value": 6
+              },
+              "2xs": {
+                "$scopes": [
+                  "CORNER_RADIUS"
+                ],
+                "$description": "--control-radius-2xs\nControl border radius for 2xs (6px)",
+                "$hiddenFromPublishing": true,
+                "$type": "float",
+                "$value": 6
+              },
+              "xs": {
+                "$scopes": [
+                  "CORNER_RADIUS"
+                ],
+                "$description": "--control-radius-xs\nControl border radius for xs (6px)",
+                "$hiddenFromPublishing": true,
+                "$type": "float",
+                "$value": 6
+              },
               "sm": {
                 "$scopes": [
                   "CORNER_RADIUS"
                 ],
-                "$description": "--control-radius-sm\nControl border radius (6px)",
+                "$description": "--control-radius-sm\nControl border radius for sm (6px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
                 "$value": 6
@@ -507,7 +534,7 @@
                 "$scopes": [
                   "CORNER_RADIUS"
                 ],
-                "$description": "--control-radius-md\nControl border radius (8px)",
+                "$description": "--control-radius-md\nControl border radius for md (8px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
                 "$value": 8
@@ -516,7 +543,7 @@
                 "$scopes": [
                   "CORNER_RADIUS"
                 ],
-                "$description": "--control-radius-lg\nControl border radius (10px)",
+                "$description": "--control-radius-lg\nControl border radius for lg (10px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
                 "$value": 10
@@ -525,10 +552,28 @@
                 "$scopes": [
                   "CORNER_RADIUS"
                 ],
-                "$description": "--control-radius-xl\nControl border radius (12px)",
+                "$description": "--control-radius-xl\nControl border radius for xl (12px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
                 "$value": 12
+              },
+              "2xl": {
+                "$scopes": [
+                  "CORNER_RADIUS"
+                ],
+                "$description": "--control-radius-2xl\nControl border radius for 2xl (16px)",
+                "$hiddenFromPublishing": true,
+                "$type": "float",
+                "$value": 16
+              },
+              "3xl": {
+                "$scopes": [
+                  "CORNER_RADIUS"
+                ],
+                "$description": "--control-radius-3xl\nControl border radius for 3xl (20px)",
+                "$hiddenFromPublishing": true,
+                "$type": "float",
+                "$value": 20
               }
             }
           },
