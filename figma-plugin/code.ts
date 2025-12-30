@@ -1857,6 +1857,7 @@ async function getVariableByName(name: string): Promise<Variable | null> {
 
   // Try partial match (ends with the path)
   found = variablesCache.find(v => v.name.endsWith(name) || v.name.endsWith('/' + name));
+
   if (found) return found;
 
   // Log all variables for debugging (first time only)
@@ -1952,6 +1953,8 @@ async function bindColorToInstance(instance: InstanceNode | FrameNode, varName: 
   const variable = await getVariableByName(varName);
   // If variable not found, return false so caller can handle fallback
   if (!variable || variable.resolvedType !== 'COLOR') return false;
+
+  // Auto-fix logic removed - fixed in source design system file
 
   try {
     const basePaint: SolidPaint = {
@@ -2093,11 +2096,11 @@ async function generateButtons(targetStyles?: string[]): Promise<void> {
 
   // If specific styles are requested, filter the styles list. Otherwise use all.
   const stylesToGenerate = targetStyles && targetStyles.length > 0
-    ? BUTTON_STYLES.filter(s => targetStyles.includes(s))
+    ? BUTTON_STYLES.filter(s => targetStyles.some(ts => ts.trim().toLowerCase() === s))
     : BUTTON_STYLES;
 
   if (stylesToGenerate.length === 0) {
-    console.warn(`No valid styles found in request: ${targetStyles}`);
+    console.warn(`No valid styles found in request: ${JSON.stringify(targetStyles)}`);
     return;
   }
 
