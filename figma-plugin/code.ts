@@ -1357,6 +1357,251 @@ async function generateTypographyTable(): Promise<FrameNode> {
 }
 
 // ============================================================================
+// Effects Table Generation
+// ============================================================================
+
+async function generateEffectsTable(): Promise<FrameNode> {
+  const effectStyles = await figma.getLocalEffectStylesAsync();
+
+  if (effectStyles.length === 0) {
+    throw new Error('No effect styles found in this file');
+  }
+
+  // Custom sort: hairline first, then by numeric value
+  effectStyles.sort((a, b) => {
+    const aName = a.name.toLowerCase();
+    const bName = b.name.toLowerCase();
+
+    // Extract base name (last part after /)
+    const aBase = aName.split('/').pop() || aName;
+    const bBase = bName.split('/').pop() || bName;
+
+    // Hairline always first
+    if (aBase.includes('hairline')) return -1;
+    if (bBase.includes('hairline')) return 1;
+
+    // Extract numeric part for comparison
+    const aNum = parseInt(aBase.match(/\d+/)?.[0] || '0');
+    const bNum = parseInt(bBase.match(/\d+/)?.[0] || '0');
+
+    if (aNum !== bNum) return aNum - bNum;
+
+    // Same base number - sort by variant (base < strong < stronger)
+    if (aBase.includes('stronger')) return 1;
+    if (bBase.includes('stronger')) return -1;
+    if (aBase.includes('strong')) return 1;
+    if (bBase.includes('strong')) return -1;
+
+    return 0;
+  });
+
+  // All effects will be shown in both Light and Dark columns
+  const allEffects = effectStyles;
+
+  // Create main table frame
+  const table = figma.createFrame();
+  table.name = 'UI Kit: shadow';
+  table.layoutMode = 'VERTICAL';
+  table.primaryAxisSizingMode = 'AUTO';
+  table.counterAxisSizingMode = 'AUTO';
+  table.paddingLeft = 40;
+  table.paddingRight = 40;
+  table.paddingTop = 40;
+  table.paddingBottom = 40;
+  table.fills = [{ type: 'SOLID', color: COLORS.white }];
+  table.cornerRadius = 24;
+  table.clipsContent = false;
+  table.effects = [{
+    type: 'DROP_SHADOW',
+    color: { r: 0, g: 0, b: 0, a: 0.19 },
+    offset: { x: 0, y: 8 },
+    radius: 16,
+    spread: -4,
+    visible: true,
+    blendMode: 'NORMAL',
+  }];
+
+  // Add title
+  const titleFrame = figma.createFrame();
+  titleFrame.name = 'Title';
+  titleFrame.layoutMode = 'HORIZONTAL';
+  titleFrame.primaryAxisAlignItems = 'MIN';
+  titleFrame.counterAxisAlignItems = 'CENTER';
+  titleFrame.primaryAxisSizingMode = 'AUTO';
+  titleFrame.counterAxisSizingMode = 'AUTO';
+  titleFrame.paddingBottom = 80;
+  titleFrame.fills = [];
+
+  const titleText = figma.createText();
+  titleText.characters = 'shadow';
+  titleText.fontSize = FONT.size.title;
+  titleText.fontName = FONT.familyBold;
+  titleText.fills = [{ type: 'SOLID', color: COLORS.black }];
+  titleText.letterSpacing = { value: -1.44, unit: 'PIXELS' };
+  titleText.lineHeight = { value: FONT.size.title, unit: 'PIXELS' };
+  titleFrame.appendChild(titleText);
+  table.appendChild(titleFrame);
+
+  // Content container (horizontal layout for Light and Dark columns)
+  const contentFrame = figma.createFrame();
+  contentFrame.name = 'Content';
+  contentFrame.layoutMode = 'HORIZONTAL';
+  contentFrame.primaryAxisAlignItems = 'MIN';
+  contentFrame.counterAxisAlignItems = 'MIN';
+  contentFrame.primaryAxisSizingMode = 'AUTO';
+  contentFrame.counterAxisSizingMode = 'AUTO';
+  contentFrame.itemSpacing = 0;
+  contentFrame.fills = [];
+  contentFrame.clipsContent = false;
+
+  table.appendChild(contentFrame);
+
+  // Helper function to create effect card
+  const createEffectCard = async (style: EffectStyle, bgColor: RGB): Promise<FrameNode> => {
+    const card = figma.createFrame();
+    card.name = 'shadow';
+    card.layoutMode = 'VERTICAL';
+    card.primaryAxisAlignItems = 'CENTER';
+    card.counterAxisAlignItems = 'CENTER';
+    card.resize(220, 120);
+    card.layoutSizingHorizontal = 'FIXED';
+    card.layoutSizingVertical = 'FIXED';
+    card.paddingLeft = 8;
+    card.paddingRight = 8;
+    card.paddingTop = 8;
+    card.paddingBottom = 8;
+    card.cornerRadius = 8;
+    card.fills = [{ type: 'SOLID', color: bgColor }];
+    card.clipsContent = true;
+
+    // Apply the effect style (async for dynamic-page access)
+    await card.setEffectStyleIdAsync(style.id);
+
+    // No border as requested
+    card.strokes = [];
+
+    // Add label
+    const label = figma.createText();
+    label.characters = style.name.split('/').pop() || style.name;
+    label.fontSize = 14;
+    label.fontName = FONT.family;
+    label.fills = [{ type: 'SOLID', color: bgColor.r < 0.5 ? COLORS.white : COLORS.gray900 }];
+    label.textAlignHorizontal = 'CENTER';
+    card.appendChild(label);
+
+    return card;
+  };
+
+  // Helper function to create mode column
+  const createModeColumn = async (modeName: string, effects: EffectStyle[], isDark: boolean): Promise<FrameNode> => {
+    const column = figma.createFrame();
+    column.name = `Group: ${modeName}`;
+    column.layoutMode = 'VERTICAL';
+    column.primaryAxisAlignItems = 'MIN';
+    column.counterAxisAlignItems = 'MIN';
+    column.primaryAxisSizingMode = 'AUTO';
+    column.counterAxisSizingMode = 'AUTO';
+    // Light: #f3f3f3, Dark: #161616
+    const lightBg = { r: 0.953, g: 0.953, b: 0.953 }; // #f3f3f3
+    const darkBg = { r: 0.086, g: 0.086, b: 0.086 };  // #161616
+    column.fills = [{ type: 'SOLID', color: isDark ? darkBg : lightBg }];
+    column.clipsContent = false;
+
+    // Mode header
+    const header = figma.createFrame();
+    header.name = 'Group';
+    header.layoutMode = 'HORIZONTAL';
+    header.primaryAxisAlignItems = 'MIN';
+    header.counterAxisAlignItems = 'CENTER';
+    header.primaryAxisSizingMode = 'AUTO';
+    header.counterAxisSizingMode = 'AUTO';
+    header.paddingLeft = 40;
+    header.paddingRight = 40;
+    header.paddingTop = 40;
+    header.paddingBottom = 40;
+    header.fills = [];
+
+    const headerText = figma.createText();
+    headerText.characters = modeName;
+    headerText.fontSize = 40;
+    headerText.fontName = FONT.familySemiBold;
+    // Light: #0d0d0d, Dark: white
+    headerText.fills = [{ type: 'SOLID', color: isDark ? COLORS.white : { r: 0.051, g: 0.051, b: 0.051 } }];
+    header.appendChild(headerText);
+    column.appendChild(header);
+
+    // Effects content
+    const content = figma.createFrame();
+    content.name = modeName;
+    content.layoutMode = 'VERTICAL';
+    content.primaryAxisAlignItems = 'MIN';
+    content.counterAxisAlignItems = 'MIN';
+    content.primaryAxisSizingMode = 'AUTO';
+    content.counterAxisSizingMode = 'AUTO';
+    content.paddingLeft = 40;
+    content.paddingRight = 40;
+    content.paddingTop = 0;
+    content.paddingBottom = 40;
+    content.itemSpacing = 40;
+    content.fills = [];
+    content.clipsContent = false;
+
+    // Group effects by base name (e.g., "shadow/100", "shadow/100-strong" -> "100")
+    const groups = new Map<string, EffectStyle[]>();
+    for (const effect of effects) {
+      const nameParts = effect.name.split('/');
+      const baseName = nameParts[nameParts.length - 1].replace(/-strong(er)?$/, '');
+      if (!groups.has(baseName)) {
+        groups.set(baseName, []);
+      }
+      groups.get(baseName)!.push(effect);
+    }
+
+    // Create rows for each group
+    for (const [, groupEffects] of groups) {
+      const row = figma.createFrame();
+      row.name = 'group';
+      row.layoutMode = 'HORIZONTAL';
+      row.primaryAxisAlignItems = 'MIN';
+      row.counterAxisAlignItems = 'MIN';
+      row.primaryAxisSizingMode = 'AUTO';
+      row.counterAxisSizingMode = 'AUTO';
+      row.itemSpacing = 40;  // Gap between variant cards
+      row.fills = [];
+      row.clipsContent = false;
+
+      for (const effect of groupEffects) {
+        // Light: #FFFFFF cards, Dark: #212121 cards
+        const cardBgLight = COLORS.white;
+        const cardBgDark = { r: 0.129, g: 0.129, b: 0.129 }; // #212121
+        const bgColor = isDark ? cardBgDark : cardBgLight;
+        const card = await createEffectCard(effect, bgColor);
+        row.appendChild(card);
+      }
+
+      content.appendChild(row);
+    }
+
+    column.appendChild(content);
+    return column;
+  };
+
+  // Create Light column (all effects on light background)
+  if (allEffects.length > 0) {
+    const lightColumn = await createModeColumn('Light', allEffects, false);
+    contentFrame.appendChild(lightColumn);
+  }
+
+  // Create Dark column (same effects on dark background)
+  if (allEffects.length > 0) {
+    const darkColumn = await createModeColumn('Dark', allEffects, true);
+    contentFrame.appendChild(darkColumn);
+  }
+
+  return table;
+}
+
+// ============================================================================
 // Main Plugin Logic
 // ============================================================================
 
@@ -1416,6 +1661,23 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
       figma.viewport.scrollAndZoomIntoView([table]);
 
       figma.ui.postMessage({ type: 'typography-complete' });
+    }
+
+    if (msg.type === 'generate-effects') {
+      await loadFonts();
+
+      const table = await generateEffectsTable();
+
+      // Position at viewport center
+      const viewportCenter = figma.viewport.center;
+      table.x = viewportCenter.x;
+      table.y = viewportCenter.y;
+
+      figma.currentPage.appendChild(table);
+      figma.currentPage.selection = [table];
+      figma.viewport.scrollAndZoomIntoView([table]);
+
+      figma.ui.postMessage({ type: 'effects-complete' });
     }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
