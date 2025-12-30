@@ -1974,7 +1974,7 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
       `text/${lowerSize}`
     ];
 
-    let style = null;
+    let style: TextStyle | undefined = undefined;
     for (const pattern of targetPatterns) {
       style = styles.find(s => s.name.toLowerCase() === pattern);
       if (style) break;
@@ -2157,11 +2157,10 @@ async function createStyledButton(
   label.characters = 'Button';
 
   // Apply text style - this is the primary source for font family, size, etc.
-  const styleName = `Button/${size.toUpperCase()}`;
-  const styleApplied = await applyTextStyle(label, styleName);
+  const styleApplied = await applyTextStyle(label, size);
 
   if (!styleApplied) {
-    console.log('No text style found for:', styleName, '- using fallback font settings');
+    console.log(`No text style found for size: ${size} - using fallback font settings`);
     label.fontSize = config.fontSize;
     label.fontName = FONT.familyMedium;
     label.letterSpacing = { value: -0.14, unit: 'PIXELS' };
