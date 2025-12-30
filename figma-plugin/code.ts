@@ -1703,36 +1703,36 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
 // https://openai.github.io/apps-sdk-ui/?path=/docs/components-button--docs
 // Variables: control/size/{size}, control/gutter/{size}, control/icon-size/{size}, button/gap/{size}
 const BUTTON_SIZES = {
-  // size: { height, paddingX (gutter), fontSize, iconSize, borderRadius, gap }
-  '3xs': { height: 22, paddingX: 4, fontSize: 12, iconSize: 14, borderRadius: 2, gap: 3 },
-  '2xs': { height: 24, paddingX: 6, fontSize: 12, iconSize: 14, borderRadius: 4, gap: 4 },
-  'xs': { height: 26, paddingX: 8, fontSize: 12, iconSize: 16, borderRadius: 6, gap: 4 },
+  // size: { height, paddingX, fontSize, iconSize, borderRadius, gap }
+  '3xs': { height: 22, paddingX: 4, fontSize: 12, iconSize: 12, borderRadius: 6, gap: 3 },
+  '2xs': { height: 24, paddingX: 6, fontSize: 12, iconSize: 12, borderRadius: 6, gap: 4 },
+  'xs': { height: 26, paddingX: 8, fontSize: 12, iconSize: 14, borderRadius: 6, gap: 4 },
   'sm': { height: 28, paddingX: 10, fontSize: 12, iconSize: 16, borderRadius: 6, gap: 4 },
   'md': { height: 32, paddingX: 12, fontSize: 14, iconSize: 18, borderRadius: 8, gap: 6 },
-  'lg': { height: 36, paddingX: 14, fontSize: 16, iconSize: 18, borderRadius: 10, gap: 6 },
-  'xl': { height: 40, paddingX: 16, fontSize: 16, iconSize: 18, borderRadius: 12, gap: 6 },
-  '2xl': { height: 44, paddingX: 16, fontSize: 18, iconSize: 20, borderRadius: 16, gap: 6 },
-  '3xl': { height: 48, paddingX: 16, fontSize: 18, iconSize: 22, borderRadius: 20, gap: 6 },
+  'lg': { height: 36, paddingX: 14, fontSize: 16, iconSize: 20, borderRadius: 8, gap: 6 },
+  'xl': { height: 40, paddingX: 16, fontSize: 16, iconSize: 22, borderRadius: 10, gap: 6 },
+  '2xl': { height: 44, paddingX: 16, fontSize: 18, iconSize: 24, borderRadius: 12, gap: 6 },
+  '3xl': { height: 48, paddingX: 16, fontSize: 18, iconSize: 26, borderRadius: 12, gap: 6 },
 };
 
 // Variable name mappings for sizing (to bind Figma variables)
 // Radius uses size-specific control/radius/* tokens (all sizes now in sizing.json)
 const BUTTON_SIZE_VARS = {
-  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'control/radius/3xs', fontSize: 'control/font-size/sm' },
-  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'control/radius/2xs', fontSize: 'control/font-size/sm' },
-  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/sm', gap: 'button/gap/sm', radius: 'control/radius/xs', fontSize: 'control/font-size/sm' },
-  'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', iconSize: 'control/icon-size/sm', gap: 'button/gap/sm', radius: 'control/radius/sm', fontSize: 'control/font-size/sm' },
-  'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'control/radius/md', fontSize: 'control/font-size/md' },
-  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'control/radius/lg', fontSize: 'control/font-size/lg' },
-  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'control/radius/xl', fontSize: 'control/font-size/lg' },
-  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/md', radius: 'control/radius/2xl', fontSize: 'control/font-size/xl' },
-  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'control/radius/3xl', fontSize: 'control/font-size/xl' },
+  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', iconSize: 'control/icon-size/3xs', gap: 'control/gap/3xs', radius: 'control/radius/3xs', fontSize: 'control/font-size/3xs' },
+  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/2xs', gap: 'control/gap/2xs', radius: 'control/radius/2xs', fontSize: 'control/font-size/2xs' },
+  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/xs', gap: 'control/gap/xs', radius: 'control/radius/xs', fontSize: 'control/font-size/xs' },
+  'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', iconSize: 'control/icon-size/sm', gap: 'control/gap/sm', radius: 'control/radius/sm', fontSize: 'control/font-size/sm' },
+  'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'control/gap/md', radius: 'control/radius/md', fontSize: 'control/font-size/md' },
+  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/lg', gap: 'control/gap/lg', radius: 'control/radius/lg', fontSize: 'control/font-size/lg' },
+  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'control/gap/xl', radius: 'control/radius/xl', fontSize: 'control/font-size/xl' },
+  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/2xl', iconSize: 'control/icon-size/2xl', gap: 'control/gap/2xl', radius: 'control/radius/2xl', fontSize: 'control/font-size/2xl' },
+  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/3xl', iconSize: 'control/icon-size/3xl', gap: 'control/gap/3xl', radius: 'control/radius/3xl', fontSize: 'control/font-size/3xl' },
 };
 
 type ButtonSizeName = keyof typeof BUTTON_SIZES;
 type IconMode = 'none' | 'start' | 'end' | 'both';
 
-const BUTTON_STYLES = ['solid', 'outline', 'ghost', 'link'] as const;
+const BUTTON_STYLES = ['soft', 'solid', 'outline', 'ghost', 'link'] as const;
 // Reversed size order: Largest to Smallest
 const BUTTON_SIZE_ORDER: ButtonSizeName[] = ['3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs', '2xs', '3xs'];
 
@@ -1999,9 +1999,9 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
       'sm': 'xs',
       'md': 'sm',
       'lg': 'md',
-      'xl': 'lg',
-      '2xl': 'xl',
-      '3xl': '2xl'
+      'xl': 'md',
+      '2xl': 'lg',
+      '3xl': 'lg'
     };
 
     const textStyleSize = sizeShiftMap[lowerSize] || lowerSize;
@@ -2011,8 +2011,11 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
     const targetPatterns = [
       `text/${textStyleSize}/medium`,
       `text/${textStyleSize}/semibold`,
+      `text/${textStyleSize}/bold`,
       `text/${textStyleSize}/normal`,
       `text/${textStyleSize}/regular`,
+      `${textStyleSize}/medium`,
+      `${textStyleSize}/semibold`,
       `text/${textStyleSize}`
     ];
 
@@ -2072,7 +2075,11 @@ async function generateButtons(targetStyles?: string[]): Promise<void> {
     for (const color of BUTTON_COLOR_VARIANTS) {
       for (const state of BUTTON_STATES) {
         for (const size of BUTTON_SIZE_ORDER) {
-          const component = await createStyledButton(style, color, state, size, pill, iconMode);
+          // Parse if it's an icon-only style
+          const isIconOnly = style.endsWith('-icon-only');
+          const baseStyle = isIconOnly ? style.replace('-icon-only', '') as ButtonStyle : style as ButtonStyle;
+
+          const component = await createStyledButton(baseStyle, color, state, size, pill, iconMode, isIconOnly);
 
           // Simple positioning prevents overlapping before combine
           component.x = x;
@@ -2120,7 +2127,8 @@ async function createStyledButton(
   state: ButtonState,
   size: ButtonSizeName,
   pill: boolean,
-  iconMode: IconMode
+  iconMode: IconMode,
+  iconOnly: boolean = false
 ): Promise<ComponentNode> {
   const config = BUTTON_SIZES[size];
   const colors = getButtonFallbackColors(style, colorVariant, state);
@@ -2128,19 +2136,23 @@ async function createStyledButton(
   // Create as component
   const button = figma.createComponent();
   // Name using Property=Value syntax, ONLY requested properties
-  // Note: Property KEYS are capitalized (standard), values are lowercase.
-  button.name = `Color=${colorVariant}, State=${state}, Size=${size}`;
+  // Note: Property KEYS are lowercase as per design system convention.
+  button.name = `color=${colorVariant}, state=${state}, size=${size}${iconOnly ? ', iconOnly=true' : ''}`;
 
   button.layoutMode = 'HORIZONTAL';
   button.primaryAxisAlignItems = 'CENTER';
   button.counterAxisAlignItems = 'CENTER';
   button.primaryAxisSizingMode = 'AUTO';
   button.counterAxisSizingMode = 'FIXED';
-  button.resize(button.width, config.height);
+  button.resize(iconOnly ? config.height : button.width, config.height);
+
+  if (iconOnly) {
+    button.layoutSizingHorizontal = 'FIXED';
+  }
 
   // Padding
   // OpenAI Apps SDK UI uses a 1.33x multiplier for padding when pill={true}
-  const paddingX = pill ? Math.round(config.paddingX * 1.33) : config.paddingX;
+  const paddingX = iconOnly ? 0 : (pill ? Math.round(config.paddingX * 1.33) : config.paddingX);
   button.paddingLeft = paddingX;
   button.paddingRight = paddingX;
   button.itemSpacing = config.gap;
@@ -2172,8 +2184,13 @@ async function createStyledButton(
   // Bind sizing properties to the button frame
   const sizeVars = BUTTON_SIZE_VARS[size];
   await bindVariableToProperty(button, 'height', sizeVars.height);
-  await bindVariableToProperty(button, 'paddingLeft', sizeVars.padding);
-  await bindVariableToProperty(button, 'paddingRight', sizeVars.padding);
+  if (iconOnly) {
+    // For icon-only, bind width to the same height variable to keep it square
+    await bindVariableToProperty(button, 'width', sizeVars.height);
+  } else {
+    await bindVariableToProperty(button, 'paddingLeft', sizeVars.padding);
+    await bindVariableToProperty(button, 'paddingRight', sizeVars.padding);
+  }
   await bindVariableToProperty(button, 'itemSpacing', sizeVars.gap);
   if (!pill) {
     await bindVariableToProperty(button, 'cornerRadius', sizeVars.radius);
@@ -2190,32 +2207,37 @@ async function createStyledButton(
     button.appendChild(iconLeft);
   }
 
-  // Text
-  const label = figma.createText();
-  label.name = 'label'; // Lowercase name
-  label.characters = 'Button';
+  if (!iconOnly) {
+    // Text
+    const label = figma.createText();
+    label.name = 'label'; // Lowercase name
+    label.characters = 'Button';
 
-  // Apply text style - this is the primary source for font family, size, etc.
-  const styleApplied = await applyTextStyle(label, size);
+    // Apply text style - this is the primary source for font family, size, etc.
+    const styleApplied = await applyTextStyle(label, size);
 
-  if (!styleApplied) {
-    console.log(`No text style found for size: ${size} - using fallback font settings`);
-    label.fontSize = config.fontSize;
-    label.fontName = FONT.familyMedium;
-    label.letterSpacing = { value: -0.14, unit: 'PIXELS' };
-    // Set line-height to match font-size (1:1 ratio)
-    label.lineHeight = { value: config.fontSize, unit: 'PIXELS' };
+    // Also try to bind font size variable explicitly
+    await bindVariableToProperty(label, 'fontSize', sizeVars.fontSize);
+
+    if (!styleApplied) {
+      console.log(`No text style found for size: ${size} - using fallback font settings`);
+      label.fontSize = config.fontSize;
+      label.fontName = FONT.familyMedium;
+      label.letterSpacing = { value: -0.14, unit: 'PIXELS' };
+      // Set line-height to match font-size (1:1 ratio)
+      label.lineHeight = { value: config.fontSize, unit: 'PIXELS' };
+    }
+
+    // Try to bind text color variable
+    const textBound = await bindVariableToTextFill(label, textVarName);
+    if (!textBound) {
+      label.fills = [{ type: 'SOLID', color: colors.text }];
+    }
+    button.appendChild(label);
   }
-
-  // Try to bind text color variable
-  const textBound = await bindVariableToTextFill(label, textVarName);
-  if (!textBound) {
-    label.fills = [{ type: 'SOLID', color: colors.text }];
-  }
-  button.appendChild(label);
 
   // Icon right
-  if (iconMode === 'end' || iconMode === 'both') {
+  if (!iconOnly && (iconMode === 'end' || iconMode === 'both')) {
     const iconRight = await createIconInstance(ICON_NODE_IDS.right, config.iconSize, textVarName, iconSizeVarName);
     iconRight.name = 'right icon';
     button.appendChild(iconRight);

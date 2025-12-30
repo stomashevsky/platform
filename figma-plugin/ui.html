@@ -318,6 +318,10 @@
       <h3>Buttons</h3>
       <div class="component-grid">
         <label class="collection-item">
+          <input type="checkbox" name="buttonStyle" value="soft" checked>
+          <span class="collection-name">Soft</span>
+        </label>
+        <label class="collection-item">
           <input type="checkbox" name="buttonStyle" value="solid" checked>
           <span class="collection-name">Solid</span>
         </label>
@@ -329,9 +333,24 @@
           <input type="checkbox" name="buttonStyle" value="ghost" checked>
           <span class="collection-name">Ghost</span>
         </label>
+
+        <div style="height: 12px; margin: 8px 0; border-top: 1px solid #f0f0f0;"></div>
+
         <label class="collection-item">
-          <input type="checkbox" name="buttonStyle" value="link" checked>
-          <span class="collection-name">Link</span>
+          <input type="checkbox" name="buttonStyle" value="soft-icon-only" checked>
+          <span class="collection-name">Soft Icon-only</span>
+        </label>
+        <label class="collection-item">
+          <input type="checkbox" name="buttonStyle" value="solid-icon-only" checked>
+          <span class="collection-name">Solid Icon-only</span>
+        </label>
+        <label class="collection-item">
+          <input type="checkbox" name="buttonStyle" value="outline-icon-only" checked>
+          <span class="collection-name">Outline Icon-only</span>
+        </label>
+        <label class="collection-item">
+          <input type="checkbox" name="buttonStyle" value="ghost-icon-only" checked>
+          <span class="collection-name">Ghost Icon-only</span>
         </label>
         <button class="btn-primary" id="generateButtons" style="margin-top: 16px;">Generate Selected Buttons</button>
       </div>
@@ -554,7 +573,64 @@
       }, '*');
     };
 
-    // Generate Buttons
+    // Generate Buttons - sequential generation to prevent Figma crash
+    let isGeneratingButtons = false;
+    let buttonStylesQueue = [];
+    let currentStyleIndex = 0;
+
+    async function generateNextButtonStyle() {
+      if (currentStyleIndex >= buttonStylesQueue.length) {
+        // All styles generated
+        isGeneratingButtons = false;
+        hideComponentsLoading();
+        showComponentsStatus('success', `Generated ${buttonStylesQueue.length} button set(s) successfully!`);
+        buttonStylesQueue = [];
+        currentStyleIndex = 0;
+        return;
+      }
+
+      const style = buttonStylesQueue[currentStyleIndex];
+      // Update loading message to show progress
+      document.querySelector('#componentsLoading span').textContent =
+        `Generating ${style} (${currentStyleIndex + 1}/${buttonStylesQueue.length})...`;
+
+      parent.postMessage({
+        pluginMessage: {
+          type: 'generate-buttons',
+          styles: [style]
+        }
+      }, '*');
+    }
+
+    // Override the buttons-complete handler to continue with next style
+    const originalOnMessage = window.onmessage;
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+
+      // Handle sequential button generation
+      if (msg.type === 'buttons-complete' && isGeneratingButtons) {
+        currentStyleIndex++;
+        // Small delay to let Figma breathe before next style
+        setTimeout(generateNextButtonStyle, 300);
+        return;
+      }
+
+      if (msg.type === 'buttons-error' && isGeneratingButtons) {
+        isGeneratingButtons = false;
+        hideComponentsLoading();
+        showComponentsStatus('error', msg.message);
+        buttonStylesQueue = [];
+        currentStyleIndex = 0;
+        return;
+      }
+
+      // Call original handler for other messages
+      if (originalOnMessage) {
+        originalOnMessage(event);
+      }
+    };
+
     document.getElementById('generateButtons').onclick = () => {
       const checkboxes = document.querySelectorAll('input[name="buttonStyle"]:checked');
       const selectedStyles = Array.from(checkboxes).map(cb => cb.value);
@@ -564,13 +640,13 @@
         return;
       }
 
+      // Start sequential generation
+      isGeneratingButtons = true;
+      buttonStylesQueue = selectedStyles;
+      currentStyleIndex = 0;
+
       showComponentsLoading();
-      parent.postMessage({
-        pluginMessage: {
-          type: 'generate-buttons',
-          styles: selectedStyles
-        }
-      }, '*');
+      generateNextButtonStyle();
     };
   </script>
 </body>
