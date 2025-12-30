@@ -94,10 +94,11 @@ function processComponentTokens(tokens, mode = 'Light') {
 
 // ============================================
 // CUSTOM JSON SERIALIZATION
-// Preserves correct key order for numeric palette keys
+// Preserves correct key order for numeric palette keys AND variants
 // ============================================
 
 const NUMERIC_PALETTES = ['gray', 'gray dark', 'alpha', 'alpha-white', 'red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+const VARIANT_ORDER = ['default', 'primary', 'secondary', 'tertiary', 'success', 'info', 'warning', 'danger', 'discovery', 'caution', 'inverse'];
 
 function sortPaletteKeys(keys) {
     return [...keys].sort((a, b) => {
@@ -111,6 +112,34 @@ function sortPaletteKeys(keys) {
 
         return parseInt(a) - parseInt(b);
     });
+}
+
+function sortVariantKeys(keys) {
+    return [...keys].sort((a, b) => {
+        const indexA = VARIANT_ORDER.indexOf(a);
+        const indexB = VARIANT_ORDER.indexOf(b);
+
+        // If both are found in VARIANT_ORDER, sort by index
+        if (indexA !== -1 && indexB !== -1) {
+            return indexA - indexB;
+        }
+
+        // If only A is found, it comes first
+        if (indexA !== -1) return -1;
+
+        // If only B is found, it comes first
+        if (indexB !== -1) return 1;
+
+        // If neither found, alphabetical
+        return a.localeCompare(b);
+    });
+}
+
+// Helper to check if a set of keys looks like a variant group
+function isVariantGroup(keys) {
+    // If it contains at least 2 known variants, treat as variant group
+    const knownVariants = keys.filter(k => VARIANT_ORDER.includes(k));
+    return knownVariants.length >= 2;
 }
 
 function serializeWithOrder(obj, indent = 2, depth = 0, parentKey = '') {
@@ -129,9 +158,11 @@ function serializeWithOrder(obj, indent = 2, depth = 0, parentKey = '') {
     let keys = Object.keys(obj);
     if (keys.length === 0) return '{}';
 
-    // Sort keys for numeric palettes
+    // Sort keys based on context
     if (NUMERIC_PALETTES.includes(parentKey)) {
         keys = sortPaletteKeys(keys);
+    } else if (isVariantGroup(keys)) {
+        keys = sortVariantKeys(keys);
     }
 
     const items = keys.map(key => {
@@ -177,6 +208,25 @@ if (primitives) {
     }
 }
 
+// STEP 2.1: Add missing text/solid/caution token to SEMANTIC tokens (data[0])
+const semanticModes = data[0]?.color?.modes;
+if (semanticModes) {
+    ['Light', 'Dark'].forEach(mode => {
+        if (semanticModes[mode] && semanticModes[mode].text && semanticModes[mode].text.solid) {
+            // UPDATE even if existing to ensure value is correct
+            console.log(`   + Updating text/solid/caution token to ${mode} mode`);
+            semanticModes[mode].text.solid.caution = {
+                "$scopes": ["TEXT_FILL"],
+                "$description": "--color-text-caution-solid\nButton caution solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive", // Keep consistent with siblings even if it's semantic
+                "$value": "{base.white}"
+            };
+        }
+    });
+}
+
 // STEP 3: Add/update component tokens
 const lightComponentTokens = processComponentTokens(componentTokens, 'Light');
 const darkComponentTokens = processComponentTokens(componentTokens, 'Dark');
@@ -192,4 +242,5 @@ fs.writeFileSync(filePath, serializeWithOrder(data, 2));
 console.log('✅ Updated openai-design-system.json');
 console.log('   - Normalized alpha keys (00 -> 0, 08 -> 8) for automatic sorting.');
 console.log('   - Updated ALL references to match new key names.');
+console.log('   - Enforced logical variant sorting (primary, secondary, etc.)');
 console.log(`   Path: ${filePath}`);

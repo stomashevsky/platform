@@ -1605,7 +1605,7 @@ async function generateEffectsTable(): Promise<FrameNode> {
 // Main Plugin Logic
 // ============================================================================
 
-figma.showUI(__html__, { width: 400, height: 600 });
+figma.showUI(__html__, { width: 400, height: 800 });
 
 figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => {
   try {
@@ -1745,7 +1745,7 @@ const BUTTON_STYLES = ['soft', 'solid', 'outline', 'ghost'] as const;
 const BUTTON_COLOR_VARIANTS = ['primary', 'secondary', 'success', 'info', 'discovery', 'danger', 'warning', 'caution'] as const;
 
 // Button states
-const BUTTON_STATES = ['default', 'hover', 'active'] as const;
+const BUTTON_STATES = ['default', 'hover', 'active', 'disabled'] as const;
 
 type ButtonSizeName = keyof typeof BUTTON_SIZES;
 type ButtonStyle = typeof BUTTON_STYLES[number];
@@ -1755,6 +1755,13 @@ type ButtonState = typeof BUTTON_STATES[number];
 // Variable name mappings for each style/variant/state combination
 // Based on JSON structure: background/soft/primary or background/soft/hover/primary
 function getButtonColorVarName(style: ButtonStyle, variant: ButtonColorVariant, state: ButtonState, property: 'bg' | 'text' | 'border'): string {
+  // Handle disabled state first - it uses specific global tokens
+  if (state === 'disabled') {
+    if (property === 'bg') return 'background/disabled';
+    if (property === 'text') return 'text/disabled';
+    if (property === 'border') return 'border/disabled';
+  }
+
   // Build path based on the JSON structure in design system
   if (property === 'bg') {
     if (state === 'default') {
@@ -1927,29 +1934,53 @@ async function bindVariableToProperty(node: SceneNode, property: 'width' | 'heig
 // Bind color variable to an instance node (for icons) - recursively targets children with fills
 async function bindColorToInstance(instance: InstanceNode | FrameNode, varName: string): Promise<boolean> {
   const variable = await getVariableByName(varName);
+  // If variable not found, return false so caller can handle fallback
   if (!variable || variable.resolvedType !== 'COLOR') return false;
 
   try {
     const basePaint: SolidPaint = {
       type: 'SOLID',
-      color: { r: 0.5, g: 0.5, b: 0.5 },
+      color: { r: 0.5, g: 0.5, b: 0.5 }, // Placeholder color
     };
     const boundPaint = figma.variables.setBoundVariableForPaint(basePaint, 'color', variable);
 
-    // Also apply to all children recursively (especially for icons with internal vectors)
-    // We only apply to geometry-heavy nodes, not the container itself
+    // Recursively apply to all vector children
     const applyToChildren = (node: SceneNode) => {
+      // Skip hidden nodes
+      if (!node.visible) return;
+
       if (
         'fills' in node &&
-        (node.type === 'VECTOR' || node.type === 'BOOLEAN_OPERATION' || node.type === 'STAR' || node.type === 'LINE' || node.type === 'ELLIPSE' || node.type === 'RECTANGLE')
+        (node.type === 'VECTOR' || node.type === 'BOOLEAN_OPERATION' || node.type === 'STAR' || node.type === 'LINE' || node.type === 'ELLIPSE' || node.type === 'RECTANGLE' || node.type === 'TEXT')
       ) {
-        node.fills = [boundPaint];
+        // Check if node has existing visible fills
+        // We only want to recolor elements that are meant to be seen, not transparent bounding boxes
+        const hasVisibleFills = Array.isArray(node.fills) && node.fills.some(fill => fill.visible !== false);
+
+        if (hasVisibleFills) {
+          // Clear existing fills first to ensure clean state
+          node.fills = [];
+          node.fills = [boundPaint];
+        } else {
+          // For nodes with no fills (likely bounding boxes), do nothing
+        }
+
+        // Also try to bind stroke if it exists and has strokes
+        if ('strokes' in node && node.strokes.length > 0) {
+          const boundStroke = figma.variables.setBoundVariableForPaint(basePaint, 'color', variable);
+          node.strokes = [boundStroke];
+        }
       }
+
       if ('children' in node) {
-        node.children.forEach(applyToChildren);
+        (node as any).children.forEach(applyToChildren);
       }
     };
-    instance.children.forEach(applyToChildren);
+
+    // Apply to instance children
+    if ('children' in instance) {
+      instance.children.forEach(applyToChildren);
+    }
 
     return true;
   } catch (e) {
@@ -2016,18 +2047,32 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
   return false;
 }
 
-async function generateButtons(): Promise<ComponentNode> {
+async function generateButtons(): Promise<FrameNode> {
   // Reset variables cache for fresh lookup
   variablesCache = null;
 
-  // Create only the Button/solid/primary component - no tables or labels
-  const button = await createStyledButton('solid', 'primary', 'default', 'md', false);
+  // Create main container for the library
+  const library = figma.createFrame();
+  library.name = 'Button Library';
+  library.layoutMode = 'HORIZONTAL';
+  library.primaryAxisAlignItems = 'MIN';
+  library.counterAxisAlignItems = 'MIN';
+  library.primaryAxisSizingMode = 'AUTO';
+  library.counterAxisSizingMode = 'AUTO';
+  library.itemSpacing = 80;
+  library.paddingLeft = 40;
+  library.paddingRight = 40;
+  library.paddingTop = 40;
+  library.paddingBottom = 40;
+  library.fills = [{ type: 'SOLID', color: COLORS.white }];
 
-  // List all available text styles for debugging
-  const textStyles = await figma.getLocalTextStylesAsync();
-  console.log('Available Text Styles:', textStyles.map(s => s.name));
+  // Generate sections for each button style
+  for (const style of BUTTON_STYLES) {
+    const section = await createButtonStyleSection(style);
+    library.appendChild(section);
+  }
 
-  return button;
+  return library;
 }
 
 async function createButtonStyleSection(style: ButtonStyle): Promise<FrameNode> {
@@ -2088,8 +2133,8 @@ async function createButtonStyleSection(style: ButtonStyle): Promise<FrameNode> 
     }
 
     // Add pill version (default state only)
-    const pillButton = await createStyledButton(style, colorVariant, 'default', 'md', true);
-    variantRow.appendChild(pillButton);
+    // const pillButton = await createStyledButton(style, colorVariant, 'default', 'md', true);
+    // variantRow.appendChild(pillButton);
 
     componentsGrid.appendChild(variantRow);
   }
@@ -2203,8 +2248,8 @@ async function createStyledButton(
 
 // Icon component node IDs from the Figma library
 const ICON_NODE_IDS = {
-  left: '6030:1029',
-  right: '6030:1032',
+  left: '6011:127065', // Specific envelope component
+  right: '6011:126766', // Specific arrow component
 };
 
 async function createIconInstance(
