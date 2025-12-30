@@ -492,6 +492,44 @@
                 "$type": "float",
                 "$value": 24
               }
+            },
+            "radius": {
+              "sm": {
+                "$scopes": [
+                  "CORNER_RADIUS"
+                ],
+                "$description": "--control-radius-sm\nControl border radius (6px)",
+                "$hiddenFromPublishing": true,
+                "$type": "float",
+                "$value": 6
+              },
+              "md": {
+                "$scopes": [
+                  "CORNER_RADIUS"
+                ],
+                "$description": "--control-radius-md\nControl border radius (8px)",
+                "$hiddenFromPublishing": true,
+                "$type": "float",
+                "$value": 8
+              },
+              "lg": {
+                "$scopes": [
+                  "CORNER_RADIUS"
+                ],
+                "$description": "--control-radius-lg\nControl border radius (10px)",
+                "$hiddenFromPublishing": true,
+                "$type": "float",
+                "$value": 10
+              },
+              "xl": {
+                "$scopes": [
+                  "CORNER_RADIUS"
+                ],
+                "$description": "--control-radius-xl\nControl border radius (12px)",
+                "$hiddenFromPublishing": true,
+                "$type": "float",
+                "$value": 12
+              }
             }
           },
           "button": {

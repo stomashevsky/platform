@@ -1716,17 +1716,18 @@ const BUTTON_SIZES = {
 };
 
 // Variable name mappings for sizing (to bind Figma variables)
-// Radius fixed: 3xs/2xs/xs/sm all use radius/sm (6px) per user feedback
+// Radius uses semantic control/radius/* tokens (added to sizing.json)
+// For 3xs/2xs, use primitives as control/radius doesn't have those sizes
 const BUTTON_SIZE_VARS = {
-  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
-  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
-  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/sm', gap: 'button/gap/sm', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
-  'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', iconSize: 'control/icon-size/sm', gap: 'button/gap/sm', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
-  'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'radius/md', fontSize: 'control/font-size/md' },
-  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'radius/lg', fontSize: 'control/font-size/lg' },
-  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'radius/xl', fontSize: 'control/font-size/lg' },
-  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/md', radius: 'radius/2xl', fontSize: 'control/font-size/xl' },
-  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'radius/3xl', fontSize: 'control/font-size/xl' },
+  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/2xs', fontSize: 'control/font-size/sm' },
+  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/xs', fontSize: 'control/font-size/sm' },
+  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/sm', gap: 'button/gap/sm', radius: 'control/radius/sm', fontSize: 'control/font-size/sm' },
+  'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', iconSize: 'control/icon-size/sm', gap: 'button/gap/sm', radius: 'control/radius/sm', fontSize: 'control/font-size/sm' },
+  'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'control/radius/md', fontSize: 'control/font-size/md' },
+  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'control/radius/lg', fontSize: 'control/font-size/lg' },
+  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'control/radius/xl', fontSize: 'control/font-size/lg' },
+  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/md', radius: 'control/radius/xl', fontSize: 'control/font-size/xl' },
+  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'control/radius/xl', fontSize: 'control/font-size/xl' },
 };
 
 type ButtonSizeName = keyof typeof BUTTON_SIZES;
@@ -2071,7 +2072,7 @@ async function generateButtons(targetStyles?: string[]): Promise<void> {
 
     for (const color of BUTTON_COLOR_VARIANTS) {
       for (const state of BUTTON_STATES) {
-        for (const size of Object.keys(BUTTON_SIZES) as ButtonSizeName[]) {
+        for (const size of BUTTON_SIZE_ORDER) {
           const component = await createStyledButton(style, color, state, size, pill, iconMode);
 
           // Simple positioning prevents overlapping before combine
@@ -2217,7 +2218,7 @@ async function createStyledButton(
   // Icon right
   if (iconMode === 'end' || iconMode === 'both') {
     const iconRight = await createIconInstance(ICON_NODE_IDS.right, config.iconSize, textVarName, iconSizeVarName);
-    iconRight.name = 'Icon Right';
+    iconRight.name = 'right icon';
     button.appendChild(iconRight);
   }
 
