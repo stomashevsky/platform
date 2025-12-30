@@ -1683,17 +1683,8 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
     if (msg.type === 'generate-buttons') {
       await loadFonts();
 
-      const buttonLibrary = await generateButtons();
-
-      // Position at viewport center
-      const viewportCenter = figma.viewport.center;
-      buttonLibrary.x = viewportCenter.x;
-      buttonLibrary.y = viewportCenter.y;
-
-      figma.currentPage.appendChild(buttonLibrary);
-      figma.currentPage.selection = [buttonLibrary];
-      figma.viewport.scrollAndZoomIntoView([buttonLibrary]);
-
+      await generateButtons();
+      figma.notify('Button sets generated separately');
       figma.ui.postMessage({ type: 'buttons-complete' });
     }
   } catch (error) {
@@ -2048,59 +2039,64 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
   return false;
 }
 
-async function generateButtons(): Promise<ComponentSetNode> {
+async function generateButtons(): Promise<void> {
   // Reset variables cache for fresh lookup
   variablesCache = null;
 
-  const components: ComponentNode[] = [];
-  let x = 0;
   let y = 0;
-  const GAP = 50;
+  const GAP_BETWEEN_SETS = 200;
+  const GAP_WITHIN_SET = 50;
 
-  // Flattened loop for all permutations
+  // Loop for each style to create a SEPARATE component set
   for (const style of BUTTON_STYLES) {
+    const styleComponents: ComponentNode[] = [];
+    let x = 0;
+
+    // Fixed values for Pill and IconMode as requested
+    const pill = false;
+    const iconMode: IconMode = 'both';
+
     for (const color of BUTTON_COLOR_VARIANTS) {
       for (const state of BUTTON_STATES) {
         for (const size of Object.keys(BUTTON_SIZES) as ButtonSizeName[]) {
-          // Temporary restriction to avoid hitting Figma limits during dev/testing if needed
-          // For now, generating all.
-          for (const pill of [false, true]) {
-            for (const iconMode of ICON_MODES) {
-              const component = await createStyledButton(style, color, state, size, pill, iconMode);
+          const component = await createStyledButton(style, color, state, size, pill, iconMode);
 
-              // Simple positioning prevents overlapping before combine
-              component.x = x;
-              component.y = y;
-              x += component.width + GAP;
+          // Simple positioning prevents overlapping before combine
+          component.x = x;
+          component.y = y;
+          x += component.width + GAP_WITHIN_SET;
 
-              components.push(component);
-            }
-          }
+          styleComponents.push(component);
         }
-        // New row for each state/color combo to keep things somewhat orderly on canvas before combine
+        // New row for each state/color combo within the set
         x = 0;
-        y += 100;
+        y += 100; // rough vertical spacing for pre-combined items
       }
     }
+
+    // Create the component set for THIS style
+    const componentSet = figma.combineAsVariants(styleComponents, figma.currentPage);
+    componentSet.name = style.toLowerCase(); // Name the set "solid", "outline", etc.
+
+    // Organize the component set with auto layout
+    componentSet.layoutMode = 'HORIZONTAL';
+    componentSet.layoutWrap = 'WRAP';
+    componentSet.itemSpacing = 24;
+    componentSet.counterAxisSpacing = 24;
+
+    // Add some padding
+    componentSet.paddingLeft = 40;
+    componentSet.paddingRight = 40;
+    componentSet.paddingTop = 40;
+    componentSet.paddingBottom = 40;
+    componentSet.fills = [{ type: 'SOLID', color: COLORS.white }];
+
+    // Position the SET itself
+    componentSet.y = y;
+
+    // Move Y down for the next set
+    y += componentSet.height + GAP_BETWEEN_SETS;
   }
-
-  const componentSet = figma.combineAsVariants(components, figma.currentPage);
-  componentSet.name = 'Button';
-
-  // Organize the component set with auto layout
-  componentSet.layoutMode = 'HORIZONTAL';
-  componentSet.layoutWrap = 'WRAP';
-  componentSet.itemSpacing = 24;
-  componentSet.counterAxisSpacing = 24;
-
-  // Add some padding
-  componentSet.paddingLeft = 40;
-  componentSet.paddingRight = 40;
-  componentSet.paddingTop = 40;
-  componentSet.paddingBottom = 40;
-  componentSet.fills = [{ type: 'SOLID', color: COLORS.white }];
-
-  return componentSet;
 }
 
 // function createButtonStyleSection removed
@@ -2118,8 +2114,10 @@ async function createStyledButton(
 
   // Create as component
   const button = figma.createComponent();
-  // Name using Property=Value syntax for variants
-  button.name = `Style=${style}, Color=${colorVariant}, State=${state}, Size=${size}, Pill=${pill}, Icon=${iconMode}`;
+  // Name using Property=Value syntax, ONLY requested properties
+  // Note: Property KEYS are capitalized (standard), values are lowercase.
+  button.name = `Color=${colorVariant}, State=${state}, Size=${size}`;
+
   button.layoutMode = 'HORIZONTAL';
   button.primaryAxisAlignItems = 'CENTER';
   button.counterAxisAlignItems = 'CENTER';
@@ -2175,13 +2173,13 @@ async function createStyledButton(
   // Icon left
   if (iconMode === 'start' || iconMode === 'both') {
     const iconLeft = await createIconInstance(ICON_NODE_IDS.left, config.iconSize, textVarName, iconSizeVarName);
-    iconLeft.name = 'Icon Left';
+    iconLeft.name = 'left icon'; // Lowercase name
     button.appendChild(iconLeft);
   }
 
   // Text
   const label = figma.createText();
-  label.name = 'Label';
+  label.name = 'label'; // Lowercase name
   label.characters = 'Button';
 
   // Apply text style - this is the primary source for font family, size, etc.
