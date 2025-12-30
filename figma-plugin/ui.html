@@ -317,7 +317,23 @@
     <div class="component-section">
       <h3>Buttons</h3>
       <div class="component-grid">
-        <button class="btn-primary" id="generateButtons">Generate Button Library</button>
+        <label class="collection-item">
+          <input type="checkbox" name="buttonStyle" value="solid" checked>
+          <span class="collection-name">Solid</span>
+        </label>
+        <label class="collection-item">
+          <input type="checkbox" name="buttonStyle" value="outline" checked>
+          <span class="collection-name">Outline</span>
+        </label>
+        <label class="collection-item">
+          <input type="checkbox" name="buttonStyle" value="ghost" checked>
+          <span class="collection-name">Ghost</span>
+        </label>
+        <label class="collection-item">
+          <input type="checkbox" name="buttonStyle" value="link" checked>
+          <span class="collection-name">Link</span>
+        </label>
+        <button class="btn-primary" id="generateButtons" style="margin-top: 16px;">Generate Selected Buttons</button>
       </div>
     </div>
 
@@ -540,10 +556,19 @@
 
     // Generate Buttons
     document.getElementById('generateButtons').onclick = () => {
+      const checkboxes = document.querySelectorAll('input[name="buttonStyle"]:checked');
+      const selectedStyles = Array.from(checkboxes).map(cb => cb.value);
+
+      if (selectedStyles.length === 0) {
+        showComponentsStatus('error', 'Please select at least one style');
+        return;
+      }
+
       showComponentsLoading();
       parent.postMessage({
         pluginMessage: {
-          type: 'generate-buttons'
+          type: 'generate-buttons',
+          styles: selectedStyles
         }
       }, '*');
     };

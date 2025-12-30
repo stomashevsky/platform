@@ -1683,16 +1683,15 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
     if (msg.type === 'generate-buttons') {
       await loadFonts();
 
-      await generateButtons();
-      figma.notify('Button sets generated separately');
+      const targetStyles = (msg as any).styles as string[] | undefined;
+      await generateButtons(targetStyles);
+      figma.notify(targetStyles ? `Generated ${targetStyles.length} button set(s)` : 'All button sets generated');
       figma.ui.postMessage({ type: 'buttons-complete' });
     }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-    figma.ui.postMessage({
-      type: 'generation-error',
-      message: errorMessage
-    });
+    figma.notify(`Error: ${errorMessage}`, { error: true });
+    figma.ui.postMessage({ type: 'buttons-error', message: errorMessage });
   }
 };
 
@@ -1717,15 +1716,16 @@ const BUTTON_SIZES = {
 };
 
 // Variable name mappings for sizing (to bind Figma variables)
+// Radius fixed: 3xs/2xs/xs/sm all use radius/sm (6px) per user feedback
 const BUTTON_SIZE_VARS = {
-  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/2xs', fontSize: 'control/font-size/sm' },
-  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/md', radius: 'radius/xs', fontSize: 'control/font-size/sm' },
-  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/sm', gap: 'button/gap/md', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
-  'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', iconSize: 'control/icon-size/sm', gap: 'button/gap/md', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
-  'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'button/gap/lg', radius: 'radius/md', fontSize: 'control/font-size/md' },
-  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/md', gap: 'button/gap/lg', radius: 'radius/lg', fontSize: 'control/font-size/lg' },
-  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/md', gap: 'button/gap/lg', radius: 'radius/xl', fontSize: 'control/font-size/lg' },
-  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/lg', radius: 'radius/2xl', fontSize: 'control/font-size/xl' },
+  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
+  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
+  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/sm', gap: 'button/gap/sm', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
+  'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', iconSize: 'control/icon-size/sm', gap: 'button/gap/sm', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
+  'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'radius/md', fontSize: 'control/font-size/md' },
+  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'radius/lg', fontSize: 'control/font-size/lg' },
+  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'radius/xl', fontSize: 'control/font-size/lg' },
+  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/md', radius: 'radius/2xl', fontSize: 'control/font-size/xl' },
   '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'radius/3xl', fontSize: 'control/font-size/xl' },
 };
 
@@ -1733,7 +1733,11 @@ type ButtonSizeName = keyof typeof BUTTON_SIZES;
 type IconMode = 'none' | 'start' | 'end' | 'both';
 
 const BUTTON_STYLES = ['solid', 'outline', 'ghost', 'link'] as const;
-const BUTTON_COLOR_VARIANTS = ['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'discovery', 'caution', 'inverse'] as const;
+// Reversed size order: Largest to Smallest
+const BUTTON_SIZE_ORDER: ButtonSizeName[] = ['3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs', '2xs', '3xs'];
+
+// Removed 'inverse'
+const BUTTON_COLOR_VARIANTS = ['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'discovery', 'caution'] as const;
 const BUTTON_STATES = ['default', 'hover', 'active', 'disabled'] as const;
 const ICON_MODES = ['none', 'start', 'end', 'both'] as const;
 
@@ -1779,7 +1783,6 @@ function getButtonFallbackColors(style: ButtonStyle, variant: ButtonColorVariant
     danger: { r: 0.937, g: 0.267, b: 0.267 },
     warning: { r: 1, g: 0.6, b: 0 },
     caution: { r: 0.85, g: 0.65, b: 0 },
-    inverse: { r: 0.1, g: 0.1, b: 0.1 },
   };
 
   const baseColor = colorMap[variant];
@@ -2039,7 +2042,7 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
   return false;
 }
 
-async function generateButtons(): Promise<void> {
+async function generateButtons(targetStyles?: string[]): Promise<void> {
   // Reset variables cache for fresh lookup
   variablesCache = null;
 
@@ -2047,8 +2050,18 @@ async function generateButtons(): Promise<void> {
   const GAP_BETWEEN_SETS = 200;
   const GAP_WITHIN_SET = 50;
 
+  // If specific styles are requested, filter the styles list. Otherwise use all.
+  const stylesToGenerate = targetStyles && targetStyles.length > 0
+    ? BUTTON_STYLES.filter(s => targetStyles.includes(s))
+    : BUTTON_STYLES;
+
+  if (stylesToGenerate.length === 0) {
+    console.warn(`No valid styles found in request: ${targetStyles}`);
+    return;
+  }
+
   // Loop for each style to create a SEPARATE component set
-  for (const style of BUTTON_STYLES) {
+  for (const style of stylesToGenerate) {
     const styleComponents: ComponentNode[] = [];
     let x = 0;
 
