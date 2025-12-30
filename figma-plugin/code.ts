@@ -1679,6 +1679,23 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
 
       figma.ui.postMessage({ type: 'effects-complete' });
     }
+
+    if (msg.type === 'generate-buttons') {
+      await loadFonts();
+
+      const buttonLibrary = await generateButtons();
+
+      // Position at viewport center
+      const viewportCenter = figma.viewport.center;
+      buttonLibrary.x = viewportCenter.x;
+      buttonLibrary.y = viewportCenter.y;
+
+      figma.currentPage.appendChild(buttonLibrary);
+      figma.currentPage.selection = [buttonLibrary];
+      figma.viewport.scrollAndZoomIntoView([buttonLibrary]);
+
+      figma.ui.postMessage({ type: 'buttons-complete' });
+    }
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     figma.ui.postMessage({
@@ -1687,3 +1704,466 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
     });
   }
 };
+
+// ============================================================================
+// Button Component Generator
+// ============================================================================
+
+// Button sizing specifications - fallback values matching sizing.json
+// Variables: control/size/{size}, control/gutter/{size}, control/icon-size/{size}, button/gap/{size}
+const BUTTON_SIZES = {
+  '3xs': { height: 22, paddingX: 6, fontSize: 12, iconSize: 14, borderRadius: 4, gap: 3 },
+  '2xs': { height: 24, paddingX: 8, fontSize: 12, iconSize: 14, borderRadius: 5, gap: 3 },
+  'xs': { height: 26, paddingX: 8, fontSize: 12, iconSize: 16, borderRadius: 6, gap: 4 },
+  'sm': { height: 28, paddingX: 10, fontSize: 12, iconSize: 16, borderRadius: 6, gap: 4 },
+  'md': { height: 32, paddingX: 12, fontSize: 14, iconSize: 18, borderRadius: 8, gap: 4 },
+  'lg': { height: 36, paddingX: 14, fontSize: 14, iconSize: 18, borderRadius: 8, gap: 6 },
+  'xl': { height: 40, paddingX: 16, fontSize: 16, iconSize: 20, borderRadius: 10, gap: 6 },
+  '2xl': { height: 44, paddingX: 16, fontSize: 16, iconSize: 22, borderRadius: 10, gap: 6 },
+  '3xl': { height: 48, paddingX: 16, fontSize: 16, iconSize: 22, borderRadius: 12, gap: 6 },
+};
+
+// Variable name mappings for sizing (to bind Figma variables)
+const BUTTON_SIZE_VARS = {
+  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm' },
+  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm' },
+  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/sm', gap: 'button/gap/md' },
+  'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', iconSize: 'control/icon-size/sm', gap: 'button/gap/md' },
+  'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'button/gap/md' },
+  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/md', gap: 'button/gap/lg' },
+  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/lg' },
+  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg' },
+  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg' },
+};
+
+// Button styles (4 component sets)
+const BUTTON_STYLES = ['soft', 'solid', 'outline', 'ghost'] as const;
+
+// Button color variants (8 variants per style)
+const BUTTON_COLOR_VARIANTS = ['primary', 'secondary', 'success', 'info', 'discovery', 'danger', 'warning', 'caution'] as const;
+
+// Button states
+const BUTTON_STATES = ['default', 'hover', 'active'] as const;
+
+type ButtonSizeName = keyof typeof BUTTON_SIZES;
+type ButtonStyle = typeof BUTTON_STYLES[number];
+type ButtonColorVariant = typeof BUTTON_COLOR_VARIANTS[number];
+type ButtonState = typeof BUTTON_STATES[number];
+
+// Variable name mappings for each style/variant/state combination
+// Based on JSON structure: background/soft/primary or background/soft/hover/primary
+function getButtonColorVarName(style: ButtonStyle, variant: ButtonColorVariant, state: ButtonState, property: 'bg' | 'text' | 'border'): string {
+  // Build path based on the JSON structure in design system
+  if (property === 'bg') {
+    if (state === 'default') {
+      return `background/${style}/${variant}`;
+    } else {
+      return `background/${style}/${state}/${variant}`;
+    }
+  } else if (property === 'text') {
+    // Text colors are typically in text/{variant} format
+    return `text/${style}/${variant}`;
+  } else {
+    // Border colors
+    return `border/${style}/${variant}`;
+  }
+}
+
+// Fallback colors for each style/variant
+function getButtonFallbackColors(style: ButtonStyle, variant: ButtonColorVariant, state: ButtonState): { bg: RGB | null; text: RGB; border: RGB | null } {
+  // Simplified fallback colors - will be overridden by variables when available
+  const colorMap: Record<ButtonColorVariant, RGB> = {
+    primary: { r: 0.094, g: 0.094, b: 0.094 },
+    secondary: { r: 0.365, g: 0.365, b: 0.365 },
+    success: { r: 0.133, g: 0.545, b: 0.133 },
+    info: { r: 0.0, g: 0.45, b: 0.9 },
+    discovery: { r: 0.553, g: 0.055, b: 0.89 },
+    danger: { r: 0.937, g: 0.267, b: 0.267 },
+    warning: { r: 1, g: 0.6, b: 0 },
+    caution: { r: 0.85, g: 0.65, b: 0 },
+  };
+
+  const baseColor = colorMap[variant];
+
+  switch (style) {
+    case 'solid':
+      return {
+        bg: baseColor,
+        text: { r: 1, g: 1, b: 1 },
+        border: null,
+      };
+    case 'soft':
+      return {
+        bg: { r: baseColor.r * 0.1 + 0.9, g: baseColor.g * 0.1 + 0.9, b: baseColor.b * 0.1 + 0.9 },
+        text: baseColor,
+        border: null,
+      };
+    case 'outline':
+      return {
+        bg: null,
+        text: baseColor,
+        border: baseColor,
+      };
+    case 'ghost':
+      return {
+        bg: null,
+        text: baseColor,
+        border: null,
+      };
+  }
+}
+
+// Cache for variables lookup
+let variablesCache: Variable[] | null = null;
+
+async function getVariableByName(name: string): Promise<Variable | null> {
+  if (!variablesCache) {
+    variablesCache = await figma.variables.getLocalVariablesAsync();
+  }
+
+  // Try exact match first
+  let found = variablesCache.find(v => v.name === name);
+  if (found) return found;
+
+  // Try with slashes replaced by dots (some legacy formats)
+  const dotName = name.replace(/\//g, '.');
+  found = variablesCache.find(v => v.name === dotName);
+  if (found) return found;
+
+  // Try partial match (ends with the path)
+  found = variablesCache.find(v => v.name.endsWith(name) || v.name.endsWith('/' + name));
+  if (found) return found;
+
+  // Log all variables for debugging (first time only)
+  if (name.includes('solid') && name.includes('primary')) {
+    console.log('Available color variables:', variablesCache.filter(v => v.resolvedType === 'COLOR').map(v => v.name).slice(0, 20));
+  }
+
+  return null;
+}
+
+async function bindVariableToFill(node: FrameNode | ComponentNode | RectangleNode, varName: string): Promise<boolean> {
+  const variable = await getVariableByName(varName);
+  if (variable && variable.resolvedType === 'COLOR') {
+    try {
+      // Create a base solid paint
+      const basePaint: SolidPaint = {
+        type: 'SOLID',
+        color: { r: 0.5, g: 0.5, b: 0.5 }, // placeholder color
+      };
+      // Use the official API to bind the variable
+      const boundPaint = figma.variables.setBoundVariableForPaint(basePaint, 'color', variable);
+      node.fills = [boundPaint];
+      return true;
+    } catch (e) {
+      // Variable binding might fail for various reasons
+      console.log('Failed to bind fill variable:', varName, e);
+    }
+  }
+  return false;
+}
+
+async function bindVariableToStroke(node: FrameNode | ComponentNode | RectangleNode, varName: string): Promise<boolean> {
+  const variable = await getVariableByName(varName);
+  if (variable && variable.resolvedType === 'COLOR') {
+    try {
+      // Create a base solid paint
+      const basePaint: SolidPaint = {
+        type: 'SOLID',
+        color: { r: 0.5, g: 0.5, b: 0.5 },
+      };
+      // Use the official API to bind the variable
+      const boundPaint = figma.variables.setBoundVariableForPaint(basePaint, 'color', variable);
+      node.strokes = [boundPaint];
+      return true;
+    } catch (e) {
+      // Variable binding might fail
+      console.log('Failed to bind stroke variable:', varName, e);
+    }
+  }
+  return false;
+}
+
+async function bindVariableToTextFill(node: TextNode, varName: string): Promise<boolean> {
+  const variable = await getVariableByName(varName);
+  if (variable && variable.resolvedType === 'COLOR') {
+    try {
+      // Create a base solid paint
+      const basePaint: SolidPaint = {
+        type: 'SOLID',
+        color: { r: 0.5, g: 0.5, b: 0.5 },
+      };
+      // Use the official API to bind the variable to the paint
+      const boundPaint = figma.variables.setBoundVariableForPaint(basePaint, 'color', variable);
+      node.fills = [boundPaint];
+      return true;
+    } catch (e) {
+      console.log('Failed to bind text fill variable:', varName, e);
+    }
+  }
+  return false;
+}
+
+async function generateButtons(): Promise<ComponentNode> {
+  // Reset variables cache for fresh lookup
+  variablesCache = null;
+
+  // Create only the Button/solid/primary component - no tables or labels
+  const button = await createStyledButton('solid', 'primary', 'default', 'md', false);
+
+  return button;
+}
+
+async function createButtonStyleSection(style: ButtonStyle): Promise<FrameNode> {
+  const section = figma.createFrame();
+  section.name = `Style: ${style}`;
+  section.layoutMode = 'VERTICAL';
+  section.primaryAxisAlignItems = 'MIN';
+  section.counterAxisAlignItems = 'MIN';
+  section.primaryAxisSizingMode = 'AUTO';
+  section.counterAxisSizingMode = 'AUTO';
+  section.itemSpacing = 24;
+  section.fills = [];
+
+  // Style header
+  const header = figma.createText();
+  header.characters = style.charAt(0).toUpperCase() + style.slice(1);
+  header.fontSize = 32;
+  header.fontName = FONT.familySemiBold;
+  header.fills = [{ type: 'SOLID', color: COLORS.gray900 }];
+  section.appendChild(header);
+
+  // Create components for this style
+  const componentsGrid = figma.createFrame();
+  componentsGrid.name = 'Components';
+  componentsGrid.layoutMode = 'VERTICAL';
+  componentsGrid.primaryAxisAlignItems = 'MIN';
+  componentsGrid.counterAxisAlignItems = 'MIN';
+  componentsGrid.primaryAxisSizingMode = 'AUTO';
+  componentsGrid.counterAxisSizingMode = 'AUTO';
+  componentsGrid.itemSpacing = 16;
+  componentsGrid.fills = [];
+
+  // Create buttons for each color variant and state
+  for (const colorVariant of BUTTON_COLOR_VARIANTS) {
+    const variantRow = figma.createFrame();
+    variantRow.name = `Color: ${colorVariant}`;
+    variantRow.layoutMode = 'HORIZONTAL';
+    variantRow.primaryAxisAlignItems = 'CENTER';
+    variantRow.counterAxisAlignItems = 'CENTER';
+    variantRow.primaryAxisSizingMode = 'AUTO';
+    variantRow.counterAxisSizingMode = 'AUTO';
+    variantRow.itemSpacing = 12;
+    variantRow.fills = [];
+
+    // Label for color variant
+    const label = figma.createText();
+    label.characters = colorVariant;
+    label.fontSize = 12;
+    label.fontName = FONT.familyMono;
+    label.fills = [{ type: 'SOLID', color: COLORS.gray400 }];
+    label.resize(80, label.height);
+    variantRow.appendChild(label);
+
+    // Create button for each state
+    for (const state of BUTTON_STATES) {
+      const button = await createStyledButton(style, colorVariant, state, 'md', false);
+      variantRow.appendChild(button);
+    }
+
+    // Add pill version (default state only)
+    const pillButton = await createStyledButton(style, colorVariant, 'default', 'md', true);
+    variantRow.appendChild(pillButton);
+
+    componentsGrid.appendChild(variantRow);
+  }
+
+  section.appendChild(componentsGrid);
+  return section;
+}
+
+async function createStyledButton(
+  style: ButtonStyle,
+  colorVariant: ButtonColorVariant,
+  state: ButtonState,
+  size: ButtonSizeName,
+  pill: boolean
+): Promise<ComponentNode> {
+  const config = BUTTON_SIZES[size];
+  const colors = getButtonFallbackColors(style, colorVariant, state);
+
+  // Create as component
+  const button = figma.createComponent();
+  button.name = `Button/${style}/${colorVariant}/${state}${pill ? '/pill' : ''}`;
+  button.layoutMode = 'HORIZONTAL';
+  button.primaryAxisAlignItems = 'CENTER';
+  button.counterAxisAlignItems = 'CENTER';
+  button.primaryAxisSizingMode = 'AUTO';
+  button.counterAxisSizingMode = 'FIXED';
+  button.resize(button.width, config.height);
+
+  // Padding
+  const paddingX = pill ? config.paddingX + 4 : config.paddingX;
+  button.paddingLeft = paddingX;
+  button.paddingRight = paddingX;
+  button.itemSpacing = config.gap;
+
+  // Border radius
+  button.cornerRadius = pill ? config.height / 2 : config.borderRadius;
+
+  // Try to bind background variable
+  const bgVarName = getButtonColorVarName(style, colorVariant, state, 'bg');
+  const bgBound = await bindVariableToFill(button, bgVarName);
+  if (!bgBound) {
+    if (colors.bg) {
+      button.fills = [{ type: 'SOLID', color: colors.bg }];
+    } else {
+      button.fills = [];
+    }
+  }
+
+  // Border for outline style
+  if (style === 'outline') {
+    const borderVarName = getButtonColorVarName(style, colorVariant, state, 'border');
+    const borderBound = await bindVariableToStroke(button, borderVarName);
+    if (!borderBound && colors.border) {
+      button.strokes = [{ type: 'SOLID', color: colors.border }];
+    }
+    button.strokeWeight = 1;
+  }
+
+  // Icon left
+  const iconLeft = await createIconInstance(ICON_NODE_IDS.left, config.iconSize);
+  iconLeft.name = 'Icon Left';
+  button.appendChild(iconLeft);
+
+  // Text
+  const label = figma.createText();
+  label.name = 'Label';
+  label.characters = 'Button';
+  label.fontSize = config.fontSize;
+  label.fontName = FONT.familyMedium;
+  label.letterSpacing = { value: -0.14, unit: 'PIXELS' };
+
+  // Try to bind text color variable
+  const textVarName = getButtonColorVarName(style, colorVariant, state, 'text');
+  const textBound = await bindVariableToTextFill(label, textVarName);
+  if (!textBound) {
+    label.fills = [{ type: 'SOLID', color: colors.text }];
+  }
+  button.appendChild(label);
+
+  // Icon right
+  const iconRight = await createIconInstance(ICON_NODE_IDS.right, config.iconSize);
+  iconRight.name = 'Icon Right';
+  button.appendChild(iconRight);
+
+  return button;
+}
+
+
+// Icon component node IDs from the Figma library
+const ICON_NODE_IDS = {
+  left: '6029:3440',
+  right: '6029:3443',
+};
+
+async function createIconInstance(nodeId: string, size: number): Promise<InstanceNode | FrameNode> {
+  console.log('createIconInstance called with nodeId:', nodeId, 'size:', size);
+
+  // Try to find the icon component in the document
+  const node = await figma.getNodeByIdAsync(nodeId);
+  console.log('Found node:', node ? `${node.type} - ${node.name}` : 'null');
+
+  if (node && node.type === 'COMPONENT') {
+    // Create an instance of the icon component
+    const instance = node.createInstance();
+    console.log('Created instance:', instance.name, 'size:', instance.width, 'x', instance.height);
+
+    // Resize to match the button's icon size
+    instance.resize(size, size);
+    console.log('Resized to:', size);
+
+    return instance;
+  }
+
+  // Maybe it's an instance we need to get the main component from
+  if (node && node.type === 'INSTANCE') {
+    const mainComponent = await node.getMainComponentAsync();
+    if (mainComponent) {
+      const instance = mainComponent.createInstance();
+      instance.resize(size, size);
+      console.log('Created instance from main component:', instance.name);
+      return instance;
+    }
+  }
+
+  console.log('Fallback: creating placeholder. Node type was:', node?.type || 'not found');
+  // Fallback: create a simple placeholder if component not found
+  return createIconPlaceholder(size, { r: 0.5, g: 0.5, b: 0.5 });
+}
+
+
+function createIconPlaceholder(size: number, color: RGB): FrameNode {
+  // Create a simple mail-like icon placeholder (envelope shape)
+  const icon = figma.createFrame();
+  icon.name = 'icon';
+  icon.resize(size, size);
+  icon.fills = [];
+
+  // Create envelope rectangle
+  const envelope = figma.createRectangle();
+  envelope.resize(size * 0.75, size * 0.55);
+  envelope.x = size * 0.125;
+  envelope.y = size * 0.225;
+  envelope.cornerRadius = size * 0.08;
+  envelope.fills = [];
+  envelope.strokes = [{ type: 'SOLID', color: color }];
+  envelope.strokeWeight = size * 0.08;
+
+  icon.appendChild(envelope);
+  return icon;
+}
+
+function createArrowIcon(size: number, color: RGB): FrameNode {
+  // Create a simple right arrow icon
+  const icon = figma.createFrame();
+  icon.name = 'arrow';
+  icon.resize(size, size);
+  icon.fills = [];
+
+  // Create arrow line
+  const line = figma.createLine();
+  line.resize(size * 0.5, 0);
+  line.x = size * 0.25;
+  line.y = size / 2;
+  line.strokes = [{ type: 'SOLID', color: color }];
+  line.strokeWeight = size * 0.1;
+  line.strokeCap = 'ROUND';
+
+  icon.appendChild(line);
+
+  // Create arrowhead (two short lines)
+  const head1 = figma.createLine();
+  head1.resize(size * 0.2, 0);
+  head1.rotation = -45;
+  head1.x = size * 0.65;
+  head1.y = size * 0.35;
+  head1.strokes = [{ type: 'SOLID', color: color }];
+  head1.strokeWeight = size * 0.1;
+  head1.strokeCap = 'ROUND';
+
+  const head2 = figma.createLine();
+  head2.resize(size * 0.2, 0);
+  head2.rotation = 45;
+  head2.x = size * 0.65;
+  head2.y = size * 0.65;
+  head2.strokes = [{ type: 'SOLID', color: color }];
+  head2.strokeWeight = size * 0.1;
+  head2.strokeCap = 'ROUND';
+
+  icon.appendChild(head1);
+  icon.appendChild(head2);
+
+  return icon;
+}

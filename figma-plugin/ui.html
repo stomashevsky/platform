@@ -15,8 +15,55 @@
       line-height: 1.5;
       color: #1a1a1a;
       background: #fff;
-      padding: 24px;
       min-height: 100vh;
+    }
+
+    /* Tab Navigation */
+    .tab-nav {
+      display: flex;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 0 24px;
+      background: #fafafa;
+    }
+
+    .tab-btn {
+      padding: 16px 20px;
+      background: none;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b6b6b;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      color: #1a1a1a;
+    }
+
+    .tab-btn.active {
+      color: #1a1a1a;
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #1a1a1a;
+    }
+
+    /* Tab Content */
+    .tab-content {
+      display: none;
+      padding: 24px;
+    }
+
+    .tab-content.active {
+      display: block;
     }
 
     h2 {
@@ -207,36 +254,99 @@
       background: #fef2f2;
       color: #dc2626;
     }
+
+    /* Components Tab Styles */
+    .component-section {
+      margin-bottom: 24px;
+    }
+
+    .component-section h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+    }
+
+    .component-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
   </style>
 </head>
 
 <body>
-  <h2>UI Kit</h2>
-  <p class="description">Generate documentation tables from your Variable Collections. Select the collections you want
-    to document.</p>
-
-  <div class="collection-header">
-    <span class="collection-label">Collections</span>
-    <button class="btn-toggle" id="toggleSelect">Select all</button>
+  <!-- Tab Navigation -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="documentation">Documentation</button>
+    <button class="tab-btn" data-tab="components">Components</button>
   </div>
 
-  <div class="collection-list" id="collectionList">
-    <div class="empty-state" id="emptyState">Loading collections...</div>
+  <!-- Documentation Tab -->
+  <div class="tab-content active" id="tab-documentation">
+    <h2>UI Kit</h2>
+    <p class="description">Generate documentation tables from your Variable Collections. Select the collections you want
+      to document.</p>
+
+    <div class="collection-header">
+      <span class="collection-label">Collections</span>
+      <button class="btn-toggle" id="toggleSelect">Select all</button>
+    </div>
+
+    <div class="collection-list" id="collectionList">
+      <div class="empty-state" id="emptyState">Loading collections...</div>
+    </div>
+
+    <button class="btn-primary" id="generate" disabled>Generate Documentation</button>
+    <button class="btn-secondary" id="generateTypography">Generate Text Styles Table</button>
+    <button class="btn-secondary" id="generateEffects">Generate Effects Table</button>
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <span>Generating tables...</span>
+    </div>
+
+    <div class="status" id="status"></div>
   </div>
 
-  <button class="btn-primary" id="generate" disabled>Generate Documentation</button>
-  <button class="btn-secondary" id="generateTypography">Generate Text Styles Table</button>
-  <button class="btn-secondary" id="generateEffects">Generate Effects Table</button>
+  <!-- Components Tab -->
+  <div class="tab-content" id="tab-components">
+    <h2>Components</h2>
+    <p class="description">Generate UI component libraries with all variants, sizes, and states.</p>
 
-  <div class="loading" id="loading">
-    <div class="spinner"></div>
-    <span>Generating tables...</span>
+    <div class="component-section">
+      <h3>Buttons</h3>
+      <div class="component-grid">
+        <button class="btn-primary" id="generateButtons">Generate Button Library</button>
+      </div>
+    </div>
+
+    <div class="loading" id="componentsLoading">
+      <div class="spinner"></div>
+      <span>Generating components...</span>
+    </div>
+
+    <div class="status" id="componentsStatus"></div>
   </div>
-
-  <div class="status" id="status"></div>
 
   <script>
     let collections = [];
+
+    // Tab Navigation
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active tab button
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Update active tab content
+        const tabId = btn.dataset.tab;
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+      });
+    });
 
     // Request collections from plugin
     parent.postMessage({ pluginMessage: { type: 'get-collections' } }, '*');
@@ -279,6 +389,17 @@
       if (msg.type === 'effects-error') {
         hideLoading();
         showStatus('error', msg.message);
+      }
+
+      // Components tab messages
+      if (msg.type === 'buttons-complete') {
+        hideComponentsLoading();
+        showComponentsStatus('success', 'Button library generated successfully!');
+      }
+
+      if (msg.type === 'buttons-error') {
+        hideComponentsLoading();
+        showComponentsStatus('error', msg.message);
       }
     };
 
@@ -357,6 +478,22 @@
       status.textContent = message;
     }
 
+    // Components tab loading/status functions
+    function showComponentsLoading() {
+      document.getElementById('componentsLoading').classList.add('visible');
+      document.getElementById('componentsStatus').className = 'status';
+    }
+
+    function hideComponentsLoading() {
+      document.getElementById('componentsLoading').classList.remove('visible');
+    }
+
+    function showComponentsStatus(type, message) {
+      const status = document.getElementById('componentsStatus');
+      status.className = `status ${type}`;
+      status.textContent = message;
+    }
+
     // Toggle Select All / Deselect All
     document.getElementById('toggleSelect').onclick = () => {
       const allSelected = areAllSelected();
@@ -367,7 +504,7 @@
       updateToggleButton();
     };
 
-    // Generate
+    // Generate Documentation
     document.getElementById('generate').onclick = () => {
       const selected = getSelectedCollections();
       if (selected.length === 0) return;
@@ -397,6 +534,16 @@
       parent.postMessage({
         pluginMessage: {
           type: 'generate-effects'
+        }
+      }, '*');
+    };
+
+    // Generate Buttons
+    document.getElementById('generateButtons').onclick = () => {
+      showComponentsLoading();
+      parent.postMessage({
+        pluginMessage: {
+          type: 'generate-buttons'
         }
       }, '*');
     };
