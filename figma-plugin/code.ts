@@ -1715,27 +1715,27 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
 const BUTTON_SIZES = {
   // size: { height, paddingX (gutter), fontSize, iconSize, borderRadius, gap }
   '3xs': { height: 22, paddingX: 4, fontSize: 12, iconSize: 14, borderRadius: 2, gap: 3 },
-  '2xs': { height: 24, paddingX: 6, fontSize: 12, iconSize: 14, borderRadius: 4, gap: 3 },
+  '2xs': { height: 24, paddingX: 6, fontSize: 12, iconSize: 14, borderRadius: 4, gap: 4 },
   'xs': { height: 26, paddingX: 8, fontSize: 12, iconSize: 16, borderRadius: 6, gap: 4 },
   'sm': { height: 28, paddingX: 10, fontSize: 12, iconSize: 16, borderRadius: 6, gap: 4 },
-  'md': { height: 32, paddingX: 12, fontSize: 14, iconSize: 18, borderRadius: 8, gap: 4 },
-  'lg': { height: 36, paddingX: 14, fontSize: 14, iconSize: 18, borderRadius: 10, gap: 6 },
-  'xl': { height: 40, paddingX: 16, fontSize: 16, iconSize: 20, borderRadius: 10, gap: 6 },
-  '2xl': { height: 44, paddingX: 16, fontSize: 16, iconSize: 22, borderRadius: 12, gap: 6 },
-  '3xl': { height: 48, paddingX: 16, fontSize: 16, iconSize: 22, borderRadius: 12, gap: 6 },
+  'md': { height: 32, paddingX: 12, fontSize: 14, iconSize: 18, borderRadius: 8, gap: 6 },
+  'lg': { height: 36, paddingX: 14, fontSize: 16, iconSize: 18, borderRadius: 10, gap: 6 },
+  'xl': { height: 40, paddingX: 16, fontSize: 16, iconSize: 18, borderRadius: 12, gap: 6 },
+  '2xl': { height: 44, paddingX: 16, fontSize: 18, iconSize: 20, borderRadius: 16, gap: 6 },
+  '3xl': { height: 48, paddingX: 16, fontSize: 18, iconSize: 22, borderRadius: 20, gap: 6 },
 };
 
 // Variable name mappings for sizing (to bind Figma variables)
 const BUTTON_SIZE_VARS = {
   '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/2xs', fontSize: 'control/font-size/sm' },
-  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/xs', fontSize: 'control/font-size/sm' },
+  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/md', radius: 'radius/xs', fontSize: 'control/font-size/sm' },
   'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/sm', gap: 'button/gap/md', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
   'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', iconSize: 'control/icon-size/sm', gap: 'button/gap/md', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
-  'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'radius/md', fontSize: 'control/font-size/md' },
-  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/md', gap: 'button/gap/lg', radius: 'radius/lg', fontSize: 'control/font-size/md' },
-  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/lg', radius: 'radius/lg', fontSize: 'control/font-size/lg' },
-  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'radius/xl', fontSize: 'control/font-size/lg' },
-  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'radius/xl', fontSize: 'control/font-size/lg' },
+  'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'button/gap/lg', radius: 'radius/md', fontSize: 'control/font-size/md' },
+  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/md', gap: 'button/gap/lg', radius: 'radius/lg', fontSize: 'control/font-size/lg' },
+  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/md', gap: 'button/gap/lg', radius: 'radius/xl', fontSize: 'control/font-size/lg' },
+  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/lg', radius: 'radius/2xl', fontSize: 'control/font-size/xl' },
+  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'radius/3xl', fontSize: 'control/font-size/xl' },
 };
 
 // Button styles (4 component sets)
@@ -1964,14 +1964,30 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
     const styles = await figma.getLocalTextStylesAsync();
     const lowerSize = size.toLowerCase();
 
+    // Translation map: Button Size -> Text Style Size (One-size down shift)
+    // As per design system: md button -> sm text style, lg -> md, etc.
+    const sizeShiftMap: Record<string, string> = {
+      '3xs': 'xs',
+      '2xs': 'xs',
+      'xs': 'xs',
+      'sm': 'xs',
+      'md': 'sm',
+      'lg': 'md',
+      'xl': 'lg',
+      '2xl': 'xl',
+      '3xl': '2xl'
+    };
+
+    const textStyleSize = sizeShiftMap[lowerSize] || lowerSize;
+
     // We target "text/{size}/medium" as the standard for buttons
     // Patterns to try in order:
     const targetPatterns = [
-      `text/${lowerSize}/medium`,
-      `text/${lowerSize}/semibold`,
-      `text/${lowerSize}/normal`,
-      `text/${lowerSize}/regular`,
-      `text/${lowerSize}`
+      `text/${textStyleSize}/medium`,
+      `text/${textStyleSize}/semibold`,
+      `text/${textStyleSize}/normal`,
+      `text/${textStyleSize}/regular`,
+      `text/${textStyleSize}`
     ];
 
     let style: TextStyle | undefined = undefined;
@@ -1980,11 +1996,11 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
       if (style) break;
     }
 
-    // fallback: find any style that contains the size and "text"
+    // fallback: find any style that contains the shifted size and "text"
     if (!style) {
       style = styles.find(s => {
         const name = s.name.toLowerCase();
-        return name.includes('text') && name.includes(lowerSize);
+        return name.includes('text') && name.includes(textStyleSize);
       });
     }
 
@@ -2103,7 +2119,8 @@ async function createStyledButton(
   button.resize(button.width, config.height);
 
   // Padding
-  const paddingX = pill ? config.paddingX + 4 : config.paddingX;
+  // OpenAI Apps SDK UI uses a 1.33x multiplier for padding when pill={true}
+  const paddingX = pill ? Math.round(config.paddingX * 1.33) : config.paddingX;
   button.paddingLeft = paddingX;
   button.paddingRight = paddingX;
   button.itemSpacing = config.gap;
@@ -2164,6 +2181,8 @@ async function createStyledButton(
     label.fontSize = config.fontSize;
     label.fontName = FONT.familyMedium;
     label.letterSpacing = { value: -0.14, unit: 'PIXELS' };
+    // Set line-height to match font-size (1:1 ratio)
+    label.lineHeight = { value: config.fontSize, unit: 'PIXELS' };
   }
 
   // Try to bind text color variable
@@ -2184,8 +2203,8 @@ async function createStyledButton(
 
 // Icon component node IDs from the Figma library
 const ICON_NODE_IDS = {
-  left: '6029:3440',
-  right: '6029:3443',
+  left: '6030:1029',
+  right: '6030:1032',
 };
 
 async function createIconInstance(
