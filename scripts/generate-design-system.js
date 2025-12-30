@@ -227,6 +227,114 @@ if (semanticModes) {
     });
 }
 
+// STEP 2.2: Fix scope for all button text color variables to include SHAPE_FILL and FRAME_FILL for icons
+// These variables are used for both text and icons in buttons, so they need broader scope
+if (semanticModes) {
+    ['Light', 'Dark'].forEach(mode => {
+        if (!semanticModes[mode] || !semanticModes[mode].text) return;
+        
+        const textSection = semanticModes[mode].text;
+        const buttonTextVariants = ['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'discovery', 'caution'];
+        
+        // Fix text/disabled (used for all button styles in disabled state)
+        if (textSection.disabled) {
+            const currentScopes = textSection.disabled.$scopes || [];
+            if (!currentScopes.includes('SHAPE_FILL') || !currentScopes.includes('FRAME_FILL')) {
+                console.log(`   + Fixing scope for text/disabled in ${mode} mode`);
+                textSection.disabled.$scopes = ["TEXT_FILL", "SHAPE_FILL", "FRAME_FILL"];
+            }
+        }
+        
+        // Fix base text variants (used by ghost, outline, link styles)
+        buttonTextVariants.forEach(variant => {
+            if (textSection[variant]) {
+                const currentScopes = textSection[variant].$scopes || [];
+                if (!currentScopes.includes('SHAPE_FILL') || !currentScopes.includes('FRAME_FILL')) {
+                    console.log(`   + Fixing scope for text/${variant} in ${mode} mode`);
+                    textSection[variant].$scopes = ["TEXT_FILL", "SHAPE_FILL", "FRAME_FILL"];
+                }
+            }
+        });
+        
+        // Fix text/solid/* variants
+        if (textSection.solid) {
+            buttonTextVariants.forEach(variant => {
+                if (textSection.solid[variant]) {
+                    const currentScopes = textSection.solid[variant].$scopes || [];
+                    if (!currentScopes.includes('SHAPE_FILL') || !currentScopes.includes('FRAME_FILL')) {
+                        console.log(`   + Fixing scope for text/solid/${variant} in ${mode} mode`);
+                        textSection.solid[variant].$scopes = ["TEXT_FILL", "SHAPE_FILL", "FRAME_FILL"];
+                    }
+                }
+            });
+        }
+        
+        // Fix text/soft/* variants
+        if (textSection.soft) {
+            buttonTextVariants.forEach(variant => {
+                if (textSection.soft[variant]) {
+                    const currentScopes = textSection.soft[variant].$scopes || [];
+                    if (!currentScopes.includes('SHAPE_FILL') || !currentScopes.includes('FRAME_FILL')) {
+                        console.log(`   + Fixing scope for text/soft/${variant} in ${mode} mode`);
+                        textSection.soft[variant].$scopes = ["TEXT_FILL", "SHAPE_FILL", "FRAME_FILL"];
+                    }
+                }
+            });
+        }
+        
+        // Fix text/ghost/* variants
+        if (textSection.ghost) {
+            buttonTextVariants.forEach(variant => {
+                if (textSection.ghost[variant]) {
+                    const currentScopes = textSection.ghost[variant].$scopes || [];
+                    if (!currentScopes.includes('SHAPE_FILL') || !currentScopes.includes('FRAME_FILL')) {
+                        console.log(`   + Fixing scope for text/ghost/${variant} in ${mode} mode`);
+                        textSection.ghost[variant].$scopes = ["TEXT_FILL", "SHAPE_FILL", "FRAME_FILL"];
+                    }
+                }
+            });
+        }
+        
+        // Fix text/outline/* variants
+        if (textSection.outline) {
+            buttonTextVariants.forEach(variant => {
+                if (textSection.outline[variant]) {
+                    const currentScopes = textSection.outline[variant].$scopes || [];
+                    if (!currentScopes.includes('SHAPE_FILL') || !currentScopes.includes('FRAME_FILL')) {
+                        console.log(`   + Fixing scope for text/outline/${variant} in ${mode} mode`);
+                        textSection.outline[variant].$scopes = ["TEXT_FILL", "SHAPE_FILL", "FRAME_FILL"];
+                    }
+                }
+            });
+        }
+        
+        // Fix hover states for ghost, outline (if they exist and are used for icons)
+        if (textSection.ghost && textSection.ghost.hover) {
+            buttonTextVariants.forEach(variant => {
+                if (textSection.ghost.hover[variant]) {
+                    const currentScopes = textSection.ghost.hover[variant].$scopes || [];
+                    if (!currentScopes.includes('SHAPE_FILL') || !currentScopes.includes('FRAME_FILL')) {
+                        console.log(`   + Fixing scope for text/ghost/hover/${variant} in ${mode} mode`);
+                        textSection.ghost.hover[variant].$scopes = ["TEXT_FILL", "SHAPE_FILL", "FRAME_FILL"];
+                    }
+                }
+            });
+        }
+        
+        if (textSection.outline && textSection.outline.hover) {
+            buttonTextVariants.forEach(variant => {
+                if (textSection.outline.hover[variant]) {
+                    const currentScopes = textSection.outline.hover[variant].$scopes || [];
+                    if (!currentScopes.includes('SHAPE_FILL') || !currentScopes.includes('FRAME_FILL')) {
+                        console.log(`   + Fixing scope for text/outline/hover/${variant} in ${mode} mode`);
+                        textSection.outline.hover[variant].$scopes = ["TEXT_FILL", "SHAPE_FILL", "FRAME_FILL"];
+                    }
+                }
+            });
+        }
+    });
+}
+
 // STEP 3: Add/update component tokens
 const lightComponentTokens = processComponentTokens(componentTokens, 'Light');
 const darkComponentTokens = processComponentTokens(componentTokens, 'Dark');

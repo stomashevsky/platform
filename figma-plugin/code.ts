@@ -209,13 +209,17 @@ function parseDescription(description: string): ParsedDescription {
 // ============================================================================
 
 async function loadFonts(): Promise<void> {
+  console.log('[loadFonts] Starting to load fonts...');
   try {
+    console.log('[loadFonts] Loading Inter fonts...');
     await figma.loadFontAsync(FONT.family);
     await figma.loadFontAsync(FONT.familyMedium);
     await figma.loadFontAsync(FONT.familySemiBold);
     await figma.loadFontAsync(FONT.familyBold);
     await figma.loadFontAsync(FONT.familyMono);
-  } catch {
+    console.log('[loadFonts] Inter fonts loaded successfully');
+  } catch (error) {
+    console.log('[loadFonts] Inter fonts failed, falling back to Roboto:', error);
     // Fallback to Roboto if Inter is not available
     FONT.family = { family: 'Roboto', style: 'Regular' };
     FONT.familyMedium = { family: 'Roboto', style: 'Medium' };
@@ -227,6 +231,7 @@ async function loadFonts(): Promise<void> {
     await figma.loadFontAsync(FONT.familySemiBold);
     await figma.loadFontAsync(FONT.familyBold);
     await figma.loadFontAsync(FONT.familyMono);
+    console.log('[loadFonts] Roboto fonts loaded successfully');
   }
 }
 
@@ -1693,6 +1698,7 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
       figma.notify(targetStyles ? `Generated ${targetStyles.length} button set(s)` : 'All button sets generated');
       figma.ui.postMessage({ type: 'buttons-complete' });
     }
+
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     figma.notify(`Error: ${errorMessage}`, { error: true });
@@ -1848,21 +1854,49 @@ async function getVariableByName(name: string): Promise<Variable | null> {
 
   // Try exact match first
   let found = variablesCache.find(v => v.name === name);
-  if (found) return found;
+  if (found) {
+    console.log(`Found variable by exact match: ${name} (scopes: ${found.scopes.join(', ')})`);
+    return found;
+  }
 
   // Try with slashes replaced by dots (some legacy formats)
   const dotName = name.replace(/\//g, '.');
   found = variablesCache.find(v => v.name === dotName);
-  if (found) return found;
+  if (found) {
+    console.log(`Found variable by dot format: ${name} -> ${dotName} (scopes: ${found.scopes.join(', ')})`);
+    return found;
+  }
 
-  // Try partial match (ends with the path)
-  found = variablesCache.find(v => v.name.endsWith(name) || v.name.endsWith('/' + name));
+  // Try partial match (ends with the path) - but only if it's a valid path segment
+  // This prevents finding text/primary when searching for text/soft/primary
+  // Only match if the variable name ends with the exact path we're looking for
+  found = variablesCache.find(v => {
+    // Must end with the exact name or with a slash followed by the name
+    const endsWithExact = v.name === name || v.name.endsWith('/' + name);
+    if (!endsWithExact) return false;
+    
+    // For paths with multiple segments (like text/soft/primary), ensure we don't match
+    // shorter paths (like text/primary) by checking the segment count
+    const nameSegments = name.split('/').length;
+    const varSegments = v.name.split('/').length;
+    
+    // Only match if segment counts are equal or variable has more segments
+    // This prevents text/primary from matching text/soft/primary
+    return varSegments >= nameSegments;
+  });
+  if (found) {
+    console.log(`Found variable by partial match: ${name} -> ${found.name} (scopes: ${found.scopes.join(', ')})`);
+    return found;
+  }
 
-  if (found) return found;
-
-  // Log all variables for debugging (first time only)
-  if (name.includes('solid') && name.includes('primary')) {
-    console.log('Available color variables:', variablesCache.filter(v => v.resolvedType === 'COLOR').map(v => v.name).slice(0, 20));
+  // Log available variables for debugging if not found
+  if (name.includes('soft') || name.includes('primary') || name.includes('secondary')) {
+    const matchingVars = variablesCache.filter(v => 
+      v.resolvedType === 'COLOR' && 
+      (v.name.includes('soft') || v.name.includes('primary') || v.name.includes('secondary'))
+    ).map(v => `${v.name} (${v.scopes.join(', ')})`).slice(0, 30);
+    console.log(`Variable not found: ${name}`);
+    console.log(`Available matching color variables:`, matchingVars);
   }
 
   return null;
@@ -1912,22 +1946,19 @@ async function bindVariableToStroke(node: FrameNode | ComponentNode | RectangleN
 
 async function bindVariableToTextFill(node: TextNode, varName: string): Promise<boolean> {
   const variable = await getVariableByName(varName);
-  if (variable && variable.resolvedType === 'COLOR') {
-    try {
-      // Create a base solid paint
-      const basePaint: SolidPaint = {
-        type: 'SOLID',
-        color: { r: 0.5, g: 0.5, b: 0.5 },
-      };
-      // Use the official API to bind the variable to the paint
-      const boundPaint = figma.variables.setBoundVariableForPaint(basePaint, 'color', variable);
-      node.fills = [boundPaint];
-      return true;
-    } catch (e) {
-      console.log('Failed to bind text fill variable:', varName, e);
-    }
+  if (!variable || variable.resolvedType !== 'COLOR') return false;
+  
+  try {
+    const basePaint: SolidPaint = {
+      type: 'SOLID',
+      color: { r: 0.5, g: 0.5, b: 0.5 },
+    };
+    const boundPaint = figma.variables.setBoundVariableForPaint(basePaint, 'color', variable);
+    node.fills = [boundPaint];
+    return true;
+  } catch (e) {
+    return false;
   }
-  return false;
 }
 
 // Bind a FLOAT variable to a node property (width, height, etc.)
@@ -1951,40 +1982,30 @@ async function bindVariableToProperty(node: SceneNode, property: 'width' | 'heig
 // Bind color variable to an instance node (for icons) - recursively targets children with fills
 async function bindColorToInstance(instance: InstanceNode | FrameNode, varName: string): Promise<boolean> {
   const variable = await getVariableByName(varName);
-  // If variable not found, return false so caller can handle fallback
   if (!variable || variable.resolvedType !== 'COLOR') return false;
-
-  // Auto-fix logic removed - fixed in source design system file
 
   try {
     const basePaint: SolidPaint = {
       type: 'SOLID',
-      color: { r: 0.5, g: 0.5, b: 0.5 }, // Placeholder color
+      color: { r: 0.5, g: 0.5, b: 0.5 },
     };
     const boundPaint = figma.variables.setBoundVariableForPaint(basePaint, 'color', variable);
 
     // Recursively apply to all vector children
     const applyToChildren = (node: SceneNode) => {
-      // Skip hidden nodes
       if (!node.visible) return;
 
       if (
         'fills' in node &&
         (node.type === 'VECTOR' || node.type === 'BOOLEAN_OPERATION' || node.type === 'STAR' || node.type === 'LINE' || node.type === 'ELLIPSE' || node.type === 'RECTANGLE' || node.type === 'TEXT')
       ) {
-        // Check if node has existing visible fills
-        // We only want to recolor elements that are meant to be seen, not transparent bounding boxes
         const hasVisibleFills = Array.isArray(node.fills) && node.fills.some(fill => fill.visible !== false);
 
         if (hasVisibleFills) {
-          // Clear existing fills first to ensure clean state
           node.fills = [];
           node.fills = [boundPaint];
-        } else {
-          // For nodes with no fills (likely bounding boxes), do nothing
         }
 
-        // Also try to bind stroke if it exists and has strokes
         if ('strokes' in node && node.strokes.length > 0) {
           const boundStroke = figma.variables.setBoundVariableForPaint(basePaint, 'color', variable);
           node.strokes = [boundStroke];
@@ -1996,14 +2017,12 @@ async function bindColorToInstance(instance: InstanceNode | FrameNode, varName: 
       }
     };
 
-    // Apply to instance children
     if ('children' in instance) {
       instance.children.forEach(applyToChildren);
     }
 
     return true;
   } catch (e) {
-    console.log('Failed to bind instance color variable:', varName, e);
     return false;
   }
 }
@@ -2245,6 +2264,7 @@ async function createStyledButton(
   // Get variable names for icons and text
   const textVarName = getButtonColorVarName(style, colorVariant, state, 'text');
   const iconSizeVarName = sizeVars.iconSize;
+  console.log(`Button ${style}/${colorVariant}/${state}: Looking for text variable: ${textVarName}`);
 
   // Icon left
   if (iconMode === 'start' || iconMode === 'both') {
@@ -2275,9 +2295,22 @@ async function createStyledButton(
     }
 
     // Try to bind text color variable
+    console.log(`Attempting to bind text variable: ${textVarName}`);
     const textBound = await bindVariableToTextFill(label, textVarName);
     if (!textBound) {
+      console.log(`Failed to bind text variable ${textVarName}, using fallback color`);
       label.fills = [{ type: 'SOLID', color: colors.text }];
+    } else {
+      // Verify the variable is actually bound
+      const fills = label.fills;
+      if (Array.isArray(fills) && fills.length > 0) {
+        const fill = fills[0];
+        if (fill.type === 'SOLID' && 'boundVariable' in fill && fill.boundVariable) {
+          console.log(`Text variable ${textVarName} successfully bound`);
+        } else {
+          console.log(`Warning: Text variable ${textVarName} binding may have failed - fill type:`, fill.type);
+        }
+      }
     }
     button.appendChild(label);
   }
@@ -2329,6 +2362,7 @@ async function createIconInstance(
 
     // Try to bind color variable to the icon
     if (colorVarName) {
+      console.log(`Attempting to bind icon color variable: ${colorVarName}`);
       await bindColorToInstance(instance, colorVarName);
     }
 
@@ -2351,6 +2385,7 @@ async function createIconInstance(
         instance.resize(size, size);
       }
 
+      // Try to bind color variable to the icon
       if (colorVarName) {
         await bindColorToInstance(instance, colorVarName);
       }

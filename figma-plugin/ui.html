@@ -264,13 +264,40 @@
       font-size: 14px;
       font-weight: 600;
       color: #1a1a1a;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .component-grid {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 0;
+    }
+
+    .component-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      border-radius: 4px;
+    }
+
+    .component-item:hover {
+      background: #f8f8f8;
+    }
+
+    .component-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+      accent-color: #2563eb;
+    }
+
+    .component-item .collection-name {
+      font-size: 13px;
+      font-weight: 400;
+      color: #1a1a1a;
     }
   </style>
 </head>
@@ -317,42 +344,39 @@
     <div class="component-section">
       <h3>Buttons</h3>
       <div class="component-grid">
-        <label class="collection-item">
-          <input type="checkbox" name="buttonStyle" value="soft" checked>
+        <label class="component-item">
+          <input type="checkbox" name="buttonStyle" value="soft">
           <span class="collection-name">Soft</span>
         </label>
-        <label class="collection-item">
-          <input type="checkbox" name="buttonStyle" value="solid" checked>
+        <label class="component-item">
+          <input type="checkbox" name="buttonStyle" value="solid">
           <span class="collection-name">Solid</span>
         </label>
-        <label class="collection-item">
-          <input type="checkbox" name="buttonStyle" value="outline" checked>
+        <label class="component-item">
+          <input type="checkbox" name="buttonStyle" value="outline">
           <span class="collection-name">Outline</span>
         </label>
-        <label class="collection-item">
-          <input type="checkbox" name="buttonStyle" value="ghost" checked>
+        <label class="component-item">
+          <input type="checkbox" name="buttonStyle" value="ghost">
           <span class="collection-name">Ghost</span>
         </label>
-
-        <div style="height: 12px; margin: 8px 0; border-top: 1px solid #f0f0f0;"></div>
-
-        <label class="collection-item">
-          <input type="checkbox" name="buttonStyle" value="soft-icon-only" checked>
+        <label class="component-item">
+          <input type="checkbox" name="buttonStyle" value="soft-icon-only">
           <span class="collection-name">Soft Icon-only</span>
         </label>
-        <label class="collection-item">
-          <input type="checkbox" name="buttonStyle" value="solid-icon-only" checked>
+        <label class="component-item">
+          <input type="checkbox" name="buttonStyle" value="solid-icon-only">
           <span class="collection-name">Solid Icon-only</span>
         </label>
-        <label class="collection-item">
-          <input type="checkbox" name="buttonStyle" value="outline-icon-only" checked>
+        <label class="component-item">
+          <input type="checkbox" name="buttonStyle" value="outline-icon-only">
           <span class="collection-name">Outline Icon-only</span>
         </label>
-        <label class="collection-item">
-          <input type="checkbox" name="buttonStyle" value="ghost-icon-only" checked>
+        <label class="component-item">
+          <input type="checkbox" name="buttonStyle" value="ghost-icon-only">
           <span class="collection-name">Ghost Icon-only</span>
         </label>
-        <button class="btn-primary" id="generateButtons" style="margin-top: 16px;">Generate Selected Buttons</button>
+        <button class="btn-primary" id="generateButtons" style="margin-top: 12px;">Generate Selected Buttons</button>
       </div>
     </div>
 
@@ -363,6 +387,7 @@
 
     <div class="status" id="componentsStatus"></div>
   </div>
+
 
   <script>
     let collections = [];
@@ -625,6 +650,7 @@
         return;
       }
 
+
       // Call original handler for other messages
       if (originalOnMessage) {
         originalOnMessage(event);
@@ -648,6 +674,8 @@
       showComponentsLoading();
       generateNextButtonStyle();
     };
+
+
   </script>
 </body>
 

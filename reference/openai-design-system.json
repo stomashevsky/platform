@@ -2222,7 +2222,9 @@
             "ghost": {
               "primary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-primary-ghost\nButton primary ghost text",
                 "$type": "color",
@@ -2232,7 +2234,9 @@
               },
               "secondary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-secondary-ghost\nButton secondary ghost text",
                 "$type": "color",
@@ -2242,7 +2246,9 @@
               },
               "success": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-success-ghost\nButton success ghost text",
                 "$type": "color",
@@ -2252,7 +2258,9 @@
               },
               "info": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-info-ghost\nButton info ghost text",
                 "$type": "color",
@@ -2262,7 +2270,9 @@
               },
               "warning": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-warning-ghost\nButton warning ghost text",
                 "$type": "color",
@@ -2272,7 +2282,9 @@
               },
               "danger": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-danger-ghost\nButton danger ghost text",
                 "$type": "color",
@@ -2282,7 +2294,9 @@
               },
               "discovery": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-discovery-ghost\nButton discovery ghost text",
                 "$type": "color",
@@ -2292,7 +2306,9 @@
               },
               "caution": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-caution-ghost\nButton caution ghost text",
                 "$type": "color",
@@ -2303,7 +2319,9 @@
               "hover": {
                 "primary": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-primary-ghost-hover\nButton primary ghost text hover",
                   "$type": "color",
@@ -2313,7 +2331,9 @@
                 },
                 "secondary": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-secondary-ghost-hover\nButton secondary ghost text hover",
                   "$type": "color",
@@ -2323,7 +2343,9 @@
                 },
                 "success": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-success-ghost-hover\nButton success ghost text hover",
                   "$type": "color",
@@ -2333,7 +2355,9 @@
                 },
                 "info": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-info-ghost-hover\nButton info ghost text hover",
                   "$type": "color",
@@ -2343,7 +2367,9 @@
                 },
                 "warning": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-warning-ghost-hover\nButton warning ghost text hover",
                   "$type": "color",
@@ -2353,7 +2379,9 @@
                 },
                 "danger": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-danger-ghost-hover\nButton danger ghost text hover",
                   "$type": "color",
@@ -2363,7 +2391,9 @@
                 },
                 "discovery": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-discovery-ghost-hover\nButton discovery ghost text hover",
                   "$type": "color",
@@ -2373,7 +2403,9 @@
                 },
                 "caution": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-caution-ghost-hover\nButton caution ghost text hover",
                   "$type": "color",
@@ -2386,7 +2418,9 @@
             "outline": {
               "primary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-primary-outline\nButton primary outline text",
                 "$type": "color",
@@ -2396,7 +2430,9 @@
               },
               "secondary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-secondary-outline\nButton secondary outline text",
                 "$type": "color",
@@ -2406,7 +2442,9 @@
               },
               "success": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-success-outline\nButton success outline text",
                 "$type": "color",
@@ -2416,7 +2454,9 @@
               },
               "info": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-info-outline\nButton info outline text",
                 "$type": "color",
@@ -2426,7 +2466,9 @@
               },
               "warning": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-warning-outline\nButton warning outline text",
                 "$type": "color",
@@ -2436,7 +2478,9 @@
               },
               "danger": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-danger-outline\nButton danger outline text",
                 "$type": "color",
@@ -2446,7 +2490,9 @@
               },
               "discovery": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-discovery-outline\nButton discovery outline text",
                 "$type": "color",
@@ -2456,7 +2502,9 @@
               },
               "caution": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-caution-outline\nButton caution outline text",
                 "$type": "color",
@@ -2467,7 +2515,9 @@
               "hover": {
                 "primary": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-primary-outline-hover\nButton primary outline text hover",
                   "$type": "color",
@@ -2477,7 +2527,9 @@
                 },
                 "secondary": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-secondary-outline-hover\nButton secondary outline text hover",
                   "$type": "color",
@@ -2487,7 +2539,9 @@
                 },
                 "success": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-success-outline-hover\nButton success outline text hover",
                   "$type": "color",
@@ -2497,7 +2551,9 @@
                 },
                 "info": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-info-outline-hover\nButton info outline text hover",
                   "$type": "color",
@@ -2507,7 +2563,9 @@
                 },
                 "warning": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-warning-outline-hover\nButton warning outline text hover",
                   "$type": "color",
@@ -2517,7 +2575,9 @@
                 },
                 "danger": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-danger-outline-hover\nButton danger outline text hover",
                   "$type": "color",
@@ -2527,7 +2587,9 @@
                 },
                 "discovery": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-discovery-outline-hover\nButton discovery outline text hover",
                   "$type": "color",
@@ -2537,7 +2599,9 @@
                 },
                 "caution": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-caution-outline-hover\nButton caution outline text hover",
                   "$type": "color",
@@ -2550,7 +2614,9 @@
             "soft": {
               "primary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-primary-soft\nButton primary soft text",
                 "$type": "color",
@@ -2560,7 +2626,9 @@
               },
               "secondary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-secondary-soft\nButton secondary soft text",
                 "$type": "color",
@@ -2570,7 +2638,9 @@
               },
               "success": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-success-soft\nButton success soft text",
                 "$type": "color",
@@ -2580,7 +2650,9 @@
               },
               "info": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-info-soft\nButton info soft text",
                 "$type": "color",
@@ -2590,7 +2662,9 @@
               },
               "warning": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-warning-soft\nButton warning soft text",
                 "$type": "color",
@@ -2600,7 +2674,9 @@
               },
               "danger": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-danger-soft\nButton danger soft text",
                 "$type": "color",
@@ -2610,7 +2686,9 @@
               },
               "discovery": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-discovery-soft\nButton discovery soft text",
                 "$type": "color",
@@ -2620,7 +2698,9 @@
               },
               "caution": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-caution-soft\nButton caution soft text",
                 "$type": "color",
@@ -2654,7 +2734,9 @@
             "solid": {
               "primary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-primary-solid\nButton primary solid text",
                 "$type": "color",
@@ -2664,7 +2746,9 @@
               },
               "secondary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-secondary-solid\nButton secondary solid text",
                 "$type": "color",
@@ -2674,7 +2758,9 @@
               },
               "success": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-success-solid\nButton success solid text",
                 "$type": "color",
@@ -2684,7 +2770,9 @@
               },
               "info": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-info-solid\nButton info solid text",
                 "$type": "color",
@@ -2694,7 +2782,9 @@
               },
               "warning": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-warning-solid\nButton warning solid text",
                 "$type": "color",
@@ -2704,7 +2794,9 @@
               },
               "danger": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-danger-solid\nButton danger solid text",
                 "$type": "color",
@@ -2714,7 +2806,9 @@
               },
               "discovery": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-discovery-solid\nButton discovery solid text",
                 "$type": "color",
@@ -2724,7 +2818,9 @@
               },
               "caution": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-caution-solid\nButton caution solid text",
                 "$type": "color",
@@ -5353,7 +5449,9 @@
             "ghost": {
               "primary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-primary-ghost\nButton primary ghost text",
                 "$type": "color",
@@ -5363,7 +5461,9 @@
               },
               "secondary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-secondary-ghost\nButton secondary ghost text",
                 "$type": "color",
@@ -5373,7 +5473,9 @@
               },
               "success": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-success-ghost\nButton success ghost text",
                 "$type": "color",
@@ -5383,7 +5485,9 @@
               },
               "info": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-info-ghost\nButton info ghost text",
                 "$type": "color",
@@ -5393,7 +5497,9 @@
               },
               "warning": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-warning-ghost\nButton warning ghost text",
                 "$type": "color",
@@ -5403,7 +5509,9 @@
               },
               "danger": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-danger-ghost\nButton danger ghost text",
                 "$type": "color",
@@ -5413,7 +5521,9 @@
               },
               "discovery": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-discovery-ghost\nButton discovery ghost text",
                 "$type": "color",
@@ -5423,7 +5533,9 @@
               },
               "caution": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-caution-ghost\nButton caution ghost text",
                 "$type": "color",
@@ -5434,7 +5546,9 @@
               "hover": {
                 "primary": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-primary-ghost-hover\nButton primary ghost text hover",
                   "$type": "color",
@@ -5444,7 +5558,9 @@
                 },
                 "secondary": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-secondary-ghost-hover\nButton secondary ghost text hover",
                   "$type": "color",
@@ -5454,7 +5570,9 @@
                 },
                 "success": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-success-ghost-hover\nButton success ghost text hover",
                   "$type": "color",
@@ -5464,7 +5582,9 @@
                 },
                 "info": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-info-ghost-hover\nButton info ghost text hover",
                   "$type": "color",
@@ -5474,7 +5594,9 @@
                 },
                 "warning": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-warning-ghost-hover\nButton warning ghost text hover",
                   "$type": "color",
@@ -5484,7 +5606,9 @@
                 },
                 "danger": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-danger-ghost-hover\nButton danger ghost text hover",
                   "$type": "color",
@@ -5494,7 +5618,9 @@
                 },
                 "discovery": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-discovery-ghost-hover\nButton discovery ghost text hover",
                   "$type": "color",
@@ -5504,7 +5630,9 @@
                 },
                 "caution": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-caution-ghost-hover\nButton caution ghost text hover",
                   "$type": "color",
@@ -5517,7 +5645,9 @@
             "outline": {
               "primary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-primary-outline\nButton primary outline text",
                 "$type": "color",
@@ -5527,7 +5657,9 @@
               },
               "secondary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-secondary-outline\nButton secondary outline text",
                 "$type": "color",
@@ -5537,7 +5669,9 @@
               },
               "success": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-success-outline\nButton success outline text",
                 "$type": "color",
@@ -5547,7 +5681,9 @@
               },
               "info": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-info-outline\nButton info outline text",
                 "$type": "color",
@@ -5557,7 +5693,9 @@
               },
               "warning": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-warning-outline\nButton warning outline text",
                 "$type": "color",
@@ -5567,7 +5705,9 @@
               },
               "danger": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-danger-outline\nButton danger outline text",
                 "$type": "color",
@@ -5577,7 +5717,9 @@
               },
               "discovery": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-discovery-outline\nButton discovery outline text",
                 "$type": "color",
@@ -5587,7 +5729,9 @@
               },
               "caution": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-caution-outline\nButton caution outline text",
                 "$type": "color",
@@ -5598,7 +5742,9 @@
               "hover": {
                 "primary": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-primary-outline-hover\nButton primary outline text hover",
                   "$type": "color",
@@ -5608,7 +5754,9 @@
                 },
                 "secondary": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-secondary-outline-hover\nButton secondary outline text hover",
                   "$type": "color",
@@ -5618,7 +5766,9 @@
                 },
                 "success": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-success-outline-hover\nButton success outline text hover",
                   "$type": "color",
@@ -5628,7 +5778,9 @@
                 },
                 "info": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-info-outline-hover\nButton info outline text hover",
                   "$type": "color",
@@ -5638,7 +5790,9 @@
                 },
                 "warning": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-warning-outline-hover\nButton warning outline text hover",
                   "$type": "color",
@@ -5648,7 +5802,9 @@
                 },
                 "danger": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-danger-outline-hover\nButton danger outline text hover",
                   "$type": "color",
@@ -5658,7 +5814,9 @@
                 },
                 "discovery": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-discovery-outline-hover\nButton discovery outline text hover",
                   "$type": "color",
@@ -5668,7 +5826,9 @@
                 },
                 "caution": {
                   "$scopes": [
-                    "TEXT_FILL"
+                    "TEXT_FILL",
+                    "SHAPE_FILL",
+                    "FRAME_FILL"
                   ],
                   "$description": "--color-text-caution-outline-hover\nButton caution outline text hover",
                   "$type": "color",
@@ -5681,7 +5841,9 @@
             "soft": {
               "primary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-primary-soft\nButton primary soft text",
                 "$type": "color",
@@ -5691,7 +5853,9 @@
               },
               "secondary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-secondary-soft\nButton secondary soft text",
                 "$type": "color",
@@ -5701,7 +5865,9 @@
               },
               "success": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-success-soft\nButton success soft text",
                 "$type": "color",
@@ -5711,7 +5877,9 @@
               },
               "info": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-info-soft\nButton info soft text",
                 "$type": "color",
@@ -5721,7 +5889,9 @@
               },
               "warning": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-warning-soft\nButton warning soft text",
                 "$type": "color",
@@ -5731,7 +5901,9 @@
               },
               "danger": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-danger-soft\nButton danger soft text",
                 "$type": "color",
@@ -5741,7 +5913,9 @@
               },
               "discovery": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-discovery-soft\nButton discovery soft text",
                 "$type": "color",
@@ -5751,7 +5925,9 @@
               },
               "caution": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-caution-soft\nButton caution soft text",
                 "$type": "color",
@@ -5785,7 +5961,9 @@
             "solid": {
               "primary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-primary-solid\nButton primary solid text",
                 "$type": "color",
@@ -5795,7 +5973,9 @@
               },
               "secondary": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-secondary-solid\nButton secondary solid text",
                 "$type": "color",
@@ -5805,7 +5985,9 @@
               },
               "success": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-success-solid\nButton success solid text",
                 "$type": "color",
@@ -5815,7 +5997,9 @@
               },
               "info": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-info-solid\nButton info solid text",
                 "$type": "color",
@@ -5825,7 +6009,9 @@
               },
               "warning": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-warning-solid\nButton warning solid text",
                 "$type": "color",
@@ -5835,7 +6021,9 @@
               },
               "danger": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-danger-solid\nButton danger solid text",
                 "$type": "color",
@@ -5845,7 +6033,9 @@
               },
               "discovery": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-discovery-solid\nButton discovery solid text",
                 "$type": "color",
@@ -5855,7 +6045,9 @@
               },
               "caution": {
                 "$scopes": [
-                  "TEXT_FILL"
+                  "TEXT_FILL",
+                  "SHAPE_FILL",
+                  "FRAME_FILL"
                 ],
                 "$description": "--color-text-caution-solid\nButton caution solid text",
                 "$type": "color",
