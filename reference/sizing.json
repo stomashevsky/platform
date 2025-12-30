@@ -344,6 +344,15 @@
               }
             },
             "gutter": {
+              "3xs": {
+                "$scopes": [
+                  "GAP"
+                ],
+                "$description": "--control-gutter-3xs\nControl padding (4px)",
+                "$hiddenFromPublishing": true,
+                "$type": "float",
+                "$value": 4
+              },
               "2xs": {
                 "$scopes": [
                   "GAP"
@@ -478,10 +487,10 @@
                 "$scopes": [
                   "WIDTH_HEIGHT"
                 ],
-                "$description": "--control-icon-size-2xl\nControl icon size (28px)",
+                "$description": "--control-icon-size-2xl\nControl icon size (24px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 28
+                "$value": 24
               }
             }
           },

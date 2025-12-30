@@ -1709,31 +1709,33 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
 // Button Component Generator
 // ============================================================================
 
-// Button sizing specifications - fallback values matching sizing.json
+// Button sizing specifications - matching OpenAI Apps SDK UI documentation
+// https://openai.github.io/apps-sdk-ui/?path=/docs/components-button--docs
 // Variables: control/size/{size}, control/gutter/{size}, control/icon-size/{size}, button/gap/{size}
 const BUTTON_SIZES = {
-  '3xs': { height: 22, paddingX: 6, fontSize: 12, iconSize: 14, borderRadius: 4, gap: 3 },
-  '2xs': { height: 24, paddingX: 8, fontSize: 12, iconSize: 14, borderRadius: 5, gap: 3 },
+  // size: { height, paddingX (gutter), fontSize, iconSize, borderRadius, gap }
+  '3xs': { height: 22, paddingX: 4, fontSize: 12, iconSize: 14, borderRadius: 2, gap: 3 },
+  '2xs': { height: 24, paddingX: 6, fontSize: 12, iconSize: 14, borderRadius: 4, gap: 3 },
   'xs': { height: 26, paddingX: 8, fontSize: 12, iconSize: 16, borderRadius: 6, gap: 4 },
   'sm': { height: 28, paddingX: 10, fontSize: 12, iconSize: 16, borderRadius: 6, gap: 4 },
   'md': { height: 32, paddingX: 12, fontSize: 14, iconSize: 18, borderRadius: 8, gap: 4 },
-  'lg': { height: 36, paddingX: 14, fontSize: 14, iconSize: 18, borderRadius: 8, gap: 6 },
+  'lg': { height: 36, paddingX: 14, fontSize: 14, iconSize: 18, borderRadius: 10, gap: 6 },
   'xl': { height: 40, paddingX: 16, fontSize: 16, iconSize: 20, borderRadius: 10, gap: 6 },
-  '2xl': { height: 44, paddingX: 16, fontSize: 16, iconSize: 22, borderRadius: 10, gap: 6 },
+  '2xl': { height: 44, paddingX: 16, fontSize: 16, iconSize: 22, borderRadius: 12, gap: 6 },
   '3xl': { height: 48, paddingX: 16, fontSize: 16, iconSize: 22, borderRadius: 12, gap: 6 },
 };
 
 // Variable name mappings for sizing (to bind Figma variables)
 const BUTTON_SIZE_VARS = {
-  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm' },
-  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm' },
-  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/sm', gap: 'button/gap/md' },
-  'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', iconSize: 'control/icon-size/sm', gap: 'button/gap/md' },
-  'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'button/gap/md' },
-  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/md', gap: 'button/gap/lg' },
-  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/lg' },
-  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg' },
-  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg' },
+  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/2xs', fontSize: 'control/font-size/sm' },
+  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/xs', gap: 'button/gap/sm', radius: 'radius/xs', fontSize: 'control/font-size/sm' },
+  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/sm', gap: 'button/gap/md', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
+  'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', iconSize: 'control/icon-size/sm', gap: 'button/gap/md', radius: 'radius/sm', fontSize: 'control/font-size/sm' },
+  'md': { height: 'control/size/md', padding: 'control/gutter/md', iconSize: 'control/icon-size/md', gap: 'button/gap/md', radius: 'radius/md', fontSize: 'control/font-size/md' },
+  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', iconSize: 'control/icon-size/md', gap: 'button/gap/lg', radius: 'radius/lg', fontSize: 'control/font-size/md' },
+  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/lg', gap: 'button/gap/lg', radius: 'radius/lg', fontSize: 'control/font-size/lg' },
+  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'radius/xl', fontSize: 'control/font-size/lg' },
+  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'radius/xl', fontSize: 'control/font-size/lg' },
 };
 
 // Button styles (4 component sets)
@@ -1904,12 +1906,110 @@ async function bindVariableToTextFill(node: TextNode, varName: string): Promise<
   return false;
 }
 
+// Bind a FLOAT variable to a node property (width, height, etc.)
+async function bindVariableToProperty(node: SceneNode, property: 'width' | 'height' | 'paddingLeft' | 'paddingRight' | 'itemSpacing' | 'cornerRadius' | 'fontSize', varName: string): Promise<boolean> {
+  const variable = await getVariableByName(varName);
+  if (variable && variable.resolvedType === 'FLOAT') {
+    try {
+      if (property === 'fontSize' && node.type === 'TEXT') {
+        node.setBoundVariable('fontSize', variable);
+      } else {
+        (node as any).setBoundVariable(property, variable);
+      }
+      return true;
+    } catch (e) {
+      console.log(`Failed to bind ${property} variable:`, varName, e);
+    }
+  }
+  return false;
+}
+
+// Bind color variable to an instance node (for icons) - recursively targets children with fills
+async function bindColorToInstance(instance: InstanceNode | FrameNode, varName: string): Promise<boolean> {
+  const variable = await getVariableByName(varName);
+  if (!variable || variable.resolvedType !== 'COLOR') return false;
+
+  try {
+    const basePaint: SolidPaint = {
+      type: 'SOLID',
+      color: { r: 0.5, g: 0.5, b: 0.5 },
+    };
+    const boundPaint = figma.variables.setBoundVariableForPaint(basePaint, 'color', variable);
+
+    // Also apply to all children recursively (especially for icons with internal vectors)
+    // We only apply to geometry-heavy nodes, not the container itself
+    const applyToChildren = (node: SceneNode) => {
+      if (
+        'fills' in node &&
+        (node.type === 'VECTOR' || node.type === 'BOOLEAN_OPERATION' || node.type === 'STAR' || node.type === 'LINE' || node.type === 'ELLIPSE' || node.type === 'RECTANGLE')
+      ) {
+        node.fills = [boundPaint];
+      }
+      if ('children' in node) {
+        node.children.forEach(applyToChildren);
+      }
+    };
+    instance.children.forEach(applyToChildren);
+
+    return true;
+  } catch (e) {
+    console.log('Failed to bind instance color variable:', varName, e);
+    return false;
+  }
+}
+
+// Find and apply a text style by name or size-based pattern
+async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
+  try {
+    const styles = await figma.getLocalTextStylesAsync();
+    const lowerSize = size.toLowerCase();
+
+    // We target "text/{size}/medium" as the standard for buttons
+    // Patterns to try in order:
+    const targetPatterns = [
+      `text/${lowerSize}/medium`,
+      `text/${lowerSize}/semibold`,
+      `text/${lowerSize}/normal`,
+      `text/${lowerSize}/regular`,
+      `text/${lowerSize}`
+    ];
+
+    let style = null;
+    for (const pattern of targetPatterns) {
+      style = styles.find(s => s.name.toLowerCase() === pattern);
+      if (style) break;
+    }
+
+    // fallback: find any style that contains the size and "text"
+    if (!style) {
+      style = styles.find(s => {
+        const name = s.name.toLowerCase();
+        return name.includes('text') && name.includes(lowerSize);
+      });
+    }
+
+    if (style) {
+      await node.setTextStyleIdAsync(style.id);
+      console.log(`Applied text style: ${style.name}`);
+      return true;
+    }
+    console.log(`No matching text style found for size: ${size}`);
+  } catch (e) {
+    console.log('Failed to apply text style for size:', size, e);
+  }
+  return false;
+}
+
 async function generateButtons(): Promise<ComponentNode> {
   // Reset variables cache for fresh lookup
   variablesCache = null;
 
   // Create only the Button/solid/primary component - no tables or labels
   const button = await createStyledButton('solid', 'primary', 'default', 'md', false);
+
+  // List all available text styles for debugging
+  const textStyles = await figma.getLocalTextStylesAsync();
+  console.log('Available Text Styles:', textStyles.map(s => s.name));
 
   return button;
 }
@@ -2032,8 +2132,22 @@ async function createStyledButton(
     button.strokeWeight = 1;
   }
 
+  // Bind sizing properties to the button frame
+  const sizeVars = BUTTON_SIZE_VARS[size];
+  await bindVariableToProperty(button, 'height', sizeVars.height);
+  await bindVariableToProperty(button, 'paddingLeft', sizeVars.padding);
+  await bindVariableToProperty(button, 'paddingRight', sizeVars.padding);
+  await bindVariableToProperty(button, 'itemSpacing', sizeVars.gap);
+  if (!pill) {
+    await bindVariableToProperty(button, 'cornerRadius', sizeVars.radius);
+  }
+
+  // Get variable names for icons and text
+  const textVarName = getButtonColorVarName(style, colorVariant, state, 'text');
+  const iconSizeVarName = sizeVars.iconSize;
+
   // Icon left
-  const iconLeft = await createIconInstance(ICON_NODE_IDS.left, config.iconSize);
+  const iconLeft = await createIconInstance(ICON_NODE_IDS.left, config.iconSize, textVarName, iconSizeVarName);
   iconLeft.name = 'Icon Left';
   button.appendChild(iconLeft);
 
@@ -2041,12 +2155,19 @@ async function createStyledButton(
   const label = figma.createText();
   label.name = 'Label';
   label.characters = 'Button';
-  label.fontSize = config.fontSize;
-  label.fontName = FONT.familyMedium;
-  label.letterSpacing = { value: -0.14, unit: 'PIXELS' };
+
+  // Apply text style - this is the primary source for font family, size, etc.
+  const styleName = `Button/${size.toUpperCase()}`;
+  const styleApplied = await applyTextStyle(label, styleName);
+
+  if (!styleApplied) {
+    console.log('No text style found for:', styleName, '- using fallback font settings');
+    label.fontSize = config.fontSize;
+    label.fontName = FONT.familyMedium;
+    label.letterSpacing = { value: -0.14, unit: 'PIXELS' };
+  }
 
   // Try to bind text color variable
-  const textVarName = getButtonColorVarName(style, colorVariant, state, 'text');
   const textBound = await bindVariableToTextFill(label, textVarName);
   if (!textBound) {
     label.fills = [{ type: 'SOLID', color: colors.text }];
@@ -2054,7 +2175,7 @@ async function createStyledButton(
   button.appendChild(label);
 
   // Icon right
-  const iconRight = await createIconInstance(ICON_NODE_IDS.right, config.iconSize);
+  const iconRight = await createIconInstance(ICON_NODE_IDS.right, config.iconSize, textVarName, iconSizeVarName);
   iconRight.name = 'Icon Right';
   button.appendChild(iconRight);
 
@@ -2068,7 +2189,12 @@ const ICON_NODE_IDS = {
   right: '6029:3443',
 };
 
-async function createIconInstance(nodeId: string, size: number): Promise<InstanceNode | FrameNode> {
+async function createIconInstance(
+  nodeId: string,
+  size: number,
+  colorVarName?: string,
+  sizeVarName?: string
+): Promise<InstanceNode | FrameNode> {
   console.log('createIconInstance called with nodeId:', nodeId, 'size:', size);
 
   // Try to find the icon component in the document
@@ -2080,9 +2206,21 @@ async function createIconInstance(nodeId: string, size: number): Promise<Instanc
     const instance = node.createInstance();
     console.log('Created instance:', instance.name, 'size:', instance.width, 'x', instance.height);
 
-    // Resize to match the button's icon size
-    instance.resize(size, size);
-    console.log('Resized to:', size);
+    // Try to bind size variables, fallback to manual resize
+    if (sizeVarName) {
+      const widthBound = await bindVariableToProperty(instance, 'width', sizeVarName);
+      const heightBound = await bindVariableToProperty(instance, 'height', sizeVarName);
+      if (!widthBound || !heightBound) {
+        instance.resize(size, size);
+      }
+    } else {
+      instance.resize(size, size);
+    }
+
+    // Try to bind color variable to the icon
+    if (colorVarName) {
+      await bindColorToInstance(instance, colorVarName);
+    }
 
     return instance;
   }
@@ -2092,7 +2230,21 @@ async function createIconInstance(nodeId: string, size: number): Promise<Instanc
     const mainComponent = await node.getMainComponentAsync();
     if (mainComponent) {
       const instance = mainComponent.createInstance();
-      instance.resize(size, size);
+
+      if (sizeVarName) {
+        const widthBound = await bindVariableToProperty(instance, 'width', sizeVarName);
+        const heightBound = await bindVariableToProperty(instance, 'height', sizeVarName);
+        if (!widthBound || !heightBound) {
+          instance.resize(size, size);
+        }
+      } else {
+        instance.resize(size, size);
+      }
+
+      if (colorVarName) {
+        await bindColorToInstance(instance, colorVarName);
+      }
+
       console.log('Created instance from main component:', instance.name);
       return instance;
     }
