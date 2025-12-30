@@ -2772,17 +2772,6 @@
               }
             }
           },
-          "custom": {
-            "gray-75": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray.75}"
-            }
-          },
           "component": {
             "switch": {
               "track": {
@@ -5878,17 +5867,6 @@
                   "$value": "{purple.500}"
                 }
               }
-            }
-          },
-          "custom": {
-            "gray-75": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray dark.75}"
             }
           },
           "component": {
