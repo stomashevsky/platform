@@ -21,6 +21,11 @@ interface ResolvedValue {
   aliasId?: string;
 }
 
+// Helper to handle optional alpha in color objects
+interface ColorWithAlpha extends RGB {
+  a?: number;
+}
+
 interface VariableRowData {
   name: string;
   group: string;
@@ -1746,16 +1751,14 @@ type ButtonColorVariant = typeof BUTTON_COLOR_VARIANTS[number];
 type ButtonState = typeof BUTTON_STATES[number];
 
 // Variable name mappings for each style/variant/state combination
-// Based on JSON structure: background/soft/primary or background/soft/hover/primary
 function getButtonColorVarName(style: ButtonStyle, variant: ButtonColorVariant, state: ButtonState, property: 'bg' | 'text' | 'border'): string {
-  // Handle disabled state first - it uses specific global tokens
+  // Handle disabled state first
   if (state === 'disabled') {
     if (property === 'bg') return 'background/disabled';
     if (property === 'text') return 'text/disabled';
     if (property === 'border') return 'border/disabled';
   }
 
-  // Build path based on the JSON structure in design system
   if (property === 'bg') {
     if (state === 'default') {
       return `background/${style}/${variant}`;
@@ -1763,16 +1766,23 @@ function getButtonColorVarName(style: ButtonStyle, variant: ButtonColorVariant, 
       return `background/${style}/${state}/${variant}`;
     }
   } else if (property === 'text') {
-    // Text colors are typically in text/{variant} format
-    return `text/${style}/${variant}`;
+    // Solid has its own text color (usually white/on-color)
+    if (style === 'solid') {
+      return `text/solid/${variant}`;
+    }
+    // Other styles (soft, ghost, outline, link) usually use the variant color directly
+    return `text/${variant}`;
   } else {
     // Border colors
+    if (style === 'outline') {
+      return `border/${variant}`;
+    }
     return `border/${style}/${variant}`;
   }
 }
 
 // Fallback colors for each style/variant
-function getButtonFallbackColors(style: ButtonStyle, variant: ButtonColorVariant, state: ButtonState): { bg: RGB | null; text: RGB; border: RGB | null } {
+function getButtonFallbackColors(style: ButtonStyle, variant: ButtonColorVariant, state: ButtonState): { bg: RGB | RGBA | null; text: RGB | RGBA; border: RGB | RGBA | null } {
   // Simplified fallback colors - will be overridden by variables when available
   const colorMap: Record<ButtonColorVariant, RGB> = {
     primary: { r: 0.094, g: 0.094, b: 0.094 },
@@ -1794,7 +1804,14 @@ function getButtonFallbackColors(style: ButtonStyle, variant: ButtonColorVariant
         text: { r: 1, g: 1, b: 1 },
         border: null,
       };
-    case 'link': // link behaves like ghost for fallback
+    case 'soft':
+      return {
+        // Use 15% opacity for soft background if variable is missing
+        bg: { r: baseColor.r, g: baseColor.g, b: baseColor.b, a: 0.15 },
+        text: baseColor,
+        border: null,
+      };
+    case 'link':
     case 'ghost':
       return {
         bg: null,
@@ -2009,14 +2026,31 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
     // We target "text/{size}/medium" as the standard for buttons
     // Patterns to try in order:
     const targetPatterns = [
+      // Standard patterns
       `text/${textStyleSize}/medium`,
       `text/${textStyleSize}/semibold`,
       `text/${textStyleSize}/bold`,
       `text/${textStyleSize}/normal`,
       `text/${textStyleSize}/regular`,
+
+      // Direct size patterns (without shifting)
+      `text/${lowerSize}/medium`,
+      `text/${lowerSize}/semibold`,
+
+      // Short patterns
       `${textStyleSize}/medium`,
       `${textStyleSize}/semibold`,
-      `text/${textStyleSize}`
+      `text/${textStyleSize}`,
+
+      // Button specific patterns (commonly used)
+      `button/${textStyleSize}`,
+      `btn/${textStyleSize}`,
+      `button/${lowerSize}`,
+      `btn/${lowerSize}`,
+
+      // Simple size fallback
+      `${textStyleSize}`,
+      `${lowerSize}`
     ];
 
     let style: TextStyle | undefined = undefined;
@@ -2165,7 +2199,12 @@ async function createStyledButton(
   const bgBound = await bindVariableToFill(button, bgVarName);
   if (!bgBound) {
     if (colors.bg) {
-      button.fills = [{ type: 'SOLID', color: colors.bg }];
+      const alpha = (colors.bg as RGBA).a !== undefined ? (colors.bg as RGBA).a : 1;
+      button.fills = [{
+        type: 'SOLID',
+        color: { r: colors.bg.r, g: colors.bg.g, b: colors.bg.b },
+        opacity: alpha
+      }];
     } else {
       button.fills = [];
     }
