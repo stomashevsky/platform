@@ -1,0 +1,238 @@
+[
+  {
+    "sizing": {
+      "modes": {
+        "Value": {
+          "radius": {
+            "none": {
+              "$scopes": [
+                "CORNER_RADIUS"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 0
+            },
+            "2xs": {
+              "$scopes": [
+                "CORNER_RADIUS"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 2
+            },
+            "xs": {
+              "$scopes": [
+                "CORNER_RADIUS"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 4
+            },
+            "sm": {
+              "$scopes": [
+                "CORNER_RADIUS"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 6
+            },
+            "md": {
+              "$scopes": [
+                "CORNER_RADIUS"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 8
+            },
+            "lg": {
+              "$scopes": [
+                "CORNER_RADIUS"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 10
+            },
+            "xl": {
+              "$scopes": [
+                "CORNER_RADIUS"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 12
+            },
+            "2xl": {
+              "$scopes": [
+                "CORNER_RADIUS"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 16
+            },
+            "3xl": {
+              "$scopes": [
+                "CORNER_RADIUS"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 20
+            },
+            "4xl": {
+              "$scopes": [
+                "CORNER_RADIUS"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 24
+            },
+            "full": {
+              "$scopes": [
+                "CORNER_RADIUS"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 9999
+            }
+          },
+          "spacing": {
+            "none": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 0
+            },
+            "2xs": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 2
+            },
+            "xs": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 4
+            },
+            "sm": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 6
+            },
+            "md": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 8
+            },
+            "lg": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 12
+            },
+            "xl": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 16
+            },
+            "2xl": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 20
+            },
+            "3xl": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 24
+            },
+            "4xl": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 32
+            },
+            "5xl": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 40
+            },
+            "6xl": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 48
+            },
+            "7xl": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 64
+            },
+            "8xl": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 80
+            },
+            "9xl": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 96
+            },
+            "10xl": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 128
+            },
+            "11xl": {
+              "$scopes": [
+                "GAP"
+              ],
+              "$hiddenFromPublishing": true,
+              "$type": "float",
+              "$value": 160
+            }
+          }
+        }
+      }
+    }
+  }
+]

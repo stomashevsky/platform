@@ -72,7 +72,7 @@
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{alpha.05}"
+              "$value": "{alpha.5}"
             },
             "soft": {
               "primary": {
@@ -353,7 +353,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.02}"
+                  "$value": "{alpha.2}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -364,7 +364,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.02}"
+                  "$value": "{alpha.2}"
                 }
               },
               "alpha": {
@@ -377,7 +377,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.08}"
+                  "$value": "{alpha.8}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -388,7 +388,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.08}"
+                  "$value": "{alpha.8}"
                 },
                 "info": {
                   "$scopes": [
@@ -648,7 +648,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{alpha.05}"
+                "$value": "{alpha.5}"
               },
               "info": {
                 "$scopes": [
@@ -998,7 +998,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.02}"
+                  "$value": "{alpha.2}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -1009,7 +1009,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.02}"
+                  "$value": "{alpha.2}"
                 },
                 "info": {
                   "$scopes": [
@@ -1088,7 +1088,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.04}"
+                  "$value": "{alpha.4}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -1099,7 +1099,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.04}"
+                  "$value": "{alpha.4}"
                 },
                 "info": {
                   "$scopes": [
@@ -1180,7 +1180,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.08}"
+                  "$value": "{alpha.8}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -1191,7 +1191,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.08}"
+                  "$value": "{alpha.8}"
                 },
                 "info": {
                   "$scopes": [
@@ -1371,7 +1371,7 @@
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{alpha.06}"
+              "$value": "{alpha.6}"
             },
             "soft": {
               "alt": {
@@ -1383,7 +1383,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.06}"
+                  "$value": "{alpha.6}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -1393,7 +1393,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.06}"
+                  "$value": "{alpha.6}"
                 }
               }
             },
@@ -1406,7 +1406,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{alpha.05}"
+                "$value": "{alpha.5}"
               },
               "info": {
                 "$scopes": [
@@ -1632,6 +1632,446 @@
                   "$value": "{purple.500}"
                 }
               }
+            },
+            "strong": {
+              "$scopes": [
+                "STROKE_COLOR"
+              ],
+              "$description": "--color-border-strong\nStrong border, high contrast",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{alpha.15}"
+            },
+            "subtle": {
+              "$scopes": [
+                "STROKE_COLOR"
+              ],
+              "$description": "--color-border-subtle\nSubtle border, low contrast",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{alpha.5}"
+            }
+          },
+          "ring": {
+            "default": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring\nDefault focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.500}"
+            },
+            "primary": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-primary\nPrimary focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.500}"
+            },
+            "secondary": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-secondary\nSecondary focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.500}"
+            },
+            "info": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-info\nInfo focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.500}"
+            },
+            "warning": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-warning\nWarning focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.500}"
+            },
+            "caution": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-caution\nCaution focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.500}"
+            },
+            "danger": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-danger\nDanger focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{red.200}"
+            },
+            "success": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-success\nSuccess focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.500}"
+            },
+            "discovery": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-discovery\nDiscovery focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.500}"
+            },
+            "soft": {
+              "primary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-primary-soft\nButton primary soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-secondary-soft\nButton secondary soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "info": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-info-soft\nButton info soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "warning": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-warning-soft\nButton warning soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "caution": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-caution-soft\nButton caution soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "danger": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-danger-soft\nButton danger soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.200}"
+              },
+              "success": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-success-soft\nButton success soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-discovery-soft\nButton discovery soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              }
+            },
+            "solid": {
+              "primary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-primary-solid\nButton primary solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-secondary-solid\nButton secondary solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "info": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-info-solid\nButton info solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "warning": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-warning-solid\nButton warning solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "caution": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-caution-solid\nButton caution solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "danger": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-danger-solid\nButton danger solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.200}"
+              },
+              "success": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-success-solid\nButton success solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-discovery-solid\nButton discovery solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              }
+            },
+            "outline": {
+              "primary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-primary-outline\nButton primary outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-secondary-outline\nButton secondary outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "info": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-info-outline\nButton info outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "warning": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-warning-outline\nButton warning outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "caution": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-caution-outline\nButton caution outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "danger": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-danger-outline\nButton danger outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.200}"
+              },
+              "success": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-success-outline\nButton success outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-discovery-outline\nButton discovery outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              }
+            },
+            "ghost": {
+              "primary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-primary-ghost\nButton primary ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-secondary-ghost\nButton secondary ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "info": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-info-ghost\nButton info ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "warning": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-warning-ghost\nButton warning ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "caution": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-caution-ghost\nButton caution ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "danger": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-danger-ghost\nButton danger ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.200}"
+              },
+              "success": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-success-ghost\nButton success ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-discovery-ghost\nButton discovery ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              }
             }
           },
           "text": {
@@ -1639,7 +2079,17 @@
               "$scopes": [
                 "TEXT_FILL"
               ],
-              "$description": "--color-text\nPrimary text color",
+              "$description": "--color-text\nPage text, paragraphs, headings",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray.1000}"
+            },
+            "primary": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-primary\nText in components with color=\"primary\"",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
@@ -1649,7 +2099,7 @@
               "$scopes": [
                 "TEXT_FILL"
               ],
-              "$description": "--color-text-secondary\nSecondary text color",
+              "$description": "--color-text-secondary\nSecondary text, less emphasis",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
@@ -1659,7 +2109,7 @@
               "$scopes": [
                 "TEXT_FILL"
               ],
-              "$description": "--color-text-tertiary\nTertiary text color",
+              "$description": "--color-text-tertiary\nTertiary text, subtle",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
@@ -1669,21 +2119,81 @@
               "$scopes": [
                 "TEXT_FILL"
               ],
-              "$description": "--color-text-disabled\nDisabled text color",
+              "$description": "--color-text-disabled\nDisabled text state",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{alpha.25}"
+              "$value": "{gray.400}"
             },
             "inverse": {
               "$scopes": [
                 "TEXT_FILL"
               ],
-              "$description": "--color-text-inverse\nInverse text color (on dark backgrounds)",
+              "$description": "--color-text-inverse\nText on inverted backgrounds",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
               "$value": "{gray.0}"
+            },
+            "info": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-info\nText in components with color=\"info\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.700}"
+            },
+            "warning": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-warning\nText in components with color=\"warning\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{orange.700}"
+            },
+            "caution": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-caution\nText in components with color=\"caution\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{yellow.700}"
+            },
+            "danger": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-danger\nText in components with color=\"danger\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{red.700}"
+            },
+            "success": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-success\nText in components with color=\"success\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{green.700}"
+            },
+            "discovery": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-discovery\nText in components with color=\"discovery\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{purple.700}"
             },
             "soft": {
               "primary": {
@@ -1694,7 +2204,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.700}"
+                "$value": "{gray.1000}"
               },
               "secondary": {
                 "$scopes": [
@@ -1704,7 +2214,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.700}"
+                "$value": "{gray.1000}"
               },
               "info": {
                 "$scopes": [
@@ -1714,7 +2224,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{blue.700}"
+                "$value": "{blue.600}"
               },
               "warning": {
                 "$scopes": [
@@ -1765,6 +2275,28 @@
                 "$libraryName": "",
                 "$collectionName": "color primitive",
                 "$value": "{purple.600}"
+              },
+              "alt": {
+                "primary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-primary-soft-alt\nButton primary soft text alt",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-secondary-soft-alt\nButton secondary soft text alt",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                }
               }
             },
             "surface": {
@@ -1776,7 +2308,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.700}"
+                "$value": "{gray.1000}"
               },
               "info": {
                 "$scopes": [
@@ -1786,7 +2318,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{blue.700}"
+                "$value": "{blue.600}"
               },
               "warning": {
                 "$scopes": [
@@ -1880,16 +2412,6 @@
                 "$collectionName": "color primitive",
                 "$value": "{base.white}"
               },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-solid\nButton caution solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
               "danger": {
                 "$scopes": [
                   "TEXT_FILL"
@@ -1930,7 +2452,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.700}"
+                "$value": "{gray.1000}"
               },
               "secondary": {
                 "$scopes": [
@@ -1940,7 +2462,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.700}"
+                "$value": "{gray.500}"
               },
               "info": {
                 "$scopes": [
@@ -2001,6 +2523,88 @@
                 "$libraryName": "",
                 "$collectionName": "color primitive",
                 "$value": "{purple.500}"
+              },
+              "hover": {
+                "primary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-primary-outline-hover\nButton primary outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-secondary-outline-hover\nButton secondary outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                },
+                "info": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-info-outline-hover\nButton info outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{blue.500}"
+                },
+                "warning": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-warning-outline-hover\nButton warning outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{orange.500}"
+                },
+                "caution": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-caution-outline-hover\nButton caution outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{yellow.700}"
+                },
+                "danger": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-danger-outline-hover\nButton danger outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{red.500}"
+                },
+                "success": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-success-outline-hover\nButton success outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{green.500}"
+                },
+                "discovery": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-discovery-outline-hover\nButton discovery outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{purple.500}"
+                }
               }
             },
             "ghost": {
@@ -2012,7 +2616,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.700}"
+                "$value": "{gray.1000}"
               },
               "secondary": {
                 "$scopes": [
@@ -2085,6 +2689,26 @@
                 "$value": "{purple.500}"
               },
               "hover": {
+                "primary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-primary-ghost-hover\nButton primary ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-secondary-ghost-hover\nButton secondary ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                },
                 "info": {
                   "$scopes": [
                     "TEXT_FILL"
@@ -2148,139 +2772,15 @@
               }
             }
           },
-          "icon": {
-            "default": {
+          "custom": {
+            "gray-75": {
               "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
+                "ALL_SCOPES"
               ],
-              "$description": "--color-icon\nDefault icon color",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{gray.500}"
-            },
-            "secondary": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-secondary\nSecondary icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray.400}"
-            },
-            "tertiary": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-tertiary\nTertiary icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray.350}"
-            },
-            "disabled": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-disabled\nDisabled icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{alpha.25}"
-            },
-            "inverse": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-inverse\nInverse icon color (on dark backgrounds)",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray.0}"
-            },
-            "info": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-info\nInfo icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{blue.500}"
-            },
-            "warning": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-warning\nWarning icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{orange.500}"
-            },
-            "caution": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-caution\nCaution icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{yellow.600}"
-            },
-            "danger": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-danger\nDanger icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{red.500}"
-            },
-            "success": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-success\nSuccess icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{green.500}"
-            },
-            "discovery": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-discovery\nDiscovery icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{purple.500}"
-            }
-          },
-          "ring": {
-            "default": {
-              "$scopes": [
-                "EFFECT_COLOR"
-              ],
-              "$description": "--color-ring\nDefault focus ring color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{blue.200}"
+              "$value": "{gray.75}"
             }
           },
           "component": {
@@ -2471,7 +2971,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.08}"
+                  "$value": "{alpha.8}"
                 }
               }
             },
@@ -2485,7 +2985,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.04}"
+                  "$value": "{alpha.4}"
                 }
               }
             },
@@ -2621,7 +3121,7 @@
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{gray.200}"
+              "$value": "{gray dark.200}"
             },
             "secondary": {
               "$scopes": [
@@ -2632,7 +3132,7 @@
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{gray.150}"
+              "$value": "{gray dark.100}"
             },
             "tertiary": {
               "$scopes": [
@@ -2643,7 +3143,7 @@
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{gray.100}"
+              "$value": "{gray dark.50}"
             },
             "elevated": {
               "default": {
@@ -2655,7 +3155,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.200}"
+                "$value": "{gray dark.300}"
               },
               "secondary": {
                 "$scopes": [
@@ -2666,7 +3166,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.150}"
+                "$value": "{gray dark.400}"
               }
             }
           },
@@ -2680,7 +3180,7 @@
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{alpha-white.08}"
+              "$value": "{alpha-white.5}"
             },
             "soft": {
               "primary": {
@@ -2692,7 +3192,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.300}"
+                "$value": "{gray dark.300}"
               },
               "secondary": {
                 "$scopes": [
@@ -2703,7 +3203,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.300}"
+                "$value": "{gray dark.300}"
               },
               "info": {
                 "$scopes": [
@@ -2781,7 +3281,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.350}"
+                  "$value": "{gray dark.350}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -2792,7 +3292,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.350}"
+                  "$value": "{gray dark.350}"
                 },
                 "info": {
                   "$scopes": [
@@ -2871,7 +3371,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.400}"
+                  "$value": "{gray dark.400}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -2882,7 +3382,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.400}"
+                  "$value": "{gray dark.400}"
                 },
                 "info": {
                   "$scopes": [
@@ -2961,7 +3461,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha-white.04}"
+                  "$value": "{alpha-white.2}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -2972,7 +3472,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha-white.04}"
+                  "$value": "{alpha-white.2}"
                 }
               },
               "alpha": {
@@ -3256,7 +3756,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{alpha-white.08}"
+                "$value": "{alpha-white.8}"
               },
               "info": {
                 "$scopes": [
@@ -3606,7 +4106,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha-white.04}"
+                  "$value": "{alpha-white.4}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -3617,7 +4117,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha-white.04}"
+                  "$value": "{alpha-white.4}"
                 },
                 "info": {
                   "$scopes": [
@@ -3696,7 +4196,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha-white.06}"
+                  "$value": "{alpha-white.6}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -3707,7 +4207,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha-white.06}"
+                  "$value": "{alpha-white.6}"
                 },
                 "info": {
                   "$scopes": [
@@ -3979,7 +4479,7 @@
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{alpha-white.06}"
+              "$value": "{alpha-white.6}"
             },
             "soft": {
               "alt": {
@@ -3991,7 +4491,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha-white.06}"
+                  "$value": "{alpha-white.6}"
                 },
                 "secondary": {
                   "$scopes": [
@@ -4001,7 +4501,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha-white.06}"
+                  "$value": "{alpha-white.6}"
                 }
               }
             },
@@ -4014,7 +4514,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{alpha-white.08}"
+                "$value": "{alpha-white.8}"
               },
               "info": {
                 "$scopes": [
@@ -4240,6 +4740,446 @@
                   "$value": "{purple.500}"
                 }
               }
+            },
+            "strong": {
+              "$scopes": [
+                "STROKE_COLOR"
+              ],
+              "$description": "--color-border-strong\nStrong border, high contrast",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{alpha-white.20}"
+            },
+            "subtle": {
+              "$scopes": [
+                "STROKE_COLOR"
+              ],
+              "$description": "--color-border-subtle\nSubtle border, low contrast",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{alpha-white.6}"
+            }
+          },
+          "ring": {
+            "default": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring\nDefault focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.400}"
+            },
+            "primary": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-primary\nPrimary focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.400}"
+            },
+            "secondary": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-secondary\nSecondary focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.400}"
+            },
+            "info": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-info\nInfo focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.400}"
+            },
+            "warning": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-warning\nWarning focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.400}"
+            },
+            "caution": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-caution\nCaution focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.400}"
+            },
+            "danger": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-danger\nDanger focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{red.200}"
+            },
+            "success": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-success\nSuccess focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.400}"
+            },
+            "discovery": {
+              "$scopes": [
+                "EFFECT_COLOR"
+              ],
+              "$description": "--color-ring-discovery\nDiscovery focus ring",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.400}"
+            },
+            "soft": {
+              "primary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-primary-soft\nButton primary soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-secondary-soft\nButton secondary soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "info": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-info-soft\nButton info soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "warning": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-warning-soft\nButton warning soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "caution": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-caution-soft\nButton caution soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "danger": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-danger-soft\nButton danger soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.200}"
+              },
+              "success": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-success-soft\nButton success soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-discovery-soft\nButton discovery soft focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              }
+            },
+            "solid": {
+              "primary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-primary-solid\nButton primary solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-secondary-solid\nButton secondary solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "info": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-info-solid\nButton info solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "warning": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-warning-solid\nButton warning solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "caution": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-caution-solid\nButton caution solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "danger": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-danger-solid\nButton danger solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.200}"
+              },
+              "success": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-success-solid\nButton success solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-discovery-solid\nButton discovery solid focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              }
+            },
+            "outline": {
+              "primary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-primary-outline\nButton primary outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-secondary-outline\nButton secondary outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "info": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-info-outline\nButton info outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "warning": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-warning-outline\nButton warning outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "caution": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-caution-outline\nButton caution outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "danger": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-danger-outline\nButton danger outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.200}"
+              },
+              "success": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-success-outline\nButton success outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-discovery-outline\nButton discovery outline focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              }
+            },
+            "ghost": {
+              "primary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-primary-ghost\nButton primary ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-secondary-ghost\nButton secondary ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "info": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-info-ghost\nButton info ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "warning": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-warning-ghost\nButton warning ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "caution": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-caution-ghost\nButton caution ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "danger": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-danger-ghost\nButton danger ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.200}"
+              },
+              "success": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-success-ghost\nButton success ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "EFFECT_COLOR"
+                ],
+                "$description": "--color-ring-discovery-ghost\nButton discovery ghost focus ring",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.400}"
+              }
             }
           },
           "text": {
@@ -4247,7 +5187,17 @@
               "$scopes": [
                 "TEXT_FILL"
               ],
-              "$description": "--color-text\nPrimary text color",
+              "$description": "--color-text\nPage text, paragraphs, headings",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray dark.1000}"
+            },
+            "primary": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-primary\nText in components with color=\"primary\"",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
@@ -4257,41 +5207,101 @@
               "$scopes": [
                 "TEXT_FILL"
               ],
-              "$description": "--color-text-secondary\nSecondary text color",
+              "$description": "--color-text-secondary\nSecondary text, less emphasis",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{gray dark.550}"
+              "$value": "{gray dark.700}"
             },
             "tertiary": {
               "$scopes": [
                 "TEXT_FILL"
               ],
-              "$description": "--color-text-tertiary\nTertiary text color",
+              "$description": "--color-text-tertiary\nTertiary text, subtle",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{gray dark.500}"
+              "$value": "{gray dark.600}"
             },
             "disabled": {
               "$scopes": [
                 "TEXT_FILL"
               ],
-              "$description": "--color-text-disabled\nDisabled text color",
+              "$description": "--color-text-disabled\nDisabled text state",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{alpha-white.30}"
+              "$value": "{gray dark.500}"
             },
             "inverse": {
               "$scopes": [
                 "TEXT_FILL"
               ],
-              "$description": "--color-text-inverse\nInverse text color (on dark backgrounds)",
+              "$description": "--color-text-inverse\nText on inverted backgrounds",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
               "$value": "{gray dark.0}"
+            },
+            "info": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-info\nText in components with color=\"info\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.200}"
+            },
+            "warning": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-warning\nText in components with color=\"warning\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{orange.500}"
+            },
+            "caution": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-caution\nText in components with color=\"caution\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{yellow.500}"
+            },
+            "danger": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-danger\nText in components with color=\"danger\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{red.500}"
+            },
+            "success": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-success\nText in components with color=\"success\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{green.400}"
+            },
+            "discovery": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-discovery\nText in components with color=\"discovery\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{purple.500}"
             },
             "soft": {
               "primary": {
@@ -4302,7 +5312,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray dark.700}"
+                "$value": "{gray dark.1000}"
               },
               "secondary": {
                 "$scopes": [
@@ -4312,7 +5322,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray dark.700}"
+                "$value": "{gray dark.1000}"
               },
               "info": {
                 "$scopes": [
@@ -4322,7 +5332,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{blue.200}"
+                "$value": "{blue.300}"
               },
               "warning": {
                 "$scopes": [
@@ -4362,7 +5372,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{green.300}"
+                "$value": "{green.400}"
               },
               "discovery": {
                 "$scopes": [
@@ -4373,6 +5383,28 @@
                 "$libraryName": "",
                 "$collectionName": "color primitive",
                 "$value": "{purple.300}"
+              },
+              "alt": {
+                "primary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-primary-soft-alt\nButton primary soft text alt",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-secondary-soft-alt\nButton secondary soft text alt",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                }
               }
             },
             "surface": {
@@ -4384,7 +5416,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray dark.700}"
+                "$value": "{gray dark.1000}"
               },
               "info": {
                 "$scopes": [
@@ -4394,7 +5426,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{blue.200}"
+                "$value": "{blue.300}"
               },
               "warning": {
                 "$scopes": [
@@ -4434,7 +5466,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{green.300}"
+                "$value": "{green.400}"
               },
               "discovery": {
                 "$scopes": [
@@ -4444,7 +5476,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{purple.300}"
+                "$value": "{purple.200}"
               }
             },
             "solid": {
@@ -4483,16 +5515,6 @@
                   "TEXT_FILL"
                 ],
                 "$description": "--color-text-warning-solid\nButton warning solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-solid\nButton caution solid text",
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
@@ -4538,7 +5560,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray dark.700}"
+                "$value": "{gray dark.1000}"
               },
               "secondary": {
                 "$scopes": [
@@ -4609,6 +5631,88 @@
                 "$libraryName": "",
                 "$collectionName": "color primitive",
                 "$value": "{purple.500}"
+              },
+              "hover": {
+                "primary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-primary-outline-hover\nButton primary outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-secondary-outline-hover\nButton secondary outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                },
+                "info": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-info-outline-hover\nButton info outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{blue.500}"
+                },
+                "warning": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-warning-outline-hover\nButton warning outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{orange.500}"
+                },
+                "caution": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-caution-outline-hover\nButton caution outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{yellow.700}"
+                },
+                "danger": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-danger-outline-hover\nButton danger outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{red.500}"
+                },
+                "success": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-success-outline-hover\nButton success outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{green.500}"
+                },
+                "discovery": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-discovery-outline-hover\nButton discovery outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{purple.500}"
+                }
               }
             },
             "ghost": {
@@ -4620,7 +5724,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray dark.700}"
+                "$value": "{gray dark.1000}"
               },
               "secondary": {
                 "$scopes": [
@@ -4630,7 +5734,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray dark.550}"
+                "$value": "{gray dark.700}"
               },
               "info": {
                 "$scopes": [
@@ -4640,7 +5744,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{blue.500}"
+                "$value": "{blue.200}"
               },
               "warning": {
                 "$scopes": [
@@ -4693,6 +5797,26 @@
                 "$value": "{purple.500}"
               },
               "hover": {
+                "primary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-primary-ghost-hover\nButton primary ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--color-text-secondary-ghost-hover\nButton secondary ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                },
                 "info": {
                   "$scopes": [
                     "TEXT_FILL"
@@ -4701,7 +5825,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{blue.500}"
+                  "$value": "{blue.200}"
                 },
                 "warning": {
                   "$scopes": [
@@ -4756,139 +5880,15 @@
               }
             }
           },
-          "icon": {
-            "default": {
+          "custom": {
+            "gray-75": {
               "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
+                "ALL_SCOPES"
               ],
-              "$description": "--color-icon\nDefault icon color",
               "$type": "color",
               "$libraryName": "",
               "$collectionName": "color primitive",
-              "$value": "{gray dark.550}"
-            },
-            "secondary": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-secondary\nSecondary icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray dark.500}"
-            },
-            "tertiary": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-tertiary\nTertiary icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray dark.450}"
-            },
-            "disabled": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-disabled\nDisabled icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{alpha-white.30}"
-            },
-            "inverse": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-inverse\nInverse icon color (on dark backgrounds)",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray dark.0}"
-            },
-            "info": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-info\nInfo icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{blue.400}"
-            },
-            "warning": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-warning\nWarning icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{orange.400}"
-            },
-            "caution": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-caution\nCaution icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{yellow.400}"
-            },
-            "danger": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-danger\nDanger icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{red.400}"
-            },
-            "success": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-success\nSuccess icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{green.400}"
-            },
-            "discovery": {
-              "$scopes": [
-                "FRAME_FILL",
-                "SHAPE_FILL"
-              ],
-              "$description": "--color-icon-discovery\nDiscovery icon color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{purple.400}"
-            }
-          },
-          "ring": {
-            "default": {
-              "$scopes": [
-                "EFFECT_COLOR"
-              ],
-              "$description": "--color-ring\nDefault focus ring color",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{blue.700}"
+              "$value": "{gray dark.75}"
             }
           },
           "component": {
@@ -4903,7 +5903,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.400}"
+                  "$value": "{gray dark.400}"
                 },
                 "hover": {
                   "$scopes": [
@@ -4914,7 +5914,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.450}"
+                  "$value": "{gray dark.450}"
                 },
                 "checked": {
                   "$scopes": [
@@ -4936,7 +5936,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.300}"
+                  "$value": "{gray dark.300}"
                 },
                 "checkedDisabled": {
                   "$scopes": [
@@ -4960,7 +5960,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.1000}"
+                  "$value": "{gray dark.1000}"
                 },
                 "disabled": {
                   "$scopes": [
@@ -4971,7 +5971,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.800}"
+                  "$value": "{gray dark.800}"
                 }
               }
             },
@@ -4986,7 +5986,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.400}"
+                  "$value": "{gray dark.400}"
                 }
               },
               "range": {
@@ -4999,7 +5999,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.600}"
+                  "$value": "{gray dark.600}"
                 }
               }
             },
@@ -5013,7 +6013,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.0}"
+                "$value": "{gray dark.0}"
               },
               "thumb": {
                 "background": {
@@ -5025,7 +6025,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.300}"
+                  "$value": "{gray dark.300}"
                 }
               },
               "option": {
@@ -5038,7 +6038,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.300}"
+                  "$value": "{gray dark.300}"
                 }
               }
             },
@@ -5052,7 +6052,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.30}"
+                  "$value": "{alpha-white.30}"
                 }
               },
               "border": {
@@ -5079,7 +6079,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.10}"
+                  "$value": "{alpha-white.10}"
                 }
               }
             },
@@ -5093,7 +6093,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{alpha.15}"
+                  "$value": "{alpha-white.15}"
                 }
               }
             },
@@ -5120,7 +6120,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{alpha.30}"
+                "$value": "{alpha-white.30}"
               },
               "background": {
                 "checked": {
@@ -5132,7 +6132,7 @@
                   "$type": "color",
                   "$libraryName": "",
                   "$collectionName": "color primitive",
-                  "$value": "{gray.0}"
+                  "$value": "{gray dark.0}"
                 }
               },
               "checkmark": {
@@ -5144,7 +6144,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.900}"
+                "$value": "{gray dark.900}"
               }
             },
             "radio": {
@@ -5156,7 +6156,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{alpha.30}"
+                "$value": "{alpha-white.30}"
               },
               "dot": {
                 "$scopes": [
@@ -5167,7 +6167,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.0}"
+                "$value": "{gray dark.0}"
               }
             },
             "tooltip": {
@@ -5180,7 +6180,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.100}"
+                "$value": "{gray dark.100}"
               },
               "text": {
                 "$scopes": [
@@ -5190,7 +6190,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.900}"
+                "$value": "{gray dark.900}"
               }
             },
             "popover": {
@@ -5203,7 +6203,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{gray.200}"
+                "$value": "{gray dark.200}"
               },
               "border": {
                 "$scopes": [
@@ -5213,7 +6213,7 @@
                 "$type": "color",
                 "$libraryName": "",
                 "$collectionName": "color primitive",
-                "$value": "{alpha.12}"
+                "$value": "{alpha-white.12}"
               }
             }
           }
@@ -5230,8 +6230,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--base-white",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#ffffff"
             },
@@ -5239,8 +6239,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--base-black",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#000000"
             }
@@ -5250,8 +6250,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-0",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#ffffff"
             },
@@ -5259,8 +6259,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#fcfcfc"
             },
@@ -5268,8 +6268,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#f9f9f9"
             },
@@ -5277,8 +6277,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#f3f3f3"
             },
@@ -5286,8 +6286,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#ededed"
             },
@@ -5295,8 +6295,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-150",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#dfdfdf"
             },
@@ -5304,8 +6304,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#c4c4c4"
             },
@@ -5313,8 +6313,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-250",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#b9b9b9"
             },
@@ -5322,8 +6322,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#afafaf"
             },
@@ -5331,8 +6331,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-350",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#9f9f9f"
             },
@@ -5340,8 +6340,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-400",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#8f8f8f"
             },
@@ -5349,8 +6349,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-450",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#767676"
             },
@@ -5358,8 +6358,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-500",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#5d5d5d"
             },
@@ -5367,8 +6367,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-550",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#4f4f4f"
             },
@@ -5376,8 +6376,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-600",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#414141"
             },
@@ -5385,8 +6385,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-650",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#393939"
             },
@@ -5394,8 +6394,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-700",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#303030"
             },
@@ -5403,8 +6403,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-750",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#292929"
             },
@@ -5412,8 +6412,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-800",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#212121"
             },
@@ -5421,8 +6421,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-850",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#1c1c1c"
             },
@@ -5430,8 +6430,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-900",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#181818"
             },
@@ -5439,8 +6439,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-925",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#161616"
             },
@@ -5448,8 +6448,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-950",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#131313"
             },
@@ -5457,8 +6457,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-975",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#101010"
             },
@@ -5466,8 +6466,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-1000",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#0d0d0d"
             }
@@ -5477,8 +6477,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-0",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#0d0d0d"
             },
@@ -5486,8 +6486,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#101010"
             },
@@ -5495,8 +6495,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#131313"
             },
@@ -5504,8 +6504,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#161616"
             },
@@ -5513,8 +6513,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#181818"
             },
@@ -5522,8 +6522,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-150",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#1c1c1c"
             },
@@ -5531,8 +6531,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#212121"
             },
@@ -5540,8 +6540,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-250",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#282828"
             },
@@ -5549,8 +6549,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#303030"
             },
@@ -5558,8 +6558,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-350",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#393939"
             },
@@ -5567,8 +6567,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-400",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#414141"
             },
@@ -5576,8 +6576,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-450",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#4f4f4f"
             },
@@ -5585,8 +6585,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-500",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#5d5d5d"
             },
@@ -5594,8 +6594,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-550",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#767676"
             },
@@ -5603,8 +6603,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-600",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#8f8f8f"
             },
@@ -5612,8 +6612,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-650",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#9f9f9f"
             },
@@ -5621,8 +6621,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-700",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#afafaf"
             },
@@ -5630,8 +6630,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-750",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#b9b9b9"
             },
@@ -5639,8 +6639,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-800",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#cdcdcd"
             },
@@ -5648,8 +6648,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-850",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#dcdcdc"
             },
@@ -5657,8 +6657,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-900",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#ededed"
             },
@@ -5666,8 +6666,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-925",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#f3f3f3"
             },
@@ -5675,8 +6675,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-950",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#f3f3f3"
             },
@@ -5684,8 +6684,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-975",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#f9f9f9"
             },
@@ -5693,19 +6693,73 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--gray-dark-1000",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#fff"
+              "$value": "#ffffff"
             }
           },
           "alpha": {
+            "0": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-00",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(0, 0, 0, 0)"
+            },
+            "2": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-02",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(0, 0, 0, 0.02)"
+            },
+            "4": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-04",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(0, 0, 0, 0.04)"
+            },
+            "5": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-05",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(0, 0, 0, 0.05)"
+            },
+            "6": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-06",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(0, 0, 0, 0.06)"
+            },
+            "8": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-08",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(0, 0, 0, 0.08)"
+            },
             "10": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-10",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.1)"
             },
@@ -5713,8 +6767,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-12",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.12)"
             },
@@ -5722,8 +6776,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-15",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.15)"
             },
@@ -5731,8 +6785,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-16",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.16)"
             },
@@ -5740,8 +6794,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-20",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.2)"
             },
@@ -5749,8 +6803,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.25)"
             },
@@ -5758,8 +6812,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-30",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.3)"
             },
@@ -5767,8 +6821,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-35",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.35)"
             },
@@ -5776,8 +6830,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-40",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.4)"
             },
@@ -5785,73 +6839,73 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 0, 0, 0.5)"
-            },
-            "00": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-00",
-              "$type": "color",
-              "$value": "rgba(0, 0, 0, 0)"
-            },
-            "02": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-02",
-              "$type": "color",
-              "$value": "rgba(0, 0, 0, 0.02)"
-            },
-            "04": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-04",
-              "$type": "color",
-              "$value": "rgba(0, 0, 0, 0.04)"
-            },
-            "05": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-05",
-              "$type": "color",
-              "$value": "rgba(0, 0, 0, 0.05)"
-            },
-            "06": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-06",
-              "$type": "color",
-              "$value": "rgba(0, 0, 0, 0.06)"
-            },
-            "08": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-08",
-              "$type": "color",
-              "$value": "rgba(0, 0, 0, 0.08)"
             }
           },
           "alpha-white": {
+            "0": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-white-00",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(255, 255, 255, 0)"
+            },
+            "2": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-white-02",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(255, 255, 255, 0.02)"
+            },
+            "4": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-white-04",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(255, 255, 255, 0.04)"
+            },
+            "5": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-white-05",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(255, 255, 255, 0.05)"
+            },
+            "6": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-white-06",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(255, 255, 255, 0.06)"
+            },
+            "8": {
+              "$scopes": [
+                "ALL_SCOPES"
+              ],
+              "$description": "--alpha-white-08",
+              "$hiddenFromPublishing": true,
+              "$type": "color",
+              "$value": "rgba(255, 255, 255, 0.08)"
+            },
             "10": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-white-10",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.1)"
             },
@@ -5859,8 +6913,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-white-12",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.12)"
             },
@@ -5868,8 +6922,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-white-15",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.15)"
             },
@@ -5877,8 +6931,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-white-16",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.16)"
             },
@@ -5886,8 +6940,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-white-20",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.2)"
             },
@@ -5895,8 +6949,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-white-25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.25)"
             },
@@ -5904,8 +6958,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-white-30",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.3)"
             },
@@ -5913,8 +6967,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-white-35",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.35)"
             },
@@ -5922,8 +6976,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-white-40",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.4)"
             },
@@ -5931,64 +6985,10 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--alpha-white-50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(255, 255, 255, 0.5)"
-            },
-            "00": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-00",
-              "$type": "color",
-              "$value": "rgba(255, 255, 255, 0)"
-            },
-            "02": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-02",
-              "$type": "color",
-              "$value": "rgba(255, 255, 255, 0.02)"
-            },
-            "04": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-04",
-              "$type": "color",
-              "$value": "rgba(255, 255, 255, 0.04)"
-            },
-            "05": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-05",
-              "$type": "color",
-              "$value": "rgba(255, 255, 255, 0.05)"
-            },
-            "06": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-06",
-              "$type": "color",
-              "$value": "rgba(255, 255, 255, 0.06)"
-            },
-            "08": {
-              "$scopes": [
-                "ALL_SCOPES"
-              ],
-              "$hiddenFromPublishing": true,
-              "$description": "--alpha-white-08",
-              "$type": "color",
-              "$value": "rgba(255, 255, 255, 0.08)"
             }
           },
           "red": {
@@ -5996,181 +6996,181 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#fef0ef"
+              "$value": "#fff0f0"
             },
             "50": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#fdd9d6"
+              "$value": "#ffd9d9"
             },
             "75": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#fcc5c1"
+              "$value": "#ffc6c5"
             },
             "100": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#f9a19a"
+              "$value": "#ffa4a2"
             },
             "200": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#f67d73"
+              "$value": "#ff8583"
             },
             "300": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#f2594d"
+              "$value": "#ff6764"
             },
             "400": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-400",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#e73a2d"
+              "$value": "#fa423e"
             },
             "500": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-500",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#c6271b"
+              "$value": "#e02e2a"
             },
             "600": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-600",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#9d1f15"
+              "$value": "#c11713"
             },
             "700": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-700",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#781810"
+              "$value": "#9c0600"
             },
             "800": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-800",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#56110c"
+              "$value": "#6e0400"
             },
             "900": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-900",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#3b0c08"
+              "$value": "#4a0300"
             },
             "950": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-950",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#290805"
+              "$value": "#340200"
             },
             "1000": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-1000",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#180503"
+              "$value": "#1f0101"
             },
             "a25": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-a25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "rgba(198, 39, 27, 0.08)"
+              "$value": "rgba(224, 46, 42, 0.08)"
             },
             "a50": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-a50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "rgba(198, 39, 27, 0.16)"
+              "$value": "rgba(224, 46, 42, 0.16)"
             },
             "a75": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-a75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "rgba(198, 39, 27, 0.24)"
+              "$value": "rgba(224, 46, 42, 0.24)"
             },
             "a100": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-a100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "rgba(198, 39, 27, 0.32)"
+              "$value": "rgba(224, 46, 42, 0.32)"
             },
             "a200": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-a200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "rgba(198, 39, 27, 0.48)"
+              "$value": "rgba(224, 46, 42, 0.48)"
             },
             "a300": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--red-a300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "rgba(198, 39, 27, 0.64)"
+              "$value": "rgba(224, 46, 42, 0.64)"
             }
           },
           "orange": {
@@ -6178,71 +7178,71 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#fef3e6"
+              "$value": "#fff3eb"
             },
             "50": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#fce2c3"
+              "$value": "#ffe0cc"
             },
             "75": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#fad2a4"
+              "$value": "#ffcfb0"
             },
             "100": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#f7b86e"
+              "$value": "#ffb384"
             },
             "200": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#f39f39"
+              "$value": "#ff9758"
             },
             "300": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#e88600"
+              "$value": "#ff7b2b"
             },
             "400": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-400",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#d17800"
+              "$value": "#f56300"
             },
             "500": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-500",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#c54f00"
             },
@@ -6250,26 +7250,26 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-600",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#923c00"
+              "$value": "#9c3f00"
             },
             "700": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-700",
+              "$hiddenFromPublishing": true,
               "$type": "color",
-              "$value": "#6f2e00"
+              "$value": "#793100"
             },
             "800": {
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-800",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#562300"
             },
@@ -6277,8 +7277,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-900",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#3a1800"
             },
@@ -6286,8 +7286,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-950",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#281000"
             },
@@ -6295,8 +7295,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-1000",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#180a00"
             },
@@ -6304,8 +7304,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-a25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.08)"
             },
@@ -6313,8 +7313,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-a50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.16)"
             },
@@ -6322,8 +7322,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-a75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.24)"
             },
@@ -6331,8 +7331,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-a100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.32)"
             },
@@ -6340,8 +7340,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-a200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.48)"
             },
@@ -6349,8 +7349,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--orange-a300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(197, 79, 0, 0.64)"
             }
@@ -6360,8 +7360,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#fef9eb"
             },
@@ -6369,8 +7369,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#fcefcc"
             },
@@ -6378,8 +7378,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#fae6af"
             },
@@ -6387,8 +7387,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#f5d782"
             },
@@ -6396,8 +7396,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#f0c855"
             },
@@ -6405,8 +7405,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#eaba28"
             },
@@ -6414,8 +7414,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-400",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#d9a800"
             },
@@ -6423,8 +7423,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-500",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#ad8600"
             },
@@ -6432,8 +7432,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-600",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#876900"
             },
@@ -6441,8 +7441,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-700",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#685100"
             },
@@ -6450,8 +7450,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-800",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#4b3b00"
             },
@@ -6459,8 +7459,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-900",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#332800"
             },
@@ -6468,8 +7468,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-950",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#241c00"
             },
@@ -6477,8 +7477,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-1000",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#161100"
             },
@@ -6486,8 +7486,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-a25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.08)"
             },
@@ -6495,8 +7495,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-a50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.16)"
             },
@@ -6504,8 +7504,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-a75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.24)"
             },
@@ -6513,8 +7513,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-a100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.32)"
             },
@@ -6522,8 +7522,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-a200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.48)"
             },
@@ -6531,8 +7531,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--yellow-a300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(173, 134, 0, 0.64)"
             }
@@ -6542,8 +7542,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#e9fcf2"
             },
@@ -6551,8 +7551,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#c7f7de"
             },
@@ -6560,8 +7560,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#a8f1cb"
             },
@@ -6569,8 +7569,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#76e6ac"
             },
@@ -6578,8 +7578,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#45db8e"
             },
@@ -6587,8 +7587,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#15cf70"
             },
@@ -6596,8 +7596,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-400",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#00b85a"
             },
@@ -6605,8 +7605,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-500",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#009348"
             },
@@ -6614,8 +7614,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-600",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#007439"
             },
@@ -6623,8 +7623,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-700",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#005a2c"
             },
@@ -6632,8 +7632,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-800",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#004120"
             },
@@ -6641,8 +7641,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-900",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#002c16"
             },
@@ -6650,8 +7650,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-950",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#001f0f"
             },
@@ -6659,8 +7659,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-1000",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#001309"
             },
@@ -6668,8 +7668,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-a25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.08)"
             },
@@ -6677,8 +7677,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-a50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.16)"
             },
@@ -6686,8 +7686,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-a75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.24)"
             },
@@ -6695,8 +7695,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-a100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.32)"
             },
@@ -6704,8 +7704,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-a200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.48)"
             },
@@ -6713,8 +7713,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--green-a300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 147, 72, 0.64)"
             }
@@ -6724,8 +7724,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#eef6ff"
             },
@@ -6733,8 +7733,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#d4eaff"
             },
@@ -6742,8 +7742,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#bddeff"
             },
@@ -6751,8 +7751,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#97cbff"
             },
@@ -6760,8 +7760,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#70b7ff"
             },
@@ -6769,8 +7769,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#4aa4ff"
             },
@@ -6778,8 +7778,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-400",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#2491ff"
             },
@@ -6787,8 +7787,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-500",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#0073e6"
             },
@@ -6796,8 +7796,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-600",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#005bbb"
             },
@@ -6805,8 +7805,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-700",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#004691"
             },
@@ -6814,8 +7814,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-800",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#003269"
             },
@@ -6823,8 +7823,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-900",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#002349"
             },
@@ -6832,8 +7832,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-950",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#001833"
             },
@@ -6841,8 +7841,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-1000",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#000e1f"
             },
@@ -6850,8 +7850,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-a25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.08)"
             },
@@ -6859,8 +7859,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-a50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.16)"
             },
@@ -6868,8 +7868,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-a75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.24)"
             },
@@ -6877,8 +7877,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-a100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.32)"
             },
@@ -6886,8 +7886,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-a200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.48)"
             },
@@ -6895,8 +7895,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--blue-a300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(0, 115, 230, 0.64)"
             }
@@ -6906,8 +7906,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#f8f0ff"
             },
@@ -6915,8 +7915,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#eed9ff"
             },
@@ -6924,8 +7924,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#e5c6ff"
             },
@@ -6933,8 +7933,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#d6a4ff"
             },
@@ -6942,8 +7942,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#c782ff"
             },
@@ -6951,8 +7951,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#b85fff"
             },
@@ -6960,8 +7960,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-400",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#a939ff"
             },
@@ -6969,8 +7969,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-500",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#8d0ee3"
             },
@@ -6978,8 +7978,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-600",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#6f00b8"
             },
@@ -6987,8 +7987,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-700",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#55008e"
             },
@@ -6996,8 +7996,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-800",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#3c0066"
             },
@@ -7005,8 +8005,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-900",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#290047"
             },
@@ -7014,8 +8014,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-950",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#1d0033"
             },
@@ -7023,8 +8023,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-1000",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "#11001f"
             },
@@ -7032,8 +8032,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-a25",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.08)"
             },
@@ -7041,8 +8041,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-a50",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.16)"
             },
@@ -7050,8 +8050,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-a75",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.24)"
             },
@@ -7059,8 +8059,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-a100",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.32)"
             },
@@ -7068,8 +8068,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-a200",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.48)"
             },
@@ -7077,8 +8077,8 @@
               "$scopes": [
                 "ALL_SCOPES"
               ],
-              "$hiddenFromPublishing": true,
               "$description": "--purple-a300",
+              "$hiddenFromPublishing": true,
               "$type": "color",
               "$value": "rgba(141, 14, 227, 0.64)"
             }
