@@ -2042,18 +2042,19 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
     const styles = await figma.getLocalTextStylesAsync();
     const lowerSize = size.toLowerCase();
 
-    // Translation map: Button Size -> Text Style Size (One-size down shift)
-    // As per design system: md button -> sm text style, lg -> md, etc.
+    // Translation map: Button Size -> Text Style Size
+    // Based on actual font sizes: xs=12px, sm=14px, md=16px, lg=18px
+    // Button font sizes from sizing.json: 3xs/2xs=12px, xs/sm/md/lg/xl=14px, 2xl/3xl=16px
     const sizeShiftMap: Record<string, string> = {
-      '3xs': 'xs',
-      '2xs': 'xs',
-      'xs': 'xs',
-      'sm': 'xs',
-      'md': 'sm',
-      'lg': 'md',
-      'xl': 'md',
-      '2xl': 'lg',
-      '3xl': 'lg'
+      '3xs': 'xs',  // 12px → xs (12px)
+      '2xs': 'xs',  // 12px → xs (12px)
+      'xs': 'sm',   // 14px → sm (14px)
+      'sm': 'sm',   // 14px → sm (14px)
+      'md': 'sm',   // 14px → sm (14px)
+      'lg': 'sm',   // 14px → sm (14px)
+      'xl': 'sm',   // 14px → sm (14px)
+      '2xl': 'md',  // 16px → md (16px)
+      '3xl': 'md'   // 16px → md (16px)
     };
 
     const textStyleSize = sizeShiftMap[lowerSize] || lowerSize;
