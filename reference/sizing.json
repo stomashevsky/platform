@@ -348,19 +348,19 @@
                 "$scopes": [
                   "GAP"
                 ],
-                "$description": "--control-gutter-3xs\nControl padding (4px)",
+                "$description": "--control-gutter-3xs\nControl padding (6px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 4
+                "$value": 6
               },
               "2xs": {
                 "$scopes": [
                   "GAP"
                 ],
-                "$description": "--control-gutter-2xs\nControl padding (6px)",
+                "$description": "--control-gutter-2xs\nControl padding (8px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 6
+                "$value": 8
               },
               "xs": {
                 "$scopes": [
@@ -393,28 +393,28 @@
                 "$scopes": [
                   "GAP"
                 ],
-                "$description": "--control-gutter-lg\nControl padding (14px)",
+                "$description": "--control-gutter-lg\nControl padding (12px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 14
+                "$value": 12
               },
               "xl": {
                 "$scopes": [
                   "GAP"
                 ],
-                "$description": "--control-gutter-xl\nControl padding (16px)",
+                "$description": "--control-gutter-xl\nControl padding (14px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 16
+                "$value": 14
               },
               "2xl": {
                 "$scopes": [
                   "GAP"
                 ],
-                "$description": "--control-gutter-2xl\nControl padding (16px)",
+                "$description": "--control-gutter-2xl\nControl padding (14px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 16
+                "$value": 14
               },
               "3xl": {
                 "$scopes": [
@@ -449,19 +449,19 @@
                 "$scopes": [
                   "FONT_SIZE"
                 ],
-                "$description": "--control-font-size-xs\nControl font size (12px)",
+                "$description": "--control-font-size-xs\nControl font size (14px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 12
+                "$value": 14
               },
               "sm": {
                 "$scopes": [
                   "FONT_SIZE"
                 ],
-                "$description": "--control-font-size-sm\nControl font size (12px)",
+                "$description": "--control-font-size-sm\nControl font size (14px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 12
+                "$value": 14
               },
               "md": {
                 "$scopes": [
@@ -476,37 +476,37 @@
                 "$scopes": [
                   "FONT_SIZE"
                 ],
-                "$description": "--control-font-size-lg\nControl font size (16px)",
+                "$description": "--control-font-size-lg\nControl font size (14px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 16
+                "$value": 14
               },
               "xl": {
                 "$scopes": [
                   "FONT_SIZE"
                 ],
-                "$description": "--control-font-size-xl\nControl font size (16px)",
+                "$description": "--control-font-size-xl\nControl font size (14px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 16
+                "$value": 14
               },
               "2xl": {
                 "$scopes": [
                   "FONT_SIZE"
                 ],
-                "$description": "--control-font-size-2xl\nControl font size (18px)",
+                "$description": "--control-font-size-2xl\nControl font size (16px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 18
+                "$value": 16
               },
               "3xl": {
                 "$scopes": [
                   "FONT_SIZE"
                 ],
-                "$description": "--control-font-size-3xl\nControl font size (18px)",
+                "$description": "--control-font-size-3xl\nControl font size (16px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 18
+                "$value": 16
               }
             },
             "icon-size": {
@@ -514,43 +514,43 @@
                 "$scopes": [
                   "WIDTH_HEIGHT"
                 ],
-                "$description": "--control-icon-size-3xs\nControl icon size (12px)",
+                "$description": "--control-icon-size-3xs\nControl icon size for 3xs button (0.875rem≈14px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 12
+                "$value": 14
               },
               "2xs": {
                 "$scopes": [
                   "WIDTH_HEIGHT"
                 ],
-                "$description": "--control-icon-size-2xs\nControl icon size (12px)",
+                "$description": "--control-icon-size-2xs\nControl icon size for 2xs button (1rem≈16px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 12
+                "$value": 16
               },
               "xs": {
                 "$scopes": [
                   "WIDTH_HEIGHT"
                 ],
-                "$description": "--control-icon-size-xs\nControl icon size (14px)",
+                "$description": "--control-icon-size-xs\nControl icon size for xs button (1rem≈16px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 14
+                "$value": 16
               },
               "sm": {
                 "$scopes": [
                   "WIDTH_HEIGHT"
                 ],
-                "$description": "--control-icon-size-sm\nControl icon size (16px)",
+                "$description": "--control-icon-size-sm\nControl icon size for sm button (1.125rem≈18px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 16
+                "$value": 18
               },
               "md": {
                 "$scopes": [
                   "WIDTH_HEIGHT"
                 ],
-                "$description": "--control-icon-size-md\nControl icon size (18px)",
+                "$description": "--control-icon-size-md\nControl icon size for md button (1.125rem≈18px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
                 "$value": 18
@@ -559,37 +559,37 @@
                 "$scopes": [
                   "WIDTH_HEIGHT"
                 ],
-                "$description": "--control-icon-size-lg\nControl icon size (20px)",
+                "$description": "--control-icon-size-lg\nControl icon size for lg button (1.125rem≈18px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 20
+                "$value": 18
               },
               "xl": {
                 "$scopes": [
                   "WIDTH_HEIGHT"
                 ],
-                "$description": "--control-icon-size-xl\nControl icon size (22px)",
+                "$description": "--control-icon-size-xl\nControl icon size for xl button (1.125rem≈18px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 22
+                "$value": 18
               },
               "2xl": {
                 "$scopes": [
                   "WIDTH_HEIGHT"
                 ],
-                "$description": "--control-icon-size-2xl\nControl icon size (24px)",
+                "$description": "--control-icon-size-2xl\nControl icon size for 2xl button (1.25rem≈20px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 24
+                "$value": 20
               },
               "3xl": {
                 "$scopes": [
                   "WIDTH_HEIGHT"
                 ],
-                "$description": "--control-icon-size-3xl\nControl icon size (26px)",
+                "$description": "--control-icon-size-3xl\nControl icon size for 3xl button (1.25rem≈20px)",
                 "$hiddenFromPublishing": true,
                 "$type": "float",
-                "$value": 26
+                "$value": 20
               }
             },
             "gap": {

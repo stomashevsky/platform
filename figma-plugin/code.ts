@@ -1715,20 +1715,21 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
 // Variables: control/size/{size}, control/gutter/{size}, control/icon-size/{size}, button/gap/{size}
 const BUTTON_SIZES = {
   // size: { height, paddingX, fontSize, iconSize, borderRadius, gap }
-  '3xs': { height: 22, paddingX: 4, fontSize: 12, iconSize: 12, borderRadius: 6, gap: 3 },
-  '2xs': { height: 24, paddingX: 6, fontSize: 12, iconSize: 12, borderRadius: 6, gap: 4 },
-  'xs': { height: 26, paddingX: 8, fontSize: 12, iconSize: 14, borderRadius: 6, gap: 4 },
-  'sm': { height: 28, paddingX: 10, fontSize: 12, iconSize: 16, borderRadius: 6, gap: 4 },
+  '3xs': { height: 22, paddingX: 6, fontSize: 12, iconSize: 14, borderRadius: 6, gap: 3 },
+  '2xs': { height: 24, paddingX: 8, fontSize: 12, iconSize: 16, borderRadius: 6, gap: 4 },
+  'xs': { height: 26, paddingX: 8, fontSize: 14, iconSize: 16, borderRadius: 6, gap: 4 },
+  'sm': { height: 28, paddingX: 10, fontSize: 14, iconSize: 18, borderRadius: 6, gap: 4 },
   'md': { height: 32, paddingX: 12, fontSize: 14, iconSize: 18, borderRadius: 8, gap: 6 },
-  'lg': { height: 36, paddingX: 14, fontSize: 16, iconSize: 20, borderRadius: 8, gap: 6 },
-  'xl': { height: 40, paddingX: 16, fontSize: 16, iconSize: 22, borderRadius: 10, gap: 6 },
-  '2xl': { height: 44, paddingX: 16, fontSize: 18, iconSize: 24, borderRadius: 12, gap: 6 },
-  '3xl': { height: 48, paddingX: 16, fontSize: 18, iconSize: 26, borderRadius: 12, gap: 6 },
+  'lg': { height: 36, paddingX: 12, fontSize: 14, iconSize: 18, borderRadius: 8, gap: 6 },
+  'xl': { height: 40, paddingX: 14, fontSize: 14, iconSize: 18, borderRadius: 10, gap: 6 },
+  '2xl': { height: 44, paddingX: 14, fontSize: 16, iconSize: 20, borderRadius: 12, gap: 6 },
+  '3xl': { height: 48, paddingX: 16, fontSize: 16, iconSize: 20, borderRadius: 12, gap: 6 },
 };
 
 // Variable name mappings for sizing (to bind Figma variables)
 // Radius uses size-specific control/radius/* tokens (all sizes now in sizing.json)
 const BUTTON_SIZE_VARS = {
+  // Icon sizes are now directly mapped in sizing.json for each button size
   '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', iconSize: 'control/icon-size/3xs', gap: 'control/gap/3xs', radius: 'control/radius/3xs', fontSize: 'control/font-size/3xs' },
   '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', iconSize: 'control/icon-size/2xs', gap: 'control/gap/2xs', radius: 'control/radius/2xs', fontSize: 'control/font-size/2xs' },
   'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', iconSize: 'control/icon-size/xs', gap: 'control/gap/xs', radius: 'control/radius/xs', fontSize: 'control/font-size/xs' },
@@ -1780,7 +1781,15 @@ function getButtonColorVarName(style: ButtonStyle, variant: ButtonColorVariant, 
     if (style === 'soft') {
       return `text/soft/${variant}`;
     }
-    // Other styles (ghost, outline, link) usually use the variant color directly
+    // Outline has its own text color path
+    if (style === 'outline') {
+      return `text/outline/${variant}`;
+    }
+    // Ghost has its own text color path
+    if (style === 'ghost') {
+      return `text/ghost/${variant}`;
+    }
+    // Link and other styles use the variant color directly
     return `text/${variant}`;
   } else {
     // Border colors
