@@ -1738,16 +1738,14 @@ const BUTTON_SIZE_VARS = {
   '3xl': { height: 'control/size/3xl', padding: 'control/gutter/xl', iconSize: 'control/icon-size/xl', gap: 'button/gap/lg', radius: 'radius/3xl', fontSize: 'control/font-size/xl' },
 };
 
-// Button styles (4 component sets)
-const BUTTON_STYLES = ['soft', 'solid', 'outline', 'ghost'] as const;
-
-// Button color variants (8 variants per style)
-const BUTTON_COLOR_VARIANTS = ['primary', 'secondary', 'success', 'info', 'discovery', 'danger', 'warning', 'caution'] as const;
-
-// Button states
-const BUTTON_STATES = ['default', 'hover', 'active', 'disabled'] as const;
-
 type ButtonSizeName = keyof typeof BUTTON_SIZES;
+type IconMode = 'none' | 'start' | 'end' | 'both';
+
+const BUTTON_STYLES = ['solid', 'outline', 'ghost', 'link'] as const;
+const BUTTON_COLOR_VARIANTS = ['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'discovery', 'caution', 'inverse'] as const;
+const BUTTON_STATES = ['default', 'hover', 'active', 'disabled'] as const;
+const ICON_MODES = ['none', 'start', 'end', 'both'] as const;
+
 type ButtonStyle = typeof BUTTON_STYLES[number];
 type ButtonColorVariant = typeof BUTTON_COLOR_VARIANTS[number];
 type ButtonState = typeof BUTTON_STATES[number];
@@ -1790,6 +1788,7 @@ function getButtonFallbackColors(style: ButtonStyle, variant: ButtonColorVariant
     danger: { r: 0.937, g: 0.267, b: 0.267 },
     warning: { r: 1, g: 0.6, b: 0 },
     caution: { r: 0.85, g: 0.65, b: 0 },
+    inverse: { r: 0.1, g: 0.1, b: 0.1 },
   };
 
   const baseColor = colorMap[variant];
@@ -1801,9 +1800,10 @@ function getButtonFallbackColors(style: ButtonStyle, variant: ButtonColorVariant
         text: { r: 1, g: 1, b: 1 },
         border: null,
       };
-    case 'soft':
+    case 'link': // link behaves like ghost for fallback
+    case 'ghost':
       return {
-        bg: { r: baseColor.r * 0.1 + 0.9, g: baseColor.g * 0.1 + 0.9, b: baseColor.b * 0.1 + 0.9 },
+        bg: null,
         text: baseColor,
         border: null,
       };
@@ -1813,13 +1813,14 @@ function getButtonFallbackColors(style: ButtonStyle, variant: ButtonColorVariant
         text: baseColor,
         border: baseColor,
       };
-    case 'ghost':
-      return {
-        bg: null,
-        text: baseColor,
-        border: null,
-      };
   }
+
+  // Default fallback (should not be reached if styles match)
+  return {
+    bg: baseColor,
+    text: { r: 1, g: 1, b: 1 },
+    border: null,
+  };
 }
 
 // Cache for variables lookup
@@ -2047,115 +2048,78 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
   return false;
 }
 
-async function generateButtons(): Promise<FrameNode> {
+async function generateButtons(): Promise<ComponentSetNode> {
   // Reset variables cache for fresh lookup
   variablesCache = null;
 
-  // Create main container for the library
-  const library = figma.createFrame();
-  library.name = 'Button Library';
-  library.layoutMode = 'HORIZONTAL';
-  library.primaryAxisAlignItems = 'MIN';
-  library.counterAxisAlignItems = 'MIN';
-  library.primaryAxisSizingMode = 'AUTO';
-  library.counterAxisSizingMode = 'AUTO';
-  library.itemSpacing = 80;
-  library.paddingLeft = 40;
-  library.paddingRight = 40;
-  library.paddingTop = 40;
-  library.paddingBottom = 40;
-  library.fills = [{ type: 'SOLID', color: COLORS.white }];
+  const components: ComponentNode[] = [];
+  let x = 0;
+  let y = 0;
+  const GAP = 50;
 
-  // Generate sections for each button style
+  // Flattened loop for all permutations
   for (const style of BUTTON_STYLES) {
-    const section = await createButtonStyleSection(style);
-    library.appendChild(section);
-  }
+    for (const color of BUTTON_COLOR_VARIANTS) {
+      for (const state of BUTTON_STATES) {
+        for (const size of Object.keys(BUTTON_SIZES) as ButtonSizeName[]) {
+          // Temporary restriction to avoid hitting Figma limits during dev/testing if needed
+          // For now, generating all.
+          for (const pill of [false, true]) {
+            for (const iconMode of ICON_MODES) {
+              const component = await createStyledButton(style, color, state, size, pill, iconMode);
 
-  return library;
-}
+              // Simple positioning prevents overlapping before combine
+              component.x = x;
+              component.y = y;
+              x += component.width + GAP;
 
-async function createButtonStyleSection(style: ButtonStyle): Promise<FrameNode> {
-  const section = figma.createFrame();
-  section.name = `Style: ${style}`;
-  section.layoutMode = 'VERTICAL';
-  section.primaryAxisAlignItems = 'MIN';
-  section.counterAxisAlignItems = 'MIN';
-  section.primaryAxisSizingMode = 'AUTO';
-  section.counterAxisSizingMode = 'AUTO';
-  section.itemSpacing = 24;
-  section.fills = [];
-
-  // Style header
-  const header = figma.createText();
-  header.characters = style.charAt(0).toUpperCase() + style.slice(1);
-  header.fontSize = 32;
-  header.fontName = FONT.familySemiBold;
-  header.fills = [{ type: 'SOLID', color: COLORS.gray900 }];
-  section.appendChild(header);
-
-  // Create components for this style
-  const componentsGrid = figma.createFrame();
-  componentsGrid.name = 'Components';
-  componentsGrid.layoutMode = 'VERTICAL';
-  componentsGrid.primaryAxisAlignItems = 'MIN';
-  componentsGrid.counterAxisAlignItems = 'MIN';
-  componentsGrid.primaryAxisSizingMode = 'AUTO';
-  componentsGrid.counterAxisSizingMode = 'AUTO';
-  componentsGrid.itemSpacing = 16;
-  componentsGrid.fills = [];
-
-  // Create buttons for each color variant and state
-  for (const colorVariant of BUTTON_COLOR_VARIANTS) {
-    const variantRow = figma.createFrame();
-    variantRow.name = `Color: ${colorVariant}`;
-    variantRow.layoutMode = 'HORIZONTAL';
-    variantRow.primaryAxisAlignItems = 'CENTER';
-    variantRow.counterAxisAlignItems = 'CENTER';
-    variantRow.primaryAxisSizingMode = 'AUTO';
-    variantRow.counterAxisSizingMode = 'AUTO';
-    variantRow.itemSpacing = 12;
-    variantRow.fills = [];
-
-    // Label for color variant
-    const label = figma.createText();
-    label.characters = colorVariant;
-    label.fontSize = 12;
-    label.fontName = FONT.familyMono;
-    label.fills = [{ type: 'SOLID', color: COLORS.gray400 }];
-    label.resize(80, label.height);
-    variantRow.appendChild(label);
-
-    // Create button for each state
-    for (const state of BUTTON_STATES) {
-      const button = await createStyledButton(style, colorVariant, state, 'md', false);
-      variantRow.appendChild(button);
+              components.push(component);
+            }
+          }
+        }
+        // New row for each state/color combo to keep things somewhat orderly on canvas before combine
+        x = 0;
+        y += 100;
+      }
     }
-
-    // Add pill version (default state only)
-    // const pillButton = await createStyledButton(style, colorVariant, 'default', 'md', true);
-    // variantRow.appendChild(pillButton);
-
-    componentsGrid.appendChild(variantRow);
   }
 
-  section.appendChild(componentsGrid);
-  return section;
+  const componentSet = figma.combineAsVariants(components, figma.currentPage);
+  componentSet.name = 'Button';
+
+  // Organize the component set with auto layout
+  componentSet.layoutMode = 'HORIZONTAL';
+  componentSet.layoutWrap = 'WRAP';
+  componentSet.itemSpacing = 24;
+  componentSet.counterAxisSpacing = 24;
+
+  // Add some padding
+  componentSet.paddingLeft = 40;
+  componentSet.paddingRight = 40;
+  componentSet.paddingTop = 40;
+  componentSet.paddingBottom = 40;
+  componentSet.fills = [{ type: 'SOLID', color: COLORS.white }];
+
+  return componentSet;
 }
+
+// function createButtonStyleSection removed
 
 async function createStyledButton(
   style: ButtonStyle,
   colorVariant: ButtonColorVariant,
   state: ButtonState,
   size: ButtonSizeName,
-  pill: boolean
+  pill: boolean,
+  iconMode: IconMode
 ): Promise<ComponentNode> {
   const config = BUTTON_SIZES[size];
   const colors = getButtonFallbackColors(style, colorVariant, state);
 
   // Create as component
   const button = figma.createComponent();
-  button.name = `Button/${style}/${colorVariant}/${state}${pill ? '/pill' : ''}`;
+  // Name using Property=Value syntax for variants
+  button.name = `Style=${style}, Color=${colorVariant}, State=${state}, Size=${size}, Pill=${pill}, Icon=${iconMode}`;
   button.layoutMode = 'HORIZONTAL';
   button.primaryAxisAlignItems = 'CENTER';
   button.counterAxisAlignItems = 'CENTER';
@@ -2209,9 +2173,11 @@ async function createStyledButton(
   const iconSizeVarName = sizeVars.iconSize;
 
   // Icon left
-  const iconLeft = await createIconInstance(ICON_NODE_IDS.left, config.iconSize, textVarName, iconSizeVarName);
-  iconLeft.name = 'Icon Left';
-  button.appendChild(iconLeft);
+  if (iconMode === 'start' || iconMode === 'both') {
+    const iconLeft = await createIconInstance(ICON_NODE_IDS.left, config.iconSize, textVarName, iconSizeVarName);
+    iconLeft.name = 'Icon Left';
+    button.appendChild(iconLeft);
+  }
 
   // Text
   const label = figma.createText();
@@ -2238,9 +2204,11 @@ async function createStyledButton(
   button.appendChild(label);
 
   // Icon right
-  const iconRight = await createIconInstance(ICON_NODE_IDS.right, config.iconSize, textVarName, iconSizeVarName);
-  iconRight.name = 'Icon Right';
-  button.appendChild(iconRight);
+  if (iconMode === 'end' || iconMode === 'both') {
+    const iconRight = await createIconInstance(ICON_NODE_IDS.right, config.iconSize, textVarName, iconSizeVarName);
+    iconRight.name = 'Icon Right';
+    button.appendChild(iconRight);
+  }
 
   return button;
 }
