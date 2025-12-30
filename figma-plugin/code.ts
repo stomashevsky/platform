@@ -1770,7 +1770,11 @@ function getButtonColorVarName(style: ButtonStyle, variant: ButtonColorVariant, 
     if (style === 'solid') {
       return `text/solid/${variant}`;
     }
-    // Other styles (soft, ghost, outline, link) usually use the variant color directly
+    // Soft also has its own text color path
+    if (style === 'soft') {
+      return `text/soft/${variant}`;
+    }
+    // Other styles (ghost, outline, link) usually use the variant color directly
     return `text/${variant}`;
   } else {
     // Border colors
