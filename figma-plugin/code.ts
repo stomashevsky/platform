@@ -1794,7 +1794,7 @@ function getButtonColorVarName(style: ButtonStyle, variant: ButtonColorVariant, 
   } else {
     // Border colors
     if (style === 'outline') {
-      return `border/${variant}`;
+      return `border/outline/${variant}`;
     }
     return `border/${style}/${variant}`;
   }
@@ -2124,8 +2124,15 @@ async function generateButtons(targetStyles?: string[]): Promise<void> {
   const GAP_WITHIN_SET = 50;
 
   // If specific styles are requested, filter the styles list. Otherwise use all.
+  // Handle both base styles (e.g., 'solid') and icon-only styles (e.g., 'solid-icon-only')
   const stylesToGenerate = targetStyles && targetStyles.length > 0
-    ? BUTTON_STYLES.filter(s => targetStyles.some(ts => ts.trim().toLowerCase() === s))
+    ? targetStyles.map(ts => ts.trim().toLowerCase()).filter(style => {
+        // Check if it's a base style or an icon-only variant
+        const baseStyle = style.endsWith('-icon-only') 
+          ? style.replace('-icon-only', '') 
+          : style;
+        return BUTTON_STYLES.includes(baseStyle as ButtonStyle);
+      })
     : BUTTON_STYLES;
 
   if (stylesToGenerate.length === 0) {
@@ -2214,10 +2221,10 @@ async function createStyledButton(
   button.counterAxisAlignItems = 'CENTER';
   button.primaryAxisSizingMode = 'AUTO';
   button.counterAxisSizingMode = 'FIXED';
-  button.resize(iconOnly ? config.height : button.width, config.height);
-
+  
   if (iconOnly) {
     button.layoutSizingHorizontal = 'FIXED';
+    button.resize(config.height, config.height);
   }
 
   // Padding
@@ -2277,9 +2284,12 @@ async function createStyledButton(
   console.log(`Button ${style}/${colorVariant}/${state}: Looking for text variable: ${textVarName}`);
 
   // Icon left
-  if (iconMode === 'start' || iconMode === 'both') {
-    const iconLeft = await createIconInstance(ICON_NODE_IDS.left, config.iconSize, textVarName, iconSizeVarName);
-    iconLeft.name = 'left icon'; // Lowercase name
+  // For icon-only buttons, always add icon. For regular buttons, respect iconMode.
+  if (iconOnly || iconMode === 'start' || iconMode === 'both') {
+    // Use specific icon for icon-only buttons, otherwise use left icon
+    const iconNodeId = iconOnly ? ICON_NODE_IDS.iconOnly : ICON_NODE_IDS.left;
+    const iconLeft = await createIconInstance(iconNodeId, config.iconSize, textVarName, iconSizeVarName);
+    iconLeft.name = iconOnly ? 'icon' : 'left icon'; // Lowercase name
     button.appendChild(iconLeft);
   }
 
@@ -2340,6 +2350,7 @@ async function createStyledButton(
 const ICON_NODE_IDS = {
   left: '6011:127065', // Specific envelope component
   right: '6011:126766', // Specific arrow component
+  iconOnly: '6011:126811', // Icon for icon-only buttons
 };
 
 async function createIconInstance(
