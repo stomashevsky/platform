@@ -2212,6 +2212,18 @@ async function generateButtons(targetColors?: string[]): Promise<void> {
       }
     }
 
+    // Log component count for debugging
+    console.log(`[${color}] Total components to combine: ${colorComponents.length}, expected: ${componentsPerColor}`);
+    
+    // Verify we have the expected number of components
+    if (colorComponents.length !== componentsPerColor) {
+      console.warn(`[${color}] Component count mismatch! Expected ${componentsPerColor}, got ${colorComponents.length}`);
+      // Log component names to debug
+      colorComponents.forEach((comp, idx) => {
+        console.log(`  [${idx}] ${comp.name}`);
+      });
+    }
+
     // Send progress update before combining variants (this can be slow)
     figma.ui.postMessage({
       type: 'progress-update',
@@ -2227,8 +2239,36 @@ async function generateButtons(targetColors?: string[]): Promise<void> {
 
     // Create the component set for THIS color
     // Note: combineAsVariants can be slow with many components, so we send progress update before
-    const componentSet = figma.combineAsVariants(colorComponents, figma.currentPage);
-    componentSet.name = color.toLowerCase(); // Name the set "primary", "secondary", etc.
+    let componentSet: ComponentSetNode;
+    try {
+      componentSet = figma.combineAsVariants(colorComponents, figma.currentPage);
+      componentSet.name = color.toLowerCase(); // Name the set "primary", "secondary", etc.
+      
+      // Log the number of variants in the set
+      console.log(`[${color}] Component set created with ${componentSet.children.length} variants`);
+      
+      // Verify icon-only variants are present
+      const iconOnlyVariants = componentSet.children.filter(child => {
+        if (child.type === 'COMPONENT') {
+          return child.name.includes('iconOnly=true');
+        }
+        return false;
+      });
+      console.log(`[${color}] Icon-only variants in set: ${iconOnlyVariants.length}, expected: ${BUTTON_STYLES.length * BUTTON_STATES.length * BUTTON_SIZE_ORDER.length * 2 * 2}`);
+      
+      // Position the SET itself
+      componentSet.y = y;
+
+      // Move Y down for the next set
+      y += componentSet.height + GAP_BETWEEN_SETS;
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      console.error(`[${color}] Error combining variants: ${errorMessage}`);
+      figma.notify(`Error combining variants for ${color}: ${errorMessage}`, { error: true });
+      figma.ui.postMessage({ type: 'buttons-error', message: `Error combining variants for ${color}: ${errorMessage}` });
+      // Continue to next color even if one fails
+      continue;
+    }
 
     // Position the SET itself
     componentSet.y = y;

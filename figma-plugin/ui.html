@@ -642,12 +642,16 @@
           if (msg.style === 'combining' && msg.state === 'variants') {
             // Special message for combining variants
             loadingSpan.textContent = `Combining ${msg.color} variants... (${msg.currentTotal}/${msg.totalAll})`;
-          } else if (msg.color && msg.style && msg.state && msg.size !== undefined && msg.currentTotal !== undefined && msg.totalAll !== undefined) {
+          } else if (msg.color && msg.style && msg.state && msg.size && msg.currentTotal !== undefined && msg.totalAll !== undefined) {
+            // Full progress info available
             const progressText = `${msg.color}: ${msg.style} ${msg.state} ${msg.size} (${msg.currentTotal}/${msg.totalAll})`;
             loadingSpan.textContent = progressText;
           } else if (msg.color && msg.currentTotal !== undefined && msg.totalAll !== undefined) {
             // Fallback if some data is missing
             loadingSpan.textContent = `Generating ${msg.color}... (${msg.currentTotal}/${msg.totalAll})`;
+          } else if (msg.color) {
+            // Minimal fallback
+            loadingSpan.textContent = `Generating ${msg.color}...`;
           }
         }
         return;
