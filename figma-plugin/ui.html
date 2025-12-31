@@ -345,36 +345,36 @@
       <h3>Buttons</h3>
       <div class="component-grid">
         <label class="component-item">
-          <input type="checkbox" name="buttonStyle" value="soft">
-          <span class="collection-name">Soft</span>
+          <input type="checkbox" name="buttonColor" value="primary">
+          <span class="collection-name">Primary</span>
         </label>
         <label class="component-item">
-          <input type="checkbox" name="buttonStyle" value="solid">
-          <span class="collection-name">Solid</span>
+          <input type="checkbox" name="buttonColor" value="secondary">
+          <span class="collection-name">Secondary</span>
         </label>
         <label class="component-item">
-          <input type="checkbox" name="buttonStyle" value="outline">
-          <span class="collection-name">Outline</span>
+          <input type="checkbox" name="buttonColor" value="success">
+          <span class="collection-name">Success</span>
         </label>
         <label class="component-item">
-          <input type="checkbox" name="buttonStyle" value="ghost">
-          <span class="collection-name">Ghost</span>
+          <input type="checkbox" name="buttonColor" value="info">
+          <span class="collection-name">Info</span>
         </label>
         <label class="component-item">
-          <input type="checkbox" name="buttonStyle" value="soft-icon-only">
-          <span class="collection-name">Soft Icon-only</span>
+          <input type="checkbox" name="buttonColor" value="discovery">
+          <span class="collection-name">Discovery</span>
         </label>
         <label class="component-item">
-          <input type="checkbox" name="buttonStyle" value="solid-icon-only">
-          <span class="collection-name">Solid Icon-only</span>
+          <input type="checkbox" name="buttonColor" value="danger">
+          <span class="collection-name">Danger</span>
         </label>
         <label class="component-item">
-          <input type="checkbox" name="buttonStyle" value="outline-icon-only">
-          <span class="collection-name">Outline Icon-only</span>
+          <input type="checkbox" name="buttonColor" value="warning">
+          <span class="collection-name">Warning</span>
         </label>
         <label class="component-item">
-          <input type="checkbox" name="buttonStyle" value="ghost-icon-only">
-          <span class="collection-name">Ghost Icon-only</span>
+          <input type="checkbox" name="buttonColor" value="caution">
+          <span class="collection-name">Caution</span>
         </label>
         <button class="btn-primary" id="generateButtons" style="margin-top: 12px;">Generate Selected Buttons</button>
       </div>
@@ -600,29 +600,31 @@
 
     // Generate Buttons - sequential generation to prevent Figma crash
     let isGeneratingButtons = false;
-    let buttonStylesQueue = [];
-    let currentStyleIndex = 0;
+    let buttonColorsQueue = [];
+    let currentColorIndex = 0;
 
-    async function generateNextButtonStyle() {
-      if (currentStyleIndex >= buttonStylesQueue.length) {
-        // All styles generated
+    async function generateNextButtonColor() {
+      if (currentColorIndex >= buttonColorsQueue.length) {
+        // All colors generated
         isGeneratingButtons = false;
         hideComponentsLoading();
-        showComponentsStatus('success', `Generated ${buttonStylesQueue.length} button set(s) successfully!`);
-        buttonStylesQueue = [];
-        currentStyleIndex = 0;
+        showComponentsStatus('success', `Generated ${buttonColorsQueue.length} button set(s) successfully!`);
+        buttonColorsQueue = [];
+        currentColorIndex = 0;
         return;
       }
 
-      const style = buttonStylesQueue[currentStyleIndex];
-      // Update loading message to show progress
-      document.querySelector('#componentsLoading span').textContent =
-        `Generating ${style} (${currentStyleIndex + 1}/${buttonStylesQueue.length})...`;
+      const color = buttonColorsQueue[currentColorIndex];
+      // Update loading message to show initial progress
+      const loadingSpan = document.querySelector('#componentsLoading span');
+      if (loadingSpan) {
+        loadingSpan.textContent = `Generating ${color} (${currentColorIndex + 1}/${buttonColorsQueue.length})...`;
+      }
 
       parent.postMessage({
         pluginMessage: {
           type: 'generate-buttons',
-          styles: [style]
+          colors: [color]
         }
       }, '*');
     }
@@ -633,11 +635,52 @@
       const msg = event.data.pluginMessage;
       if (!msg) return;
 
-      // Handle sequential button generation
+      // Handle progress updates - always process them
+      if (msg.type === 'progress-update') {
+        const loadingSpan = document.querySelector('#componentsLoading span');
+        if (loadingSpan) {
+          if (msg.style === 'combining' && msg.state === 'variants') {
+            // Special message for combining variants
+            loadingSpan.textContent = `Combining ${msg.color} variants... (${msg.currentTotal}/${msg.totalAll})`;
+          } else if (msg.color && msg.style && msg.state && msg.size !== undefined && msg.currentTotal !== undefined && msg.totalAll !== undefined) {
+            const progressText = `${msg.color}: ${msg.style} ${msg.state} ${msg.size} (${msg.currentTotal}/${msg.totalAll})`;
+            loadingSpan.textContent = progressText;
+          } else if (msg.color && msg.currentTotal !== undefined && msg.totalAll !== undefined) {
+            // Fallback if some data is missing
+            loadingSpan.textContent = `Generating ${msg.color}... (${msg.currentTotal}/${msg.totalAll})`;
+          }
+        }
+        return;
+      }
+
+      // Handle color completion
+      if (msg.type === 'color-complete' && isGeneratingButtons) {
+        const loadingSpan = document.querySelector('#componentsLoading span');
+        if (loadingSpan) {
+          loadingSpan.textContent = `Completed ${msg.color} (${msg.currentTotal}/${msg.totalAll})`;
+        }
+        // Continue to next color after a short delay
+        setTimeout(() => {
+          currentColorIndex++;
+          if (currentColorIndex >= buttonColorsQueue.length) {
+            // All colors generated
+            isGeneratingButtons = false;
+            hideComponentsLoading();
+            showComponentsStatus('success', `Generated ${buttonColorsQueue.length} button set(s) successfully!`);
+            buttonColorsQueue = [];
+            currentColorIndex = 0;
+          } else {
+            generateNextButtonColor();
+          }
+        }, 100);
+        return;
+      }
+
+      // Handle sequential button generation (legacy, should not be used now)
       if (msg.type === 'buttons-complete' && isGeneratingButtons) {
-        currentStyleIndex++;
-        // Small delay to let Figma breathe before next style
-        setTimeout(generateNextButtonStyle, 300);
+        currentColorIndex++;
+        // Small delay to let Figma breathe before next color
+        setTimeout(generateNextButtonColor, 300);
         return;
       }
 
@@ -645,8 +688,8 @@
         isGeneratingButtons = false;
         hideComponentsLoading();
         showComponentsStatus('error', msg.message);
-        buttonStylesQueue = [];
-        currentStyleIndex = 0;
+        buttonColorsQueue = [];
+        currentColorIndex = 0;
         return;
       }
 
@@ -658,21 +701,21 @@
     };
 
     document.getElementById('generateButtons').onclick = () => {
-      const checkboxes = document.querySelectorAll('input[name="buttonStyle"]:checked');
-      const selectedStyles = Array.from(checkboxes).map(cb => cb.value);
+      const checkboxes = document.querySelectorAll('input[name="buttonColor"]:checked');
+      const selectedColors = Array.from(checkboxes).map(cb => cb.value);
 
-      if (selectedStyles.length === 0) {
-        showComponentsStatus('error', 'Please select at least one style');
+      if (selectedColors.length === 0) {
+        showComponentsStatus('error', 'Please select at least one color');
         return;
       }
 
       // Start sequential generation
       isGeneratingButtons = true;
-      buttonStylesQueue = selectedStyles;
-      currentStyleIndex = 0;
+      buttonColorsQueue = selectedColors;
+      currentColorIndex = 0;
 
       showComponentsLoading();
-      generateNextButtonStyle();
+      generateNextButtonColor();
     };
 
 

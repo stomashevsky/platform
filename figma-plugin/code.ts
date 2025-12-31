@@ -1693,10 +1693,16 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
     if (msg.type === 'generate-buttons') {
       await loadFonts();
 
-      const targetStyles = (msg as any).styles as string[] | undefined;
-      await generateButtons(targetStyles);
-      figma.notify(targetStyles ? `Generated ${targetStyles.length} button set(s)` : 'All button sets generated');
-      figma.ui.postMessage({ type: 'buttons-complete' });
+      const targetColors = (msg as any).colors as string[] | undefined;
+      try {
+        await generateButtons(targetColors);
+        // Note: color-complete messages are sent per color, buttons-complete is for backward compatibility
+        figma.notify(targetColors ? `Generated ${targetColors.length} button set(s)` : 'All button sets generated');
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        figma.notify(`Error: ${errorMessage}`, { error: true });
+        figma.ui.postMessage({ type: 'buttons-error', message: errorMessage });
+      }
     }
 
   } catch (error) {
@@ -1744,7 +1750,7 @@ const BUTTON_SIZE_VARS = {
 type ButtonSizeName = keyof typeof BUTTON_SIZES;
 type IconMode = 'none' | 'start' | 'end' | 'both';
 
-const BUTTON_STYLES = ['soft', 'solid', 'outline', 'ghost', 'link'] as const;
+const BUTTON_STYLES = ['soft', 'solid', 'outline', 'ghost'] as const;
 // Reversed size order: Largest to Smallest
 const BUTTON_SIZE_ORDER: ButtonSizeName[] = ['3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs', '2xs', '3xs'];
 
@@ -1830,7 +1836,6 @@ function getButtonFallbackColors(style: ButtonStyle, variant: ButtonColorVariant
         text: baseColor,
         border: null,
       };
-    case 'link':
     case 'ghost':
       return {
         bg: null,
@@ -2115,7 +2120,7 @@ async function applyTextStyle(node: TextNode, size: string): Promise<boolean> {
   return false;
 }
 
-async function generateButtons(targetStyles?: string[]): Promise<void> {
+async function generateButtons(targetColors?: string[]): Promise<void> {
   // Reset variables cache for fresh lookup
   variablesCache = null;
 
@@ -2123,89 +2128,121 @@ async function generateButtons(targetStyles?: string[]): Promise<void> {
   const GAP_BETWEEN_SETS = 200;
   const GAP_WITHIN_SET = 50;
 
-  // If specific styles are requested, filter the styles list. Otherwise use all.
-  // Handle both base styles (e.g., 'solid') and icon-only styles (e.g., 'solid-icon-only')
-  const stylesToGenerate = targetStyles && targetStyles.length > 0
-    ? targetStyles.map(ts => ts.trim().toLowerCase()).filter(style => {
-        // Check if it's a base style or an icon-only variant
-        const baseStyle = style.endsWith('-icon-only') 
-          ? style.replace('-icon-only', '') 
-          : style;
-        return BUTTON_STYLES.includes(baseStyle as ButtonStyle);
-      })
-    : BUTTON_STYLES;
+  // If specific colors are requested, filter the colors list. Otherwise use all.
+  const colorsToGenerate = targetColors && targetColors.length > 0
+    ? BUTTON_COLOR_VARIANTS.filter(c => targetColors.some(tc => tc.trim().toLowerCase() === c.toLowerCase()))
+    : BUTTON_COLOR_VARIANTS;
 
-  if (stylesToGenerate.length === 0) {
-    console.warn(`No valid styles found in request: ${JSON.stringify(targetStyles)}`);
+  if (colorsToGenerate.length === 0) {
+    console.warn(`No valid colors found in request: ${JSON.stringify(targetColors)}`);
     return;
   }
 
-  // Loop for each style to create a SEPARATE component set
-  for (const style of stylesToGenerate) {
-    const styleComponents: ComponentNode[] = [];
+  // Fixed values for IconMode (pill is now a variant property, not fixed)
+  const iconMode: IconMode = 'both';
+
+  // Calculate total components: styles × states × sizes × 3 (regular + 2 icon-only variants) × 2 (pill variants)
+  const componentsPerColor = BUTTON_STYLES.length * BUTTON_STATES.length * BUTTON_SIZE_ORDER.length * 3 * 2;
+  const totalComponentsAll = componentsPerColor * colorsToGenerate.length;
+
+  let totalCreatedComponents = 0;
+
+  // Loop for each color to create a SEPARATE component set
+  for (const color of colorsToGenerate) {
+    const colorComponents: ComponentNode[] = [];
     let x = 0;
+    let localY = 0;
 
-    // Fixed values for Pill and IconMode as requested
-    const pill = false;
-    const iconMode: IconMode = 'both';
+    let currentComponentIndexForColor = 0;
 
-    for (const color of BUTTON_COLOR_VARIANTS) {
+    // For each style
+    for (const style of BUTTON_STYLES) {
+      // For each state
       for (const state of BUTTON_STATES) {
+        // For each size
         for (const size of BUTTON_SIZE_ORDER) {
-          // Parse if it's an icon-only style
-          const isIconOnly = style.endsWith('-icon-only');
-          const baseStyle = isIconOnly ? style.replace('-icon-only', '') as ButtonStyle : style as ButtonStyle;
-
-          if (isIconOnly) {
-            // Generate two variants for icon-only: uniform=false and uniform=true
-            const componentUniformFalse = await createStyledButton(baseStyle, color, state, size, pill, iconMode, true, false);
-            componentUniformFalse.x = x;
-            componentUniformFalse.y = y;
-            x += componentUniformFalse.width + GAP_WITHIN_SET;
-            styleComponents.push(componentUniformFalse);
-
-            const componentUniformTrue = await createStyledButton(baseStyle, color, state, size, pill, iconMode, true, true);
-            componentUniformTrue.x = x;
-            componentUniformTrue.y = y;
-            x += componentUniformTrue.width + GAP_WITHIN_SET;
-            styleComponents.push(componentUniformTrue);
-          } else {
-            // Regular button (not icon-only)
-            const component = await createStyledButton(baseStyle, color, state, size, pill, iconMode, false, false);
+          // Generate variants with pill=true first (default), then pill=false
+          for (const pillValue of [true, false]) {
+            // Regular button (not icon-only), pill=true first
+            const component = await createStyledButton(style, color, state, size, pillValue, iconMode, false, false);
             component.x = x;
-            component.y = y;
+            component.y = localY;
             x += component.width + GAP_WITHIN_SET;
-            styleComponents.push(component);
+            colorComponents.push(component);
+            currentComponentIndexForColor++;
+            totalCreatedComponents++;
+
+            // Icon-only variant with uniform=false
+            const componentIconOnlyUniformFalse = await createStyledButton(style, color, state, size, pillValue, iconMode, true, false);
+            componentIconOnlyUniformFalse.x = x;
+            componentIconOnlyUniformFalse.y = localY;
+            x += componentIconOnlyUniformFalse.width + GAP_WITHIN_SET;
+            colorComponents.push(componentIconOnlyUniformFalse);
+            currentComponentIndexForColor++;
+            totalCreatedComponents++;
+
+            // Icon-only variant with uniform=true
+            const componentIconOnlyUniformTrue = await createStyledButton(style, color, state, size, pillValue, iconMode, true, true);
+            componentIconOnlyUniformTrue.x = x;
+            componentIconOnlyUniformTrue.y = localY;
+            x += componentIconOnlyUniformTrue.width + GAP_WITHIN_SET;
+            colorComponents.push(componentIconOnlyUniformTrue);
+            currentComponentIndexForColor++;
+            totalCreatedComponents++;
           }
+
+          // Send progress update after all 6 variants (3 × 2 pill variants) for this size are created
+          // Use setTimeout to allow UI to process previous messages
+          await new Promise(resolve => setTimeout(resolve, 0));
+          figma.ui.postMessage({
+            type: 'progress-update',
+            color: color,
+            style: style,
+            state: state,
+            size: size,
+            currentForColor: currentComponentIndexForColor,
+            totalForColor: componentsPerColor,
+            currentTotal: totalCreatedComponents,
+            totalAll: totalComponentsAll
+          });
         }
-        // New row for each state/color combo within the set
+        // New row for each state/style combo within the set
         x = 0;
-        y += 100; // rough vertical spacing for pre-combined items
+        localY += 100; // rough vertical spacing for pre-combined items
       }
     }
 
-    // Create the component set for THIS style
-    const componentSet = figma.combineAsVariants(styleComponents, figma.currentPage);
-    componentSet.name = style.toLowerCase(); // Name the set "solid", "outline", etc.
+    // Send progress update before combining variants (this can be slow)
+    figma.ui.postMessage({
+      type: 'progress-update',
+      color: color,
+      style: 'combining',
+      state: 'variants',
+      size: '',
+      currentForColor: currentComponentIndexForColor,
+      totalForColor: componentsPerColor,
+      currentTotal: totalCreatedComponents,
+      totalAll: totalComponentsAll
+    });
 
-    // Organize the component set with auto layout
-    componentSet.layoutMode = 'HORIZONTAL';
-    componentSet.layoutWrap = 'WRAP';
-    componentSet.itemSpacing = 24;
-    componentSet.counterAxisSpacing = 24;
-
-    // Add some padding
-    componentSet.paddingLeft = 40;
-    componentSet.paddingRight = 40;
-    componentSet.paddingTop = 40;
-    componentSet.paddingBottom = 40;
-    componentSet.fills = [{ type: 'SOLID', color: COLORS.white }];
+    // Create the component set for THIS color
+    // Note: combineAsVariants can be slow with many components, so we send progress update before
+    const componentSet = figma.combineAsVariants(colorComponents, figma.currentPage);
+    componentSet.name = color.toLowerCase(); // Name the set "primary", "secondary", etc.
 
     // Position the SET itself
     componentSet.y = y;
 
     // Move Y down for the next set
     y += componentSet.height + GAP_BETWEEN_SETS;
+
+    // Send message that this color is complete
+    figma.ui.postMessage({
+      type: 'color-complete',
+      color: color,
+      currentTotal: totalCreatedComponents,
+      totalAll: totalComponentsAll
+    });
   }
 }
 
@@ -2226,13 +2263,21 @@ async function createStyledButton(
 
   // Create as component
   const button = figma.createComponent();
-  // Name using Property=Value syntax, ONLY requested properties
+  // Name using Property=Value syntax
   // Note: Property KEYS are lowercase as per design system convention.
-  let nameParts = [`color=${colorVariant}`, `state=${state}`, `size=${size}`];
+  // All components must have the same property structure for variants to work correctly
+  // Color is not included because it's already defined by the component set name
+  let nameParts = [`style=${style}`, `state=${state}`, `size=${size}`];
+  // Always include iconOnly and uniform properties for consistent variant structure
+  nameParts.push(`iconOnly=${iconOnly}`);
   if (iconOnly) {
-    nameParts.push('iconOnly=true');
     nameParts.push(`uniform=${uniform}`);
+  } else {
+    // For non-icon-only buttons, uniform is not applicable, but we can set it to false for consistency
+    nameParts.push('uniform=false');
   }
+  // Add pill property (pill=true is the default/first value)
+  nameParts.push(`pill=${pill}`);
   button.name = nameParts.join(', ');
 
   button.layoutMode = 'HORIZONTAL';
@@ -2259,7 +2304,8 @@ async function createStyledButton(
   button.itemSpacing = config.gap;
 
   // Border radius
-  button.cornerRadius = pill ? config.height / 2 : config.borderRadius;
+  // For pill=true, use 9999 (full radius). For pill=false, use config.borderRadius
+  button.cornerRadius = pill ? 9999 : config.borderRadius;
 
   // Try to bind background variable
   const bgVarName = getButtonColorVarName(style, colorVariant, state, 'bg');
