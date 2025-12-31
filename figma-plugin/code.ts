@@ -2156,14 +2156,27 @@ async function generateButtons(targetStyles?: string[]): Promise<void> {
           const isIconOnly = style.endsWith('-icon-only');
           const baseStyle = isIconOnly ? style.replace('-icon-only', '') as ButtonStyle : style as ButtonStyle;
 
-          const component = await createStyledButton(baseStyle, color, state, size, pill, iconMode, isIconOnly);
+          if (isIconOnly) {
+            // Generate two variants for icon-only: uniform=false and uniform=true
+            const componentUniformFalse = await createStyledButton(baseStyle, color, state, size, pill, iconMode, true, false);
+            componentUniformFalse.x = x;
+            componentUniformFalse.y = y;
+            x += componentUniformFalse.width + GAP_WITHIN_SET;
+            styleComponents.push(componentUniformFalse);
 
-          // Simple positioning prevents overlapping before combine
-          component.x = x;
-          component.y = y;
-          x += component.width + GAP_WITHIN_SET;
-
-          styleComponents.push(component);
+            const componentUniformTrue = await createStyledButton(baseStyle, color, state, size, pill, iconMode, true, true);
+            componentUniformTrue.x = x;
+            componentUniformTrue.y = y;
+            x += componentUniformTrue.width + GAP_WITHIN_SET;
+            styleComponents.push(componentUniformTrue);
+          } else {
+            // Regular button (not icon-only)
+            const component = await createStyledButton(baseStyle, color, state, size, pill, iconMode, false, false);
+            component.x = x;
+            component.y = y;
+            x += component.width + GAP_WITHIN_SET;
+            styleComponents.push(component);
+          }
         }
         // New row for each state/color combo within the set
         x = 0;
@@ -2205,7 +2218,8 @@ async function createStyledButton(
   size: ButtonSizeName,
   pill: boolean,
   iconMode: IconMode,
-  iconOnly: boolean = false
+  iconOnly: boolean = false,
+  uniform: boolean = false
 ): Promise<ComponentNode> {
   const config = BUTTON_SIZES[size];
   const colors = getButtonFallbackColors(style, colorVariant, state);
@@ -2214,7 +2228,12 @@ async function createStyledButton(
   const button = figma.createComponent();
   // Name using Property=Value syntax, ONLY requested properties
   // Note: Property KEYS are lowercase as per design system convention.
-  button.name = `color=${colorVariant}, state=${state}, size=${size}${iconOnly ? ', iconOnly=true' : ''}`;
+  let nameParts = [`color=${colorVariant}`, `state=${state}`, `size=${size}`];
+  if (iconOnly) {
+    nameParts.push('iconOnly=true');
+    nameParts.push(`uniform=${uniform}`);
+  }
+  button.name = nameParts.join(', ');
 
   button.layoutMode = 'HORIZONTAL';
   button.primaryAxisAlignItems = 'CENTER';
@@ -2222,14 +2241,19 @@ async function createStyledButton(
   button.primaryAxisSizingMode = 'AUTO';
   button.counterAxisSizingMode = 'FIXED';
   
-  if (iconOnly) {
+  // For icon-only buttons: uniform=true means square (width = height), uniform=false means use normal padding
+  if (iconOnly && uniform) {
     button.layoutSizingHorizontal = 'FIXED';
     button.resize(config.height, config.height);
   }
 
   // Padding
   // OpenAI Apps SDK UI uses a 1.33x multiplier for padding when pill={true}
-  const paddingX = iconOnly ? 0 : (pill ? Math.round(config.paddingX * 1.33) : config.paddingX);
+  // For icon-only: uniform=true means padding=0 (square), uniform=false means use normal padding
+  const paddingX = iconOnly 
+    ? (uniform ? 0 : config.paddingX)
+    : (pill ? Math.round(config.paddingX * 1.33) : config.paddingX);
+  // Set fallback padding values (will be overridden by variable binding if successful)
   button.paddingLeft = paddingX;
   button.paddingRight = paddingX;
   button.itemSpacing = config.gap;
@@ -2267,8 +2291,14 @@ async function createStyledButton(
   const sizeVars = BUTTON_SIZE_VARS[size];
   await bindVariableToProperty(button, 'height', sizeVars.height);
   if (iconOnly) {
-    // For icon-only, bind width to the same height variable to keep it square
-    await bindVariableToProperty(button, 'width', sizeVars.height);
+    if (uniform) {
+      // For uniform icon-only, bind width to the same height variable to keep it square
+      await bindVariableToProperty(button, 'width', sizeVars.height);
+    } else {
+      // For non-uniform icon-only, bind padding from variables (same as regular buttons)
+      await bindVariableToProperty(button, 'paddingLeft', sizeVars.padding);
+      await bindVariableToProperty(button, 'paddingRight', sizeVars.padding);
+    }
   } else {
     await bindVariableToProperty(button, 'paddingLeft', sizeVars.padding);
     await bindVariableToProperty(button, 'paddingRight', sizeVars.padding);
