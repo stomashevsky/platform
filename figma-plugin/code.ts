@@ -1717,6 +1717,18 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
       }
     }
 
+    if (msg.type === 'group-icons') {
+      try {
+        const count = await groupIconsByCategory();
+        figma.notify(`Organized ${count} icon(s) into groups`);
+        figma.ui.postMessage({ type: 'icons-complete', count });
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        figma.notify(`Error: ${errorMessage}`, { error: true });
+        figma.ui.postMessage({ type: 'icons-error', message: errorMessage });
+      }
+    }
+
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     figma.notify(`Error: ${errorMessage}`, { error: true });
@@ -4875,7 +4887,960 @@ function generateSearchTags(iconName: string): string {
         tags.add('ratio');
         tags.add('size');
         break;
-      
+
+      // OpenAI/AI-specific icons
+      case 'gizmo':
+      case 'gizmos':
+        tags.add('tool');
+        tags.add('widget');
+        tags.add('feature');
+        tags.add('plugin');
+        break;
+      case 'mcp':
+        tags.add('protocol');
+        tags.add('connection');
+        tags.add('api');
+        tags.add('model');
+        break;
+      case 'operator':
+        tags.add('admin');
+        tags.add('manage');
+        tags.add('control');
+        tags.add('agent');
+        break;
+      case 'playground':
+        tags.add('test');
+        tags.add('experiment');
+        tags.add('sandbox');
+        tags.add('try');
+        break;
+      case 'prompt':
+        tags.add('input');
+        tags.add('text');
+        tags.add('question');
+        tags.add('message');
+        break;
+      case 'memory':
+        tags.add('remember');
+        tags.add('save');
+        tags.add('store');
+        tags.add('history');
+        break;
+      case 'internal':
+        tags.add('knowledge');
+        tags.add('data');
+        tags.add('private');
+        tags.add('inside');
+        break;
+      case 'sources':
+        tags.add('input');
+        tags.add('data');
+        tags.add('add');
+        tags.add('import');
+        break;
+      case 'products':
+        tags.add('items');
+        tags.add('catalog');
+        tags.add('services');
+        tags.add('offerings');
+        break;
+      case 'explore':
+        tags.add('discover');
+        tags.add('browse');
+        tags.add('find');
+        tags.add('search');
+        break;
+
+      // Video/Media icons  
+      case 'storyboard':
+        tags.add('video');
+        tags.add('plan');
+        tags.add('sequence');
+        tags.add('frames');
+        break;
+      case 'caption':
+      case 'captions':
+        tags.add('subtitle');
+        tags.add('text');
+        tags.add('video');
+        tags.add('accessibility');
+        break;
+      case 'resolution':
+        tags.add('quality');
+        tags.add('size');
+        tags.add('video');
+        tags.add('pixels');
+        break;
+      case 'rewind':
+        tags.add('backward');
+        tags.add('back');
+        tags.add('previous');
+        tags.add('replay');
+        break;
+      case 'forward':
+        tags.add('next');
+        tags.add('skip');
+        tags.add('advance');
+        tags.add('ahead');
+        break;
+
+      // Activities/Objects
+      case 'snorkle':
+        tags.add('swim');
+        tags.add('diving');
+        tags.add('underwater');
+        tags.add('ocean');
+        break;
+      case 'dumbbell':
+      case 'kettlebell':
+        tags.add('fitness');
+        tags.add('gym');
+        tags.add('exercise');
+        tags.add('workout');
+        break;
+      case 'lotus':
+        tags.add('meditation');
+        tags.add('yoga');
+        tags.add('calm');
+        tags.add('wellness');
+        break;
+      case 'paw':
+        tags.add('pet');
+        tags.add('animal');
+        tags.add('dog');
+        tags.add('cat');
+        break;
+      case 'dining':
+        tags.add('food');
+        tags.add('restaurant');
+        tags.add('eat');
+        tags.add('meal');
+        break;
+      case 'plane':
+        tags.add('travel');
+        tags.add('flight');
+        tags.add('airplane');
+        tags.add('trip');
+        break;
+      case 'graduation':
+        tags.add('education');
+        tags.add('school');
+        tags.add('cap');
+        tags.add('degree');
+        break;
+      case 'education':
+        tags.add('school');
+        tags.add('learning');
+        tags.add('study');
+        tags.add('teach');
+        break;
+      case 'stethoscope':
+        tags.add('medical');
+        tags.add('doctor');
+        tags.add('health');
+        tags.add('hospital');
+        break;
+      case 'glasses':
+        tags.add('eyewear');
+        tags.add('vision');
+        tags.add('reading');
+        tags.add('spectacles');
+        break;
+      case 'telescope':
+        tags.add('look');
+        tags.add('view');
+        tags.add('see');
+        tags.add('observe');
+        break;
+
+      // Text/Content
+      case 'spelling':
+        tags.add('check');
+        tags.add('grammar');
+        tags.add('text');
+        tags.add('correct');
+        break;
+      case 'speak':
+        tags.add('voice');
+        tags.add('talk');
+        tags.add('audio');
+        tags.add('speech');
+        break;
+      case 'speech':
+        tags.add('text');
+        tags.add('voice');
+        tags.add('talk');
+        tags.add('convert');
+        break;
+      case 'reading':
+        tags.add('level');
+        tags.add('text');
+        tags.add('difficulty');
+        tags.add('comprehension');
+        break;
+      case 'pasted':
+        tags.add('clipboard');
+        tags.add('paste');
+        tags.add('copy');
+        tags.add('text');
+        break;
+      case 'autocomplete':
+        tags.add('suggest');
+        tags.add('complete');
+        tags.add('predict');
+        tags.add('text');
+        break;
+      case 'followup':
+        tags.add('continue');
+        tags.add('next');
+        tags.add('response');
+        tags.add('question');
+        break;
+      case 'suggest':
+      case 'suggested':
+        tags.add('recommend');
+        tags.add('hint');
+        tags.add('propose');
+        tags.add('auto');
+        break;
+      case 'inspiration':
+        tags.add('idea');
+        tags.add('creative');
+        tags.add('spark');
+        tags.add('lightbulb');
+        break;
+      case 'longer':
+        tags.add('extend');
+        tags.add('more');
+        tags.add('expand');
+        tags.add('text');
+        break;
+      case 'shorter':
+        tags.add('reduce');
+        tags.add('less');
+        tags.add('shrink');
+        tags.add('text');
+        break;
+
+      // Additional icons
+      case 'batches':
+        tags.add('group');
+        tags.add('bulk');
+        tags.add('multiple');
+        tags.add('queue');
+        break;
+      case 'commit':
+        tags.add('git');
+        tags.add('save');
+        tags.add('version');
+        tags.add('code');
+        break;
+      case 'compare':
+        tags.add('diff');
+        tags.add('contrast');
+        tags.add('match');
+        tags.add('side');
+        break;
+      case 'latency':
+        tags.add('speed');
+        tags.add('delay');
+        tags.add('time');
+        tags.add('performance');
+        break;
+      case 'connect':
+        tags.add('link');
+        tags.add('join');
+        tags.add('plug');
+        tags.add('integration');
+        break;
+      case 'permission':
+        tags.add('access');
+        tags.add('allow');
+        tags.add('security');
+        tags.add('role');
+        break;
+      case 'subscription':
+        tags.add('plan');
+        tags.add('payment');
+        tags.add('recurring');
+        tags.add('membership');
+        break;
+      case 'credits':
+        tags.add('tokens');
+        tags.add('balance');
+        tags.add('usage');
+        tags.add('billing');
+        break;
+      case 'paid':
+        tags.add('payment');
+        tags.add('money');
+        tags.add('purchased');
+        tags.add('premium');
+        break;
+      case 'billing':
+      case 'bills':
+        tags.add('payment');
+        tags.add('invoice');
+        tags.add('money');
+        tags.add('finance');
+        break;
+      case 'identity':
+        tags.add('person');
+        tags.add('id');
+        tags.add('profile');
+        tags.add('auth');
+        break;
+      case 'privacy':
+        tags.add('security');
+        tags.add('private');
+        tags.add('data');
+        tags.add('protection');
+        break;
+      case 'terms':
+        tags.add('legal');
+        tags.add('policy');
+        tags.add('agreement');
+        tags.add('document');
+        break;
+      case 'parent':
+        tags.add('control');
+        tags.add('family');
+        tags.add('restrict');
+        tags.add('child');
+        break;
+      case 'controls':
+        tags.add('settings');
+        tags.add('options');
+        tags.add('manage');
+        tags.add('config');
+        break;
+      case 'haptic':
+        tags.add('vibration');
+        tags.add('touch');
+        tags.add('feedback');
+        tags.add('tactile');
+        break;
+      case 'blending':
+        tags.add('curve');
+        tags.add('mix');
+        tags.add('smooth');
+        tags.add('transition');
+        break;
+      case 'confetti':
+        tags.add('celebrate');
+        tags.add('party');
+        tags.add('success');
+        tags.add('joy');
+        break;
+      case 'emoji':
+        tags.add('emoticon');
+        tags.add('face');
+        tags.add('reaction');
+        tags.add('expression');
+        break;
+      case 'frozen':
+        tags.add('ice');
+        tags.add('cold');
+        tags.add('pause');
+        tags.add('stop');
+        break;
+      case 'snowflake':
+        tags.add('winter');
+        tags.add('cold');
+        tags.add('snow');
+        tags.add('freeze');
+        break;
+      case 'whisk':
+        tags.add('cook');
+        tags.add('kitchen');
+        tags.add('mix');
+        tags.add('bake');
+        break;
+      case 'scissor':
+        tags.add('cut');
+        tags.add('trim');
+        tags.add('clip');
+        tags.add('edit');
+        break;
+      case 'wreath':
+        tags.add('award');
+        tags.add('decoration');
+        tags.add('celebration');
+        tags.add('achievement');
+        break;
+      case 'diamond':
+      case 'pro':
+        tags.add('premium');
+        tags.add('upgrade');
+        tags.add('exclusive');
+        tags.add('vip');
+        break;
+      case 'remix':
+        tags.add('edit');
+        tags.add('modify');
+        tags.add('variation');
+        tags.add('change');
+        break;
+      case 'popcorn':
+        tags.add('movie');
+        tags.add('cinema');
+        tags.add('watch');
+        tags.add('snack');
+        break;
+      case 'director':
+        tags.add('video');
+        tags.add('film');
+        tags.add('create');
+        tags.add('control');
+        break;
+      case 'clapping':
+        tags.add('applause');
+        tags.add('video');
+        tags.add('film');
+        tags.add('action');
+        break;
+      case 'dice':
+        tags.add('random');
+        tags.add('game');
+        tags.add('chance');
+        tags.add('shuffle');
+        break;
+      case 'interactiv':
+        tags.add('click');
+        tags.add('engage');
+        tags.add('action');
+        tags.add('dynamic');
+        break;
+      case 'signal':
+        tags.add('wifi');
+        tags.add('network');
+        tags.add('connection');
+        tags.add('bars');
+        break;
+      case 'exclamation':
+        tags.add('warning');
+        tags.add('alert');
+        tags.add('attention');
+        tags.add('important');
+        break;
+      case 'preset':
+        tags.add('template');
+        tags.add('default');
+        tags.add('saved');
+        tags.add('config');
+        break;
+      case 'dock':
+        tags.add('bar');
+        tags.add('taskbar');
+        tags.add('launcher');
+        tags.add('apps');
+        break;
+      case 'macbook':
+        tags.add('laptop');
+        tags.add('apple');
+        tags.add('computer');
+        tags.add('device');
+        break;
+      case 'menubar':
+        tags.add('navigation');
+        tags.add('menu');
+        tags.add('toolbar');
+        tags.add('header');
+        break;
+      case 'floating':
+        tags.add('hover');
+        tags.add('overlay');
+        tags.add('popup');
+        tags.add('panel');
+        break;
+      case 'pop':
+        tags.add('window');
+        tags.add('popup');
+        tags.add('modal');
+        tags.add('dialog');
+        break;
+      case 'pip':
+        tags.add('picture');
+        tags.add('video');
+        tags.add('overlay');
+        tags.add('mini');
+        break;
+      case 'minimize':
+        tags.add('reduce');
+        tags.add('shrink');
+        tags.add('small');
+        tags.add('collapse');
+        break;
+      case 'collapse':
+        tags.add('minimize');
+        tags.add('shrink');
+        tags.add('close');
+        tags.add('hide');
+        break;
+      case 'double':
+        tags.add('two');
+        tags.add('pair');
+        tags.add('dual');
+        tags.add('multiple');
+        break;
+      case 'circle':
+        tags.add('round');
+        tags.add('shape');
+        tags.add('dot');
+        tags.add('ring');
+        break;
+      case 'dashed':
+        tags.add('dotted');
+        tags.add('border');
+        tags.add('outline');
+        tags.add('line');
+        break;
+      case 'filled':
+        tags.add('solid');
+        tags.add('full');
+        tags.add('complete');
+        tags.add('active');
+        break;
+      case 'outline':
+        tags.add('border');
+        tags.add('stroke');
+        tags.add('line');
+        tags.add('empty');
+        break;
+      case 'alt':
+        tags.add('alternative');
+        tags.add('variant');
+        tags.add('option');
+        tags.add('different');
+        break;
+      case 'off':
+        tags.add('disabled');
+        tags.add('inactive');
+        tags.add('mute');
+        tags.add('hide');
+        break;
+      case 'on':
+        tags.add('active');
+        tags.add('enabled');
+        tags.add('visible');
+        tags.add('show');
+        break;
+
+      // More missing icons
+      case 'clip':
+        tags.add('attach');
+        tags.add('paperclip');
+        tags.add('file');
+        tags.add('attachment');
+        break;
+      case 'paperclip':
+        tags.add('attach');
+        tags.add('clip');
+        tags.add('file');
+        tags.add('document');
+        break;
+      case 'attach':
+        tags.add('clip');
+        tags.add('paperclip');
+        tags.add('file');
+        tags.add('upload');
+        break;
+      case 'bolt':
+        tags.add('lightning');
+        tags.add('fast');
+        tags.add('power');
+        tags.add('electric');
+        break;
+      case 'brain':
+        tags.add('mind');
+        tags.add('think');
+        tags.add('ai');
+        tags.add('intelligence');
+        break;
+      case 'balancing':
+        tags.add('scale');
+        tags.add('weight');
+        tags.add('compare');
+        tags.add('equal');
+        break;
+      case 'at':
+        tags.add('email');
+        tags.add('mention');
+        tags.add('address');
+        tags.add('sign');
+        break;
+      case 'sign':
+        tags.add('at');
+        tags.add('symbol');
+        tags.add('mark');
+        tags.add('character');
+        break;
+      case 'pulse':
+        tags.add('heartbeat');
+        tags.add('health');
+        tags.add('monitor');
+        tags.add('activity');
+        break;
+      case 'headphones':
+        tags.add('audio');
+        tags.add('music');
+        tags.add('listen');
+        tags.add('earphones');
+        break;
+      case 'lightbulb':
+        tags.add('idea');
+        tags.add('light');
+        tags.add('bright');
+        tags.add('insight');
+        break;
+      case 'key':
+        tags.add('password');
+        tags.add('access');
+        tags.add('security');
+        tags.add('unlock');
+        break;
+      case 'api':
+        tags.add('integration');
+        tags.add('code');
+        tags.add('developer');
+        tags.add('connect');
+        break;
+      case 'terminal':
+        tags.add('console');
+        tags.add('command');
+        tags.add('shell');
+        tags.add('code');
+        break;
+      case 'enum':
+        tags.add('type');
+        tags.add('list');
+        tags.add('options');
+        tags.add('values');
+        break;
+      case 'string':
+        tags.add('text');
+        tags.add('type');
+        tags.add('data');
+        tags.add('variable');
+        break;
+      case 'number':
+        tags.add('digit');
+        tags.add('count');
+        tags.add('integer');
+        tags.add('value');
+        break;
+      case 'news':
+      case 'newspaper':
+        tags.add('article');
+        tags.add('read');
+        tags.add('media');
+        tags.add('press');
+        break;
+      case 'plant':
+        tags.add('nature');
+        tags.add('grow');
+        tags.add('green');
+        tags.add('leaf');
+        break;
+      case 'desk':
+        tags.add('office');
+        tags.add('work');
+        tags.add('table');
+        tags.add('workspace');
+        break;
+      case 'stuff':
+        tags.add('items');
+        tags.add('things');
+        tags.add('tools');
+        tags.add('misc');
+        break;
+      case 'skill':
+      case 'skills':
+        tags.add('ability');
+        tags.add('capability');
+        tags.add('talent');
+        tags.add('feature');
+        break;
+      case 'local':
+        tags.add('nearby');
+        tags.add('location');
+        tags.add('services');
+        tags.add('area');
+        break;
+      case 'services':
+        tags.add('features');
+        tags.add('offerings');
+        tags.add('tools');
+        tags.add('help');
+        break;
+      case 'travel':
+        tags.add('trip');
+        tags.add('journey');
+        tags.add('vacation');
+        tags.add('transport');
+        break;
+      case 'events':
+        tags.add('calendar');
+        tags.add('schedule');
+        tags.add('occasion');
+        tags.add('meeting');
+        break;
+      case 'bone':
+        tags.add('t-bone');
+        tags.add('raw');
+        tags.add('meat');
+        tags.add('food');
+        break;
+      case 'raw':
+        tags.add('uncooked');
+        tags.add('original');
+        tags.add('source');
+        tags.add('natural');
+        break;
+      case 'background':
+        tags.add('wallpaper');
+        tags.add('behind');
+        tags.add('layer');
+        tags.add('canvas');
+        break;
+      case 'conversation':
+        tags.add('chat');
+        tags.add('talk');
+        tags.add('dialog');
+        tags.add('discuss');
+        break;
+      case 'triple':
+        tags.add('three');
+        tags.add('multiple');
+        tags.add('dots');
+        tags.add('more');
+        break;
+      case 'horizontal':
+        tags.add('landscape');
+        tags.add('wide');
+        tags.add('row');
+        tags.add('left-right');
+        break;
+      case 'vertical':
+        tags.add('portrait');
+        tags.add('tall');
+        tags.add('column');
+        tags.add('up-down');
+        break;
+      case 'rotate':
+        tags.add('turn');
+        tags.add('spin');
+        tags.add('ccw');
+        tags.add('cw');
+        break;
+      case 'ccw':
+        tags.add('counterclockwise');
+        tags.add('left');
+        tags.add('rotate');
+        tags.add('undo');
+        break;
+      case 'cw':
+        tags.add('clockwise');
+        tags.add('right');
+        tags.add('rotate');
+        tags.add('redo');
+        break;
+      case 'today':
+        tags.add('now');
+        tags.add('current');
+        tags.add('date');
+        tags.add('calendar');
+        break;
+      case 'cc':
+        tags.add('closed');
+        tags.add('captions');
+        tags.add('subtitle');
+        tags.add('accessibility');
+        break;
+      case 'jump':
+        tags.add('go');
+        tags.add('skip');
+        tags.add('navigate');
+        tags.add('move');
+        break;
+      case 'curved':
+        tags.add('arc');
+        tags.add('bend');
+        tags.add('round');
+        tags.add('smooth');
+        break;
+      case 'bottom':
+        tags.add('down');
+        tags.add('below');
+        tags.add('end');
+        tags.add('lower');
+        break;
+      case 'top':
+        tags.add('up');
+        tags.add('above');
+        tags.add('start');
+        tags.add('upper');
+        break;
+      case 'position':
+        tags.add('location');
+        tags.add('place');
+        tags.add('spot');
+        tags.add('point');
+        break;
+      case 'watermark':
+        tags.add('logo');
+        tags.add('brand');
+        tags.add('overlay');
+        tags.add('mark');
+        break;
+      case 'waving':
+        tags.add('hello');
+        tags.add('wave');
+        tags.add('hi');
+        tags.add('greeting');
+        break;
+      case 'peace':
+        tags.add('victory');
+        tags.add('v');
+        tags.add('two');
+        tags.add('gesture');
+        break;
+      case 'raised':
+        tags.add('up');
+        tags.add('stop');
+        tags.add('hand');
+        tags.add('gesture');
+        break;
+      case 'front':
+        tags.add('forward');
+        tags.add('face');
+        tags.add('ahead');
+        tags.add('view');
+        break;
+      case 'back':
+        tags.add('behind');
+        tags.add('rear');
+        tags.add('previous');
+        tags.add('return');
+        break;
+      case 'missed':
+        tags.add('lost');
+        tags.add('call');
+        tags.add('failed');
+        tags.add('unanswered');
+        break;
+      case 'ring':
+        tags.add('call');
+        tags.add('phone');
+        tags.add('alert');
+        tags.add('notification');
+        break;
+      case 'waves':
+        tags.add('sound');
+        tags.add('audio');
+        tags.add('signal');
+        tags.add('vibration');
+        break;
+      case 'featured':
+        tags.add('highlight');
+        tags.add('star');
+        tags.add('special');
+        tags.add('promoted');
+        break;
+      case 'wide':
+        tags.add('landscape');
+        tags.add('horizontal');
+        tags.add('broad');
+        tags.add('panorama');
+        break;
+      case 'narrow':
+        tags.add('thin');
+        tags.add('slim');
+        tags.add('small');
+        tags.add('compact');
+        break;
+      case 'stuffed':
+        tags.add('full');
+        tags.add('filled');
+        tags.add('packed');
+        tags.add('folder');
+        break;
+      case 'shared':
+        tags.add('public');
+        tags.add('team');
+        tags.add('collaborate');
+        tags.add('access');
+        break;
+      case 'unshare':
+        tags.add('private');
+        tags.add('remove');
+        tags.add('revoke');
+        tags.add('access');
+        break;
+      case 'blank':
+        tags.add('empty');
+        tags.add('new');
+        tags.add('clean');
+        tags.add('clear');
+        break;
+      case 'spreadsheet':
+        tags.add('excel');
+        tags.add('table');
+        tags.add('data');
+        tags.add('cells');
+        break;
+      case 'presentation':
+        tags.add('slides');
+        tags.add('powerpoint');
+        tags.add('deck');
+        tags.add('show');
+        break;
+      case 'zip':
+        tags.add('compress');
+        tags.add('archive');
+        tags.add('package');
+        tags.add('folder');
+        break;
+      case 'audio':
+        tags.add('sound');
+        tags.add('music');
+        tags.add('mp3');
+        tags.add('voice');
+        break;
+      case '3':
+      case 'd':
+      case '3d':
+        tags.add('three');
+        tags.add('dimensional');
+        tags.add('model');
+        tags.add('space');
+        break;
+      case 'draft':
+        tags.add('wip');
+        tags.add('incomplete');
+        tags.add('pending');
+        tags.add('edit');
+        break;
+      case 'merged':
+        tags.add('combined');
+        tags.add('joined');
+        tags.add('git');
+        tags.add('pull');
+        break;
+      case 'closed':
+        tags.add('done');
+        tags.add('finished');
+        tags.add('complete');
+        tags.add('resolved');
+        break;
+      case 'request':
+        tags.add('ask');
+        tags.add('pull');
+        tags.add('submit');
+        tags.add('propose');
+        break;
+
+
       // Fallback: if word is not recognized, skip it
       // (we don't add words from icon name to tags)
       default:
@@ -4908,46 +5873,14 @@ function collectVectorNodes(node: SceneNode): (VectorNode | BooleanOperationNode
   return vectors;
 }
 
-/**
- * Check if vectors have different colors or opacities
- * Returns true if vectors should NOT be flattened (have different styles)
- */
-function hasDifferentStyles(vectors: (VectorNode | BooleanOperationNode)[]): boolean {
-  if (vectors.length <= 1) {
-    return false; // Single vector or no vectors, can flatten
-  }
-
-  const styles = vectors.map(vector => {
-    let fills: readonly Paint[] = [];
-    if ('fills' in vector && Array.isArray(vector.fills)) {
-      fills = vector.fills;
-    }
-    const opacity = 'opacity' in vector && typeof vector.opacity === 'number' ? vector.opacity : 1;
-
-    // Extract color from fills
-    let color: string | null = null;
-    if (fills.length > 0 && fills[0].type === 'SOLID') {
-      const solidFill = fills[0] as SolidPaint;
-      color = `${solidFill.color.r},${solidFill.color.g},${solidFill.color.b}`;
-    }
-
-    return { color, opacity };
-  });
-
-  // Check if all styles are the same
-  const firstStyle = styles[0];
-  const allSame = styles.every(style =>
-    style.color === firstStyle.color &&
-    Math.abs(style.opacity - firstStyle.opacity) < 0.001
-  );
-
-  return !allSame; // Return true if styles differ
-}
 
 /**
  * Flatten component structure - merge same-style vectors using Figma's flatten API
- * Only flattens vectors that have the same fill color and opacity = 1.0 (no transparency)
- * Vectors with transparency (opacity < 1.0) are not modified - component structure remains unchanged
+ * 
+ * SAFETY RULES:
+ * - Only flatten if all vectors have the same fill color and opacity = 1.0
+ * - SKIP flattening if component contains BOOLEAN_OPERATION nodes (they create complex geometry)
+ * - SKIP flattening if any vector has transparency
  */
 async function flattenComponent(component: ComponentNode): Promise<void> {
   const children = [...component.children];
@@ -4956,60 +5889,65 @@ async function flattenComponent(component: ComponentNode): Promise<void> {
     return; // Nothing to flatten
   }
 
-  // Collect all vectors recursively
-  const allVectors: (VectorNode | BooleanOperationNode)[] = [];
+  // Collect all vectors AND boolean operations recursively
+  const allVectors: VectorNode[] = [];
+  let hasBooleanOperation = false;
 
-  function extractVectors(node: SceneNode) {
-    if (node.type === 'VECTOR' || node.type === 'BOOLEAN_OPERATION') {
-      allVectors.push(node as VectorNode | BooleanOperationNode);
-    } else if ('children' in node) {
-      node.children.forEach(child => extractVectors(child));
+  function extractNodes(node: SceneNode) {
+    if (node.type === 'BOOLEAN_OPERATION') {
+      hasBooleanOperation = true; // Mark that we found a boolean operation
+    } else if (node.type === 'VECTOR') {
+      allVectors.push(node as VectorNode);
+    }
+
+    if ('children' in node) {
+      node.children.forEach(child => extractNodes(child));
     }
   }
 
-  children.forEach(child => extractVectors(child));
+  children.forEach(child => extractNodes(child));
+
+  // If there are boolean operations, DON'T flatten - these create complex geometry
+  // that would be broken by flattening (e.g., hollow shapes, cutouts)
+  if (hasBooleanOperation) {
+    // Only cleanup unnecessary nesting
+    cleanupUnnecessaryNesting(component);
+    return;
+  }
 
   if (allVectors.length === 0) {
     return; // No vectors found
   }
 
   // Check if any vector has transparency (opacity < 1.0)
-  // Check both node opacity and fill opacity
-  // If so, don't touch the component structure at all - return early
   const hasTransparency = allVectors.some(vector => {
-    // Check node-level opacity
     const nodeOpacity = 'opacity' in vector && typeof vector.opacity === 'number' ? vector.opacity : 1;
     if (nodeOpacity < 0.999) {
-      return true; // Node has transparency
+      return true;
     }
 
-    // Check fill-level opacity
     if ('fills' in vector && Array.isArray(vector.fills)) {
       for (const fill of vector.fills) {
         if (fill.type === 'SOLID' && 'opacity' in fill && typeof fill.opacity === 'number') {
           if (fill.opacity < 0.999) {
-            return true; // Fill has transparency
+            return true;
           }
         }
       }
     }
-
     return false;
   });
 
-  // If any vector has transparency, don't modify the component at all
   if (hasTransparency) {
     return; // Don't touch icons with transparent layers
   }
 
   // Check if all vectors have the same style (color and opacity)
-  // Only flatten if all vectors have the same style and no transparency
   const canFlatten = !hasDifferentStyles(allVectors) && allVectors.length > 1;
 
   if (canFlatten) {
-    // Use Figma's native flatten operation
     try {
-      // First, move all vectors to component level temporarily
+      // Clone vectors to component level
       const vectorsToFlatten: SceneNode[] = [];
       for (const vector of allVectors) {
         if (vector.parent) {
@@ -5028,7 +5966,7 @@ async function flattenComponent(component: ComponentNode): Promise<void> {
         }
       });
 
-      // Flatten all vectors into one using Figma's API
+      // Flatten all vectors into one
       if (vectorsToFlatten.length > 1) {
         const flattened = figma.flatten(vectorsToFlatten);
         flattened.name = 'Vector';
@@ -5039,131 +5977,201 @@ async function flattenComponent(component: ComponentNode): Promise<void> {
       console.warn(`Could not flatten vectors:`, error);
     }
   }
-  // If styles are different, don't modify the component at all
+}
+
+/**
+ * Check if vectors have different colors or opacities
+ */
+function hasDifferentStyles(vectors: VectorNode[]): boolean {
+  if (vectors.length <= 1) {
+    return false;
+  }
+
+  const styles = vectors.map(vector => {
+    let fills: readonly Paint[] = [];
+    if ('fills' in vector && Array.isArray(vector.fills)) {
+      fills = vector.fills;
+    }
+    const opacity = 'opacity' in vector && typeof vector.opacity === 'number' ? vector.opacity : 1;
+
+    let color: string | null = null;
+    if (fills.length > 0 && fills[0].type === 'SOLID') {
+      const solidFill = fills[0] as SolidPaint;
+      color = `${solidFill.color.r},${solidFill.color.g},${solidFill.color.b}`;
+    }
+
+    return { color, opacity };
+  });
+
+  const firstStyle = styles[0];
+  const allSame = styles.every(style =>
+    style.color === firstStyle.color &&
+    Math.abs(style.opacity - firstStyle.opacity) < 0.001
+  );
+
+  return !allSame;
+}
+
+/**
+ * Remove unnecessary wrapper groups that contain only a single child.
+ */
+function cleanupUnnecessaryNesting(parent: ChildrenMixin & BaseNode): void {
+  const children = [...parent.children];
+
+  for (const child of children) {
+    if ('children' in child && child.type !== 'COMPONENT' && child.type !== 'INSTANCE') {
+      cleanupUnnecessaryNesting(child as ChildrenMixin & BaseNode);
+    }
+
+    if (child.type === 'GROUP' && child.children.length === 1) {
+      try {
+        const innerChild = child.children[0];
+        const index = parent.children.indexOf(child);
+        if (index !== -1 && 'insertChild' in parent) {
+          (parent as ChildrenMixin).insertChild(index, innerChild);
+          child.remove();
+        }
+      } catch (error) {
+        console.warn(`Could not unwrap group:`, error);
+      }
+    }
+
+    if (child.type === 'GROUP' && child.children.length === 0) {
+      try {
+        child.remove();
+      } catch (error) {
+        console.warn(`Could not remove empty group:`, error);
+      }
+    }
+  }
 }
 
 /**
  * Determine icon category from name
- * Simplified categories - no subcategories
+ * Professional icon designer style categories (like Material Icons, Heroicons)
  */
 function getIconCategory(iconName: string): string {
   const name = iconName.toLowerCase();
 
-  // Navigation - arrows, chevrons, navigation controls
+  // Navigation - arrows, directions, menu, navigation controls
   if (name.includes('arrow') || name.includes('chevron') || name.includes('caret') ||
+    name.includes('direction') || name.includes('navigate') || name.includes('compass') ||
+    name.includes('home') || name.includes('menu') || name.includes('hamburger') ||
+    name.includes('sidebar') || name.includes('collapse') || name.includes('expand') ||
+    name.includes('open-left') || name.includes('open-right') || name.includes('double-chevron') ||
     name.includes('back') || name.includes('forward') || name.includes('next') || name.includes('previous') ||
-    name.includes('home') || name.includes('openleft') || name.includes('openright') ||
-    name.includes('globe') || name.includes('world') || name.includes('earth')) {
+    name.includes('up') || name.includes('down') || name.includes('left') || name.includes('right') ||
+    name.includes('globe') || name.includes('earth') || name.includes('world') || name.includes('map') ||
+    name.includes('location') || name.includes('pin') || name.includes('gps')) {
     return 'Navigation';
   }
 
-  // Actions - all action-related icons
+  // Action - editing, manipulation, operations
   if (name.includes('add') || name.includes('plus') || name.includes('create') || name.includes('new') ||
-    name.includes('delete') || name.includes('remove') || name.includes('minus') || name.includes('clear') ||
-    name.includes('trash') || name.includes('cleanup') ||
-    name.includes('edit') || name.includes('pencil') || name.includes('modify') || name.includes('change') ||
-    name.includes('write') ||
-    name.includes('copy') || name.includes('duplicate') || name.includes('clone') ||
-    name.includes('download') || name.includes('save') || name.includes('export') ||
-    name.includes('upload') || name.includes('import') ||
-    name.includes('search') || name.includes('magnify') || name.includes('find') || name.includes('telescope') ||
-    name.includes('eye') || name.includes('view') || name.includes('visible') || name.includes('hidden') ||
-    name.includes('show') || name.includes('hide') ||
-    name.includes('filter') ||
-    name.includes('logout') || name.includes('exit') || name.includes('enterlogin')) {
-    return 'Actions';
+    name.includes('delete') || name.includes('remove') || name.includes('minus') || name.includes('trash') ||
+    name.includes('edit') || name.includes('pencil') || name.includes('write') || name.includes('compose') ||
+    name.includes('copy') || name.includes('duplicate') || name.includes('paste') || name.includes('cut') ||
+    name.includes('undo') || name.includes('redo') || name.includes('rotate') || name.includes('refresh') ||
+    name.includes('reload') || name.includes('regenerate') || name.includes('sync') ||
+    name.includes('download') || name.includes('upload') || name.includes('export') || name.includes('import') ||
+    name.includes('share') || name.includes('send') || name.includes('reply') ||
+    name.includes('search') || name.includes('find') || name.includes('filter') || name.includes('sort') ||
+    name.includes('save') || name.includes('close') || name.startsWith('x-') || name === 'x' ||
+    name.includes('check') || name.includes('select') || name.includes('unpin') ||
+    name.includes('login') || name.includes('logout') || name.includes('enter') || name.includes('exit') ||
+    name.includes('link') || name.includes('unlink') || name.includes('attach') || name.includes('clip')) {
+    return 'Action';
   }
 
-  // Communication
-  if (name.includes('chat') || name.includes('message') || name.includes('mail') || name.includes('email') ||
-    name.includes('comment') || name.includes('forum') || name.includes('notification') || name.includes('bell') ||
-    name.includes('messaging')) {
+  // Content - files, documents, media, text
+  if (name.includes('file') || name.includes('folder') || name.includes('document') ||
+    name.includes('page') || name.includes('book') || name.includes('notebook') || name.includes('note') ||
+    name.includes('archive') || name.includes('zip') || name.includes('storage') ||
+    name.includes('clipboard') || name.includes('sticky') ||
+    name.includes('image') || name.includes('picture') || name.includes('photo') || name.includes('gallery') ||
+    name.includes('video') || name.includes('camera') || name.includes('film') ||
+    name.includes('music') || name.includes('audio') || name.includes('sound') ||
+    name.includes('mic') || name.includes('voice') || name.includes('speaker') || name.includes('headphone') ||
+    name.includes('play') || name.includes('pause') || name.includes('stop') || name.includes('record') ||
+    name.includes('rewind') || name.includes('skip') || name.includes('loop') ||
+    name.includes('caption') || name.includes('subtitle') || name.includes('resolution') || name.includes('storyboard') ||
+    name.includes('text') || name.includes('font') || name.includes('quote') ||
+    name.includes('chart') || name.includes('graph') || name.includes('analytics') || name.includes('data') ||
+    name.includes('table') || name.includes('grid') || name.includes('list') ||
+    name.includes('code') || name.includes('terminal') || name.includes('function') || name.includes('api') ||
+    name.includes('branch') || name.includes('commit') || name.includes('pull') || name.includes('merge')) {
+    return 'Content';
+  }
+
+  // Communication - messaging, notifications, social
+  if (name.includes('chat') || name.includes('message') || name.includes('conversation') ||
+    name.includes('comment') || name.includes('bubble') || name.includes('speech') ||
+    name.includes('mail') || name.includes('email') || name.includes('inbox') ||
+    name.includes('bell') || name.includes('notification') ||
+    name.includes('phone') || name.includes('call') || name.includes('contact') ||
+    name.includes('forum') || name.includes('messaging')) {
     return 'Communication';
   }
 
-  // Media - all media types (video, audio, images, controls)
-  if (name.includes('video') || name.includes('caption') || name.includes('pictureinpicture') ||
-    name.includes('image') || name.includes('picture') || name.includes('photo') || name.includes('camera') ||
-    name.includes('mic') || name.includes('microphone') || name.includes('voice') || name.includes('sound') ||
-    name.includes('audio') || name.includes('speak') || name.includes('speech') || name.includes('music') ||
-    name.includes('play') || name.includes('pause') || name.includes('stop') ||
-    name.includes('rewind') || name.includes('skip') || name.includes('loop')) {
-    return 'Media';
-  }
-
-  // Files and documents
-  if (name.includes('file') || name.includes('document') || name.includes('folder') ||
-    name.includes('archive') || name.includes('page') || name.includes('notebook') || name.includes('notepad') ||
-    name.includes('clipboard')) {
-    return 'Files';
-  }
-
-  // Users
+  // Social - users, people, groups
   if (name.includes('user') || name.includes('member') || name.includes('person') ||
-    name.includes('people') || name.includes('group') || name.includes('avatar') || name.includes('profile')) {
-    return 'Users';
+    name.includes('people') || name.includes('group') || name.includes('avatar') ||
+    name.includes('profile') || name.includes('account') || name.includes('identity') ||
+    name.includes('hand') || name.includes('robot') || name.includes('agent') ||
+    name.includes('heart') || name.includes('like') || name.includes('favorite') ||
+    name.includes('star') || name.includes('bookmark') || name.includes('saved') ||
+    name.includes('thumb') || name.includes('emoji') || name.includes('reaction')) {
+    return 'Social';
   }
 
-  // Settings
-  if (name.includes('settings') || name.includes('config') || name.includes('gear') ||
-    name.includes('preferences') || name.includes('options') || name.includes('customize')) {
-    return 'Settings';
+  // Hardware - devices, screens, physical objects
+  if (name.includes('desktop') || name.includes('laptop') || name.includes('computer') ||
+    name.includes('mobile') || name.includes('phone') || name.includes('tablet') ||
+    name.includes('device') || name.includes('screen') || name.includes('monitor') ||
+    name.includes('keyboard') || name.includes('mouse') || name.includes('cursor') || name.includes('pointer') ||
+    name.includes('printer') || name.includes('scanner') ||
+    name.includes('wifi') || name.includes('bluetooth') || name.includes('signal') ||
+    name.includes('battery') || name.includes('power') || name.includes('plug') ||
+    name.includes('camera') || name.includes('mic') || name.includes('speaker') ||
+    name.includes('usb') || name.includes('cable') || name.includes('connect')) {
+    return 'Hardware';
   }
 
-  // Status - success, error, info
-  if (name.includes('check') || name.includes('success') || name.includes('complete') || name.includes('done') ||
-    name.includes('error') || name.includes('warning') || name.includes('alert') || name.includes('exclamation') ||
-    name.includes('info') || name.includes('help') || name.includes('question')) {
-    return 'Status';
+  // Toggle - visibility, settings, on/off states
+  if (name.includes('eye') || name.includes('visible') || name.includes('hide') || name.includes('view') ||
+    name.includes('toggle') || name.includes('switch') || name.includes('on') || name.includes('off') ||
+    name.includes('settings') || name.includes('config') || name.includes('gear') || name.includes('cog') ||
+    name.includes('slider') || name.includes('adjust') || name.includes('tune') ||
+    name.includes('dark') || name.includes('light') || name.includes('moon') || name.includes('sun') || name.includes('theme') ||
+    name.includes('lock') || name.includes('unlock') || name.includes('secure') || name.includes('key') ||
+    name.includes('dots') || name.includes('more') || name.includes('options') ||
+    name.includes('minimize') || name.includes('maximize') || name.includes('fullscreen') ||
+    name.includes('layout') || name.includes('aspect') || name.includes('resize') ||
+    name.includes('dock') || name.includes('window') || name.includes('popup') || name.includes('modal')) {
+    return 'Toggle';
   }
 
-  // AI and automation
-  if (name.includes('agent') || name.includes('assistant') || name.includes('ai') ||
-    name.includes('brain') || name.includes('automation') || name.includes('bot') ||
-    name.includes('sparkle') || name.includes('bolt') || name.includes('flash') ||
-    name.includes('inspiration') || name.includes('gpt') || name.includes('sora')) {
-    return 'AI & Automation';
+  // Alert - status, warnings, info
+  if (name.includes('warning') || name.includes('error') || name.includes('danger') ||
+    name.includes('alert') || name.includes('exclamation') ||
+    name.includes('info') || name.includes('help') || name.includes('question') ||
+    name.includes('success') || name.includes('complete') || name.includes('done') ||
+    name.includes('flag') || name.includes('report') ||
+    name.includes('shield') || name.includes('protect') || name.includes('security') ||
+    name.includes('clock') || name.includes('time') || name.includes('calendar') || name.includes('timer') ||
+    name.includes('sparkle') || name.includes('bolt') || name.includes('flash') || name.includes('lightning') ||
+    name.includes('brain') || name.includes('lightbulb') || name.includes('idea') || name.includes('inspiration') ||
+    name.includes('gpt') || name.includes('ai') || name.includes('magic') || name.includes('sora') ||
+    name.includes('diamond') || name.includes('pro') || name.includes('premium') || name.includes('crown') ||
+    name.includes('trophy') || name.includes('award') || name.includes('medal') || name.includes('wreath') ||
+    name.includes('tag') || name.includes('badge') || name.includes('label') ||
+    name.includes('dollar') || name.includes('credit') || name.includes('payment') || name.includes('money') ||
+    name.includes('building') || name.includes('office') || name.includes('work') ||
+    name.includes('circle') || name.includes('square') || name.includes('shape') || name.includes('dot')) {
+    return 'Alert';
   }
 
-  // Analytics
-  if (name.includes('chart') || name.includes('graph') || name.includes('analytics') ||
-    name.includes('data') || name.includes('statistics') || name.includes('metrics') ||
-    name.includes('bar')) {
-    return 'Analytics';
-  }
-
-  // Interface - all interface elements
-  if (name.includes('menu') || name.includes('hamburger') || name.includes('sidebar') ||
-    name.includes('collapse') || name.includes('expand') || name.includes('minimize') || name.includes('maximize') ||
-    name.includes('dock') || name.includes('dropdown') || name.includes('dots') || name.includes('more') ||
-    name.includes('link') || name.includes('chain') || name.includes('connect') || name.includes('external') ||
-    name.includes('code') || name.includes('function') || name.includes('variable') || name.includes('script') ||
-    name.includes('grid') || name.includes('layout') || name.includes('table') ||
-    name.includes('history') || name.includes('managehistory') ||
-    name.includes('lightmode') || name.includes('darkmode') || name.includes('moon') || name.includes('sun') ||
-    name.includes('colortheme') || name.includes('systemmode') ||
-    name.includes('cursor') || name.includes('desktop') || name.includes('mobile')) {
-    return 'Interface';
-  }
-
-  // Symbols
-  if (name.includes('heart') || name.includes('star') || name.includes('bookmark') || name.includes('pin') ||
-    name.includes('flag') || name.includes('tag') || name.includes('badge') || name.includes('wreath')) {
-    return 'Symbols';
-  }
-
-  // Time
-  if (name.includes('clock') || name.includes('time') || name.includes('calendar') || name.includes('date')) {
-    return 'Time';
-  }
-
-  // Security
-  if (name.includes('lock') || name.includes('key') || name.includes('secure') || name.includes('private') ||
-    name.includes('shield') || name.includes('protection') || (name.includes('api') && name.includes('key'))) {
-    return 'Security';
-  }
-
-  // Default category
+  // Other - anything else
   return 'Other';
 }
 
@@ -5386,3 +6394,89 @@ async function updateIconComponents(): Promise<number> {
   return successCount;
 }
 
+/**
+ * Group selected icon components by category
+ * Creates autolayout frames for each category and organizes icons into them
+ */
+async function groupIconsByCategory(): Promise<number> {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    throw new Error('Please select icon components to group');
+  }
+
+  // Filter only ComponentNode
+  const components = selection.filter(
+    node => node.type === 'COMPONENT'
+  ) as ComponentNode[];
+
+  if (components.length === 0) {
+    throw new Error('No components selected. Please select component icons.');
+  }
+
+  // Group components by category
+  const categories: Map<string, ComponentNode[]> = new Map();
+
+  for (const component of components) {
+    const category = getIconCategory(component.name);
+    if (!categories.has(category)) {
+      categories.set(category, []);
+    }
+    categories.get(category)!.push(component);
+  }
+
+  // Sort categories alphabetically
+  const sortedCategories = Array.from(categories.keys()).sort();
+
+  // Find parent frame or use current page
+  const parent = components[0].parent || figma.currentPage;
+
+  // Calculate starting position (top-left of selection)
+  let startX = Math.min(...components.map(c => c.x));
+  let startY = Math.min(...components.map(c => c.y));
+
+  // Create autolayout frame for each category
+  let currentY = startY;
+  let totalIcons = 0;
+
+  for (const categoryName of sortedCategories) {
+    const categoryIcons = categories.get(categoryName)!;
+
+    // Sort icons within category alphabetically
+    categoryIcons.sort((a, b) => a.name.localeCompare(b.name));
+
+    // Create category frame with autolayout
+    const categoryFrame = figma.createFrame();
+    categoryFrame.name = categoryName;
+    categoryFrame.layoutMode = 'HORIZONTAL';
+    categoryFrame.layoutWrap = 'WRAP';
+    categoryFrame.primaryAxisSizingMode = 'FIXED';
+    categoryFrame.counterAxisSizingMode = 'AUTO';
+    categoryFrame.resize(800, 100); // Fixed width, auto height
+    categoryFrame.itemSpacing = 8;
+    categoryFrame.counterAxisSpacing = 8;
+    categoryFrame.paddingTop = 8;
+    categoryFrame.paddingBottom = 8;
+    categoryFrame.paddingLeft = 8;
+    categoryFrame.paddingRight = 8;
+    categoryFrame.fills = []; // Transparent background
+    categoryFrame.x = startX;
+    categoryFrame.y = currentY;
+
+    // Add to parent
+    if (parent && 'appendChild' in parent) {
+      parent.appendChild(categoryFrame);
+    }
+
+    // Move icons into category frame
+    for (const icon of categoryIcons) {
+      categoryFrame.appendChild(icon);
+      totalIcons++;
+    }
+
+    // Update Y position for next category
+    currentY += categoryFrame.height + 40; // 40px gap between categories
+  }
+
+  return totalIcons;
+}

@@ -392,13 +392,15 @@
   <!-- Icons Tab -->
   <div class="tab-content" id="tab-icons">
     <h2>Icons</h2>
-    <p class="description">Select icon components and update them: flatten layers, rename to kebab-case, and add searchable tags.</p>
+    <p class="description">Select icon components and update them: flatten layers, rename to kebab-case, and add
+      searchable tags.</p>
 
     <button class="btn-primary" id="generateIcons">Update Selected Icons</button>
+    <button class="btn-primary" id="groupIcons" style="margin-top: 8px;">Group Icons by Category</button>
 
     <div class="loading" id="iconsLoading">
       <div class="spinner"></div>
-      <span>Generating icons...</span>
+      <span>Processing icons...</span>
     </div>
 
     <div class="status" id="iconsStatus"></div>
@@ -771,6 +773,16 @@
       parent.postMessage({
         pluginMessage: {
           type: 'generate-icons'
+        }
+      }, '*');
+    };
+
+    // Group Icons by Category
+    document.getElementById('groupIcons').onclick = () => {
+      showIconsLoading();
+      parent.postMessage({
+        pluginMessage: {
+          type: 'group-icons'
         }
       }, '*');
     };
