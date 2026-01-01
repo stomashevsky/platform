@@ -1729,6 +1729,19 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
       }
     }
 
+    if (msg.type === 'generate-inputs') {
+      await loadFonts();
+
+      try {
+        await generateInputs();
+        figma.notify('Input component set generated');
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        figma.notify(`Error: ${errorMessage}`, { error: true });
+        figma.ui.postMessage({ type: 'inputs-error', message: errorMessage });
+      }
+    }
+
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     figma.notify(`Error: ${errorMessage}`, { error: true });
@@ -1881,6 +1894,136 @@ function getButtonFallbackColors(style: ButtonStyle, variant: ButtonColorVariant
     border: null,
   };
 }
+
+// ============================================================================
+// Input Component Generator
+// ============================================================================
+
+// Input sizing specifications - uses same sizes as Button
+// Variables: control/size/{size}, control/gutter/{size}, control/font-size/{size} (for icon size)
+const INPUT_SIZES = {
+  // size: { height, paddingX, fontSize, borderRadius, gap }
+  // Note: iconSize uses fontSize (1em in CSS)
+  '3xs': { height: 22, paddingX: 6, fontSize: 12, borderRadius: 6, gap: 3 },
+  '2xs': { height: 24, paddingX: 8, fontSize: 12, borderRadius: 6, gap: 4 },
+  'xs': { height: 26, paddingX: 8, fontSize: 14, borderRadius: 6, gap: 4 },
+  'sm': { height: 28, paddingX: 10, fontSize: 14, borderRadius: 6, gap: 4 },
+  'md': { height: 32, paddingX: 12, fontSize: 14, borderRadius: 8, gap: 6 },
+  'lg': { height: 36, paddingX: 12, fontSize: 14, borderRadius: 8, gap: 6 },
+  'xl': { height: 40, paddingX: 14, fontSize: 14, borderRadius: 10, gap: 6 },
+  '2xl': { height: 44, paddingX: 14, fontSize: 16, borderRadius: 12, gap: 6 },
+  '3xl': { height: 48, paddingX: 16, fontSize: 16, borderRadius: 12, gap: 6 },
+};
+
+// Variable name mappings for sizing (to bind Figma variables)
+const INPUT_SIZE_VARS = {
+  // Icon size uses fontSize variable (1em in CSS = fontSize)
+  '3xs': { height: 'control/size/3xs', padding: 'control/gutter/3xs', fontSize: 'control/font-size/3xs', gap: 'control/gap/3xs', radius: 'control/radius/3xs' },
+  '2xs': { height: 'control/size/2xs', padding: 'control/gutter/2xs', fontSize: 'control/font-size/2xs', gap: 'control/gap/2xs', radius: 'control/radius/2xs' },
+  'xs': { height: 'control/size/xs', padding: 'control/gutter/xs', fontSize: 'control/font-size/xs', gap: 'control/gap/xs', radius: 'control/radius/xs' },
+  'sm': { height: 'control/size/sm', padding: 'control/gutter/sm', fontSize: 'control/font-size/sm', gap: 'control/gap/sm', radius: 'control/radius/sm' },
+  'md': { height: 'control/size/md', padding: 'control/gutter/md', fontSize: 'control/font-size/md', gap: 'control/gap/md', radius: 'control/radius/md' },
+  'lg': { height: 'control/size/lg', padding: 'control/gutter/lg', fontSize: 'control/font-size/lg', gap: 'control/gap/lg', radius: 'control/radius/lg' },
+  'xl': { height: 'control/size/xl', padding: 'control/gutter/xl', fontSize: 'control/font-size/xl', gap: 'control/gap/xl', radius: 'control/radius/xl' },
+  '2xl': { height: 'control/size/2xl', padding: 'control/gutter/2xl', fontSize: 'control/font-size/2xl', gap: 'control/gap/2xl', radius: 'control/radius/2xl' },
+  '3xl': { height: 'control/size/3xl', padding: 'control/gutter/3xl', fontSize: 'control/font-size/3xl', gap: 'control/gap/3xl', radius: 'control/radius/3xl' },
+};
+
+type InputSizeName = keyof typeof INPUT_SIZES;
+
+const INPUT_STYLES = ['outline', 'soft'] as const;
+// Reversed size order: Largest to Smallest (same as Button)
+const INPUT_SIZE_ORDER: InputSizeName[] = ['3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs', '2xs', '3xs'];
+
+const INPUT_STATES = ['default', 'hover', 'focus', 'disabled', 'invalid'] as const;
+
+type InputStyle = typeof INPUT_STYLES[number];
+type InputState = typeof INPUT_STATES[number];
+
+// Variable name mappings for each style/state combination
+function getInputColorVarName(style: InputStyle, state: InputState, property: 'bg' | 'text' | 'border'): string | null {
+  // Handle disabled state first
+  if (state === 'disabled') {
+    if (property === 'bg') return 'background/disabled';
+    if (property === 'text') return 'text/disabled';
+    if (property === 'border') return 'border/disabled';
+  }
+
+  // Handle invalid state
+  if (state === 'invalid') {
+    if (property === 'border') return 'input/border/invalid';
+    // Text and bg use default for invalid
+  }
+
+  // Border colors
+  if (property === 'border') {
+    if (style === 'outline' && state === 'hover') return 'input/outline/borderHover';
+    // For default, focus, and invalid (already handled above)
+    return 'border/default';
+  }
+
+  // Background colors
+  if (property === 'bg') {
+    if (style === 'outline') return null; // Transparent for outline
+    if (style === 'soft') return 'surface/secondary'; // Soft style background
+    return null;
+  }
+
+  // Text colors - not used directly, handled separately in createStyledInput
+  if (property === 'text') {
+    return null;
+  }
+
+  return null;
+}
+
+// Fallback colors for each style/state
+function getInputFallbackColors(style: InputStyle, state: InputState): { bg: RGB | RGBA | null; text: RGB | RGBA; border: RGB | RGBA | null } {
+  const defaultText = { r: 0.1, g: 0.1, b: 0.1 }; // gray.1000
+  const disabledText = { r: 0.4, g: 0.4, b: 0.4 }; // gray.400
+  const defaultBorder = { r: 0.5, g: 0.5, b: 0.5, a: 0.1 }; // alpha.10
+  const disabledBorder = { r: 0.5, g: 0.5, b: 0.5, a: 0.6 }; // alpha.6
+  const hoverBorder = { r: 0.5, g: 0.5, b: 0.5, a: 0.25 }; // alpha.25
+  const invalidBorder = { r: 0.937, g: 0.267, b: 0.267 }; // red.500
+  const disabledBg = { r: 0.5, g: 0.5, b: 0.5, a: 0.5 }; // alpha.5
+  const softBg = { r: 0.96, g: 0.96, b: 0.96 }; // gray.100
+
+  if (state === 'disabled') {
+    return {
+      bg: disabledBg,
+      text: disabledText,
+      border: disabledBorder,
+    };
+  }
+
+  if (state === 'invalid') {
+    return {
+      bg: style === 'soft' ? softBg : null,
+      text: defaultText,
+      border: invalidBorder,
+    };
+  }
+
+  if (style === 'outline' && state === 'hover') {
+    return {
+      bg: null,
+      text: defaultText,
+      border: hoverBorder,
+    };
+  }
+
+  return {
+    bg: style === 'soft' ? softBg : null,
+    text: defaultText,
+    border: defaultBorder,
+  };
+}
+
+// Icon component node IDs from the Figma library (placeholder - to be replaced with actual IDs)
+const INPUT_ICON_NODE_IDS = {
+  startAdornment: '6011:127065', // Placeholder - same as button left icon for now
+  endAdornment: '6011:126766', // Placeholder - same as button right icon for now
+};
 
 // Cache for variables lookup
 let variablesCache: Variable[] | null = null;
@@ -2485,6 +2628,285 @@ async function createStyledButton(
   return button;
 }
 
+async function createStyledInput(
+  style: InputStyle,
+  state: InputState,
+  size: InputSizeName,
+  startAdornment: boolean,
+  endAdornment: boolean
+): Promise<ComponentNode> {
+  const config = INPUT_SIZES[size];
+  const colors = getInputFallbackColors(style, state);
+
+  // Create as component
+  const input = figma.createComponent();
+  // Name using Property=Value syntax
+  let nameParts = [`style=${style}`, `state=${state}`, `size=${size}`];
+  nameParts.push(`startAdornment=${startAdornment}`);
+  nameParts.push(`endAdornment=${endAdornment}`);
+  input.name = nameParts.join(', ');
+
+  input.layoutMode = 'HORIZONTAL';
+  input.primaryAxisAlignItems = 'CENTER';
+  input.counterAxisAlignItems = 'CENTER';
+  input.primaryAxisSizingMode = 'AUTO';
+  input.counterAxisSizingMode = 'FIXED';
+
+  // Set fallback padding values (will be overridden by variable binding if successful)
+  input.paddingLeft = config.paddingX;
+  input.paddingRight = config.paddingX;
+  input.itemSpacing = config.gap;
+
+  // Border radius - Input always uses border radius from config (no pill option)
+  input.cornerRadius = config.borderRadius;
+
+  // Try to bind background variable
+  const bgVarName = getInputColorVarName(style, state, 'bg');
+  if (bgVarName) {
+    const bgBound = await bindVariableToFill(input, bgVarName);
+    if (!bgBound && colors.bg) {
+      const alpha = (colors.bg as RGBA).a !== undefined ? (colors.bg as RGBA).a : 1;
+      input.fills = [{
+        type: 'SOLID',
+        color: { r: colors.bg.r, g: colors.bg.g, b: colors.bg.b },
+        opacity: alpha
+      }];
+    }
+  } else {
+    // No background variable (outline style) - set fallback
+    if (colors.bg) {
+      const alpha = (colors.bg as RGBA).a !== undefined ? (colors.bg as RGBA).a : 1;
+      input.fills = [{
+        type: 'SOLID',
+        color: { r: colors.bg.r, g: colors.bg.g, b: colors.bg.b },
+        opacity: alpha
+      }];
+    } else {
+      input.fills = [];
+    }
+  }
+
+  // Border - Input always has border (both outline and soft styles)
+  const borderVarName = getInputColorVarName(style, state, 'border');
+  if (borderVarName) {
+    const borderBound = await bindVariableToStroke(input, borderVarName);
+    if (!borderBound && colors.border) {
+      const alpha = (colors.border as RGBA).a !== undefined ? (colors.border as RGBA).a : 1;
+      input.strokes = [{
+        type: 'SOLID',
+        color: { r: colors.border.r, g: colors.border.g, b: colors.border.b },
+        opacity: alpha
+      }];
+    }
+  } else if (colors.border) {
+    const alpha = (colors.border as RGBA).a !== undefined ? (colors.border as RGBA).a : 1;
+    input.strokes = [{
+      type: 'SOLID',
+      color: { r: colors.border.r, g: colors.border.g, b: colors.border.b },
+      opacity: alpha
+    }];
+  }
+  input.strokeWeight = 1;
+
+  // Bind sizing properties to the input frame
+  const sizeVars = INPUT_SIZE_VARS[size];
+  await bindVariableToProperty(input, 'height', sizeVars.height);
+  await bindVariableToProperty(input, 'paddingLeft', sizeVars.padding);
+  await bindVariableToProperty(input, 'paddingRight', sizeVars.padding);
+  await bindVariableToProperty(input, 'itemSpacing', sizeVars.gap);
+  await bindVariableToProperty(input, 'cornerRadius', sizeVars.radius);
+
+  // Get variable names for icons and text
+  // Input text color: --input-text-color (according to docs)
+  const textVarName = 'input/text/color'; // Try input/text/color first, fallback to text/primary
+  const iconSizeVarName = sizeVars.fontSize; // Use fontSize for icon size (1em in CSS)
+  console.log(`Input ${style}/${state}: Looking for text variable: ${textVarName}`);
+
+  // Start adornment (left icon) - always create, but conditionally add based on property
+  // We'll conditionally append based on startAdornment property in the component name
+  if (startAdornment) {
+    const iconStart = await createIconInstance(INPUT_ICON_NODE_IDS.startAdornment, config.fontSize, 'text/primary', iconSizeVarName);
+    iconStart.name = 'startAdornment'; // Lowercase name
+    input.appendChild(iconStart);
+  }
+
+  // Text input (placeholder text) - always present
+  const textInput = figma.createText();
+  textInput.name = 'text input'; // Lowercase name
+  textInput.characters = 'Enter text...';
+
+  // Apply text style - this is the primary source for font family, size, etc.
+  const styleApplied = await applyTextStyle(textInput, size);
+
+  // Also try to bind font size variable explicitly
+  await bindVariableToProperty(textInput, 'fontSize', sizeVars.fontSize);
+
+  if (!styleApplied) {
+    console.log(`No text style found for size: ${size} - using fallback font settings`);
+    textInput.fontSize = config.fontSize;
+    textInput.fontName = FONT.family;
+    textInput.letterSpacing = { value: -0.14, unit: 'PIXELS' };
+    // Set line-height to match font-size (1:1 ratio)
+    textInput.lineHeight = { value: config.fontSize, unit: 'PIXELS' };
+  }
+
+  // Try to bind text color variable - use input/text/color, fallback to text/primary
+  let textBound = await bindVariableToTextFill(textInput, 'input/text/color');
+  if (!textBound) {
+    // Fallback to text/primary if input/text/color doesn't exist
+    textBound = await bindVariableToTextFill(textInput, 'text/primary');
+  }
+  
+  if (!textBound) {
+    console.log(`Failed to bind text variable, using fallback color`);
+    textInput.fills = [{ type: 'SOLID', color: colors.text }];
+  } else {
+    // Verify the variable is actually bound
+    const fills = textInput.fills;
+    if (Array.isArray(fills) && fills.length > 0) {
+      const fill = fills[0];
+      if (fill.type === 'SOLID' && 'boundVariable' in fill && fill.boundVariable) {
+        console.log(`Text variable successfully bound`);
+      } else {
+        console.log(`Warning: Text variable binding may have failed - fill type:`, fill.type);
+      }
+    }
+  }
+
+  input.appendChild(textInput);
+
+  // End adornment (right icon) - always create, but conditionally add based on property
+  if (endAdornment) {
+    const iconEnd = await createIconInstance(INPUT_ICON_NODE_IDS.endAdornment, config.fontSize, 'text/primary', iconSizeVarName);
+    iconEnd.name = 'endAdornment'; // Lowercase name
+    input.appendChild(iconEnd);
+  }
+
+  return input;
+}
+
+async function generateInputs(): Promise<void> {
+  // Reset variables cache for fresh lookup
+  variablesCache = null;
+
+  let y = 0;
+  const GAP_BETWEEN_SETS = 200;
+  const GAP_WITHIN_SET = 50;
+
+  const inputComponents: ComponentNode[] = [];
+  let x = 0;
+  let localY = 0;
+
+  // Calculate total components: styles × states × sizes × adornments (4 variants: none, start, end, both)
+  const componentsPerStyle = INPUT_STATES.length * INPUT_SIZE_ORDER.length * 4;
+  const totalComponents = INPUT_STYLES.length * componentsPerStyle;
+
+  let totalCreatedComponents = 0;
+
+  // For each style
+  for (const style of INPUT_STYLES) {
+    // For each state
+    for (const state of INPUT_STATES) {
+      // For each size
+      for (const size of INPUT_SIZE_ORDER) {
+        // Generate variants for all adornment combinations
+        // 1. No adornments (both false)
+        const componentNone = await createStyledInput(style, state, size, false, false);
+        componentNone.x = x;
+        componentNone.y = localY;
+        x += componentNone.width + GAP_WITHIN_SET;
+        inputComponents.push(componentNone);
+        totalCreatedComponents++;
+
+        // 2. Start adornment only
+        const componentStart = await createStyledInput(style, state, size, true, false);
+        componentStart.x = x;
+        componentStart.y = localY;
+        x += componentStart.width + GAP_WITHIN_SET;
+        inputComponents.push(componentStart);
+        totalCreatedComponents++;
+
+        // 3. End adornment only
+        const componentEnd = await createStyledInput(style, state, size, false, true);
+        componentEnd.x = x;
+        componentEnd.y = localY;
+        x += componentEnd.width + GAP_WITHIN_SET;
+        inputComponents.push(componentEnd);
+        totalCreatedComponents++;
+
+        // 4. Both adornments
+        const componentBoth = await createStyledInput(style, state, size, true, true);
+        componentBoth.x = x;
+        componentBoth.y = localY;
+        x += componentBoth.width + GAP_WITHIN_SET;
+        inputComponents.push(componentBoth);
+        totalCreatedComponents++;
+
+        // Send progress update after all 4 adornment variants for this size are created
+        await new Promise(resolve => setTimeout(resolve, 0));
+        figma.ui.postMessage({
+          type: 'progress-update',
+          style: style,
+          state: state,
+          size: size,
+          currentTotal: totalCreatedComponents,
+          totalAll: totalComponents
+        });
+      }
+      // New row for each state/style combo within the set
+      x = 0;
+      localY += 100; // rough vertical spacing for pre-combined items
+    }
+  }
+
+  // Log component count for debugging
+  console.log(`Total Input components to combine: ${inputComponents.length}, expected: ${totalComponents}`);
+
+  // Verify we have the expected number of components
+  if (inputComponents.length !== totalComponents) {
+    console.warn(`Input component count mismatch! Expected ${totalComponents}, got ${inputComponents.length}`);
+    // Log component names to debug
+    inputComponents.forEach((comp, idx) => {
+      console.log(`  [${idx}] ${comp.name}`);
+    });
+  }
+
+  // Send progress update before combining variants (this can be slow)
+  figma.ui.postMessage({
+    type: 'progress-update',
+    style: 'combining',
+    state: 'variants',
+    size: '',
+    currentTotal: totalCreatedComponents,
+    totalAll: totalComponents
+  });
+
+  // Create the component set
+  let componentSet: ComponentSetNode;
+  try {
+    componentSet = figma.combineAsVariants(inputComponents, figma.currentPage);
+    componentSet.name = 'input'; // Single component set name
+
+    // Log the number of variants in the set
+    console.log(`Input component set created with ${componentSet.children.length} variants`);
+
+    // Position the SET itself
+    componentSet.y = y;
+
+    // Send message that generation is complete
+    figma.ui.postMessage({
+      type: 'inputs-complete',
+      currentTotal: totalCreatedComponents,
+      totalAll: totalComponents
+    });
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error(`Error combining Input variants: ${errorMessage}`);
+    figma.notify(`Error combining Input variants: ${errorMessage}`, { error: true });
+    figma.ui.postMessage({ type: 'inputs-error', message: `Error combining Input variants: ${errorMessage}` });
+    throw error;
+  }
+}
 
 // Icon component node IDs from the Figma library
 const ICON_NODE_IDS = {

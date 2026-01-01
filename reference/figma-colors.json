@@ -62,6 +62,128 @@
               }
             }
           },
+          "text": {
+            "default": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text\nPage text, paragraphs, headings",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray.1000}"
+            },
+            "primary": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-primary\nText in components with color=\"primary\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray.1000}"
+            },
+            "secondary": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-secondary\nSecondary text, less emphasis",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray.500}"
+            },
+            "tertiary": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-tertiary\nTertiary text, subtle",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray.400}"
+            },
+            "success": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-success\nText in components with color=\"success\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{green.700}"
+            },
+            "info": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-info\nText in components with color=\"info\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.700}"
+            },
+            "warning": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-warning\nText in components with color=\"warning\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{orange.700}"
+            },
+            "danger": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-danger\nText in components with color=\"danger\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{red.700}"
+            },
+            "discovery": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-discovery\nText in components with color=\"discovery\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{purple.700}"
+            },
+            "caution": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-caution\nText in components with color=\"caution\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{yellow.700}"
+            },
+            "inverse": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-inverse\nText on inverted backgrounds",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray.0}"
+            },
+            "disabled": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-disabled\nDisabled text state",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray.400}"
+            }
+          },
           "background": {
             "disabled": {
               "$scopes": [
@@ -1352,6 +1474,594 @@
               }
             }
           },
+          "foreground": {
+            "ghost": {
+              "primary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-primary-ghost\nButton primary ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray.1000}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-secondary-ghost\nButton secondary ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray.500}"
+              },
+              "success": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-success-ghost\nButton success ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{green.500}"
+              },
+              "info": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-info-ghost\nButton info ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "warning": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-warning-ghost\nButton warning ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{orange.500}"
+              },
+              "danger": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-danger-ghost\nButton danger ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.500}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-discovery-ghost\nButton discovery ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{purple.500}"
+              },
+              "caution": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-caution-ghost\nButton caution ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{yellow.700}"
+              },
+              "hover": {
+                "primary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-primary-ghost-hover\nButton primary ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-secondary-ghost-hover\nButton secondary ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                },
+                "success": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-success-ghost-hover\nButton success ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{green.500}"
+                },
+                "info": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-info-ghost-hover\nButton info ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{blue.500}"
+                },
+                "warning": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-warning-ghost-hover\nButton warning ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{orange.500}"
+                },
+                "danger": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-danger-ghost-hover\nButton danger ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{red.500}"
+                },
+                "discovery": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-discovery-ghost-hover\nButton discovery ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{purple.500}"
+                },
+                "caution": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-caution-ghost-hover\nButton caution ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{yellow.700}"
+                }
+              }
+            },
+            "outline": {
+              "primary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-primary-outline\nButton primary outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray.1000}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-secondary-outline\nButton secondary outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray.500}"
+              },
+              "success": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-success-outline\nButton success outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{green.500}"
+              },
+              "info": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-info-outline\nButton info outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "warning": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-warning-outline\nButton warning outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{orange.500}"
+              },
+              "danger": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-danger-outline\nButton danger outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.500}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-discovery-outline\nButton discovery outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{purple.500}"
+              },
+              "caution": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-caution-outline\nButton caution outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{yellow.700}"
+              },
+              "hover": {
+                "primary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-primary-outline-hover\nButton primary outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-secondary-outline-hover\nButton secondary outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                },
+                "success": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-success-outline-hover\nButton success outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{green.500}"
+                },
+                "info": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-info-outline-hover\nButton info outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{blue.500}"
+                },
+                "warning": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-warning-outline-hover\nButton warning outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{orange.500}"
+                },
+                "danger": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-danger-outline-hover\nButton danger outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{red.500}"
+                },
+                "discovery": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-discovery-outline-hover\nButton discovery outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{purple.500}"
+                },
+                "caution": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-caution-outline-hover\nButton caution outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{yellow.700}"
+                }
+              }
+            },
+            "soft": {
+              "primary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-primary-soft\nButton primary soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray.1000}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-secondary-soft\nButton secondary soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray.1000}"
+              },
+              "success": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-success-soft\nButton success soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{green.600}"
+              },
+              "info": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-info-soft\nButton info soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.600}"
+              },
+              "warning": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-warning-soft\nButton warning soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{orange.700}"
+              },
+              "danger": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-danger-soft\nButton danger soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.600}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-discovery-soft\nButton discovery soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{purple.600}"
+              },
+              "caution": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-caution-soft\nButton caution soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{yellow.800}"
+              },
+              "alt": {
+                "primary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-primary-soft-alt\nButton primary soft text alt",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-secondary-soft-alt\nButton secondary soft text alt",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray.1000}"
+                }
+              }
+            },
+            "solid": {
+              "primary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-primary-solid\nButton primary solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-secondary-solid\nButton secondary solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "success": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-success-solid\nButton success solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "info": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-info-solid\nButton info solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "warning": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-warning-solid\nButton warning solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "danger": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-danger-solid\nButton danger solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-discovery-solid\nButton discovery solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "caution": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-caution-solid\nButton caution solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              }
+            },
+            "surface": {
+              "primary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-primary-surface\nAlert/Badge primary surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray.1000}"
+              },
+              "success": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-success-surface\nAlert/Badge success surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{green.600}"
+              },
+              "info": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-info-surface\nAlert/Badge info surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.600}"
+              },
+              "warning": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-warning-surface\nAlert/Badge warning surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{orange.700}"
+              },
+              "danger": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-danger-surface\nAlert/Badge danger surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.600}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-discovery-surface\nAlert/Badge discovery surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{purple.600}"
+              },
+              "caution": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-caution-surface\nAlert/Badge caution surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{yellow.800}"
+              }
+            }
+          },
           "border": {
             "default": {
               "$scopes": [
@@ -2074,714 +2784,6 @@
               }
             }
           },
-          "text": {
-            "default": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text\nPage text, paragraphs, headings",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray.1000}"
-            },
-            "primary": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-primary\nText in components with color=\"primary\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray.1000}"
-            },
-            "secondary": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-secondary\nSecondary text, less emphasis",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray.500}"
-            },
-            "tertiary": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-tertiary\nTertiary text, subtle",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray.400}"
-            },
-            "success": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-success\nText in components with color=\"success\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{green.700}"
-            },
-            "info": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-info\nText in components with color=\"info\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{blue.700}"
-            },
-            "warning": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-warning\nText in components with color=\"warning\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{orange.700}"
-            },
-            "danger": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-danger\nText in components with color=\"danger\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{red.700}"
-            },
-            "discovery": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-discovery\nText in components with color=\"discovery\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{purple.700}"
-            },
-            "caution": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-caution\nText in components with color=\"caution\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{yellow.700}"
-            },
-            "inverse": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-inverse\nText on inverted backgrounds",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray.0}"
-            },
-            "disabled": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-disabled\nDisabled text state",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray.400}"
-            },
-            "ghost": {
-              "primary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-primary-ghost\nButton primary ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray.1000}"
-              },
-              "secondary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-secondary-ghost\nButton secondary ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray.500}"
-              },
-              "success": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-success-ghost\nButton success ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{green.500}"
-              },
-              "info": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-info-ghost\nButton info ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{blue.500}"
-              },
-              "warning": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-warning-ghost\nButton warning ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{orange.500}"
-              },
-              "danger": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-danger-ghost\nButton danger ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{red.500}"
-              },
-              "discovery": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-discovery-ghost\nButton discovery ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{purple.500}"
-              },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-ghost\nButton caution ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{yellow.700}"
-              },
-              "hover": {
-                "primary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-primary-ghost-hover\nButton primary ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray.1000}"
-                },
-                "secondary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-secondary-ghost-hover\nButton secondary ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray.1000}"
-                },
-                "success": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-success-ghost-hover\nButton success ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{green.500}"
-                },
-                "info": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-info-ghost-hover\nButton info ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{blue.500}"
-                },
-                "warning": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-warning-ghost-hover\nButton warning ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{orange.500}"
-                },
-                "danger": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-danger-ghost-hover\nButton danger ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{red.500}"
-                },
-                "discovery": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-discovery-ghost-hover\nButton discovery ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{purple.500}"
-                },
-                "caution": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-caution-ghost-hover\nButton caution ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{yellow.700}"
-                }
-              }
-            },
-            "outline": {
-              "primary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-primary-outline\nButton primary outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray.1000}"
-              },
-              "secondary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-secondary-outline\nButton secondary outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray.500}"
-              },
-              "success": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-success-outline\nButton success outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{green.500}"
-              },
-              "info": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-info-outline\nButton info outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{blue.500}"
-              },
-              "warning": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-warning-outline\nButton warning outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{orange.500}"
-              },
-              "danger": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-danger-outline\nButton danger outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{red.500}"
-              },
-              "discovery": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-discovery-outline\nButton discovery outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{purple.500}"
-              },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-outline\nButton caution outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{yellow.700}"
-              },
-              "hover": {
-                "primary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-primary-outline-hover\nButton primary outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray.1000}"
-                },
-                "secondary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-secondary-outline-hover\nButton secondary outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray.1000}"
-                },
-                "success": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-success-outline-hover\nButton success outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{green.500}"
-                },
-                "info": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-info-outline-hover\nButton info outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{blue.500}"
-                },
-                "warning": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-warning-outline-hover\nButton warning outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{orange.500}"
-                },
-                "danger": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-danger-outline-hover\nButton danger outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{red.500}"
-                },
-                "discovery": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-discovery-outline-hover\nButton discovery outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{purple.500}"
-                },
-                "caution": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-caution-outline-hover\nButton caution outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{yellow.700}"
-                }
-              }
-            },
-            "soft": {
-              "primary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-primary-soft\nButton primary soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray.1000}"
-              },
-              "secondary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-secondary-soft\nButton secondary soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray.1000}"
-              },
-              "success": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-success-soft\nButton success soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{green.600}"
-              },
-              "info": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-info-soft\nButton info soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{blue.600}"
-              },
-              "warning": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-warning-soft\nButton warning soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{orange.700}"
-              },
-              "danger": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-danger-soft\nButton danger soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{red.600}"
-              },
-              "discovery": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-discovery-soft\nButton discovery soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{purple.600}"
-              },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-soft\nButton caution soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{yellow.800}"
-              },
-              "alt": {
-                "primary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-primary-soft-alt\nButton primary soft text alt",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray.1000}"
-                },
-                "secondary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-secondary-soft-alt\nButton secondary soft text alt",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray.1000}"
-                }
-              }
-            },
-            "solid": {
-              "primary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-primary-solid\nButton primary solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "secondary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-secondary-solid\nButton secondary solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "success": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-success-solid\nButton success solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "info": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-info-solid\nButton info solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "warning": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-warning-solid\nButton warning solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "danger": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-danger-solid\nButton danger solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "discovery": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-discovery-solid\nButton discovery solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-solid\nButton caution solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              }
-            },
-            "surface": {
-              "primary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-primary-surface\nAlert/Badge primary surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray.1000}"
-              },
-              "success": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-success-surface\nAlert/Badge success surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{green.600}"
-              },
-              "info": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-info-surface\nAlert/Badge info surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{blue.600}"
-              },
-              "warning": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-warning-surface\nAlert/Badge warning surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{orange.700}"
-              },
-              "danger": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-danger-surface\nAlert/Badge danger surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{red.600}"
-              },
-              "discovery": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-discovery-surface\nAlert/Badge discovery surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{purple.600}"
-              },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-surface\nAlert/Badge caution surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{yellow.800}"
-              }
-            }
-          },
           "component": {
             "switch": {
               "track": {
@@ -2934,6 +2936,26 @@
               }
             },
             "input": {
+              "text": {
+                "default": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color",
+                  "$value": "{text.default}"
+                },
+                "placeholder": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color",
+                  "$value": "{text.tertiary}"
+                }
+              },
               "outline": {
                 "borderHover": {
                   "$scopes": [
@@ -3167,6 +3189,128 @@
                 "$collectionName": "color primitive",
                 "$value": "{gray dark.400}"
               }
+            }
+          },
+          "text": {
+            "default": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text\nPage text, paragraphs, headings",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray dark.1000}"
+            },
+            "primary": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-primary\nText in components with color=\"primary\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray dark.1000}"
+            },
+            "secondary": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-secondary\nSecondary text, less emphasis",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray dark.700}"
+            },
+            "tertiary": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-tertiary\nTertiary text, subtle",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray dark.600}"
+            },
+            "success": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-success\nText in components with color=\"success\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{green.400}"
+            },
+            "info": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-info\nText in components with color=\"info\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{blue.200}"
+            },
+            "warning": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-warning\nText in components with color=\"warning\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{orange.500}"
+            },
+            "danger": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-danger\nText in components with color=\"danger\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{red.500}"
+            },
+            "discovery": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-discovery\nText in components with color=\"discovery\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{purple.500}"
+            },
+            "caution": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-caution\nText in components with color=\"caution\"",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{yellow.500}"
+            },
+            "inverse": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-inverse\nText on inverted backgrounds",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray dark.0}"
+            },
+            "disabled": {
+              "$scopes": [
+                "TEXT_FILL"
+              ],
+              "$description": "--color-text-disabled\nDisabled text state",
+              "$type": "color",
+              "$libraryName": "",
+              "$collectionName": "color primitive",
+              "$value": "{gray dark.500}"
             }
           },
           "background": {
@@ -4459,6 +4603,594 @@
               }
             }
           },
+          "foreground": {
+            "ghost": {
+              "primary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-primary-ghost\nButton primary ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray dark.1000}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-secondary-ghost\nButton secondary ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray dark.700}"
+              },
+              "success": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-success-ghost\nButton success ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{green.500}"
+              },
+              "info": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-info-ghost\nButton info ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.200}"
+              },
+              "warning": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-warning-ghost\nButton warning ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{orange.500}"
+              },
+              "danger": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-danger-ghost\nButton danger ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.500}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-discovery-ghost\nButton discovery ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{purple.500}"
+              },
+              "caution": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-caution-ghost\nButton caution ghost text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{yellow.700}"
+              },
+              "hover": {
+                "primary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-primary-ghost-hover\nButton primary ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-secondary-ghost-hover\nButton secondary ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                },
+                "success": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-success-ghost-hover\nButton success ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{green.500}"
+                },
+                "info": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-info-ghost-hover\nButton info ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{blue.200}"
+                },
+                "warning": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-warning-ghost-hover\nButton warning ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{orange.500}"
+                },
+                "danger": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-danger-ghost-hover\nButton danger ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{red.500}"
+                },
+                "discovery": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-discovery-ghost-hover\nButton discovery ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{purple.500}"
+                },
+                "caution": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-caution-ghost-hover\nButton caution ghost text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{yellow.700}"
+                }
+              }
+            },
+            "outline": {
+              "primary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-primary-outline\nButton primary outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray dark.1000}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-secondary-outline\nButton secondary outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray dark.700}"
+              },
+              "success": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-success-outline\nButton success outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{green.500}"
+              },
+              "info": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-info-outline\nButton info outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.500}"
+              },
+              "warning": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-warning-outline\nButton warning outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{orange.500}"
+              },
+              "danger": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-danger-outline\nButton danger outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.500}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-discovery-outline\nButton discovery outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{purple.500}"
+              },
+              "caution": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-caution-outline\nButton caution outline text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{yellow.700}"
+              },
+              "hover": {
+                "primary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-primary-outline-hover\nButton primary outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-secondary-outline-hover\nButton secondary outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                },
+                "success": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-success-outline-hover\nButton success outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{green.500}"
+                },
+                "info": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-info-outline-hover\nButton info outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{blue.500}"
+                },
+                "warning": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-warning-outline-hover\nButton warning outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{orange.500}"
+                },
+                "danger": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-danger-outline-hover\nButton danger outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{red.500}"
+                },
+                "discovery": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-discovery-outline-hover\nButton discovery outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{purple.500}"
+                },
+                "caution": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-caution-outline-hover\nButton caution outline text hover",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{yellow.700}"
+                }
+              }
+            },
+            "soft": {
+              "primary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-primary-soft\nButton primary soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray dark.1000}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-secondary-soft\nButton secondary soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray dark.1000}"
+              },
+              "success": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-success-soft\nButton success soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{green.400}"
+              },
+              "info": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-info-soft\nButton info soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.300}"
+              },
+              "warning": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-warning-soft\nButton warning soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{orange.400}"
+              },
+              "danger": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-danger-soft\nButton danger soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.400}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-discovery-soft\nButton discovery soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{purple.300}"
+              },
+              "caution": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-caution-soft\nButton caution soft text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{yellow.400}"
+              },
+              "alt": {
+                "primary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-primary-soft-alt\nButton primary soft text alt",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                },
+                "secondary": {
+                  "$scopes": [
+                    "ALL_SCOPES"
+                  ],
+                  "$description": "--color-text-secondary-soft-alt\nButton secondary soft text alt",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color primitive",
+                  "$value": "{gray dark.1000}"
+                }
+              }
+            },
+            "solid": {
+              "primary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-primary-solid\nButton primary solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "secondary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-secondary-solid\nButton secondary solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "success": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-success-solid\nButton success solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "info": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-info-solid\nButton info solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "warning": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-warning-solid\nButton warning solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "danger": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-danger-solid\nButton danger solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-discovery-solid\nButton discovery solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              },
+              "caution": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-caution-solid\nButton caution solid text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{base.white}"
+              }
+            },
+            "surface": {
+              "primary": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-primary-surface\nAlert/Badge primary surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{gray dark.1000}"
+              },
+              "success": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-success-surface\nAlert/Badge success surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{green.400}"
+              },
+              "info": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-info-surface\nAlert/Badge info surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{blue.300}"
+              },
+              "warning": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-warning-surface\nAlert/Badge warning surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{orange.400}"
+              },
+              "danger": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-danger-surface\nAlert/Badge danger surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{red.400}"
+              },
+              "discovery": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-discovery-surface\nAlert/Badge discovery surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{purple.200}"
+              },
+              "caution": {
+                "$scopes": [
+                  "ALL_SCOPES"
+                ],
+                "$description": "--color-text-caution-surface\nAlert/Badge caution surface text",
+                "$type": "color",
+                "$libraryName": "",
+                "$collectionName": "color primitive",
+                "$value": "{yellow.400}"
+              }
+            }
+          },
           "border": {
             "default": {
               "$scopes": [
@@ -5181,714 +5913,6 @@
               }
             }
           },
-          "text": {
-            "default": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text\nPage text, paragraphs, headings",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray dark.1000}"
-            },
-            "primary": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-primary\nText in components with color=\"primary\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray dark.1000}"
-            },
-            "secondary": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-secondary\nSecondary text, less emphasis",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray dark.700}"
-            },
-            "tertiary": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-tertiary\nTertiary text, subtle",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray dark.600}"
-            },
-            "success": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-success\nText in components with color=\"success\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{green.400}"
-            },
-            "info": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-info\nText in components with color=\"info\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{blue.200}"
-            },
-            "warning": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-warning\nText in components with color=\"warning\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{orange.500}"
-            },
-            "danger": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-danger\nText in components with color=\"danger\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{red.500}"
-            },
-            "discovery": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-discovery\nText in components with color=\"discovery\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{purple.500}"
-            },
-            "caution": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-caution\nText in components with color=\"caution\"",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{yellow.500}"
-            },
-            "inverse": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-inverse\nText on inverted backgrounds",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray dark.0}"
-            },
-            "disabled": {
-              "$scopes": [
-                "TEXT_FILL"
-              ],
-              "$description": "--color-text-disabled\nDisabled text state",
-              "$type": "color",
-              "$libraryName": "",
-              "$collectionName": "color primitive",
-              "$value": "{gray dark.500}"
-            },
-            "ghost": {
-              "primary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-primary-ghost\nButton primary ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray dark.1000}"
-              },
-              "secondary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-secondary-ghost\nButton secondary ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray dark.700}"
-              },
-              "success": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-success-ghost\nButton success ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{green.500}"
-              },
-              "info": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-info-ghost\nButton info ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{blue.200}"
-              },
-              "warning": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-warning-ghost\nButton warning ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{orange.500}"
-              },
-              "danger": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-danger-ghost\nButton danger ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{red.500}"
-              },
-              "discovery": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-discovery-ghost\nButton discovery ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{purple.500}"
-              },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-ghost\nButton caution ghost text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{yellow.700}"
-              },
-              "hover": {
-                "primary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-primary-ghost-hover\nButton primary ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray dark.1000}"
-                },
-                "secondary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-secondary-ghost-hover\nButton secondary ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray dark.1000}"
-                },
-                "success": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-success-ghost-hover\nButton success ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{green.500}"
-                },
-                "info": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-info-ghost-hover\nButton info ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{blue.200}"
-                },
-                "warning": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-warning-ghost-hover\nButton warning ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{orange.500}"
-                },
-                "danger": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-danger-ghost-hover\nButton danger ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{red.500}"
-                },
-                "discovery": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-discovery-ghost-hover\nButton discovery ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{purple.500}"
-                },
-                "caution": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-caution-ghost-hover\nButton caution ghost text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{yellow.700}"
-                }
-              }
-            },
-            "outline": {
-              "primary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-primary-outline\nButton primary outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray dark.1000}"
-              },
-              "secondary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-secondary-outline\nButton secondary outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray dark.700}"
-              },
-              "success": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-success-outline\nButton success outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{green.500}"
-              },
-              "info": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-info-outline\nButton info outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{blue.500}"
-              },
-              "warning": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-warning-outline\nButton warning outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{orange.500}"
-              },
-              "danger": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-danger-outline\nButton danger outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{red.500}"
-              },
-              "discovery": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-discovery-outline\nButton discovery outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{purple.500}"
-              },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-outline\nButton caution outline text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{yellow.700}"
-              },
-              "hover": {
-                "primary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-primary-outline-hover\nButton primary outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray dark.1000}"
-                },
-                "secondary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-secondary-outline-hover\nButton secondary outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray dark.1000}"
-                },
-                "success": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-success-outline-hover\nButton success outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{green.500}"
-                },
-                "info": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-info-outline-hover\nButton info outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{blue.500}"
-                },
-                "warning": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-warning-outline-hover\nButton warning outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{orange.500}"
-                },
-                "danger": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-danger-outline-hover\nButton danger outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{red.500}"
-                },
-                "discovery": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-discovery-outline-hover\nButton discovery outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{purple.500}"
-                },
-                "caution": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-caution-outline-hover\nButton caution outline text hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{yellow.700}"
-                }
-              }
-            },
-            "soft": {
-              "primary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-primary-soft\nButton primary soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray dark.1000}"
-              },
-              "secondary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-secondary-soft\nButton secondary soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray dark.1000}"
-              },
-              "success": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-success-soft\nButton success soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{green.400}"
-              },
-              "info": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-info-soft\nButton info soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{blue.300}"
-              },
-              "warning": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-warning-soft\nButton warning soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{orange.400}"
-              },
-              "danger": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-danger-soft\nButton danger soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{red.400}"
-              },
-              "discovery": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-discovery-soft\nButton discovery soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{purple.300}"
-              },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-soft\nButton caution soft text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{yellow.400}"
-              },
-              "alt": {
-                "primary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-primary-soft-alt\nButton primary soft text alt",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray dark.1000}"
-                },
-                "secondary": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$description": "--color-text-secondary-soft-alt\nButton secondary soft text alt",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{gray dark.1000}"
-                }
-              }
-            },
-            "solid": {
-              "primary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-primary-solid\nButton primary solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "secondary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-secondary-solid\nButton secondary solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "success": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-success-solid\nButton success solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "info": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-info-solid\nButton info solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "warning": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-warning-solid\nButton warning solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "danger": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-danger-solid\nButton danger solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "discovery": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-discovery-solid\nButton discovery solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-solid\nButton caution solid text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{base.white}"
-              }
-            },
-            "surface": {
-              "primary": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-primary-surface\nAlert/Badge primary surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{gray dark.1000}"
-              },
-              "success": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-success-surface\nAlert/Badge success surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{green.400}"
-              },
-              "info": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-info-surface\nAlert/Badge info surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{blue.300}"
-              },
-              "warning": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-warning-surface\nAlert/Badge warning surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{orange.400}"
-              },
-              "danger": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-danger-surface\nAlert/Badge danger surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{red.400}"
-              },
-              "discovery": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-discovery-surface\nAlert/Badge discovery surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{purple.200}"
-              },
-              "caution": {
-                "$scopes": [
-                  "TEXT_FILL"
-                ],
-                "$description": "--color-text-caution-surface\nAlert/Badge caution surface text",
-                "$type": "color",
-                "$libraryName": "",
-                "$collectionName": "color primitive",
-                "$value": "{yellow.400}"
-              }
-            }
-          },
           "component": {
             "switch": {
               "track": {
@@ -6041,6 +6065,26 @@
               }
             },
             "input": {
+              "text": {
+                "default": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color",
+                  "$value": "{text.default}"
+                },
+                "placeholder": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color",
+                  "$value": "{text.tertiary}"
+                }
+              },
               "outline": {
                 "borderHover": {
                   "$scopes": [
