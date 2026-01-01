@@ -2936,38 +2936,6 @@
               }
             },
             "input": {
-              "text": {
-                "default": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color",
-                  "$value": "{text.default}"
-                },
-                "placeholder": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color",
-                  "$value": "{text.tertiary}"
-                }
-              },
-              "outline": {
-                "borderHover": {
-                  "$scopes": [
-                    "STROKE_COLOR"
-                  ],
-                  "$description": "--input-outline-border-color-hover\nInput border color on hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{alpha.25}"
-                }
-              },
               "border": {
                 "invalid": {
                   "$scopes": [
@@ -2978,6 +2946,86 @@
                   "$libraryName": "",
                   "$collectionName": "color primitive",
                   "$value": "{red.500}"
+                },
+                "outline": {
+                  "default": {
+                    "$scopes": [
+                      "ALL_SCOPES"
+                    ],
+                    "$description": "--input-outline-border-color\nInput outline border color",
+                    "$type": "color",
+                    "$libraryName": "",
+                    "$collectionName": "color",
+                    "$value": "{border.outline.primary}"
+                  },
+                  "hover": {
+                    "$scopes": [
+                      "STROKE_COLOR"
+                    ],
+                    "$description": "--input-outline-border-color-hover\nInput outline border color on hover",
+                    "$type": "color",
+                    "$libraryName": "",
+                    "$collectionName": "color primitive",
+                    "$value": "{alpha.25}"
+                  },
+                  "focus": {
+                    "$scopes": [
+                      "ALL_SCOPES"
+                    ],
+                    "$description": "--input-outline-border-color-focus\nInput outline border color on focus",
+                    "$type": "color",
+                    "$libraryName": "",
+                    "$collectionName": "color primitive",
+                    "$value": "{alpha.50}"
+                  }
+                },
+                "soft": {
+                  "focus": {
+                    "$scopes": [
+                      "ALL_SCOPES"
+                    ],
+                    "$description": "--input-soft-border-color-focus\nInput soft border color on focus",
+                    "$type": "color",
+                    "$libraryName": "",
+                    "$collectionName": "color primitive",
+                    "$value": "{alpha.20}"
+                  }
+                }
+              },
+              "text": {
+                "default": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--input-text-color\nInput text color",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color",
+                  "$value": "{text.default}"
+                },
+                "placeholder": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--input-placeholder-text-color\nInput placeholder text",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color",
+                  "$value": "{text.tertiary}"
+                }
+              },
+              "background": {
+                "soft": {
+                  "default": {
+                    "$scopes": [
+                      "TEXT_FILL"
+                    ],
+                    "$description": "--input-soft-background-color\nInput soft background color",
+                    "$type": "color",
+                    "$libraryName": "",
+                    "$collectionName": "color",
+                    "$value": "{background.soft.alpha.primary}"
+                  }
                 }
               }
             },
@@ -6065,38 +6113,6 @@
               }
             },
             "input": {
-              "text": {
-                "default": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color",
-                  "$value": "{text.default}"
-                },
-                "placeholder": {
-                  "$scopes": [
-                    "TEXT_FILL"
-                  ],
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color",
-                  "$value": "{text.tertiary}"
-                }
-              },
-              "outline": {
-                "borderHover": {
-                  "$scopes": [
-                    "STROKE_COLOR"
-                  ],
-                  "$description": "--input-outline-border-color-hover\nInput border color on hover",
-                  "$type": "color",
-                  "$libraryName": "",
-                  "$collectionName": "color primitive",
-                  "$value": "{alpha-white.30}"
-                }
-              },
               "border": {
                 "invalid": {
                   "$scopes": [
@@ -6107,6 +6123,86 @@
                   "$libraryName": "",
                   "$collectionName": "color primitive",
                   "$value": "{red.600}"
+                },
+                "outline": {
+                  "default": {
+                    "$scopes": [
+                      "ALL_SCOPES"
+                    ],
+                    "$description": "--input-outline-border-color\nInput outline border color",
+                    "$type": "color",
+                    "$libraryName": "",
+                    "$collectionName": "color",
+                    "$value": "{border.outline.primary}"
+                  },
+                  "hover": {
+                    "$scopes": [
+                      "STROKE_COLOR"
+                    ],
+                    "$description": "--input-outline-border-color-hover\nInput outline border color on hover",
+                    "$type": "color",
+                    "$libraryName": "",
+                    "$collectionName": "color primitive",
+                    "$value": "{alpha-white.30}"
+                  },
+                  "focus": {
+                    "$scopes": [
+                      "ALL_SCOPES"
+                    ],
+                    "$description": "--input-outline-border-color-focus\nInput outline border color on focus",
+                    "$type": "color",
+                    "$libraryName": "",
+                    "$collectionName": "color primitive",
+                    "$value": "{alpha-white.50}"
+                  }
+                },
+                "soft": {
+                  "focus": {
+                    "$scopes": [
+                      "ALL_SCOPES"
+                    ],
+                    "$description": "--input-soft-border-color-focus\nInput soft border color on focus",
+                    "$type": "color",
+                    "$libraryName": "",
+                    "$collectionName": "color primitive",
+                    "$value": "{alpha-white.20}"
+                  }
+                }
+              },
+              "text": {
+                "default": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--input-text-color\nInput text color",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color",
+                  "$value": "{text.default}"
+                },
+                "placeholder": {
+                  "$scopes": [
+                    "TEXT_FILL"
+                  ],
+                  "$description": "--input-placeholder-text-color\nInput placeholder text",
+                  "$type": "color",
+                  "$libraryName": "",
+                  "$collectionName": "color",
+                  "$value": "{text.tertiary}"
+                }
+              },
+              "background": {
+                "soft": {
+                  "default": {
+                    "$scopes": [
+                      "TEXT_FILL"
+                    ],
+                    "$description": "--input-soft-background-color\nInput soft background color",
+                    "$type": "color",
+                    "$libraryName": "",
+                    "$collectionName": "color",
+                    "$value": "{background.soft.alpha.primary}"
+                  }
                 }
               }
             },

@@ -148,9 +148,27 @@ const hover = await page.evaluate(el => getComputedStyle(el).backgroundColor, el
 
 ---
 
-## 7. Чеклист валидации
+## 7. Правила работы с переменными Figma
+
+**ВАЖНО:** Подробные правила работы с переменными Figma вынесены в отдельный файл [figma-variables.mdc](figma-variables.mdc). 
+
+**КРИТИЧЕСКИ ВАЖНО:** Всегда используй **полные и точные пути** переменных согласно design system. Не используй укороченные или общие пути.
+
+### Краткая справка:
+
+- Всегда проверяй структуру в `reference/figma-colors.json` или `reference/openai-design-system.json`
+- Используй **наиболее специфичный путь** (например, `component/input/border/outline/default`, а не `border/default`)
+- Для компонентов используй полный путь с префиксом `component/` (например, `component/input/text/placeholder`)
+- НЕ используй fallback на менее специфичные переменные
+
+**Подробности:** См. [figma-variables.mdc](figma-variables.mdc) для полной документации по работе с переменными Figma.
+
+---
+
+## 8. Чеклист валидации
 - [ ] Скриншоты оригинала и реализации идентичны при наложении.
 - [ ] Цвета совпадают до единицы в HEX.
 - [ ] Отступы (padding/gap) и размеры (height) совпадают пиксель-в-пиксель.
 - [ ] Шрифты (size, weight, line-height) идентичны.
 - [ ] Все состояния (hover/active) реализованы.
+- [ ] Переменные используют точные пути согласно design system.

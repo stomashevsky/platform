@@ -1951,21 +1951,33 @@ function getInputColorVarName(style: InputStyle, state: InputState, property: 'b
 
   // Handle invalid state
   if (state === 'invalid') {
-    if (property === 'border') return 'input/border/invalid';
+    if (property === 'border') return 'component/input/border/invalid';
     // Text and bg use default for invalid
   }
 
   // Border colors
   if (property === 'border') {
-    if (style === 'outline' && state === 'hover') return 'input/outline/borderHover';
-    // For default, focus, and invalid (already handled above)
-    return 'border/default';
+    if (style === 'outline') {
+      if (state === 'hover') return 'component/input/border/outline/hover';
+      if (state === 'focus') return 'component/input/border/outline/focus';
+      // For default state
+      return 'component/input/border/outline/default';
+    } else if (style === 'soft') {
+      // Soft style: focus has border, default and hover have no border
+      // Invalid state uses component/input/border/invalid (handled above)
+      if (state === 'focus') return 'component/input/border/soft/focus';
+      if (state === 'invalid') return 'component/input/border/invalid';
+      // For default and hover, return null (no border)
+      return null;
+    }
+    // Fallback (should not happen)
+    return null;
   }
 
   // Background colors
   if (property === 'bg') {
     if (style === 'outline') return null; // Transparent for outline
-    if (style === 'soft') return 'surface/secondary'; // Soft style background
+    if (style === 'soft') return 'component/input/background/soft/default'; // Soft style background
     return null;
   }
 
@@ -1979,15 +1991,18 @@ function getInputColorVarName(style: InputStyle, state: InputState, property: 'b
 
 // Fallback colors for each style/state
 function getInputFallbackColors(style: InputStyle, state: InputState): { bg: RGB | RGBA | null; text: RGB | RGBA; border: RGB | RGBA | null } {
-  const defaultText = { r: 0.1, g: 0.1, b: 0.1 }; // gray.1000
-  const disabledText = { r: 0.4, g: 0.4, b: 0.4 }; // gray.400
-  const defaultBorder = { r: 0.5, g: 0.5, b: 0.5, a: 0.1 }; // alpha.10
-  const disabledBorder = { r: 0.5, g: 0.5, b: 0.5, a: 0.6 }; // alpha.6
-  const hoverBorder = { r: 0.5, g: 0.5, b: 0.5, a: 0.25 }; // alpha.25
+  const defaultText = { r: 0.051, g: 0.051, b: 0.051 }; // gray.1000 (#0d0d0d)
+  const disabledText = { r: 0.557, g: 0.557, b: 0.557 }; // gray.400 (#8e8e8e)
+  const outlineDefaultBorder = { r: 0, g: 0, b: 0, a: 0.1 }; // alpha.10 (border/outline/primary)
+  const outlineHoverBorder = { r: 0, g: 0, b: 0, a: 0.25 }; // alpha.25
+  const outlineFocusBorder = { r: 0, g: 0, b: 0, a: 0.5 }; // alpha.50
+  const softFocusBorder = { r: 0, g: 0, b: 0, a: 0.2 }; // alpha.20
   const invalidBorder = { r: 0.937, g: 0.267, b: 0.267 }; // red.500
-  const disabledBg = { r: 0.5, g: 0.5, b: 0.5, a: 0.5 }; // alpha.5
-  const softBg = { r: 0.96, g: 0.96, b: 0.96 }; // gray.100
+  const disabledBorder = { r: 0, g: 0, b: 0, a: 0.06 }; // alpha.6
+  const disabledBg = { r: 0, g: 0, b: 0, a: 0.05 }; // alpha.5
+  const softBg = { r: 0, g: 0, b: 0, a: 0.08 }; // alpha.8 (background/soft/alpha/primary)
 
+  // Disabled state - same for both styles
   if (state === 'disabled') {
     return {
       bg: disabledBg,
@@ -1996,6 +2011,7 @@ function getInputFallbackColors(style: InputStyle, state: InputState): { bg: RGB
     };
   }
 
+  // Invalid state - border is red for both styles
   if (state === 'invalid') {
     return {
       bg: style === 'soft' ? softBg : null,
@@ -2004,18 +2020,52 @@ function getInputFallbackColors(style: InputStyle, state: InputState): { bg: RGB
     };
   }
 
-  if (style === 'outline' && state === 'hover') {
+  // Outline style states
+  if (style === 'outline') {
+    if (state === 'hover') {
+      return {
+        bg: null,
+        text: defaultText,
+        border: outlineHoverBorder,
+      };
+    }
+    if (state === 'focus') {
+      return {
+        bg: null,
+        text: defaultText,
+        border: outlineFocusBorder,
+      };
+    }
+    // default state
     return {
       bg: null,
       text: defaultText,
-      border: hoverBorder,
+      border: outlineDefaultBorder,
     };
   }
 
+  // Soft style states
+  if (style === 'soft') {
+    if (state === 'focus') {
+      return {
+        bg: softBg,
+        text: defaultText,
+        border: softFocusBorder,
+      };
+    }
+    // default and hover - no border for soft style
+    return {
+      bg: softBg,
+      text: defaultText,
+      border: null,
+    };
+  }
+
+  // Fallback (should not happen)
   return {
-    bg: style === 'soft' ? softBg : null,
+    bg: null,
     text: defaultText,
-    border: defaultBorder,
+    border: null,
   };
 }
 
@@ -2063,7 +2113,15 @@ async function getVariableByName(name: string): Promise<Variable | null> {
 
     // Only match if segment counts are equal or variable has more segments
     // This prevents text/primary from matching text/soft/primary
-    return varSegments >= nameSegments;
+    if (varSegments < nameSegments) return false;
+
+    // CRITICAL: If the search path starts with 'component/', only match variables that also start with 'component/'
+    // This prevents finding 'border/default' when searching for 'component/input/border/outline/default'
+    if (name.startsWith('component/') && !v.name.startsWith('component/')) {
+      return false;
+    }
+
+    return true;
   });
   if (found) {
     console.log(`Found variable by partial match: ${name} -> ${found.name} (scopes: ${found.scopes.join(', ')})`);
@@ -2640,11 +2698,8 @@ async function createStyledInput(
 
   // Create as component
   const input = figma.createComponent();
-  // Name using Property=Value syntax
-  let nameParts = [`style=${style}`, `state=${state}`, `size=${size}`];
-  nameParts.push(`startAdornment=${startAdornment}`);
-  nameParts.push(`endAdornment=${endAdornment}`);
-  input.name = nameParts.join(', ');
+  // Name using Property=Value syntax (no adornment props - they're always visible, user toggles them)
+  input.name = `style=${style}, state=${state}, size=${size}`;
 
   input.layoutMode = 'HORIZONTAL';
   input.primaryAxisAlignItems = 'CENTER';
@@ -2686,7 +2741,7 @@ async function createStyledInput(
     }
   }
 
-  // Border - Input always has border (both outline and soft styles)
+  // Border - Outline always has border, soft only has border on focus
   const borderVarName = getInputColorVarName(style, state, 'border');
   if (borderVarName) {
     const borderBound = await bindVariableToStroke(input, borderVarName);
@@ -2698,15 +2753,12 @@ async function createStyledInput(
         opacity: alpha
       }];
     }
-  } else if (colors.border) {
-    const alpha = (colors.border as RGBA).a !== undefined ? (colors.border as RGBA).a : 1;
-    input.strokes = [{
-      type: 'SOLID',
-      color: { r: colors.border.r, g: colors.border.g, b: colors.border.b },
-      opacity: alpha
-    }];
+    input.strokeWeight = 1;
+  } else {
+    // No border for soft default/hover states
+    input.strokes = [];
+    input.strokeWeight = 0;
   }
-  input.strokeWeight = 1;
 
   // Bind sizing properties to the input frame
   const sizeVars = INPUT_SIZE_VARS[size];
@@ -2716,19 +2768,15 @@ async function createStyledInput(
   await bindVariableToProperty(input, 'itemSpacing', sizeVars.gap);
   await bindVariableToProperty(input, 'cornerRadius', sizeVars.radius);
 
-  // Get variable names for icons and text
-  // Input text color: --input-text-color (according to docs)
-  const textVarName = 'input/text/color'; // Try input/text/color first, fallback to text/primary
-  const iconSizeVarName = sizeVars.fontSize; // Use fontSize for icon size (1em in CSS)
-  console.log(`Input ${style}/${state}: Looking for text variable: ${textVarName}`);
+  // Get variable names for icons
+  // Icon size uses fontSize (1em in CSS), not iconSize like buttons
+  const iconSizeVarName = sizeVars.fontSize;
 
-  // Start adornment (left icon) - always create, but conditionally add based on property
-  // We'll conditionally append based on startAdornment property in the component name
-  if (startAdornment) {
-    const iconStart = await createIconInstance(INPUT_ICON_NODE_IDS.startAdornment, config.fontSize, 'text/primary', iconSizeVarName);
-    iconStart.name = 'startAdornment'; // Lowercase name
-    input.appendChild(iconStart);
-  }
+  // Start adornment (left icon) - always create, visibility controlled by property
+  const iconStart = await createIconInstance(INPUT_ICON_NODE_IDS.startAdornment, config.fontSize, 'component/input/text/default', iconSizeVarName);
+  iconStart.name = 'startAdornment'; // Lowercase name
+  iconStart.visible = startAdornment; // Control visibility through property
+  input.appendChild(iconStart);
 
   // Text input (placeholder text) - always present
   const textInput = figma.createText();
@@ -2750,37 +2798,30 @@ async function createStyledInput(
     textInput.lineHeight = { value: config.fontSize, unit: 'PIXELS' };
   }
 
-  // Try to bind text color variable - use input/text/color, fallback to text/primary
-  let textBound = await bindVariableToTextFill(textInput, 'input/text/color');
+  // Bind placeholder text color variable - use component/input/text/placeholder (no fallback)
+  const textBound = await bindVariableToTextFill(textInput, 'component/input/text/placeholder');
   if (!textBound) {
-    // Fallback to text/primary if input/text/color doesn't exist
-    textBound = await bindVariableToTextFill(textInput, 'text/primary');
-  }
-  
-  if (!textBound) {
-    console.log(`Failed to bind text variable, using fallback color`);
-    textInput.fills = [{ type: 'SOLID', color: colors.text }];
+    console.log(`Failed to bind placeholder text variable: component/input/text/placeholder`);
   } else {
     // Verify the variable is actually bound
     const fills = textInput.fills;
     if (Array.isArray(fills) && fills.length > 0) {
       const fill = fills[0];
       if (fill.type === 'SOLID' && 'boundVariable' in fill && fill.boundVariable) {
-        console.log(`Text variable successfully bound`);
+        console.log(`Placeholder text variable successfully bound`);
       } else {
-        console.log(`Warning: Text variable binding may have failed - fill type:`, fill.type);
+        console.log(`Warning: Placeholder text variable binding may have failed - fill type:`, fill.type);
       }
     }
   }
 
   input.appendChild(textInput);
 
-  // End adornment (right icon) - always create, but conditionally add based on property
-  if (endAdornment) {
-    const iconEnd = await createIconInstance(INPUT_ICON_NODE_IDS.endAdornment, config.fontSize, 'text/primary', iconSizeVarName);
-    iconEnd.name = 'endAdornment'; // Lowercase name
-    input.appendChild(iconEnd);
-  }
+  // End adornment (right icon) - always create, visibility controlled by property
+  const iconEnd = await createIconInstance(INPUT_ICON_NODE_IDS.endAdornment, config.fontSize, 'component/input/text/default', iconSizeVarName);
+  iconEnd.name = 'endAdornment'; // Lowercase name
+  iconEnd.visible = endAdornment; // Control visibility through property
+  input.appendChild(iconEnd);
 
   return input;
 }
@@ -2797,9 +2838,8 @@ async function generateInputs(): Promise<void> {
   let x = 0;
   let localY = 0;
 
-  // Calculate total components: styles × states × sizes × adornments (4 variants: none, start, end, both)
-  const componentsPerStyle = INPUT_STATES.length * INPUT_SIZE_ORDER.length * 4;
-  const totalComponents = INPUT_STYLES.length * componentsPerStyle;
+  // Calculate total components: styles × states × sizes (only one adornment variant: both true)
+  const totalComponents = INPUT_STYLES.length * INPUT_STATES.length * INPUT_SIZE_ORDER.length;
 
   let totalCreatedComponents = 0;
 
@@ -2809,40 +2849,16 @@ async function generateInputs(): Promise<void> {
     for (const state of INPUT_STATES) {
       // For each size
       for (const size of INPUT_SIZE_ORDER) {
-        // Generate variants for all adornment combinations
-        // 1. No adornments (both false)
-        const componentNone = await createStyledInput(style, state, size, false, false);
-        componentNone.x = x;
-        componentNone.y = localY;
-        x += componentNone.width + GAP_WITHIN_SET;
-        inputComponents.push(componentNone);
+        // Only one variant: both adornments true (like buttons)
+        // User can toggle visibility to false as needed
+        const component = await createStyledInput(style, state, size, true, true);
+        component.x = x;
+        component.y = localY;
+        x += component.width + GAP_WITHIN_SET;
+        inputComponents.push(component);
         totalCreatedComponents++;
 
-        // 2. Start adornment only
-        const componentStart = await createStyledInput(style, state, size, true, false);
-        componentStart.x = x;
-        componentStart.y = localY;
-        x += componentStart.width + GAP_WITHIN_SET;
-        inputComponents.push(componentStart);
-        totalCreatedComponents++;
-
-        // 3. End adornment only
-        const componentEnd = await createStyledInput(style, state, size, false, true);
-        componentEnd.x = x;
-        componentEnd.y = localY;
-        x += componentEnd.width + GAP_WITHIN_SET;
-        inputComponents.push(componentEnd);
-        totalCreatedComponents++;
-
-        // 4. Both adornments
-        const componentBoth = await createStyledInput(style, state, size, true, true);
-        componentBoth.x = x;
-        componentBoth.y = localY;
-        x += componentBoth.width + GAP_WITHIN_SET;
-        inputComponents.push(componentBoth);
-        totalCreatedComponents++;
-
-        // Send progress update after all 4 adornment variants for this size are created
+        // Send progress update
         await new Promise(resolve => setTimeout(resolve, 0));
         figma.ui.postMessage({
           type: 'progress-update',

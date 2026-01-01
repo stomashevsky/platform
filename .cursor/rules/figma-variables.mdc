@@ -1,0 +1,241 @@
+# FIGMA-VARIABLES.md — Правила работы с переменными Figma
+
+Этот документ содержит правила и методологию работы с переменными Figma в плагине.
+
+---
+
+## 1. КРИТИЧЕСКИ ВАЖНО: Использование точных путей переменных
+
+**ВСЕГДА** используй **полные и точные пути** переменных согласно design system. Не используй укороченные или общие пути.
+
+### Примеры правильных путей:
+
+**Для кнопок:**
+- ✅ `text/soft/primary` (НЕ ❌ `text/primary`)
+- ✅ `text/outline/primary` (НЕ ❌ `text/primary`)
+- ✅ `text/ghost/primary` (НЕ ❌ `text/primary`)
+- ✅ `text/solid/primary` (НЕ ❌ `text/primary`)
+- ✅ `border/outline/primary` для outline стиля
+
+**Для input компонентов:**
+- ✅ `component/input/text/default` для текста input
+- ✅ `component/input/text/placeholder` для placeholder текста
+- ✅ `component/input/border/outline/default` для default border outline стиля
+- ✅ `component/input/border/outline/hover` для hover border outline стиля
+- ✅ `component/input/border/outline/focus` для focus border outline стиля
+- ✅ `component/input/border/soft/focus` для focus border soft стиля
+- ✅ `component/input/border/invalid` для invalid border (общая для всех стилей)
+- ✅ `component/input/background/soft/default` для background soft стиля
+
+---
+
+## 2. Как работает поиск переменных (`getVariableByName`)
+
+Функция `getVariableByName` использует следующий алгоритм поиска:
+
+### 2.1. Точное совпадение (Exact Match)
+Сначала ищет переменную с **точным совпадением** имени:
+```typescript
+variablesCache.find(v => v.name === name)
+```
+
+**Пример:**
+- Поиск: `component/input/border/outline/default`
+- Найдет: переменную с именем `component/input/border/outline/default`
+
+### 2.2. Формат с точками (Dot Format)
+Если точное совпадение не найдено, пытается найти переменную с точками вместо слешей:
+```typescript
+const dotName = name.replace(/\//g, '.');
+variablesCache.find(v => v.name === dotName)
+```
+
+**Пример:**
+- Поиск: `component/input/border/outline/default`
+- Попытка: `component.input.border.outline.default`
+
+### 2.3. Частичное совпадение (Partial Match)
+Если точное совпадение не найдено, ищет переменную, которая **заканчивается** на искомый путь:
+```typescript
+variablesCache.find(v => {
+  const endsWithExact = v.name === name || v.name.endsWith('/' + name);
+  if (!endsWithExact) return false;
+  
+  const nameSegments = name.split('/').length;
+  const varSegments = v.name.split('/').length;
+  
+  // Только если количество сегментов переменной >= количеству сегментов в пути поиска
+  return varSegments >= nameSegments;
+});
+```
+
+**Важно:** Проверка количества сегментов предотвращает неправильное совпадение:
+- ❌ Поиск `text/soft/primary` НЕ найдет `text/primary` (3 сегмента vs 2 сегмента)
+- ✅ Поиск `text/soft/primary` найдет `text/soft/primary` (3 сегмента = 3 сегмента)
+- ✅ Поиск `border/outline/primary` найдет `some/prefix/border/outline/primary` (3 сегмента <= 5 сегментов)
+
+**КРИТИЧЕСКИ ВАЖНО:** Если путь начинается с `component/`, partial matching должен искать только переменные, которые тоже начинаются с `component/`. Это предотвращает нахождение неправильных переменных типа `border/default` когда ищем `component/input/border/outline/default`.
+
+---
+
+## 3. Правила именования и структуры переменных
+
+### 3.1. Проверка структуры в reference данных
+
+**ВСЕГДА** проверяй структуру переменных в:
+- `reference/figma-colors.json`
+- `reference/openai-design-system.json`
+
+Используй **точный путь** как в reference данных.
+
+### 3.2. Компонентные переменные
+
+Переменные для компонентов находятся в группе `component/`:
+- ✅ `component/input/...`
+- ✅ `component/button/...` (если используется)
+
+**Важно:** Группа `component/` — это часть полного пути переменной. Не сокращай путь.
+
+### 3.3. Специфичные vs общие переменные
+
+**Правило:** Используй **наиболее специфичный путь**, который соответствует design system.
+
+**Примеры:**
+- ❌ НЕ используй `text/primary` для input placeholder
+- ✅ Используй `component/input/text/placeholder`
+- ❌ НЕ используй `border/default` для input outline border
+- ✅ Используй `component/input/border/outline/default`
+
+---
+
+## 4. Fallback значения
+
+**ВАЖНО:** После исправлений для кнопок fallback на менее специфичные переменные **НЕ используется**.
+
+### 4.1. Для кнопок
+Если точная переменная не найдена:
+- Используется fallback цвет из функции `getButtonFallbackColors`
+- НЕ используется fallback на общие переменные типа `text/primary`
+
+### 4.2. Для input компонентов
+Если точная переменная не найдена:
+- Должна быть ошибка в консоли
+- НЕ используется fallback на общие переменные типа `text/primary` или `border/default`
+- Используется fallback цвет из функции `getInputFallbackColors` только для визуализации
+
+---
+
+## 5. Чеклист проверки переменных
+
+При добавлении новых компонентов проверь:
+
+- [ ] Используются точные пути переменных (не укороченные)
+- [ ] Пути соответствуют структуре в reference данных
+- [ ] Для компонентов с группой `component/` используется полный путь
+- [ ] Нет fallback на менее специфичные переменные
+- [ ] Количество сегментов пути достаточное для правильного partial matching
+- [ ] Переменные проверены в `reference/figma-colors.json` или `reference/openai-design-system.json`
+
+---
+
+## 6. Отладка проблем с переменными
+
+### 6.1. Логирование
+
+Функция `getVariableByName` логирует:
+- Точное совпадение: `Found variable by exact match: {name}`
+- Формат с точками: `Found variable by dot format: {name} -> {dotName}`
+- Частичное совпадение: `Found variable by partial match: {name} -> {found.name}`
+- Переменная не найдена: `Variable not found: {name}` + список доступных переменных
+
+### 6.2. Проверка переменной в Figma
+
+Если переменная не находится:
+1. Проверь точное имя переменной в Figma
+2. Проверь структуру в `reference/figma-colors.json`
+3. Проверь количество сегментов пути
+4. Убедись, что используется полный путь (не укороченный)
+
+### 6.3. Частые ошибки
+
+**Ошибка 1:** Использование укороченного пути
+```typescript
+// ❌ НЕПРАВИЛЬНО
+return 'text/primary';
+
+// ✅ ПРАВИЛЬНО
+return 'text/soft/primary';
+```
+
+**Ошибка 2:** Недостаточно сегментов для partial matching
+```typescript
+// ❌ НЕПРАВИЛЬНО (может найти неправильную переменную)
+return 'border/default';
+
+// ✅ ПРАВИЛЬНО
+return 'component/input/border/outline/default';
+```
+
+**Ошибка 3:** Использование общих переменных вместо специфичных
+```typescript
+// ❌ НЕПРАВИЛЬНО
+return 'text/tertiary';
+
+// ✅ ПРАВИЛЬНО
+return 'component/input/text/placeholder';
+```
+
+---
+
+## 7. Примеры правильного использования
+
+### 7.1. Кнопки
+
+```typescript
+function getButtonColorVarName(style: ButtonStyle, variant: ButtonColorVariant, state: ButtonState, property: 'bg' | 'text' | 'border'): string {
+  if (property === 'text') {
+    if (style === 'soft') {
+      return `text/soft/${variant}`; // ✅ Правильно
+    }
+    if (style === 'outline') {
+      return `text/outline/${variant}`; // ✅ Правильно
+    }
+    // ...
+  }
+  // ...
+}
+```
+
+### 7.2. Input компоненты
+
+```typescript
+function getInputColorVarName(style: InputStyle, state: InputState, property: 'bg' | 'text' | 'border'): string | null {
+  if (property === 'border') {
+    if (style === 'outline') {
+      if (state === 'hover') {
+        return 'component/input/border/outline/hover'; // ✅ Правильно
+      }
+      if (state === 'focus') {
+        return 'component/input/border/outline/focus'; // ✅ Правильно
+      }
+      return 'component/input/border/outline/default'; // ✅ Правильно
+    } else if (style === 'soft') {
+      if (state === 'focus') {
+        return 'component/input/border/soft/focus'; // ✅ Правильно
+      }
+      return null; // ✅ Правильно (нет border для default/hover)
+    }
+  }
+  // ...
+}
+```
+
+---
+
+## 8. Связь с agents.mdc
+
+Эти правила дополняют раздел **"7. Правила работы с переменными Figma"** в [agents.mdc](agents.mdc).
+
+Для получения полной картины работы с компонентами читай оба документа:
+- [agents.mdc](agents.mdc) — общие правила разработки UI компонентов
+- [figma-variables.mdc](figma-variables.mdc) — детальные правила работы с переменными Figma
