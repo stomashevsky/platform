@@ -307,6 +307,7 @@
   <div class="tab-nav">
     <button class="tab-btn active" data-tab="documentation">Documentation</button>
     <button class="tab-btn" data-tab="components">Components</button>
+    <button class="tab-btn" data-tab="icons">Icons</button>
   </div>
 
   <!-- Documentation Tab -->
@@ -388,6 +389,21 @@
     <div class="status" id="componentsStatus"></div>
   </div>
 
+  <!-- Icons Tab -->
+  <div class="tab-content" id="tab-icons">
+    <h2>Icons</h2>
+    <p class="description">Select icon components and update them: flatten layers, rename to kebab-case, and add searchable tags.</p>
+
+    <button class="btn-primary" id="generateIcons">Update Selected Icons</button>
+
+    <div class="loading" id="iconsLoading">
+      <div class="spinner"></div>
+      <span>Generating icons...</span>
+    </div>
+
+    <div class="status" id="iconsStatus"></div>
+  </div>
+
 
   <script>
     let collections = [];
@@ -460,6 +476,17 @@
       if (msg.type === 'buttons-error') {
         hideComponentsLoading();
         showComponentsStatus('error', msg.message);
+      }
+
+      // Icons tab messages
+      if (msg.type === 'icons-complete') {
+        hideIconsLoading();
+        showIconsStatus('success', `Generated ${msg.count} icon(s) successfully!`);
+      }
+
+      if (msg.type === 'icons-error') {
+        hideIconsLoading();
+        showIconsStatus('error', msg.message);
       }
     };
 
@@ -550,6 +577,22 @@
 
     function showComponentsStatus(type, message) {
       const status = document.getElementById('componentsStatus');
+      status.className = `status ${type}`;
+      status.textContent = message;
+    }
+
+    // Icons tab loading/status functions
+    function showIconsLoading() {
+      document.getElementById('iconsLoading').classList.add('visible');
+      document.getElementById('iconsStatus').className = 'status';
+    }
+
+    function hideIconsLoading() {
+      document.getElementById('iconsLoading').classList.remove('visible');
+    }
+
+    function showIconsStatus(type, message) {
+      const status = document.getElementById('iconsStatus');
       status.className = `status ${type}`;
       status.textContent = message;
     }
@@ -720,6 +763,16 @@
 
       showComponentsLoading();
       generateNextButtonColor();
+    };
+
+    // Generate Icons
+    document.getElementById('generateIcons').onclick = () => {
+      showIconsLoading();
+      parent.postMessage({
+        pluginMessage: {
+          type: 'generate-icons'
+        }
+      }, '*');
     };
 
 

@@ -1705,6 +1705,18 @@ figma.ui.onmessage = async (msg: { type: string; collectionIds?: string[] }) => 
       }
     }
 
+    if (msg.type === 'generate-icons') {
+      try {
+        const count = await updateIconComponents();
+        figma.notify(`Updated ${count} icon component(s)`);
+        figma.ui.postMessage({ type: 'icons-complete', count });
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        figma.notify(`Error: ${errorMessage}`, { error: true });
+        figma.ui.postMessage({ type: 'icons-error', message: errorMessage });
+      }
+    }
+
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     figma.notify(`Error: ${errorMessage}`, { error: true });
@@ -1888,12 +1900,12 @@ async function getVariableByName(name: string): Promise<Variable | null> {
     // Must end with the exact name or with a slash followed by the name
     const endsWithExact = v.name === name || v.name.endsWith('/' + name);
     if (!endsWithExact) return false;
-    
+
     // For paths with multiple segments (like text/soft/primary), ensure we don't match
     // shorter paths (like text/primary) by checking the segment count
     const nameSegments = name.split('/').length;
     const varSegments = v.name.split('/').length;
-    
+
     // Only match if segment counts are equal or variable has more segments
     // This prevents text/primary from matching text/soft/primary
     return varSegments >= nameSegments;
@@ -1905,8 +1917,8 @@ async function getVariableByName(name: string): Promise<Variable | null> {
 
   // Log available variables for debugging if not found
   if (name.includes('soft') || name.includes('primary') || name.includes('secondary')) {
-    const matchingVars = variablesCache.filter(v => 
-      v.resolvedType === 'COLOR' && 
+    const matchingVars = variablesCache.filter(v =>
+      v.resolvedType === 'COLOR' &&
       (v.name.includes('soft') || v.name.includes('primary') || v.name.includes('secondary'))
     ).map(v => `${v.name} (${v.scopes.join(', ')})`).slice(0, 30);
     console.log(`Variable not found: ${name}`);
@@ -1961,7 +1973,7 @@ async function bindVariableToStroke(node: FrameNode | ComponentNode | RectangleN
 async function bindVariableToTextFill(node: TextNode, varName: string): Promise<boolean> {
   const variable = await getVariableByName(varName);
   if (!variable || variable.resolvedType !== 'COLOR') return false;
-  
+
   try {
     const basePaint: SolidPaint = {
       type: 'SOLID',
@@ -2214,7 +2226,7 @@ async function generateButtons(targetColors?: string[]): Promise<void> {
 
     // Log component count for debugging
     console.log(`[${color}] Total components to combine: ${colorComponents.length}, expected: ${componentsPerColor}`);
-    
+
     // Verify we have the expected number of components
     if (colorComponents.length !== componentsPerColor) {
       console.warn(`[${color}] Component count mismatch! Expected ${componentsPerColor}, got ${colorComponents.length}`);
@@ -2243,10 +2255,10 @@ async function generateButtons(targetColors?: string[]): Promise<void> {
     try {
       componentSet = figma.combineAsVariants(colorComponents, figma.currentPage);
       componentSet.name = color.toLowerCase(); // Name the set "primary", "secondary", etc.
-      
+
       // Log the number of variants in the set
       console.log(`[${color}] Component set created with ${componentSet.children.length} variants`);
-      
+
       // Verify icon-only variants are present
       const iconOnlyVariants = componentSet.children.filter(child => {
         if (child.type === 'COMPONENT') {
@@ -2255,7 +2267,7 @@ async function generateButtons(targetColors?: string[]): Promise<void> {
         return false;
       });
       console.log(`[${color}] Icon-only variants in set: ${iconOnlyVariants.length}, expected: ${BUTTON_STYLES.length * BUTTON_STATES.length * BUTTON_SIZE_ORDER.length * 2 * 2}`);
-      
+
       // Position the SET itself
       componentSet.y = y;
 
@@ -2325,7 +2337,7 @@ async function createStyledButton(
   button.counterAxisAlignItems = 'CENTER';
   button.primaryAxisSizingMode = 'AUTO';
   button.counterAxisSizingMode = 'FIXED';
-  
+
   // For icon-only buttons: uniform=true means square (width = height), uniform=false means use normal padding
   if (iconOnly && uniform) {
     button.layoutSizingHorizontal = 'FIXED';
@@ -2335,7 +2347,7 @@ async function createStyledButton(
   // Padding
   // OpenAI Apps SDK UI uses a 1.33x multiplier for padding when pill={true}
   // For icon-only: uniform=true means padding=0 (square), uniform=false means use normal padding
-  const paddingX = iconOnly 
+  const paddingX = iconOnly
     ? (uniform ? 0 : config.paddingX)
     : (pill ? Math.round(config.paddingX * 1.33) : config.paddingX);
   // Set fallback padding values (will be overridden by variable binding if successful)
@@ -2601,3 +2613,2776 @@ function createArrowIcon(size: number, color: RGB): FrameNode {
 
   return icon;
 }
+
+// ============================================================================
+// Icon Generation Functions
+// ============================================================================
+
+/**
+ * Transform PascalCase to kebab-case
+ * Example: ArrowBottomLeftSm -> arrow-bottom-left-sm
+ * Example: AspectRatio34 -> aspect-ratio-34
+ */
+function pascalToKebabCase(str: string): string {
+  return str
+    .replace(/([a-z])([A-Z])/g, '$1-$2')  // Lowercase letter before uppercase letter
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')  // Uppercase letter before uppercase+lowercase
+    .replace(/([a-zA-Z])([0-9])/g, '$1-$2')  // Letter before number
+    .replace(/([0-9])([a-zA-Z])/g, '$1-$2')  // Number before letter
+    .toLowerCase();
+}
+
+/**
+ * Generate human-readable description for an icon based on its name
+ * Does not include the icon name itself - only functional description
+ */
+function generateIconDescription(iconName: string): string {
+  const name = iconName.toLowerCase();
+
+  // Helper function to check if name includes any of the patterns
+  const includesAny = (patterns: string[]): boolean => patterns.some(p => name.includes(p));
+
+  // Navigation
+  if (includesAny(['arrow', 'chevron', 'caret', 'back', 'forward', 'next', 'previous'])) {
+    if (includesAny(['left'])) return 'Arrow pointing left';
+    if (includesAny(['right'])) return 'Arrow pointing right';
+    if (includesAny(['up'])) return 'Arrow pointing up';
+    if (includesAny(['down'])) return 'Arrow pointing down';
+    return 'Navigation arrow';
+  }
+  if (includesAny(['home'])) return 'Home page';
+  if (includesAny(['globe', 'world', 'earth'])) return 'Globe or world';
+
+  // Actions
+  if (includesAny(['add', 'plus', 'create', 'new'])) {
+    if (includesAny(['member', 'user'])) return 'Add user or member';
+    if (includesAny(['source'])) return 'Add source';
+    return 'Add or create';
+  }
+  if (includesAny(['delete', 'remove', 'minus', 'clear', 'trash'])) {
+    if (includesAny(['account'])) return 'Delete account';
+    return 'Delete or remove';
+  }
+  if (includesAny(['edit', 'pencil', 'modify', 'change', 'write'])) return 'Edit or modify';
+  if (includesAny(['copy', 'duplicate', 'clone'])) return 'Copy or duplicate';
+  if (includesAny(['download', 'save', 'export'])) return 'Download or save';
+  if (includesAny(['upload', 'import'])) return 'Upload or import';
+  if (includesAny(['search', 'magnify', 'find', 'telescope'])) return 'Search or find';
+  if (includesAny(['eye', 'view', 'visible', 'hidden', 'show', 'hide'])) {
+    if (includesAny(['off', 'closed'])) return 'Hide or view hidden';
+    return 'View or show';
+  }
+  if (includesAny(['filter'])) return 'Filter';
+  if (includesAny(['logout', 'exit'])) return 'Logout or exit';
+
+  // Communication
+  if (includesAny(['chat', 'message', 'messaging'])) return 'Chat or messaging';
+  if (includesAny(['mail', 'email'])) return 'Email or mail';
+  if (includesAny(['bell', 'notification'])) return 'Notification';
+  if (includesAny(['comment', 'forum'])) return 'Comment or forum';
+
+  // Media
+  if (includesAny(['play'])) return 'Play';
+  if (includesAny(['pause'])) return 'Pause';
+  if (includesAny(['stop'])) return 'Stop';
+  if (includesAny(['video'])) return 'Video';
+  if (includesAny(['image', 'picture', 'photo', 'camera'])) return 'Image or photo';
+  if (includesAny(['caption'])) return 'Caption';
+  if (includesAny(['mic', 'microphone', 'voice', 'speak', 'speech'])) {
+    if (includesAny(['off', 'mute'])) return 'Microphone muted';
+    return 'Microphone or voice';
+  }
+  if (includesAny(['sound', 'audio', 'music'])) return 'Sound or audio';
+
+  // Files
+  if (includesAny(['folder'])) return 'Folder';
+  if (includesAny(['file', 'document'])) return 'File or document';
+  if (includesAny(['notebook', 'notepad'])) return 'Notebook';
+  if (includesAny(['archive'])) return 'Archive';
+  if (includesAny(['clipboard'])) return 'Clipboard';
+
+  // Users
+  if (includesAny(['avatar', 'profile'])) return 'User avatar or profile';
+  if (includesAny(['group', 'people'])) return 'Group of users';
+  if (includesAny(['user', 'member', 'person'])) return 'User or member';
+
+  // Settings
+  if (includesAny(['settings', 'config', 'gear', 'preferences', 'options', 'customize'])) {
+    return 'Settings or configuration';
+  }
+
+  // Status
+  if (includesAny(['check', 'success', 'complete', 'done'])) return 'Success or completed';
+  if (includesAny(['error', 'warning', 'alert', 'exclamation'])) return 'Error or warning';
+  if (includesAny(['info', 'help', 'question'])) return 'Information or help';
+
+  // AI & Automation
+  if (includesAny(['agent', 'assistant'])) return 'AI agent or assistant';
+  if (includesAny(['sparkle', 'bolt', 'flash', 'inspiration'])) return 'AI or magic feature';
+  if (includesAny(['gpt', 'sora', 'brain', 'automation', 'bot'])) return 'AI or automation';
+
+  // Analytics
+  if (includesAny(['chart', 'graph', 'analytics', 'bar'])) return 'Analytics or chart';
+  if (includesAny(['data', 'statistics', 'metrics'])) return 'Data or statistics';
+
+  // Interface
+  if (includesAny(['menu', 'hamburger'])) return 'Menu';
+  if (includesAny(['collapse', 'expand'])) return 'Collapse or expand';
+  if (includesAny(['link', 'chain', 'external'])) return 'Link';
+  if (includesAny(['code', 'function', 'variable', 'script'])) return 'Code or development';
+  if (includesAny(['grid', 'layout', 'table'])) return 'Grid or layout';
+  if (includesAny(['history'])) return 'History';
+  if (includesAny(['lightmode', 'darkmode', 'moon', 'sun', 'colortheme', 'systemmode'])) {
+    return 'Theme or mode';
+  }
+  if (includesAny(['cursor', 'desktop', 'mobile'])) return 'Device or cursor';
+
+  // Symbols
+  if (includesAny(['heart'])) return 'Favorite or like';
+  if (includesAny(['star'])) return 'Star or featured';
+  if (includesAny(['bookmark', 'pin'])) return 'Bookmark or pin';
+  if (includesAny(['flag', 'tag', 'badge', 'wreath'])) return 'Symbol or marker';
+
+  // Time
+  if (includesAny(['clock', 'time'])) return 'Clock or time';
+  if (includesAny(['calendar', 'date'])) return 'Calendar or date';
+
+  // Security
+  if (includesAny(['lock', 'key'])) return 'Lock or security';
+  if (includesAny(['shield', 'protection'])) return 'Security shield';
+  if (includesAny(['secure', 'private'])) return 'Security or privacy';
+
+  // Default - return empty string (name will be in tags only)
+  return '';
+}
+
+/**
+ * Generate search tags from icon name
+ * Includes only synonyms (words from icon name are excluded - they're already in the name)
+ * Example: XCrossed -> "close, delete, remove, cancel, exit" (without "x" and "crossed")
+ */
+function generateSearchTags(iconName: string): string {
+  const words = iconName
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+    .replace(/-/g, ' ') // Replace hyphens with spaces
+    .toLowerCase()
+    .split(' ')
+    .filter(w => w.length > 0);
+
+  // Don't include words from the icon name - only synonyms
+  const tags = new Set<string>();
+
+  // Add synonyms for common words (additional search terms only)
+  words.forEach(word => {
+    switch (word) {
+      // Close/Cancel
+      case 'x':
+        tags.add('close');
+        tags.add('delete');
+        tags.add('remove');
+        tags.add('cancel');
+        tags.add('exit');
+        tags.add('dismiss');
+        break;
+      case 'crossed':
+      case 'cross':
+        tags.add('close');
+        tags.add('delete');
+        tags.add('remove');
+        tags.add('disabled');
+        break;
+
+      // Navigation
+      case 'arrow':
+        tags.add('direction');
+        tags.add('navigation');
+        tags.add('pointer');
+        break;
+      case 'chevron':
+        tags.add('arrow');
+        tags.add('expand');
+        tags.add('collapse');
+        tags.add('caret');
+        break;
+      case 'caret':
+        tags.add('chevron');
+        tags.add('dropdown');
+        tags.add('expand');
+        break;
+      case 'down':
+        tags.add('bottom');
+        tags.add('dropdown');
+        tags.add('below');
+        break;
+      case 'up':
+        tags.add('top');
+        tags.add('above');
+        tags.add('upward');
+        break;
+      case 'left':
+        tags.add('back');
+        tags.add('previous');
+        tags.add('west');
+        break;
+      case 'right':
+        tags.add('forward');
+        tags.add('next');
+        tags.add('east');
+        break;
+      case 'home':
+        tags.add('house');
+        tags.add('main');
+        tags.add('start');
+        break;
+      case 'globe':
+      case 'world':
+      case 'earth':
+        tags.add('international');
+        tags.add('web');
+        tags.add('internet');
+        tags.add('language');
+        break;
+
+      // Actions - Add/Create
+      case 'add':
+        tags.add('plus');
+        tags.add('create');
+        tags.add('new');
+        tags.add('insert');
+        break;
+      case 'plus':
+        tags.add('add');
+        tags.add('create');
+        tags.add('new');
+        break;
+      case 'create':
+      case 'new':
+        tags.add('add');
+        tags.add('plus');
+        break;
+
+      // Actions - Remove/Delete
+      case 'remove':
+      case 'delete':
+        tags.add('minus');
+        tags.add('trash');
+        tags.add('clear');
+        tags.add('erase');
+        break;
+      case 'trash':
+        tags.add('delete');
+        tags.add('bin');
+        tags.add('garbage');
+        tags.add('remove');
+        break;
+      case 'minus':
+        tags.add('remove');
+        tags.add('subtract');
+        tags.add('decrease');
+        break;
+
+      // Actions - Edit
+      case 'edit':
+        tags.add('modify');
+        tags.add('pencil');
+        tags.add('change');
+        tags.add('update');
+        tags.add('write');
+        break;
+      case 'pencil':
+        tags.add('edit');
+        tags.add('write');
+        tags.add('draw');
+        break;
+      case 'copy':
+        tags.add('duplicate');
+        tags.add('clone');
+        tags.add('clipboard');
+        break;
+      case 'paste':
+        tags.add('clipboard');
+        tags.add('insert');
+        break;
+      case 'cut':
+        tags.add('scissors');
+        tags.add('trim');
+        break;
+
+      // Actions - Transfer
+      case 'save':
+        tags.add('store');
+        tags.add('download');
+        tags.add('disk');
+        tags.add('floppy');
+        break;
+      case 'saved':
+        tags.add('bookmark');
+        tags.add('favorite');
+        tags.add('favourite');
+        tags.add('store');
+        break;
+      case 'upload':
+        tags.add('import');
+        tags.add('send');
+        tags.add('publish');
+        break;
+      case 'download':
+        tags.add('export');
+        tags.add('receive');
+        tags.add('get');
+        break;
+      case 'share':
+        tags.add('send');
+        tags.add('forward');
+        tags.add('social');
+        break;
+      case 'send':
+        tags.add('share');
+        tags.add('submit');
+        tags.add('arrow');
+        break;
+
+      // Actions - Search/View
+      case 'search':
+        tags.add('find');
+        tags.add('magnify');
+        tags.add('lookup');
+        tags.add('glass');
+        break;
+      case 'magnify':
+      case 'zoom':
+        tags.add('search');
+        tags.add('glass');
+        tags.add('enlarge');
+        break;
+      case 'eye':
+        tags.add('view');
+        tags.add('visible');
+        tags.add('watch');
+        tags.add('see');
+        tags.add('preview');
+        break;
+      case 'view':
+        tags.add('eye');
+        tags.add('visible');
+        tags.add('show');
+        break;
+      case 'hide':
+      case 'hidden':
+        tags.add('invisible');
+        tags.add('conceal');
+        tags.add('off');
+        break;
+      case 'filter':
+        tags.add('sort');
+        tags.add('funnel');
+        tags.add('refine');
+        break;
+
+      // Actions - Undo/Redo
+      case 'undo':
+        tags.add('revert');
+        tags.add('back');
+        tags.add('restore');
+        break;
+      case 'redo':
+        tags.add('repeat');
+        tags.add('forward');
+        break;
+      case 'refresh':
+        tags.add('reload');
+        tags.add('sync');
+        tags.add('update');
+        tags.add('rotate');
+        break;
+
+      // Users
+      case 'member':
+      case 'user':
+        tags.add('person');
+        tags.add('people');
+        tags.add('account');
+        tags.add('profile');
+        break;
+      case 'people':
+      case 'members':
+      case 'users':
+        tags.add('group');
+        tags.add('team');
+        tags.add('persons');
+        break;
+      case 'avatar':
+        tags.add('user');
+        tags.add('profile');
+        tags.add('photo');
+        break;
+
+      // Settings
+      case 'settings':
+        tags.add('config');
+        tags.add('gear');
+        tags.add('preferences');
+        tags.add('options');
+        tags.add('cog');
+        break;
+      case 'gear':
+      case 'cog':
+        tags.add('settings');
+        tags.add('config');
+        tags.add('options');
+        break;
+
+      // Communication
+      case 'chat':
+      case 'message':
+        tags.add('bubble');
+        tags.add('comment');
+        tags.add('talk');
+        tags.add('conversation');
+        break;
+      case 'mail':
+      case 'email':
+        tags.add('envelope');
+        tags.add('letter');
+        tags.add('inbox');
+        break;
+      case 'bell':
+        tags.add('notification');
+        tags.add('alert');
+        tags.add('ring');
+        break;
+      case 'phone':
+        tags.add('call');
+        tags.add('telephone');
+        tags.add('mobile');
+        tags.add('device');
+        break;
+
+      // Media - Video
+      case 'video':
+        tags.add('movie');
+        tags.add('film');
+        tags.add('camera');
+        tags.add('record');
+        break;
+      case 'play':
+        tags.add('start');
+        tags.add('triangle');
+        tags.add('media');
+        tags.add('run');
+        break;
+      case 'pause':
+        tags.add('hold');
+        tags.add('stop');
+        tags.add('wait');
+        break;
+      case 'stop':
+        tags.add('end');
+        tags.add('square');
+        tags.add('halt');
+        break;
+      case 'skip':
+        tags.add('next');
+        tags.add('forward');
+        break;
+      case 'rewind':
+        tags.add('backward');
+        tags.add('previous');
+        break;
+
+      // Media - Audio
+      case 'mic':
+      case 'microphone':
+        tags.add('voice');
+        tags.add('audio');
+        tags.add('record');
+        tags.add('speak');
+        break;
+      case 'sound':
+      case 'audio':
+        tags.add('volume');
+        tags.add('speaker');
+        tags.add('music');
+        break;
+      case 'mute':
+        tags.add('silent');
+        tags.add('off');
+        tags.add('quiet');
+        break;
+
+      // Media - Image
+      case 'image':
+      case 'picture':
+      case 'photo':
+        tags.add('gallery');
+        tags.add('media');
+        tags.add('snapshot');
+        break;
+      case 'camera':
+        tags.add('photo');
+        tags.add('capture');
+        tags.add('snapshot');
+        break;
+
+      // Files
+      case 'file':
+        tags.add('document');
+        tags.add('page');
+        tags.add('paper');
+        break;
+      case 'folder':
+        tags.add('directory');
+        tags.add('collection');
+        tags.add('organize');
+        break;
+      case 'document':
+        tags.add('file');
+        tags.add('page');
+        tags.add('text');
+        break;
+      case 'clipboard':
+        tags.add('paste');
+        tags.add('copy');
+        tags.add('board');
+        break;
+
+      // Interface
+      case 'menu':
+        tags.add('hamburger');
+        tags.add('navigation');
+        tags.add('list');
+        tags.add('bars');
+        break;
+      case 'hamburger':
+        tags.add('menu');
+        tags.add('bars');
+        tags.add('navigation');
+        break;
+      case 'sidebar':
+        tags.add('panel');
+        tags.add('drawer');
+        tags.add('navigation');
+        break;
+      case 'expand':
+        tags.add('enlarge');
+        tags.add('maximize');
+        tags.add('fullscreen');
+        tags.add('open');
+        break;
+      case 'collapse':
+        tags.add('minimize');
+        tags.add('shrink');
+        tags.add('close');
+        break;
+      case 'more':
+      case 'dots':
+        tags.add('menu');
+        tags.add('options');
+        tags.add('ellipsis');
+        tags.add('overflow');
+        break;
+      case 'grid':
+        tags.add('layout');
+        tags.add('tiles');
+        tags.add('gallery');
+        break;
+      case 'list':
+        tags.add('bullets');
+        tags.add('items');
+        tags.add('rows');
+        break;
+      case 'table':
+        tags.add('grid');
+        tags.add('data');
+        tags.add('spreadsheet');
+        break;
+
+      // Status
+      case 'check':
+      case 'checkmark':
+        tags.add('done');
+        tags.add('complete');
+        tags.add('success');
+        tags.add('ok');
+        tags.add('tick');
+        break;
+      case 'success':
+        tags.add('check');
+        tags.add('done');
+        tags.add('complete');
+        break;
+      case 'error':
+        tags.add('fail');
+        tags.add('wrong');
+        tags.add('problem');
+        break;
+      case 'warning':
+      case 'alert':
+        tags.add('caution');
+        tags.add('attention');
+        tags.add('exclamation');
+        break;
+      case 'info':
+        tags.add('information');
+        tags.add('about');
+        tags.add('help');
+        break;
+      case 'help':
+      case 'question':
+        tags.add('support');
+        tags.add('faq');
+        tags.add('ask');
+        break;
+      case 'loading':
+        tags.add('spinner');
+        tags.add('progress');
+        tags.add('wait');
+        break;
+
+      // Security
+      case 'lock':
+        tags.add('secure');
+        tags.add('private');
+        tags.add('password');
+        tags.add('closed');
+        break;
+      case 'unlock':
+        tags.add('open');
+        tags.add('access');
+        tags.add('unsecure');
+        break;
+      case 'key':
+        tags.add('password');
+        tags.add('access');
+        tags.add('security');
+        tags.add('auth');
+        break;
+      case 'shield':
+        tags.add('security');
+        tags.add('protect');
+        tags.add('safe');
+        break;
+
+      // Time
+      case 'clock':
+        tags.add('time');
+        tags.add('hour');
+        tags.add('schedule');
+        tags.add('watch');
+        break;
+      case 'calendar':
+        tags.add('date');
+        tags.add('schedule');
+        tags.add('event');
+        tags.add('day');
+        break;
+      case 'history':
+        tags.add('past');
+        tags.add('recent');
+        tags.add('log');
+        tags.add('activity');
+        break;
+
+      // Symbols
+      case 'heart':
+        tags.add('love');
+        tags.add('like');
+        tags.add('favorite');
+        tags.add('favourite');
+        break;
+      case 'star':
+        tags.add('favorite');
+        tags.add('rating');
+        tags.add('important');
+        tags.add('featured');
+        break;
+      case 'bookmark':
+        tags.add('save');
+        tags.add('favorite');
+        tags.add('mark');
+        break;
+      case 'pin':
+        tags.add('location');
+        tags.add('marker');
+        tags.add('attach');
+        tags.add('fix');
+        break;
+      case 'flag':
+        tags.add('report');
+        tags.add('mark');
+        tags.add('important');
+        break;
+      case 'tag':
+        tags.add('label');
+        tags.add('category');
+        tags.add('mark');
+        break;
+
+      // Link
+      case 'link':
+        tags.add('chain');
+        tags.add('connect');
+        tags.add('url');
+        tags.add('hyperlink');
+        break;
+      case 'external':
+        tags.add('outside');
+        tags.add('new window');
+        tags.add('open');
+        break;
+
+      // Code
+      case 'code':
+        tags.add('programming');
+        tags.add('developer');
+        tags.add('brackets');
+        tags.add('script');
+        break;
+      case 'terminal':
+        tags.add('console');
+        tags.add('command');
+        tags.add('cli');
+        tags.add('shell');
+        break;
+      case 'api':
+        tags.add('integration');
+        tags.add('connect');
+        tags.add('developer');
+        break;
+
+      // AI
+      case 'ai':
+        tags.add('artificial');
+        tags.add('intelligence');
+        tags.add('smart');
+        tags.add('machine');
+        break;
+      case 'sparkle':
+      case 'sparkles':
+        tags.add('magic');
+        tags.add('ai');
+        tags.add('generate');
+        tags.add('stars');
+        break;
+      case 'bolt':
+      case 'lightning':
+        tags.add('fast');
+        tags.add('quick');
+        tags.add('power');
+        tags.add('flash');
+        break;
+      case 'brain':
+        tags.add('thinking');
+        tags.add('intelligence');
+        tags.add('mind');
+        tags.add('smart');
+        break;
+
+      // Format
+      case 'bold':
+        tags.add('strong');
+        tags.add('format');
+        tags.add('text');
+        break;
+      case 'italic':
+        tags.add('slant');
+        tags.add('format');
+        tags.add('text');
+        break;
+      case 'underline':
+        tags.add('format');
+        tags.add('text');
+        break;
+      case 'align':
+        tags.add('format');
+        tags.add('text');
+        tags.add('justify');
+        break;
+
+      // Aspect/Dimensions
+      case 'aspect':
+        tags.add('ratio');
+        tags.add('size');
+        tags.add('dimensions');
+        tags.add('resize');
+        break;
+      case 'ratio':
+        tags.add('aspect');
+        tags.add('proportion');
+        tags.add('size');
+        break;
+      case 'resize':
+        tags.add('scale');
+        tags.add('size');
+        tags.add('dimensions');
+        break;
+      case 'crop':
+        tags.add('cut');
+        tags.add('trim');
+        tags.add('image');
+        break;
+      case 'rotate':
+        tags.add('turn');
+        tags.add('spin');
+        tags.add('orientation');
+        break;
+      case 'flip':
+        tags.add('mirror');
+        tags.add('reflect');
+        tags.add('horizontal');
+        tags.add('vertical');
+        break;
+
+      // Brightness/Contrast
+      case 'brightness':
+        tags.add('light');
+        tags.add('dark');
+        tags.add('adjust');
+        tags.add('sun');
+        break;
+      case 'contrast':
+        tags.add('adjust');
+        tags.add('light');
+        tags.add('dark');
+        break;
+      case 'sun':
+        tags.add('bright');
+        tags.add('light');
+        tags.add('day');
+        tags.add('mode');
+        break;
+      case 'moon':
+        tags.add('dark');
+        tags.add('night');
+        tags.add('mode');
+        break;
+
+      // Layers
+      case 'layer':
+      case 'layers':
+        tags.add('stack');
+        tags.add('overlap');
+        tags.add('depth');
+        break;
+      case 'bring':
+      case 'front':
+        tags.add('layer');
+        tags.add('forward');
+        tags.add('above');
+        break;
+      case 'back':
+        tags.add('layer');
+        tags.add('behind');
+        tags.add('below');
+        break;
+      case 'stack':
+        tags.add('layers');
+        tags.add('pile');
+        tags.add('group');
+        break;
+
+      // Text
+      case 'text':
+        tags.add('type');
+        tags.add('font');
+        tags.add('write');
+        break;
+      case 'font':
+        tags.add('text');
+        tags.add('type');
+        tags.add('letter');
+        break;
+      case 'quote':
+        tags.add('text');
+        tags.add('cite');
+        tags.add('speech');
+        break;
+
+      // Shapes
+      case 'circle':
+        tags.add('shape');
+        tags.add('round');
+        tags.add('oval');
+        break;
+      case 'square':
+        tags.add('shape');
+        tags.add('box');
+        tags.add('rectangle');
+        break;
+      case 'rectangle':
+        tags.add('shape');
+        tags.add('box');
+        tags.add('square');
+        break;
+      case 'triangle':
+        tags.add('shape');
+        tags.add('arrow');
+        break;
+      case 'polygon':
+        tags.add('shape');
+        tags.add('multi');
+        break;
+
+      // Controls
+      case 'slider':
+        tags.add('range');
+        tags.add('control');
+        tags.add('adjust');
+        break;
+      case 'toggle':
+        tags.add('switch');
+        tags.add('on');
+        tags.add('off');
+        break;
+      case 'checkbox':
+        tags.add('check');
+        tags.add('tick');
+        tags.add('select');
+        break;
+      case 'radio':
+        tags.add('select');
+        tags.add('option');
+        tags.add('choice');
+        break;
+      case 'dropdown':
+        tags.add('select');
+        tags.add('menu');
+        tags.add('list');
+        tags.add('caret');
+        break;
+      case 'button':
+        tags.add('click');
+        tags.add('action');
+        tags.add('control');
+        break;
+      case 'input':
+        tags.add('field');
+        tags.add('form');
+        tags.add('text');
+        break;
+
+      // Devices
+      case 'desktop':
+        tags.add('computer');
+        tags.add('monitor');
+        tags.add('screen');
+        break;
+      case 'laptop':
+        tags.add('computer');
+        tags.add('notebook');
+        tags.add('device');
+        break;
+      case 'mobile':
+        tags.add('phone');
+        tags.add('device');
+        tags.add('smartphone');
+        break;
+      case 'tablet':
+        tags.add('ipad');
+        tags.add('device');
+        tags.add('screen');
+        break;
+      case 'watch':
+        tags.add('time');
+        tags.add('wearable');
+        tags.add('device');
+        break;
+      case 'tv':
+        tags.add('television');
+        tags.add('screen');
+        tags.add('display');
+        break;
+
+      // Location
+      case 'location':
+        tags.add('pin');
+        tags.add('map');
+        tags.add('place');
+        tags.add('gps');
+        break;
+      case 'map':
+        tags.add('location');
+        tags.add('directions');
+        tags.add('navigate');
+        break;
+      case 'compass':
+        tags.add('direction');
+        tags.add('navigation');
+        tags.add('north');
+        break;
+
+      // Money/Commerce
+      case 'money':
+        tags.add('cash');
+        tags.add('payment');
+        tags.add('dollar');
+        break;
+      case 'dollar':
+      case 'currency':
+        tags.add('money');
+        tags.add('payment');
+        tags.add('price');
+        break;
+      case 'cart':
+        tags.add('shopping');
+        tags.add('buy');
+        tags.add('basket');
+        break;
+      case 'bag':
+        tags.add('shopping');
+        tags.add('buy');
+        tags.add('store');
+        break;
+      case 'credit':
+      case 'card':
+        tags.add('payment');
+        tags.add('money');
+        tags.add('bank');
+        break;
+
+      // Weather
+      case 'cloud':
+        tags.add('weather');
+        tags.add('storage');
+        tags.add('sky');
+        break;
+      case 'rain':
+        tags.add('weather');
+        tags.add('water');
+        tags.add('drops');
+        break;
+      case 'snow':
+        tags.add('weather');
+        tags.add('cold');
+        tags.add('winter');
+        break;
+
+      // Misc common icons
+      case 'wifi':
+        tags.add('network');
+        tags.add('internet');
+        tags.add('wireless');
+        tags.add('signal');
+        break;
+      case 'bluetooth':
+        tags.add('wireless');
+        tags.add('connect');
+        tags.add('device');
+        break;
+      case 'battery':
+        tags.add('power');
+        tags.add('charge');
+        tags.add('energy');
+        break;
+      case 'power':
+        tags.add('on');
+        tags.add('off');
+        tags.add('shut');
+        break;
+      case 'plug':
+        tags.add('power');
+        tags.add('connect');
+        tags.add('electricity');
+        break;
+      case 'print':
+      case 'printer':
+        tags.add('paper');
+        tags.add('output');
+        tags.add('document');
+        break;
+      case 'scan':
+      case 'scanner':
+        tags.add('document');
+        tags.add('qr');
+        tags.add('barcode');
+        break;
+      case 'chart':
+      case 'graph':
+        tags.add('data');
+        tags.add('analytics');
+        tags.add('statistics');
+        break;
+      case 'dashboard':
+        tags.add('panel');
+        tags.add('metrics');
+        tags.add('overview');
+        break;
+      case 'widget':
+        tags.add('component');
+        tags.add('module');
+        tags.add('element');
+        break;
+      case 'window':
+        tags.add('app');
+        tags.add('panel');
+        tags.add('frame');
+        break;
+      case 'tab':
+        tags.add('window');
+        tags.add('browser');
+        tags.add('panel');
+        break;
+      case 'split':
+        tags.add('divide');
+        tags.add('separate');
+        tags.add('two');
+        break;
+      case 'merge':
+        tags.add('combine');
+        tags.add('join');
+        tags.add('unite');
+        break;
+      case 'cut':
+        tags.add('scissors');
+        tags.add('remove');
+        tags.add('clip');
+        break;
+      case 'attach':
+        tags.add('clip');
+        tags.add('paperclip');
+        tags.add('file');
+        break;
+      case 'inbox':
+        tags.add('mail');
+        tags.add('messages');
+        tags.add('receive');
+        break;
+      case 'outbox':
+        tags.add('mail');
+        tags.add('send');
+        tags.add('sent');
+        break;
+      case 'archive':
+        tags.add('storage');
+        tags.add('save');
+        tags.add('backup');
+        break;
+      case 'trash':
+        tags.add('delete');
+        tags.add('remove');
+        tags.add('bin');
+        tags.add('garbage');
+        break;
+      case 'recycle':
+        tags.add('restore');
+        tags.add('trash');
+        tags.add('recover');
+        break;
+      case 'drag':
+        tags.add('move');
+        tags.add('handle');
+        tags.add('grip');
+        break;
+      case 'handle':
+        tags.add('drag');
+        tags.add('move');
+        tags.add('grip');
+        break;
+      case 'open':
+        tags.add('launch');
+        tags.add('start');
+        tags.add('expand');
+        break;
+      case 'close':
+        tags.add('x');
+        tags.add('exit');
+        tags.add('dismiss');
+        break;
+      case 'enter':
+        tags.add('return');
+        tags.add('submit');
+        tags.add('login');
+        break;
+      case 'login':
+        tags.add('signin');
+        tags.add('enter');
+        tags.add('access');
+        break;
+      case 'logout':
+        tags.add('signout');
+        tags.add('exit');
+        tags.add('leave');
+        break;
+      case 'profile':
+        tags.add('user');
+        tags.add('account');
+        tags.add('avatar');
+        break;
+      case 'account':
+        tags.add('user');
+        tags.add('profile');
+        tags.add('person');
+        break;
+      case 'sort':
+        tags.add('order');
+        tags.add('arrange');
+        tags.add('filter');
+        break;
+      case 'swap':
+        tags.add('exchange');
+        tags.add('switch');
+        tags.add('replace');
+        break;
+      case 'random':
+        tags.add('shuffle');
+        tags.add('mix');
+        tags.add('dice');
+        break;
+      case 'shuffle':
+        tags.add('random');
+        tags.add('mix');
+        tags.add('reorder');
+        break;
+      case 'loop':
+        tags.add('repeat');
+        tags.add('cycle');
+        tags.add('infinite');
+        break;
+      case 'repeat':
+        tags.add('loop');
+        tags.add('cycle');
+        tags.add('again');
+        break;
+      case 'object':
+        tags.add('element');
+        tags.add('item');
+        tags.add('component');
+        break;
+      case 'agent':
+        tags.add('ai');
+        tags.add('bot');
+        tags.add('assistant');
+        break;
+      case 'assistant':
+        tags.add('ai');
+        tags.add('help');
+        tags.add('agent');
+        break;
+      case 'bot':
+        tags.add('robot');
+        tags.add('ai');
+        tags.add('automation');
+        break;
+      case 'automation':
+        tags.add('auto');
+        tags.add('robot');
+        tags.add('workflow');
+        break;
+      case 'sora':
+        tags.add('ai');
+        tags.add('video');
+        tags.add('generate');
+        break;
+      case 'gpt':
+        tags.add('ai');
+        tags.add('chat');
+        tags.add('language');
+        break;
+      case 'chatgpt':
+        tags.add('ai');
+        tags.add('chat');
+        tags.add('gpt');
+        break;
+      case 'wrench':
+        tags.add('tool');
+        tags.add('settings');
+        tags.add('repair');
+        tags.add('fix');
+        break;
+      case 'hammer':
+        tags.add('tool');
+        tags.add('build');
+        tags.add('construct');
+        break;
+      case 'tool':
+      case 'tools':
+        tags.add('wrench');
+        tags.add('settings');
+        tags.add('utility');
+        break;
+      case 'magic':
+        tags.add('wand');
+        tags.add('sparkle');
+        tags.add('auto');
+        break;
+      case 'wand':
+        tags.add('magic');
+        tags.add('sparkle');
+        tags.add('auto');
+        break;
+      case 'box':
+        tags.add('cube');
+        tags.add('package');
+        tags.add('container');
+        break;
+      case 'cube':
+        tags.add('3d');
+        tags.add('box');
+        tags.add('shape');
+        break;
+      case 'package':
+        tags.add('box');
+        tags.add('delivery');
+        tags.add('ship');
+        break;
+      case 'gift':
+        tags.add('present');
+        tags.add('box');
+        tags.add('reward');
+        break;
+      case 'rocket':
+        tags.add('launch');
+        tags.add('fast');
+        tags.add('start');
+        tags.add('deploy');
+        break;
+      case 'target':
+        tags.add('goal');
+        tags.add('aim');
+        tags.add('focus');
+        break;
+      case 'trophy':
+        tags.add('award');
+        tags.add('win');
+        tags.add('achievement');
+        break;
+      case 'medal':
+        tags.add('award');
+        tags.add('win');
+        tags.add('achievement');
+        break;
+      case 'crown':
+        tags.add('king');
+        tags.add('premium');
+        tags.add('top');
+        break;
+      case 'verified':
+        tags.add('check');
+        tags.add('approved');
+        tags.add('confirmed');
+        break;
+      case 'approve':
+      case 'approved':
+        tags.add('check');
+        tags.add('verified');
+        tags.add('confirm');
+        break;
+      case 'reject':
+      case 'rejected':
+        tags.add('x');
+        tags.add('decline');
+        tags.add('deny');
+        break;
+      case 'pending':
+        tags.add('wait');
+        tags.add('processing');
+        tags.add('clock');
+        break;
+
+      // Analytics & Data
+      case 'analytics':
+        tags.add('data');
+        tags.add('chart');
+        tags.add('graph');
+        tags.add('statistics');
+        tags.add('metrics');
+        break;
+      case 'analyze':
+      case 'analysis':
+        tags.add('data');
+        tags.add('examine');
+        tags.add('study');
+        tags.add('review');
+        break;
+      case 'data':
+        tags.add('information');
+        tags.add('stats');
+        tags.add('metrics');
+        tags.add('analytics');
+        break;
+
+      // Apps & Platform
+      case 'app':
+      case 'apps':
+        tags.add('application');
+        tags.add('program');
+        tags.add('software');
+        tags.add('platform');
+        break;
+      case 'array':
+        tags.add('list');
+        tags.add('collection');
+        tags.add('data');
+        tags.add('structure');
+        break;
+      case 'atom':
+        tags.add('science');
+        tags.add('chemistry');
+        tags.add('molecule');
+        tags.add('particle');
+        break;
+
+      // Badges & Labels
+      case 'badge':
+        tags.add('label');
+        tags.add('tag');
+        tags.add('mark');
+        tags.add('award');
+        break;
+      case 'batch':
+        tags.add('group');
+        tags.add('collection');
+        tags.add('set');
+        tags.add('multiple');
+        break;
+
+      // Media & Effects
+      case 'blend':
+        tags.add('mix');
+        tags.add('merge');
+        tags.add('combine');
+        tags.add('overlay');
+        break;
+      case 'boolean':
+        tags.add('logic');
+        tags.add('true');
+        tags.add('false');
+        tags.add('condition');
+        break;
+      case 'branch':
+        tags.add('git');
+        tags.add('version');
+        tags.add('tree');
+        tags.add('split');
+        break;
+      case 'bug':
+        tags.add('error');
+        tags.add('issue');
+        tags.add('problem');
+        tags.add('debug');
+        break;
+      case 'business':
+        tags.add('company');
+        tags.add('corporate');
+        tags.add('office');
+        tags.add('work');
+        break;
+
+      // Objects & Containers
+      case 'cabinet':
+        tags.add('storage');
+        tags.add('furniture');
+        tags.add('drawer');
+        tags.add('organize');
+        break;
+      case 'card':
+        tags.add('payment');
+        tags.add('credit');
+        tags.add('debit');
+        tags.add('bank');
+        break;
+      case 'category':
+        tags.add('group');
+        tags.add('classify');
+        tags.add('organize');
+        tags.add('type');
+        break;
+      case 'certificate':
+        tags.add('award');
+        tags.add('document');
+        tags.add('diploma');
+        tags.add('credential');
+        break;
+      case 'compose':
+        tags.add('write');
+        tags.add('create');
+        tags.add('edit');
+        tags.add('draft');
+        break;
+      case 'connector':
+        tags.add('connect');
+        tags.add('link');
+        tags.add('join');
+        tags.add('integration');
+        break;
+      case 'cursor':
+        tags.add('pointer');
+        tags.add('mouse');
+        tags.add('click');
+        tags.add('select');
+        break;
+      case 'custom':
+      case 'customize':
+        tags.add('settings');
+        tags.add('personalize');
+        tags.add('configure');
+        tags.add('adjust');
+        break;
+      case 'dark':
+      case 'darkmode':
+        tags.add('night');
+        tags.add('theme');
+        tags.add('mode');
+        tags.add('black');
+        break;
+
+      // Document & Files
+      case 'document':
+        tags.add('file');
+        tags.add('paper');
+        tags.add('page');
+        tags.add('text');
+        break;
+
+      // Interface Elements
+      case 'device':
+        tags.add('hardware');
+        tags.add('machine');
+        tags.add('gadget');
+        tags.add('tool');
+        break;
+      case 'error':
+        tags.add('fail');
+        tags.add('wrong');
+        tags.add('problem');
+        tags.add('issue');
+        break;
+      case 'expand':
+        tags.add('enlarge');
+        tags.add('maximize');
+        tags.add('fullscreen');
+        tags.add('open');
+        break;
+      case 'external':
+        tags.add('outside');
+        tags.add('new window');
+        tags.add('open');
+        tags.add('link');
+        break;
+
+      // File Types
+      case 'file':
+        tags.add('document');
+        tags.add('page');
+        tags.add('paper');
+        tags.add('data');
+        break;
+      case 'filter':
+        tags.add('sort');
+        tags.add('funnel');
+        tags.add('refine');
+        tags.add('search');
+        break;
+      case 'flag':
+        tags.add('report');
+        tags.add('mark');
+        tags.add('important');
+        tags.add('alert');
+        break;
+      case 'flash':
+        tags.add('lightning');
+        tags.add('bolt');
+        tags.add('fast');
+        tags.add('speed');
+        break;
+      case 'flask':
+        tags.add('science');
+        tags.add('chemistry');
+        tags.add('experiment');
+        tags.add('lab');
+        break;
+      case 'folder':
+        tags.add('directory');
+        tags.add('collection');
+        tags.add('organize');
+        tags.add('storage');
+        break;
+      case 'function':
+        tags.add('code');
+        tags.add('programming');
+        tags.add('method');
+        tags.add('script');
+        break;
+
+      // Layout & Structure
+      case 'grid':
+        tags.add('layout');
+        tags.add('tiles');
+        tags.add('gallery');
+        tags.add('table');
+        break;
+      case 'group':
+        tags.add('team');
+        tags.add('people');
+        tags.add('collection');
+        tags.add('multiple');
+        break;
+      case 'hand':
+        tags.add('gesture');
+        tags.add('pointer');
+        tags.add('cursor');
+        tags.add('touch');
+        break;
+      case 'health':
+        tags.add('medical');
+        tags.add('wellness');
+        tags.add('care');
+        tags.add('hospital');
+        break;
+      case 'history':
+        tags.add('past');
+        tags.add('recent');
+        tags.add('log');
+        tags.add('activity');
+        break;
+      case 'home':
+        tags.add('house');
+        tags.add('main');
+        tags.add('start');
+        tags.add('dashboard');
+        break;
+      case 'image':
+      case 'picture':
+        tags.add('photo');
+        tags.add('gallery');
+        tags.add('media');
+        tags.add('visual');
+        break;
+      case 'info':
+        tags.add('information');
+        tags.add('about');
+        tags.add('help');
+        tags.add('details');
+        break;
+      case 'invoice':
+        tags.add('bill');
+        tags.add('payment');
+        tags.add('document');
+        tags.add('receipt');
+        break;
+      case 'keyboard':
+        tags.add('type');
+        tags.add('input');
+        tags.add('keys');
+        tags.add('text');
+        break;
+      case 'language':
+        tags.add('translate');
+        tags.add('locale');
+        tags.add('translation');
+        tags.add('globe');
+        break;
+      case 'layout':
+        tags.add('design');
+        tags.add('arrange');
+        tags.add('structure');
+        tags.add('grid');
+        break;
+      case 'light':
+      case 'lightmode':
+        tags.add('bright');
+        tags.add('day');
+        tags.add('theme');
+        tags.add('mode');
+        break;
+      case 'list':
+        tags.add('items');
+        tags.add('rows');
+        tags.add('bullets');
+        tags.add('collection');
+        break;
+      case 'lock':
+        tags.add('secure');
+        tags.add('private');
+        tags.add('password');
+        tags.add('protection');
+        break;
+      case 'map':
+        tags.add('location');
+        tags.add('navigation');
+        tags.add('geography');
+        tags.add('directions');
+        break;
+      case 'marker':
+        tags.add('pin');
+        tags.add('tag');
+        tags.add('note');
+        tags.add('highlight');
+        break;
+      case 'media':
+        tags.add('content');
+        tags.add('video');
+        tags.add('audio');
+        tags.add('image');
+        break;
+      case 'member':
+      case 'user':
+        tags.add('person');
+        tags.add('people');
+        tags.add('account');
+        tags.add('profile');
+        break;
+      case 'menu':
+        tags.add('navigation');
+        tags.add('list');
+        tags.add('options');
+        tags.add('hamburger');
+        break;
+      case 'message':
+        tags.add('chat');
+        tags.add('text');
+        tags.add('communication');
+        tags.add('bubble');
+        break;
+      case 'mode':
+        tags.add('theme');
+        tags.add('setting');
+        tags.add('state');
+        tags.add('view');
+        break;
+      case 'music':
+        tags.add('audio');
+        tags.add('sound');
+        tags.add('song');
+        tags.add('playlist');
+        break;
+      case 'node':
+        tags.add('point');
+        tags.add('connection');
+        tags.add('network');
+        tags.add('dot');
+        break;
+      case 'notebook':
+      case 'notepad':
+        tags.add('note');
+        tags.add('write');
+        tags.add('document');
+        tags.add('journal');
+        break;
+      case 'note':
+        tags.add('notebook');
+        tags.add('memo');
+        tags.add('comment');
+        tags.add('write');
+        break;
+      case 'order':
+        tags.add('sort');
+        tags.add('arrange');
+        tags.add('sequence');
+        tags.add('list');
+        break;
+      case 'page':
+        tags.add('document');
+        tags.add('file');
+        tags.add('paper');
+        tags.add('sheet');
+        break;
+      case 'panel':
+        tags.add('sidebar');
+        tags.add('window');
+        tags.add('section');
+        tags.add('area');
+        break;
+      case 'password':
+        tags.add('security');
+        tags.add('lock');
+        tags.add('key');
+        tags.add('auth');
+        break;
+      case 'pause':
+        tags.add('stop');
+        tags.add('hold');
+        tags.add('wait');
+        tags.add('break');
+        break;
+      case 'phone':
+        tags.add('call');
+        tags.add('mobile');
+        tags.add('telephone');
+        tags.add('device');
+        break;
+      case 'pin':
+        tags.add('location');
+        tags.add('marker');
+        tags.add('attach');
+        tags.add('fix');
+        break;
+      case 'plan':
+        tags.add('schedule');
+        tags.add('calendar');
+        tags.add('strategy');
+        tags.add('project');
+        break;
+      case 'play':
+        tags.add('start');
+        tags.add('media');
+        tags.add('video');
+        tags.add('triangle');
+        break;
+      case 'plus':
+        tags.add('add');
+        tags.add('create');
+        tags.add('new');
+        tags.add('insert');
+        break;
+      case 'profile':
+        tags.add('user');
+        tags.add('account');
+        tags.add('avatar');
+        tags.add('person');
+        break;
+      case 'pull':
+        tags.add('git');
+        tags.add('request');
+        tags.add('update');
+        tags.add('sync');
+        break;
+      case 'question':
+        tags.add('help');
+        tags.add('ask');
+        tags.add('support');
+        tags.add('faq');
+        break;
+      case 'quick':
+        tags.add('fast');
+        tags.add('speed');
+        tags.add('instant');
+        tags.add('rapid');
+        break;
+      case 'quote':
+        tags.add('text');
+        tags.add('cite');
+        tags.add('speech');
+        tags.add('reference');
+        break;
+      case 'record':
+        tags.add('video');
+        tags.add('audio');
+        tags.add('capture');
+        tags.add('save');
+        break;
+      case 'refresh':
+        tags.add('reload');
+        tags.add('sync');
+        tags.add('update');
+        tags.add('restart');
+        break;
+      case 'regenerate':
+        tags.add('refresh');
+        tags.add('recreate');
+        tags.add('new');
+        tags.add('again');
+        break;
+      case 'remove':
+      case 'delete':
+        tags.add('trash');
+        tags.add('minus');
+        tags.add('clear');
+        tags.add('erase');
+        break;
+      case 'reply':
+        tags.add('respond');
+        tags.add('answer');
+        tags.add('message');
+        tags.add('return');
+        break;
+      case 'report':
+        tags.add('flag');
+        tags.add('issue');
+        tags.add('document');
+        tags.add('alert');
+        break;
+      case 'reset':
+        tags.add('restart');
+        tags.add('clear');
+        tags.add('default');
+        tags.add('revert');
+        break;
+      case 'restore':
+        tags.add('undo');
+        tags.add('recover');
+        tags.add('backup');
+        tags.add('return');
+        break;
+      case 'robot':
+        tags.add('ai');
+        tags.add('bot');
+        tags.add('automation');
+        tags.add('machine');
+        break;
+      case 'scale':
+        tags.add('size');
+        tags.add('resize');
+        tags.add('measure');
+        tags.add('weight');
+        break;
+      case 'screen':
+        tags.add('display');
+        tags.add('monitor');
+        tags.add('window');
+        tags.add('view');
+        break;
+      case 'select':
+        tags.add('choose');
+        tags.add('pick');
+        tags.add('option');
+        tags.add('check');
+        break;
+      case 'send':
+        tags.add('share');
+        tags.add('submit');
+        tags.add('arrow');
+        tags.add('forward');
+        break;
+      case 'setting':
+      case 'settings':
+        tags.add('config');
+        tags.add('preferences');
+        tags.add('options');
+        tags.add('gear');
+        break;
+      case 'share':
+        tags.add('send');
+        tags.add('forward');
+        tags.add('social');
+        tags.add('export');
+        break;
+      case 'shield':
+        tags.add('security');
+        tags.add('protection');
+        tags.add('safe');
+        tags.add('guard');
+        break;
+      case 'shop':
+      case 'shopping':
+        tags.add('store');
+        tags.add('buy');
+        tags.add('cart');
+        tags.add('purchase');
+        break;
+      case 'shortcut':
+        tags.add('key');
+        tags.add('keyboard');
+        tags.add('fast');
+        tags.add('quick');
+        break;
+      case 'sidebar':
+        tags.add('panel');
+        tags.add('navigation');
+        tags.add('menu');
+        tags.add('drawer');
+        break;
+      case 'simple':
+        tags.add('basic');
+        tags.add('easy');
+        tags.add('minimal');
+        tags.add('plain');
+        break;
+      case 'skip':
+        tags.add('next');
+        tags.add('forward');
+        tags.add('jump');
+        tags.add('ignore');
+        break;
+      case 'sleep':
+        tags.add('pause');
+        tags.add('rest');
+        tags.add('idle');
+        tags.add('suspend');
+        break;
+      case 'sound':
+      case 'audio':
+        tags.add('volume');
+        tags.add('speaker');
+        tags.add('music');
+        tags.add('noise');
+        break;
+      case 'sparkle':
+        tags.add('magic');
+        tags.add('shine');
+        tags.add('star');
+        tags.add('glow');
+        break;
+      case 'speed':
+        tags.add('fast');
+        tags.add('quick');
+        tags.add('velocity');
+        tags.add('rapid');
+        break;
+      case 'square':
+        tags.add('shape');
+        tags.add('box');
+        tags.add('rectangle');
+        tags.add('frame');
+        break;
+      case 'stack':
+        tags.add('layers');
+        tags.add('pile');
+        tags.add('group');
+        tags.add('collection');
+        break;
+      case 'star':
+        tags.add('favorite');
+        tags.add('rating');
+        tags.add('important');
+        tags.add('featured');
+        break;
+      case 'status':
+        tags.add('state');
+        tags.add('condition');
+        tags.add('info');
+        tags.add('indicator');
+        break;
+      case 'stop':
+        tags.add('end');
+        tags.add('halt');
+        tags.add('square');
+        tags.add('cancel');
+        break;
+      case 'story':
+        tags.add('narrative');
+        tags.add('tale');
+        tags.add('history');
+        tags.add('content');
+        break;
+      case 'studio':
+        tags.add('workspace');
+        tags.add('edit');
+        tags.add('create');
+        tags.add('production');
+        break;
+      case 'suit':
+      case 'suitcase':
+        tags.add('travel');
+        tags.add('bag');
+        tags.add('luggage');
+        tags.add('case');
+        break;
+      case 'sun':
+        tags.add('bright');
+        tags.add('light');
+        tags.add('day');
+        tags.add('theme');
+        break;
+      case 'system':
+        tags.add('computer');
+        tags.add('os');
+        tags.add('platform');
+        tags.add('settings');
+        break;
+      case 'table':
+        tags.add('grid');
+        tags.add('data');
+        tags.add('spreadsheet');
+        tags.add('rows');
+        break;
+      case 'tag':
+        tags.add('label');
+        tags.add('category');
+        tags.add('mark');
+        tags.add('badge');
+        break;
+      case 'task':
+        tags.add('todo');
+        tags.add('job');
+        tags.add('work');
+        tags.add('item');
+        break;
+      case 'text':
+        tags.add('type');
+        tags.add('write');
+        tags.add('font');
+        tags.add('content');
+        break;
+      case 'theme':
+        tags.add('style');
+        tags.add('appearance');
+        tags.add('color');
+        tags.add('mode');
+        break;
+      case 'thumb':
+        tags.add('like');
+        tags.add('rate');
+        tags.add('vote');
+        tags.add('feedback');
+        break;
+      case 'thumbnail':
+        tags.add('preview');
+        tags.add('image');
+        tags.add('small');
+        tags.add('mini');
+        break;
+      case 'timer':
+        tags.add('clock');
+        tags.add('time');
+        tags.add('countdown');
+        tags.add('stopwatch');
+        break;
+      case 'tool':
+      case 'tools':
+        tags.add('utility');
+        tags.add('equipment');
+        tags.add('wrench');
+        tags.add('settings');
+        break;
+      case 'translate':
+        tags.add('language');
+        tags.add('translation');
+        tags.add('convert');
+        tags.add('localize');
+        break;
+      case 'trend':
+      case 'trending':
+        tags.add('popular');
+        tags.add('up');
+        tags.add('chart');
+        tags.add('growth');
+        break;
+      case 'trophy':
+        tags.add('award');
+        tags.add('win');
+        tags.add('achievement');
+        tags.add('prize');
+        break;
+      case 'tuning':
+        tags.add('adjust');
+        tags.add('fine');
+        tags.add('settings');
+        tags.add('optimize');
+        break;
+      case 'unarchive':
+        tags.add('restore');
+        tags.add('recover');
+        tags.add('unpack');
+        tags.add('extract');
+        break;
+      case 'undo':
+        tags.add('revert');
+        tags.add('back');
+        tags.add('restore');
+        tags.add('cancel');
+        break;
+      case 'unlink':
+        tags.add('disconnect');
+        tags.add('remove');
+        tags.add('break');
+        tags.add('detach');
+        break;
+      case 'unpin':
+        tags.add('detach');
+        tags.add('unfix');
+        tags.add('remove');
+        tags.add('release');
+        break;
+      case 'upgrade':
+        tags.add('update');
+        tags.add('improve');
+        tags.add('enhance');
+        tags.add('better');
+        break;
+      case 'upscale':
+        tags.add('enlarge');
+        tags.add('increase');
+        tags.add('grow');
+        tags.add('expand');
+        break;
+      case 'user':
+        tags.add('person');
+        tags.add('people');
+        tags.add('account');
+        tags.add('profile');
+        break;
+      case 'variation':
+        tags.add('version');
+        tags.add('variant');
+        tags.add('option');
+        tags.add('alternative');
+        break;
+      case 'version':
+        tags.add('release');
+        tags.add('update');
+        tags.add('iteration');
+        tags.add('variation');
+        break;
+      case 'video':
+        tags.add('movie');
+        tags.add('film');
+        tags.add('camera');
+        tags.add('media');
+        break;
+      case 'voice':
+        tags.add('audio');
+        tags.add('sound');
+        tags.add('speech');
+        tags.add('mic');
+        break;
+      case 'warning':
+        tags.add('alert');
+        tags.add('caution');
+        tags.add('danger');
+        tags.add('attention');
+        break;
+      case 'website':
+        tags.add('web');
+        tags.add('site');
+        tags.add('internet');
+        tags.add('page');
+        break;
+      case 'widget':
+        tags.add('component');
+        tags.add('module');
+        tags.add('element');
+        tags.add('app');
+        break;
+      case 'work':
+        tags.add('job');
+        tags.add('task');
+        tags.add('business');
+        tags.add('labor');
+        break;
+      case 'write':
+        tags.add('edit');
+        tags.add('text');
+        tags.add('pencil');
+        tags.add('create');
+        break;
+
+      // Size variants (just remove from output, don't add synonyms)
+      case 'sm':
+      case 'md':
+      case 'lg':
+      case 'xl':
+      case 'xxl':
+      case 'xs':
+      case '2xs':
+      case '3xs':
+      case '2xl':
+      case '3xl':
+        break;
+
+      // Numbers (common in icon names like AspectRatio34)
+      case '16':
+      case '9':
+      case '4':
+      case '3':
+      case '1':
+      case '34':
+      case '169':
+      case '43':
+      case '11':
+      case '21':
+        tags.add('ratio');
+        tags.add('size');
+        break;
+      
+      // Fallback: if word is not recognized, skip it
+      // (we don't add words from icon name to tags)
+      default:
+        break;
+    }
+  });
+
+  // Return tags as comma-separated string
+  // If no tags were generated (no matching cases), return empty string
+  // This is acceptable - not all icons need tags if they're not in the switch
+  return Array.from(tags).join(', ');
+}
+
+
+/**
+ * Collect all vector nodes from a node tree recursively
+ * Returns both the vectors and their parent paths for proper handling
+ */
+function collectVectorNodes(node: SceneNode): (VectorNode | BooleanOperationNode)[] {
+  const vectors: (VectorNode | BooleanOperationNode)[] = [];
+
+  if (node.type === 'VECTOR' || node.type === 'BOOLEAN_OPERATION') {
+    vectors.push(node as VectorNode | BooleanOperationNode);
+  } else if ('children' in node) {
+    for (const child of node.children) {
+      vectors.push(...collectVectorNodes(child));
+    }
+  }
+
+  return vectors;
+}
+
+/**
+ * Check if vectors have different colors or opacities
+ * Returns true if vectors should NOT be flattened (have different styles)
+ */
+function hasDifferentStyles(vectors: (VectorNode | BooleanOperationNode)[]): boolean {
+  if (vectors.length <= 1) {
+    return false; // Single vector or no vectors, can flatten
+  }
+
+  const styles = vectors.map(vector => {
+    let fills: readonly Paint[] = [];
+    if ('fills' in vector && Array.isArray(vector.fills)) {
+      fills = vector.fills;
+    }
+    const opacity = 'opacity' in vector && typeof vector.opacity === 'number' ? vector.opacity : 1;
+
+    // Extract color from fills
+    let color: string | null = null;
+    if (fills.length > 0 && fills[0].type === 'SOLID') {
+      const solidFill = fills[0] as SolidPaint;
+      color = `${solidFill.color.r},${solidFill.color.g},${solidFill.color.b}`;
+    }
+
+    return { color, opacity };
+  });
+
+  // Check if all styles are the same
+  const firstStyle = styles[0];
+  const allSame = styles.every(style =>
+    style.color === firstStyle.color &&
+    Math.abs(style.opacity - firstStyle.opacity) < 0.001
+  );
+
+  return !allSame; // Return true if styles differ
+}
+
+/**
+ * Flatten component structure - merge same-style vectors using Figma's flatten API
+ * Only flattens vectors that have the same fill color and opacity = 1.0 (no transparency)
+ * Vectors with transparency (opacity < 1.0) are not modified - component structure remains unchanged
+ */
+async function flattenComponent(component: ComponentNode): Promise<void> {
+  const children = [...component.children];
+
+  if (children.length === 0) {
+    return; // Nothing to flatten
+  }
+
+  // Collect all vectors recursively
+  const allVectors: (VectorNode | BooleanOperationNode)[] = [];
+
+  function extractVectors(node: SceneNode) {
+    if (node.type === 'VECTOR' || node.type === 'BOOLEAN_OPERATION') {
+      allVectors.push(node as VectorNode | BooleanOperationNode);
+    } else if ('children' in node) {
+      node.children.forEach(child => extractVectors(child));
+    }
+  }
+
+  children.forEach(child => extractVectors(child));
+
+  if (allVectors.length === 0) {
+    return; // No vectors found
+  }
+
+  // Check if any vector has transparency (opacity < 1.0)
+  // Check both node opacity and fill opacity
+  // If so, don't touch the component structure at all - return early
+  const hasTransparency = allVectors.some(vector => {
+    // Check node-level opacity
+    const nodeOpacity = 'opacity' in vector && typeof vector.opacity === 'number' ? vector.opacity : 1;
+    if (nodeOpacity < 0.999) {
+      return true; // Node has transparency
+    }
+
+    // Check fill-level opacity
+    if ('fills' in vector && Array.isArray(vector.fills)) {
+      for (const fill of vector.fills) {
+        if (fill.type === 'SOLID' && 'opacity' in fill && typeof fill.opacity === 'number') {
+          if (fill.opacity < 0.999) {
+            return true; // Fill has transparency
+          }
+        }
+      }
+    }
+
+    return false;
+  });
+
+  // If any vector has transparency, don't modify the component at all
+  if (hasTransparency) {
+    return; // Don't touch icons with transparent layers
+  }
+
+  // Check if all vectors have the same style (color and opacity)
+  // Only flatten if all vectors have the same style and no transparency
+  const canFlatten = !hasDifferentStyles(allVectors) && allVectors.length > 1;
+
+  if (canFlatten) {
+    // Use Figma's native flatten operation
+    try {
+      // First, move all vectors to component level temporarily
+      const vectorsToFlatten: SceneNode[] = [];
+      for (const vector of allVectors) {
+        if (vector.parent) {
+          const clone = vector.clone();
+          component.appendChild(clone);
+          vectorsToFlatten.push(clone);
+        }
+      }
+
+      // Remove original children
+      children.forEach(child => {
+        try {
+          child.remove();
+        } catch (error) {
+          console.warn(`Could not remove child:`, error);
+        }
+      });
+
+      // Flatten all vectors into one using Figma's API
+      if (vectorsToFlatten.length > 1) {
+        const flattened = figma.flatten(vectorsToFlatten);
+        flattened.name = 'Vector';
+      } else if (vectorsToFlatten.length === 1) {
+        vectorsToFlatten[0].name = 'Vector';
+      }
+    } catch (error) {
+      console.warn(`Could not flatten vectors:`, error);
+    }
+  }
+  // If styles are different, don't modify the component at all
+}
+
+/**
+ * Determine icon category from name
+ * Simplified categories - no subcategories
+ */
+function getIconCategory(iconName: string): string {
+  const name = iconName.toLowerCase();
+
+  // Navigation - arrows, chevrons, navigation controls
+  if (name.includes('arrow') || name.includes('chevron') || name.includes('caret') ||
+    name.includes('back') || name.includes('forward') || name.includes('next') || name.includes('previous') ||
+    name.includes('home') || name.includes('openleft') || name.includes('openright') ||
+    name.includes('globe') || name.includes('world') || name.includes('earth')) {
+    return 'Navigation';
+  }
+
+  // Actions - all action-related icons
+  if (name.includes('add') || name.includes('plus') || name.includes('create') || name.includes('new') ||
+    name.includes('delete') || name.includes('remove') || name.includes('minus') || name.includes('clear') ||
+    name.includes('trash') || name.includes('cleanup') ||
+    name.includes('edit') || name.includes('pencil') || name.includes('modify') || name.includes('change') ||
+    name.includes('write') ||
+    name.includes('copy') || name.includes('duplicate') || name.includes('clone') ||
+    name.includes('download') || name.includes('save') || name.includes('export') ||
+    name.includes('upload') || name.includes('import') ||
+    name.includes('search') || name.includes('magnify') || name.includes('find') || name.includes('telescope') ||
+    name.includes('eye') || name.includes('view') || name.includes('visible') || name.includes('hidden') ||
+    name.includes('show') || name.includes('hide') ||
+    name.includes('filter') ||
+    name.includes('logout') || name.includes('exit') || name.includes('enterlogin')) {
+    return 'Actions';
+  }
+
+  // Communication
+  if (name.includes('chat') || name.includes('message') || name.includes('mail') || name.includes('email') ||
+    name.includes('comment') || name.includes('forum') || name.includes('notification') || name.includes('bell') ||
+    name.includes('messaging')) {
+    return 'Communication';
+  }
+
+  // Media - all media types (video, audio, images, controls)
+  if (name.includes('video') || name.includes('caption') || name.includes('pictureinpicture') ||
+    name.includes('image') || name.includes('picture') || name.includes('photo') || name.includes('camera') ||
+    name.includes('mic') || name.includes('microphone') || name.includes('voice') || name.includes('sound') ||
+    name.includes('audio') || name.includes('speak') || name.includes('speech') || name.includes('music') ||
+    name.includes('play') || name.includes('pause') || name.includes('stop') ||
+    name.includes('rewind') || name.includes('skip') || name.includes('loop')) {
+    return 'Media';
+  }
+
+  // Files and documents
+  if (name.includes('file') || name.includes('document') || name.includes('folder') ||
+    name.includes('archive') || name.includes('page') || name.includes('notebook') || name.includes('notepad') ||
+    name.includes('clipboard')) {
+    return 'Files';
+  }
+
+  // Users
+  if (name.includes('user') || name.includes('member') || name.includes('person') ||
+    name.includes('people') || name.includes('group') || name.includes('avatar') || name.includes('profile')) {
+    return 'Users';
+  }
+
+  // Settings
+  if (name.includes('settings') || name.includes('config') || name.includes('gear') ||
+    name.includes('preferences') || name.includes('options') || name.includes('customize')) {
+    return 'Settings';
+  }
+
+  // Status - success, error, info
+  if (name.includes('check') || name.includes('success') || name.includes('complete') || name.includes('done') ||
+    name.includes('error') || name.includes('warning') || name.includes('alert') || name.includes('exclamation') ||
+    name.includes('info') || name.includes('help') || name.includes('question')) {
+    return 'Status';
+  }
+
+  // AI and automation
+  if (name.includes('agent') || name.includes('assistant') || name.includes('ai') ||
+    name.includes('brain') || name.includes('automation') || name.includes('bot') ||
+    name.includes('sparkle') || name.includes('bolt') || name.includes('flash') ||
+    name.includes('inspiration') || name.includes('gpt') || name.includes('sora')) {
+    return 'AI & Automation';
+  }
+
+  // Analytics
+  if (name.includes('chart') || name.includes('graph') || name.includes('analytics') ||
+    name.includes('data') || name.includes('statistics') || name.includes('metrics') ||
+    name.includes('bar')) {
+    return 'Analytics';
+  }
+
+  // Interface - all interface elements
+  if (name.includes('menu') || name.includes('hamburger') || name.includes('sidebar') ||
+    name.includes('collapse') || name.includes('expand') || name.includes('minimize') || name.includes('maximize') ||
+    name.includes('dock') || name.includes('dropdown') || name.includes('dots') || name.includes('more') ||
+    name.includes('link') || name.includes('chain') || name.includes('connect') || name.includes('external') ||
+    name.includes('code') || name.includes('function') || name.includes('variable') || name.includes('script') ||
+    name.includes('grid') || name.includes('layout') || name.includes('table') ||
+    name.includes('history') || name.includes('managehistory') ||
+    name.includes('lightmode') || name.includes('darkmode') || name.includes('moon') || name.includes('sun') ||
+    name.includes('colortheme') || name.includes('systemmode') ||
+    name.includes('cursor') || name.includes('desktop') || name.includes('mobile')) {
+    return 'Interface';
+  }
+
+  // Symbols
+  if (name.includes('heart') || name.includes('star') || name.includes('bookmark') || name.includes('pin') ||
+    name.includes('flag') || name.includes('tag') || name.includes('badge') || name.includes('wreath')) {
+    return 'Symbols';
+  }
+
+  // Time
+  if (name.includes('clock') || name.includes('time') || name.includes('calendar') || name.includes('date')) {
+    return 'Time';
+  }
+
+  // Security
+  if (name.includes('lock') || name.includes('key') || name.includes('secure') || name.includes('private') ||
+    name.includes('shield') || name.includes('protection') || (name.includes('api') && name.includes('key'))) {
+    return 'Security';
+  }
+
+  // Default category
+  return 'Other';
+}
+
+/**
+ * Extract base name from icon name for similarity grouping
+ * Examples:
+ *   'PlusCircleFilled' -> 'Plus'
+ *   'ChevronDownLg' -> 'Chevron'
+ *   'ArrowUpRight' -> 'Arrow'
+ *   'PlayCircleFilled' -> 'Play'
+ *   'MagnifyingGlassSearch' -> 'Magnifying'
+ */
+function getIconBaseName(iconName: string): string {
+  // Split into words by camelCase/PascalCase boundaries
+  const words = iconName
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+    .split(' ')
+    .filter(w => w.length > 0);
+
+  if (words.length === 0) return iconName;
+
+  // Size/style suffixes to ignore when determining base name
+  const suffixes = new Set([
+    'sm', 'md', 'lg', 'xl', 'xs', 'xxl', '2xs', '3xs', '2xl', '3xl',
+    'small', 'medium', 'large',
+    'filled', 'outline', 'dashed', 'bold', 'light', 'regular',
+    'alt', 'alt2', 'alt3',
+    'circle', 'square',
+    'on', 'off',
+    '12px', '14px', '16px', '18px', '20px', '24px',
+    'add', 'attach', 'copy', 'crossed', 'close',
+    'left', 'right', 'up', 'down', 'top', 'bottom',
+    'vector'
+  ]);
+
+  // Find the first significant word (base name)
+  let baseName = words[0].toLowerCase();
+
+  // If first word is very short, try combining with second word
+  if (baseName.length <= 2 && words.length > 1) {
+    baseName = (words[0] + words[1]).toLowerCase();
+  }
+
+  // For common prefixes, keep them as-is
+  const commonPrefixes: { [key: string]: string } = {
+    'arrow': 'Arrow',
+    'chevron': 'Chevron',
+    'caret': 'Caret',
+    'plus': 'Plus',
+    'minus': 'Minus',
+    'check': 'Check',
+    'x': 'X',
+    'play': 'Play',
+    'pause': 'Pause',
+    'stop': 'Stop',
+    'search': 'Search',
+    'magnifying': 'Search',
+    'edit': 'Edit',
+    'file': 'File',
+    'folder': 'Folder',
+    'user': 'User',
+    'member': 'Member',
+    'heart': 'Heart',
+    'star': 'Star',
+    'bell': 'Bell',
+    'notification': 'Bell',
+    'lock': 'Lock',
+    'eye': 'Eye',
+    'mic': 'Mic',
+    'microphone': 'Mic',
+    'voice': 'Voice',
+    'video': 'Video',
+    'image': 'Image',
+    'camera': 'Camera',
+    'calendar': 'Calendar',
+    'clock': 'Clock',
+    'settings': 'Settings',
+    'gear': 'Settings',
+    'cog': 'Settings',
+    'home': 'Home',
+    'mail': 'Mail',
+    'email': 'Mail',
+    'chat': 'Chat',
+    'message': 'Message',
+    'copy': 'Copy',
+    'clipboard': 'Clipboard',
+    'download': 'Download',
+    'upload': 'Upload',
+    'share': 'Share',
+    'link': 'Link',
+    'trash': 'Trash',
+    'delete': 'Delete',
+    'remove': 'Remove',
+    'expand': 'Expand',
+    'collapse': 'Collapse',
+    'sidebar': 'Sidebar',
+    'menu': 'Menu',
+    'hamburger': 'Menu',
+    'dots': 'Dots',
+    'more': 'More',
+    'info': 'Info',
+    'help': 'Help',
+    'question': 'Question',
+    'warning': 'Warning',
+    'error': 'Error',
+    'thumb': 'Thumb',
+    'sparkle': 'Sparkle',
+    'sparkles': 'Sparkle',
+    'globe': 'Globe',
+    'world': 'Globe',
+    'loop': 'Loop',
+    'refresh': 'Refresh',
+    'reload': 'Reload',
+    'square': 'Square',
+    'circle': 'Circle',
+    'document': 'Document',
+    'page': 'Page',
+    'book': 'Book',
+    'variation': 'Variation',
+    'aspect': 'Aspect',
+    'thumbnail': 'Thumbnail',
+    'lightbulb': 'Lightbulb',
+    'shield': 'Shield',
+    'key': 'Key',
+    'pin': 'Pin',
+    'map': 'Map',
+    'chart': 'Chart',
+    'graph': 'Graph',
+    'bar': 'Bar',
+    'phone': 'Phone',
+    'mobile': 'Mobile',
+    'desktop': 'Desktop',
+    'terminal': 'Terminal',
+    'code': 'Code',
+    'openai': 'OpenAI',
+    'back': 'Back',
+    'forward': 'Forward',
+    'skip': 'Skip',
+    'rewind': 'Rewind',
+    'paper': 'Paper',
+    'notepad': 'Notepad',
+    'notebook': 'Notebook'
+  };
+
+  if (commonPrefixes[baseName]) {
+    return commonPrefixes[baseName];
+  }
+
+  // Otherwise, return first word with proper capitalization
+  return words[0];
+}
+
+/**
+ * Update selected icon components: flatten layers and add search tags
+ * Components remain in place and keep their original names
+ */
+async function updateIconComponents(): Promise<number> {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    throw new Error('Please select at least one component icon to update');
+  }
+
+  // Filter only ComponentNode
+  const components = selection.filter(
+    node => node.type === 'COMPONENT'
+  ) as ComponentNode[];
+
+  if (components.length === 0) {
+    const nonComponentTypes = selection
+      .filter(node => node.type !== 'COMPONENT')
+      .map(node => node.type)
+      .filter((type, index, arr) => arr.indexOf(type) === index); // unique
+
+    throw new Error(
+      `No components selected. Please select component icons. ` +
+      `Found: ${nonComponentTypes.join(', ')}`
+    );
+  }
+
+  let successCount = 0;
+  const errors: string[] = [];
+
+  for (const component of components) {
+    try {
+      // Save original name for tag generation
+      const originalName = component.name;
+
+      // Flatten all layers inside the component (only if no transparency and same colors)
+      await flattenComponent(component);
+
+      // Generate tags for search
+      const tags = generateSearchTags(originalName);
+
+      // Update component description only (do not rename component)
+      component.description = tags;
+
+      successCount++;
+    } catch (error) {
+      const errorMsg = `Failed to update component "${component.name}": ${error instanceof Error ? error.message : 'Unknown error'}`;
+      console.error(errorMsg, error);
+      errors.push(errorMsg);
+    }
+  }
+
+  if (errors.length > 0 && successCount === 0) {
+    // All failed
+    throw new Error(`All components failed to update:\n${errors.join('\n')}`);
+  }
+
+  if (errors.length > 0) {
+    // Some succeeded, some failed
+    figma.notify(
+      `Updated ${successCount} component(s). ${errors.length} failed:\n${errors.join('; ')}`,
+      { timeout: 5000 }
+    );
+  }
+
+  return successCount;
+}
+

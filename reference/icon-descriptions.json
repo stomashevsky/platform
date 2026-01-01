@@ -1,0 +1,2978 @@
+{
+  "AddMember": {
+    "description": "Add user or member icon",
+    "tags": []
+  },
+  "AddSources": {
+    "description": "Add source icon",
+    "tags": []
+  },
+  "Agent": {
+    "description": "AI agent or assistant icon",
+    "tags": []
+  },
+  "AgentMode": {
+    "description": "AI agent or assistant icon",
+    "tags": []
+  },
+  "AllGizmos": {
+    "description": "All Gizmos icon",
+    "tags": []
+  },
+  "AllProductsExplore": {
+    "description": "All Products Explore icon",
+    "tags": []
+  },
+  "Analytics": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "AnalyzeData": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "ApiKey": {
+    "description": "Lock or security icon",
+    "tags": []
+  },
+  "ApiKeyAdmin": {
+    "description": "Lock or security icon",
+    "tags": []
+  },
+  "ApiKeyServiceAccount": {
+    "description": "Lock or security icon",
+    "tags": []
+  },
+  "ApiKeys": {
+    "description": "Lock or security icon",
+    "tags": []
+  },
+  "Archive": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "Array": {
+    "description": "Array icon",
+    "tags": []
+  },
+  "ArrowBottomLeftSm": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "ArrowBottomRightSm": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ArrowCurved": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "ArrowCurvedLeft": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "ArrowCurvedRight": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ArrowCurvedRightXs": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ArrowCurvedRightXs24px": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ArrowDown": {
+    "description": "Arrow pointing down for navigation",
+    "tags": []
+  },
+  "ArrowDownLg": {
+    "description": "Arrow pointing down for navigation",
+    "tags": []
+  },
+  "ArrowDownSm": {
+    "description": "Arrow pointing down for navigation",
+    "tags": []
+  },
+  "ArrowLeft": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "ArrowLeftLg": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "ArrowLeftSm": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "ArrowRight": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ArrowRightLg": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ArrowRightSm": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ArrowRotateCcw": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "ArrowRotateCw": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "ArrowTopLeftSm": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "ArrowTopRightSm": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ArrowUp": {
+    "description": "Arrow pointing up for navigation",
+    "tags": []
+  },
+  "ArrowUpLg": {
+    "description": "Arrow pointing up for navigation",
+    "tags": []
+  },
+  "ArrowUpRight": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ArrowUpSm": {
+    "description": "Arrow pointing up for navigation",
+    "tags": []
+  },
+  "AspectRatio11": {
+    "description": "Aspect Ratio11 icon",
+    "tags": []
+  },
+  "AspectRatio169": {
+    "description": "Aspect Ratio169 icon",
+    "tags": []
+  },
+  "AspectRatio34": {
+    "description": "Aspect Ratio34 icon",
+    "tags": []
+  },
+  "AspectRatio43": {
+    "description": "Aspect Ratio43 icon",
+    "tags": []
+  },
+  "AspectRatio916": {
+    "description": "Aspect Ratio916 icon",
+    "tags": []
+  },
+  "Assistant": {
+    "description": "AI agent or assistant icon",
+    "tags": []
+  },
+  "Astronout": {
+    "description": "Astronout icon",
+    "tags": []
+  },
+  "AtSign": {
+    "description": "At Sign icon",
+    "tags": []
+  },
+  "Atom": {
+    "description": "Atom icon",
+    "tags": []
+  },
+  "AutoPairApps": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "AutoSuggestedEdits": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "Autocomplete": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "AvatarFilledProfile": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "AvatarProfile": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "Back10s": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "Back15s": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "BackLarge": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "BackSmall": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "BackToApp": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "BackgroundConversation": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "BalancingScale": {
+    "description": "Balancing Scale icon",
+    "tags": []
+  },
+  "BarChart": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "BarChartFilled": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "Batch": {
+    "description": "Batch icon",
+    "tags": []
+  },
+  "Batches": {
+    "description": "Batches icon",
+    "tags": []
+  },
+  "Bell": {
+    "description": "Notification bell icon",
+    "tags": []
+  },
+  "BellFilled": {
+    "description": "Notification bell icon",
+    "tags": []
+  },
+  "Beta": {
+    "description": "Beta icon",
+    "tags": []
+  },
+  "Bills": {
+    "description": "Bills icon",
+    "tags": []
+  },
+  "Blend": {
+    "description": "Blend icon",
+    "tags": []
+  },
+  "BlendingCurveSharp": {
+    "description": "Blending Curve Sharp icon",
+    "tags": []
+  },
+  "BlendingCurveSmooth": {
+    "description": "Blending Curve Smooth icon",
+    "tags": []
+  },
+  "BlendingCurveSubtle": {
+    "description": "Blending Curve Subtle icon",
+    "tags": []
+  },
+  "Bolt": {
+    "description": "AI or magic feature icon",
+    "tags": []
+  },
+  "Book": {
+    "description": "Education or learning icon",
+    "tags": []
+  },
+  "BookBookmark": {
+    "description": "Bookmark or pin icon",
+    "tags": []
+  },
+  "BookClock": {
+    "description": "Time or clock icon",
+    "tags": []
+  },
+  "BookClosed": {
+    "description": "Education or learning icon",
+    "tags": []
+  },
+  "BookOpen": {
+    "description": "Education or learning icon",
+    "tags": []
+  },
+  "BookWrench": {
+    "description": "Education or learning icon",
+    "tags": []
+  },
+  "Boolean": {
+    "description": "Boolean icon",
+    "tags": []
+  },
+  "Brain": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "Branch": {
+    "description": "Branch icon",
+    "tags": []
+  },
+  "BranchAlt": {
+    "description": "Branch Alt icon",
+    "tags": []
+  },
+  "Bug": {
+    "description": "Bug icon",
+    "tags": []
+  },
+  "BuilderProfileCard": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "BuildingWorkspace": {
+    "description": "Business or workspace icon",
+    "tags": []
+  },
+  "Business": {
+    "description": "Business or workspace icon",
+    "tags": []
+  },
+  "BusinessFilled": {
+    "description": "Business or workspace icon",
+    "tags": []
+  },
+  "Cabinet": {
+    "description": "Cabinet icon",
+    "tags": []
+  },
+  "Calendar": {
+    "description": "Calendar or date icon",
+    "tags": []
+  },
+  "CalendarAlt": {
+    "description": "Calendar or date icon",
+    "tags": []
+  },
+  "CalendarToday": {
+    "description": "Calendar or date icon",
+    "tags": []
+  },
+  "Camera": {
+    "description": "Camera icon",
+    "tags": []
+  },
+  "CameraFilledPhoto": {
+    "description": "Camera Filled Photo icon",
+    "tags": []
+  },
+  "CameraPhoto": {
+    "description": "Camera Photo icon",
+    "tags": []
+  },
+  "CaptionCcOff": {
+    "description": "Video or image caption icon",
+    "tags": []
+  },
+  "CaptionCcOn": {
+    "description": "Video or image caption icon",
+    "tags": []
+  },
+  "CaptionOff": {
+    "description": "Video or image caption icon",
+    "tags": []
+  },
+  "CaptionOn": {
+    "description": "Video or image caption icon",
+    "tags": []
+  },
+  "Card": {
+    "description": "Card icon",
+    "tags": []
+  },
+  "CaretDown": {
+    "description": "Arrow pointing down for navigation",
+    "tags": []
+  },
+  "CaretLeft": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "CaretRight": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "CaretUp": {
+    "description": "Arrow pointing up for navigation",
+    "tags": []
+  },
+  "Category": {
+    "description": "Category icon",
+    "tags": []
+  },
+  "Certificate": {
+    "description": "Certificate icon",
+    "tags": []
+  },
+  "Chart": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "ChartXAxis": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "ChartYAxis": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "Chat": {
+    "description": "Chat or messaging icon",
+    "tags": []
+  },
+  "ChatCompose": {
+    "description": "Chat or messaging icon",
+    "tags": []
+  },
+  "ChatDashedCheckedTemp": {
+    "description": "Chat or messaging icon",
+    "tags": []
+  },
+  "ChatDashedTemp": {
+    "description": "Chat or messaging icon",
+    "tags": []
+  },
+  "ChatTemporary": {
+    "description": "Chat or messaging icon",
+    "tags": []
+  },
+  "ChatTripleDots": {
+    "description": "Chat or messaging icon",
+    "tags": []
+  },
+  "Chats": {
+    "description": "Chat or messaging icon",
+    "tags": []
+  },
+  "Check": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "CheckCircle": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "CheckCircleDashed": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "CheckCircleFilled": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "CheckLg": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "CheckMd": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "ChevronDown": {
+    "description": "Arrow pointing down for navigation",
+    "tags": []
+  },
+  "ChevronDownLg": {
+    "description": "Arrow pointing down for navigation",
+    "tags": []
+  },
+  "ChevronDownMd": {
+    "description": "Arrow pointing down for navigation",
+    "tags": []
+  },
+  "ChevronDownUp": {
+    "description": "Arrow pointing up for navigation",
+    "tags": []
+  },
+  "ChevronDownVector": {
+    "description": "Arrow pointing down for navigation",
+    "tags": []
+  },
+  "ChevronLeft": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "ChevronLeftLg": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "ChevronLeftMd": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "ChevronRight": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ChevronRightAlt": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ChevronRightLg": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ChevronRightMd": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ChevronSmallDown": {
+    "description": "Arrow pointing down for navigation",
+    "tags": []
+  },
+  "ChevronSmallLeft": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "ChevronSmallRight": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "ChevronSmallUp": {
+    "description": "Arrow pointing up for navigation",
+    "tags": []
+  },
+  "ChevronUp": {
+    "description": "Arrow pointing up for navigation",
+    "tags": []
+  },
+  "ChevronUpDown": {
+    "description": "Arrow pointing up for navigation",
+    "tags": []
+  },
+  "ChevronUpLg": {
+    "description": "Arrow pointing up for navigation",
+    "tags": []
+  },
+  "ChevronUpMd": {
+    "description": "Arrow pointing up for navigation",
+    "tags": []
+  },
+  "Circle": {
+    "description": "Circle icon",
+    "tags": []
+  },
+  "CircleDashed": {
+    "description": "Circle Dashed icon",
+    "tags": []
+  },
+  "CircleQuestion": {
+    "description": "Information or help icon",
+    "tags": []
+  },
+  "ClappingBoardClosed": {
+    "description": "Bookmark or pin icon",
+    "tags": []
+  },
+  "ClappingBoardOpen": {
+    "description": "Bookmark or pin icon",
+    "tags": []
+  },
+  "Cleanup": {
+    "description": "Cleanup icon",
+    "tags": []
+  },
+  "Clear": {
+    "description": "Delete or remove item icon",
+    "tags": []
+  },
+  "Click": {
+    "description": "Click icon",
+    "tags": []
+  },
+  "Clip": {
+    "description": "Clip icon",
+    "tags": []
+  },
+  "Clipboard": {
+    "description": "Copy or duplicate item icon",
+    "tags": []
+  },
+  "ClipboardCopy": {
+    "description": "Copy or duplicate item icon",
+    "tags": []
+  },
+  "Clock": {
+    "description": "Time or clock icon",
+    "tags": []
+  },
+  "Clock10s": {
+    "description": "Time or clock icon",
+    "tags": []
+  },
+  "Clock15s": {
+    "description": "Time or clock icon",
+    "tags": []
+  },
+  "Clock20s": {
+    "description": "Time or clock icon",
+    "tags": []
+  },
+  "Clock5s": {
+    "description": "Time or clock icon",
+    "tags": []
+  },
+  "ClockOff": {
+    "description": "Time or clock icon",
+    "tags": []
+  },
+  "CloseBold": {
+    "description": "Close Bold icon",
+    "tags": []
+  },
+  "Code": {
+    "description": "Code or development icon",
+    "tags": []
+  },
+  "CodeSquareSlash": {
+    "description": "Code or development icon",
+    "tags": []
+  },
+  "Collapse": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "CollapseLarge": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "CollapseLeft": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "CollapseLg": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "CollapseRight": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "CollapseSm": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "CollapseSmall": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "ColorTheme": {
+    "description": "Color Theme icon",
+    "tags": []
+  },
+  "Comment": {
+    "description": "Communication icon",
+    "tags": []
+  },
+  "Commit": {
+    "description": "Commit icon",
+    "tags": []
+  },
+  "Compare": {
+    "description": "Compare icon",
+    "tags": []
+  },
+  "CompareArrows": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "Compass": {
+    "description": "Compass icon",
+    "tags": []
+  },
+  "Complete": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "ComposeCanvasEditStar": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "ComposeDashedTemporary": {
+    "description": "Compose Dashed Temporary icon",
+    "tags": []
+  },
+  "ComposeEditSquare": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "Confetti": {
+    "description": "Confetti icon",
+    "tags": []
+  },
+  "ConfettiParty": {
+    "description": "Confetti Party icon",
+    "tags": []
+  },
+  "Connect": {
+    "description": "Link or connection icon",
+    "tags": []
+  },
+  "ConnectApps": {
+    "description": "Link or connection icon",
+    "tags": []
+  },
+  "ConnectedDynamicGpt": {
+    "description": "Microphone or sound enabled icon",
+    "tags": []
+  },
+  "ConnectorsConnectedApps": {
+    "description": "Link or connection icon",
+    "tags": []
+  },
+  "Copy": {
+    "description": "Copy or duplicate item icon",
+    "tags": []
+  },
+  "CreditCard": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "Credits": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "Cube": {
+    "description": "Cube icon",
+    "tags": []
+  },
+  "Cursor": {
+    "description": "Cursor icon",
+    "tags": []
+  },
+  "Customize": {
+    "description": "Settings or configuration icon",
+    "tags": []
+  },
+  "DarkMode": {
+    "description": "Dark mode icon",
+    "tags": []
+  },
+  "DataControls": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "DeepSearchTelescope": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "Delete": {
+    "description": "Delete or remove item icon",
+    "tags": []
+  },
+  "DeleteAccount": {
+    "description": "Delete account icon",
+    "tags": []
+  },
+  "Desktop": {
+    "description": "Desktop icon",
+    "tags": []
+  },
+  "DiningEvents": {
+    "description": "Dining Events icon",
+    "tags": []
+  },
+  "DisabledCursor": {
+    "description": "Disabled Cursor icon",
+    "tags": []
+  },
+  "Dock": {
+    "description": "Interface element icon",
+    "tags": []
+  },
+  "Document": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "Documentation": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "DollarCircle": {
+    "description": "Dollar Circle icon",
+    "tags": []
+  },
+  "Dot": {
+    "description": "Dot icon",
+    "tags": []
+  },
+  "DotsHorizontal": {
+    "description": "Dots Horizontal icon",
+    "tags": []
+  },
+  "DotsHorizontalCircle": {
+    "description": "Dots Horizontal Circle icon",
+    "tags": []
+  },
+  "DotsHorizontalMoreMenu": {
+    "description": "Menu or hamburger icon",
+    "tags": []
+  },
+  "DotsVertical": {
+    "description": "Dots Vertical icon",
+    "tags": []
+  },
+  "DotsVerticalCircle": {
+    "description": "Dots Vertical Circle icon",
+    "tags": []
+  },
+  "DotsVerticalMoreMenu": {
+    "description": "Menu or hamburger icon",
+    "tags": []
+  },
+  "DoubleChevronLeft": {
+    "description": "Arrow pointing left for navigation",
+    "tags": []
+  },
+  "DoubleChevronRight": {
+    "description": "Arrow pointing right for navigation",
+    "tags": []
+  },
+  "Download": {
+    "description": "Download or save file icon",
+    "tags": []
+  },
+  "DownloadCircle": {
+    "description": "Download or save file icon",
+    "tags": []
+  },
+  "DownloadGifWatermark": {
+    "description": "Download or save file icon",
+    "tags": []
+  },
+  "DownloadSimple": {
+    "description": "Download or save file icon",
+    "tags": []
+  },
+  "DownloadVideo": {
+    "description": "Download or save file icon",
+    "tags": []
+  },
+  "DownloadVideoWatermark": {
+    "description": "Download or save file icon",
+    "tags": []
+  },
+  "Dropdown": {
+    "description": "Interface element icon",
+    "tags": []
+  },
+  "DropdownVector": {
+    "description": "Interface element icon",
+    "tags": []
+  },
+  "Dumbbell": {
+    "description": "Notification bell icon",
+    "tags": []
+  },
+  "EarthTravelWorld": {
+    "description": "Globe or world icon",
+    "tags": []
+  },
+  "Edit": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "EditAlt": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "EditDalleImage": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "EditPencil": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "EditStar": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "EditXs": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "Education": {
+    "description": "Education or learning icon",
+    "tags": []
+  },
+  "Email": {
+    "description": "Email or mail icon",
+    "tags": []
+  },
+  "EmojiAdd": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "EmojiLists": {
+    "description": "Emoji Lists icon",
+    "tags": []
+  },
+  "EmojiRemove": {
+    "description": "Delete or remove item icon",
+    "tags": []
+  },
+  "EmojiSections": {
+    "description": "Emoji Sections icon",
+    "tags": []
+  },
+  "EmojiWords": {
+    "description": "Emoji Words icon",
+    "tags": []
+  },
+  "EmptyCircle": {
+    "description": "Empty Circle icon",
+    "tags": []
+  },
+  "EmptyCircleFilled": {
+    "description": "Empty Circle Filled icon",
+    "tags": []
+  },
+  "EnterLogin": {
+    "description": "Enter Login icon",
+    "tags": []
+  },
+  "Enum": {
+    "description": "Enum icon",
+    "tags": []
+  },
+  "Equal": {
+    "description": "Equal icon",
+    "tags": []
+  },
+  "Error": {
+    "description": "Error or warning icon",
+    "tags": []
+  },
+  "ExclamationMarkCircle": {
+    "description": "Error or warning icon",
+    "tags": []
+  },
+  "ExitLogout": {
+    "description": "Exit Logout icon",
+    "tags": []
+  },
+  "Expand": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "ExpandLarge": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "ExpandLg": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "ExpandMd": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "ExpandSm": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "ExpandSmall": {
+    "description": "Collapse or expand icon",
+    "tags": []
+  },
+  "Explore": {
+    "description": "Explore icon",
+    "tags": []
+  },
+  "ExploreSora": {
+    "description": "Explore Sora icon",
+    "tags": []
+  },
+  "ExternalLink": {
+    "description": "External link icon",
+    "tags": []
+  },
+  "Eye": {
+    "description": "View or show content icon",
+    "tags": []
+  },
+  "EyeClosed": {
+    "description": "Hide or view hidden icon",
+    "tags": []
+  },
+  "EyeOff": {
+    "description": "Hide or view hidden icon",
+    "tags": []
+  },
+  "FeaturedWreath": {
+    "description": "Featured Wreath icon",
+    "tags": []
+  },
+  "File": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "File3d": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "FileAudio": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "FileBlank": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "FileCode": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "FileDocument": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "FileImage": {
+    "description": "Image or picture icon",
+    "tags": []
+  },
+  "FilePresentation": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "FileSpreadsheet": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "FileSpreedsheet": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "FileUpload": {
+    "description": "Upload or import file icon",
+    "tags": []
+  },
+  "FileVideo": {
+    "description": "Video content icon",
+    "tags": []
+  },
+  "FileZip": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "Filter": {
+    "description": "Filter or search filter icon",
+    "tags": []
+  },
+  "FineTuning": {
+    "description": "Fine Tuning icon",
+    "tags": []
+  },
+  "FistBump": {
+    "description": "Fist Bump icon",
+    "tags": []
+  },
+  "Flag": {
+    "description": "Symbol or marker icon",
+    "tags": []
+  },
+  "Flash": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "Flask": {
+    "description": "Flask icon",
+    "tags": []
+  },
+  "FlaskFilled": {
+    "description": "Flask Filled icon",
+    "tags": []
+  },
+  "Folder": {
+    "description": "Folder icon",
+    "tags": []
+  },
+  "FolderDocumentsFinder": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "FolderOpen": {
+    "description": "Folder icon",
+    "tags": []
+  },
+  "FolderPlus": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "FolderPlusAdd": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "FolderShared": {
+    "description": "Folder icon",
+    "tags": []
+  },
+  "FolderSharedOpen": {
+    "description": "Folder icon",
+    "tags": []
+  },
+  "FolderStuffed": {
+    "description": "Folder icon",
+    "tags": []
+  },
+  "FolderUnshare": {
+    "description": "Folder icon",
+    "tags": []
+  },
+  "Folders": {
+    "description": "Folder icon",
+    "tags": []
+  },
+  "Followup": {
+    "description": "Followup icon",
+    "tags": []
+  },
+  "Forum": {
+    "description": "Communication icon",
+    "tags": []
+  },
+  "Forward": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "Forward10s": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "Forward15s": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "Frozen": {
+    "description": "Frozen icon",
+    "tags": []
+  },
+  "Function": {
+    "description": "Code or development icon",
+    "tags": []
+  },
+  "Functions": {
+    "description": "Code or development icon",
+    "tags": []
+  },
+  "GenerateSuggestedEdits": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "Glasses": {
+    "description": "Glasses icon",
+    "tags": []
+  },
+  "Globe": {
+    "description": "Globe or world icon",
+    "tags": []
+  },
+  "GlobeAltRealTimeSearch": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "GlobeFilled": {
+    "description": "Globe or world icon",
+    "tags": []
+  },
+  "GlobeOffRealTimeSearch": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "GlobeRealTimeSearch": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "GlobeSpin": {
+    "description": "Bookmark or pin icon",
+    "tags": []
+  },
+  "Go": {
+    "description": "Go icon",
+    "tags": []
+  },
+  "GoFilled": {
+    "description": "Go Filled icon",
+    "tags": []
+  },
+  "Graduate": {
+    "description": "Education or learning icon",
+    "tags": []
+  },
+  "GraduationCap": {
+    "description": "Education or learning icon",
+    "tags": []
+  },
+  "Grid": {
+    "description": "Grid or layout icon",
+    "tags": []
+  },
+  "GridAlt": {
+    "description": "Grid or layout icon",
+    "tags": []
+  },
+  "Group": {
+    "description": "Group of users icon",
+    "tags": []
+  },
+  "GroupFilled": {
+    "description": "Group of users icon",
+    "tags": []
+  },
+  "Groups": {
+    "description": "Group of users icon",
+    "tags": []
+  },
+  "Hamburger": {
+    "description": "Menu or hamburger icon",
+    "tags": []
+  },
+  "HandBack": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "HandFront": {
+    "description": "Hand Front icon",
+    "tags": []
+  },
+  "HandPeace": {
+    "description": "Hand Peace icon",
+    "tags": []
+  },
+  "HandRaised": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "HandRaisedHey": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "HandWavingBye": {
+    "description": "Hand Waving Bye icon",
+    "tags": []
+  },
+  "HapticFeedback": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "Headphones": {
+    "description": "Headphones icon",
+    "tags": []
+  },
+  "Health": {
+    "description": "Health icon",
+    "tags": []
+  },
+  "Heart": {
+    "description": "Favorite or like icon",
+    "tags": []
+  },
+  "HeartFilled": {
+    "description": "Favorite or like icon",
+    "tags": []
+  },
+  "HeartFilledXs": {
+    "description": "Favorite or like icon",
+    "tags": []
+  },
+  "HeartXs": {
+    "description": "Favorite or like icon",
+    "tags": []
+  },
+  "Help": {
+    "description": "Information or help icon",
+    "tags": []
+  },
+  "History": {
+    "description": "History or previous actions icon",
+    "tags": []
+  },
+  "HistoryOff": {
+    "description": "History or previous actions icon",
+    "tags": []
+  },
+  "HistoryOn": {
+    "description": "History or previous actions icon",
+    "tags": []
+  },
+  "Home": {
+    "description": "Home or main page icon",
+    "tags": []
+  },
+  "HomeAlt": {
+    "description": "Home or main page icon",
+    "tags": []
+  },
+  "Identity": {
+    "description": "Identity icon",
+    "tags": []
+  },
+  "IdentityMeSecure": {
+    "description": "Security or protection icon",
+    "tags": []
+  },
+  "ImageCaption": {
+    "description": "Video or image caption icon",
+    "tags": []
+  },
+  "ImageSquare": {
+    "description": "Image or picture icon",
+    "tags": []
+  },
+  "ImageSquarePictureLibrary": {
+    "description": "Image or picture icon",
+    "tags": []
+  },
+  "ImageToText": {
+    "description": "Image or picture icon",
+    "tags": []
+  },
+  "ImageWide": {
+    "description": "Image or picture icon",
+    "tags": []
+  },
+  "ImageWideFilled": {
+    "description": "Image or picture icon",
+    "tags": []
+  },
+  "ImageWidePictureLibrary": {
+    "description": "Image or picture icon",
+    "tags": []
+  },
+  "Images": {
+    "description": "Image or picture icon",
+    "tags": []
+  },
+  "Info": {
+    "description": "Information or help icon",
+    "tags": []
+  },
+  "InfoCircle": {
+    "description": "Information or help icon",
+    "tags": []
+  },
+  "Inpaint": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "InpaintRespond": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "Inspiration": {
+    "description": "Inspiration icon",
+    "tags": []
+  },
+  "InspirationFilled": {
+    "description": "Inspiration Filled icon",
+    "tags": []
+  },
+  "Interactiv": {
+    "description": "Interactiv icon",
+    "tags": []
+  },
+  "InternalKnowledge": {
+    "description": "Internal Knowledge icon",
+    "tags": []
+  },
+  "InternalKnowledgeOptimizedForCircle": {
+    "description": "Internal Knowledge Optimized For Circle icon",
+    "tags": []
+  },
+  "Invoice": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "Io": {
+    "description": "Io icon",
+    "tags": []
+  },
+  "JumpToCaption": {
+    "description": "Video or image caption icon",
+    "tags": []
+  },
+  "Kettlebell": {
+    "description": "Notification bell icon",
+    "tags": []
+  },
+  "Key": {
+    "description": "Lock or security icon",
+    "tags": []
+  },
+  "Keyboard": {
+    "description": "Lock or security icon",
+    "tags": []
+  },
+  "KeyboardShortcut": {
+    "description": "Lock or security icon",
+    "tags": []
+  },
+  "Lab": {
+    "description": "Lab icon",
+    "tags": []
+  },
+  "Language": {
+    "description": "Language icon",
+    "tags": []
+  },
+  "Latency": {
+    "description": "Latency icon",
+    "tags": []
+  },
+  "Lifesaver": {
+    "description": "Download or save file icon",
+    "tags": []
+  },
+  "LightMode": {
+    "description": "Light mode icon",
+    "tags": []
+  },
+  "Lightbulb": {
+    "description": "Light mode icon",
+    "tags": []
+  },
+  "Lightbulb20": {
+    "description": "Light mode icon",
+    "tags": []
+  },
+  "Lightbulb22": {
+    "description": "Light mode icon",
+    "tags": []
+  },
+  "Lightbulb22Filled": {
+    "description": "Light mode icon",
+    "tags": []
+  },
+  "LightbulbGlow": {
+    "description": "Light mode icon",
+    "tags": []
+  },
+  "Link": {
+    "description": "Link or connection icon",
+    "tags": []
+  },
+  "LinkDisabledBold": {
+    "description": "Link disabled icon",
+    "tags": []
+  },
+  "LinkExternalWebsite": {
+    "description": "External link icon",
+    "tags": []
+  },
+  "LocalServices": {
+    "description": "Local Services icon",
+    "tags": []
+  },
+  "Lock": {
+    "description": "Lock or security icon",
+    "tags": []
+  },
+  "LockKeyHole": {
+    "description": "Lock or security icon",
+    "tags": []
+  },
+  "Logout": {
+    "description": "Logout icon",
+    "tags": []
+  },
+  "Loop": {
+    "description": "Loop icon",
+    "tags": []
+  },
+  "LoopLong": {
+    "description": "Loop Long icon",
+    "tags": []
+  },
+  "LoopNormal": {
+    "description": "Loop Normal icon",
+    "tags": []
+  },
+  "LoopShort": {
+    "description": "Loop Short icon",
+    "tags": []
+  },
+  "LoopXs": {
+    "description": "Loop Xs icon",
+    "tags": []
+  },
+  "Lotus": {
+    "description": "Lotus icon",
+    "tags": []
+  },
+  "Love": {
+    "description": "Love icon",
+    "tags": []
+  },
+  "MagnifyingGlassSearch": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "MagnifyingGlassSmSearch": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "Mail": {
+    "description": "Email or mail icon",
+    "tags": []
+  },
+  "ManageHistory": {
+    "description": "History or previous actions icon",
+    "tags": []
+  },
+  "MapPin": {
+    "description": "Bookmark or pin icon",
+    "tags": []
+  },
+  "Maps": {
+    "description": "Maps icon",
+    "tags": []
+  },
+  "MapsAddress": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "MapsDirections": {
+    "description": "Maps Directions icon",
+    "tags": []
+  },
+  "MarkerCode": {
+    "description": "Code or development icon",
+    "tags": []
+  },
+  "MarkerData": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "MarkerMultiple": {
+    "description": "Marker Multiple icon",
+    "tags": []
+  },
+  "MarkerQuote": {
+    "description": "Marker Quote icon",
+    "tags": []
+  },
+  "Mcp": {
+    "description": "Mcp icon",
+    "tags": []
+  },
+  "Members": {
+    "description": "User or member icon",
+    "tags": []
+  },
+  "MembersFilled": {
+    "description": "User or member icon",
+    "tags": []
+  },
+  "MemoryFilledSm": {
+    "description": "Memory Filled Sm icon",
+    "tags": []
+  },
+  "MemoryOffRemember": {
+    "description": "User or member icon",
+    "tags": []
+  },
+  "MemoryOnRemember": {
+    "description": "User or member icon",
+    "tags": []
+  },
+  "MemoryWriteSm": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "Menu": {
+    "description": "Menu or hamburger icon",
+    "tags": []
+  },
+  "MenuInverted": {
+    "description": "Menu or hamburger icon",
+    "tags": []
+  },
+  "MenuSidebar": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "Menubar": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "Messaging": {
+    "description": "Messaging icon",
+    "tags": []
+  },
+  "Mic": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "MicFilled": {
+    "description": "Microphone or sound enabled icon",
+    "tags": []
+  },
+  "MicFilledOff": {
+    "description": "Microphone or sound muted icon",
+    "tags": []
+  },
+  "MicLgDictate": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "MicOff": {
+    "description": "Microphone or sound muted icon",
+    "tags": []
+  },
+  "MinimizeDown": {
+    "description": "Interface element icon",
+    "tags": []
+  },
+  "MinimizeLeft": {
+    "description": "Interface element icon",
+    "tags": []
+  },
+  "MinimizeRight": {
+    "description": "Interface element icon",
+    "tags": []
+  },
+  "MinimizeTop": {
+    "description": "Interface element icon",
+    "tags": []
+  },
+  "Minus": {
+    "description": "Delete or remove item icon",
+    "tags": []
+  },
+  "MinusCircle": {
+    "description": "Delete or remove item icon",
+    "tags": []
+  },
+  "MinusCircleFilled": {
+    "description": "Delete or remove item icon",
+    "tags": []
+  },
+  "Mobile": {
+    "description": "Mobile icon",
+    "tags": []
+  },
+  "Moon": {
+    "description": "Dark mode icon",
+    "tags": []
+  },
+  "MoonSunSystem": {
+    "description": "Dark mode icon",
+    "tags": []
+  },
+  "MoreCircleMenuDots": {
+    "description": "Menu or hamburger icon",
+    "tags": []
+  },
+  "Music": {
+    "description": "Music or sound icon",
+    "tags": []
+  },
+  "MyGptProfileMe": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "Name": {
+    "description": "Name icon",
+    "tags": []
+  },
+  "NewsPaper": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "NoTraining": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "Nodes": {
+    "description": "Nodes icon",
+    "tags": []
+  },
+  "Notebook": {
+    "description": "Notebook or notepad icon",
+    "tags": []
+  },
+  "NotebookCheck": {
+    "description": "Notebook or notepad icon",
+    "tags": []
+  },
+  "NotebookNarrow": {
+    "description": "Navigation arrow icon",
+    "tags": []
+  },
+  "NotebookPencil": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "Notepad": {
+    "description": "Notebook or notepad icon",
+    "tags": []
+  },
+  "NotificationBell": {
+    "description": "Notification bell icon",
+    "tags": []
+  },
+  "NotificationOffBell": {
+    "description": "Notification bell icon",
+    "tags": []
+  },
+  "Number": {
+    "description": "Number icon",
+    "tags": []
+  },
+  "Object": {
+    "description": "Object icon",
+    "tags": []
+  },
+  "On": {
+    "description": "On icon",
+    "tags": []
+  },
+  "OpenLeft": {
+    "description": "Open Left icon",
+    "tags": []
+  },
+  "OpenRight": {
+    "description": "Open Right icon",
+    "tags": []
+  },
+  "OpenaiLogoBold": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "OpenaiLogoBoldBoundingBox": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "OpenaiLogoRegular": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "OpenaiLogoRegularBoundingBox": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "OpenaiLogoWebappVariable480": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "Operator": {
+    "description": "Operator icon",
+    "tags": []
+  },
+  "Order": {
+    "description": "Order icon",
+    "tags": []
+  },
+  "PageBlank": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "Paid": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "Paperclip": {
+    "description": "Paperclip icon",
+    "tags": []
+  },
+  "PaperclipAttach": {
+    "description": "Paperclip Attach icon",
+    "tags": []
+  },
+  "ParentControl": {
+    "description": "Parent Control icon",
+    "tags": []
+  },
+  "PastedText": {
+    "description": "Pasted Text icon",
+    "tags": []
+  },
+  "Pause": {
+    "description": "Pause media icon",
+    "tags": []
+  },
+  "PauseCircle": {
+    "description": "Pause media icon",
+    "tags": []
+  },
+  "PauseCircleFilled": {
+    "description": "Pause media icon",
+    "tags": []
+  },
+  "PauseOutline": {
+    "description": "Pause media icon",
+    "tags": []
+  },
+  "PauseSm": {
+    "description": "Pause media icon",
+    "tags": []
+  },
+  "Paw": {
+    "description": "Paw icon",
+    "tags": []
+  },
+  "Pencil": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "PencilSparkle": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "PencilSquare": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "Pens": {
+    "description": "Pens icon",
+    "tags": []
+  },
+  "Phone": {
+    "description": "Phone icon",
+    "tags": []
+  },
+  "PhoneMissed": {
+    "description": "Phone Missed icon",
+    "tags": []
+  },
+  "PhoneRing": {
+    "description": "Phone Ring icon",
+    "tags": []
+  },
+  "PhoneWaves": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "PictureInPicture": {
+    "description": "Picture In Picture icon",
+    "tags": []
+  },
+  "Pin": {
+    "description": "Bookmark or pin icon",
+    "tags": []
+  },
+  "PinFilled": {
+    "description": "Bookmark or pin icon",
+    "tags": []
+  },
+  "PinWindow": {
+    "description": "Bookmark or pin icon",
+    "tags": []
+  },
+  "Plane": {
+    "description": "Plane icon",
+    "tags": []
+  },
+  "PlantDesk": {
+    "description": "Plant Desk icon",
+    "tags": []
+  },
+  "Play": {
+    "description": "Play media icon",
+    "tags": []
+  },
+  "PlayCircle": {
+    "description": "Play media icon",
+    "tags": []
+  },
+  "PlayCircleFilled": {
+    "description": "Play media icon",
+    "tags": []
+  },
+  "PlayOutline": {
+    "description": "Play media icon",
+    "tags": []
+  },
+  "PlaySm": {
+    "description": "Play media icon",
+    "tags": []
+  },
+  "PlayTriangle": {
+    "description": "Play media icon",
+    "tags": []
+  },
+  "Playground": {
+    "description": "Play media icon",
+    "tags": []
+  },
+  "Plugin": {
+    "description": "Plugin icon",
+    "tags": []
+  },
+  "PluginPuzzle": {
+    "description": "Plugin Puzzle icon",
+    "tags": []
+  },
+  "Plus": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "Plus14px": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "PlusCircle": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "PlusCircleAdd": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "PlusCircleFilled": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "PlusComposer": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "PlusFilled": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "PlusLg": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "PlusLg18pxAdd": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "PlusSm12px": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "PlusSquareAdd": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "PopOutWindow": {
+    "description": "Pop Out Window icon",
+    "tags": []
+  },
+  "PresetDefault": {
+    "description": "Preset Default icon",
+    "tags": []
+  },
+  "PresetSelected": {
+    "description": "Preset Selected icon",
+    "tags": []
+  },
+  "PrivacyIntern": {
+    "description": "Privacy Intern icon",
+    "tags": []
+  },
+  "ProDiamond": {
+    "description": "Pro Diamond icon",
+    "tags": []
+  },
+  "ProFilledDiamond": {
+    "description": "Pro Filled Diamond icon",
+    "tags": []
+  },
+  "ProductTag": {
+    "description": "Symbol or marker icon",
+    "tags": []
+  },
+  "PullRequestClosed": {
+    "description": "Pull Request Closed icon",
+    "tags": []
+  },
+  "PullRequestDraft": {
+    "description": "Pull Request Draft icon",
+    "tags": []
+  },
+  "PullRequestMerged": {
+    "description": "Pull Request Merged icon",
+    "tags": []
+  },
+  "PullRequestOpen": {
+    "description": "Stop media icon",
+    "tags": []
+  },
+  "Pulse": {
+    "description": "Pulse icon",
+    "tags": []
+  },
+  "Question": {
+    "description": "Information or help icon",
+    "tags": []
+  },
+  "QuestionMark": {
+    "description": "Information or help icon",
+    "tags": []
+  },
+  "QuestionMarkCircle": {
+    "description": "Information or help icon",
+    "tags": []
+  },
+  "QuickStart": {
+    "description": "Star or featured icon",
+    "tags": []
+  },
+  "Quote": {
+    "description": "Quote icon",
+    "tags": []
+  },
+  "QuoteReplyFilledQuoteXs": {
+    "description": "Quote Reply Filled Quote Xs icon",
+    "tags": []
+  },
+  "RadioSelected": {
+    "description": "Radio Selected icon",
+    "tags": []
+  },
+  "ReadingLevel": {
+    "description": "Reading Level icon",
+    "tags": []
+  },
+  "Record": {
+    "description": "Record icon",
+    "tags": []
+  },
+  "Regenerate": {
+    "description": "Regenerate icon",
+    "tags": []
+  },
+  "RegenerateOff": {
+    "description": "Regenerate Off icon",
+    "tags": []
+  },
+  "RegenerateStar": {
+    "description": "Star or featured icon",
+    "tags": []
+  },
+  "Reload": {
+    "description": "Reload icon",
+    "tags": []
+  },
+  "RemixMild": {
+    "description": "Remix Mild icon",
+    "tags": []
+  },
+  "RemixMildXs": {
+    "description": "Remix Mild Xs icon",
+    "tags": []
+  },
+  "RemixStrong": {
+    "description": "Remix Strong icon",
+    "tags": []
+  },
+  "RemixSubtle": {
+    "description": "Remix Subtle icon",
+    "tags": []
+  },
+  "RemoveForeverPermanently": {
+    "description": "Delete or remove item icon",
+    "tags": []
+  },
+  "RemoveRedEye": {
+    "description": "Delete or remove item icon",
+    "tags": []
+  },
+  "Reply": {
+    "description": "Reply icon",
+    "tags": []
+  },
+  "Report": {
+    "description": "Report icon",
+    "tags": []
+  },
+  "Resend": {
+    "description": "Resend icon",
+    "tags": []
+  },
+  "ResetChat": {
+    "description": "Chat or messaging icon",
+    "tags": []
+  },
+  "Resolution1080p": {
+    "description": "Resolution1080p icon",
+    "tags": []
+  },
+  "Resolution360p": {
+    "description": "Resolution360p icon",
+    "tags": []
+  },
+  "Resolution480p": {
+    "description": "Resolution480p icon",
+    "tags": []
+  },
+  "Resolution720p": {
+    "description": "Resolution720p icon",
+    "tags": []
+  },
+  "RestoreUntrash": {
+    "description": "Delete or remove item icon",
+    "tags": []
+  },
+  "Rewind": {
+    "description": "Media control icon",
+    "tags": []
+  },
+  "Robot": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "RobotHead": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "RobotHeadSad": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "SavedFilledXs": {
+    "description": "Download or save file icon",
+    "tags": []
+  },
+  "SavedXs": {
+    "description": "Download or save file icon",
+    "tags": []
+  },
+  "Scales": {
+    "description": "Scales icon",
+    "tags": []
+  },
+  "Scissor": {
+    "description": "Scissor icon",
+    "tags": []
+  },
+  "ScissorXs": {
+    "description": "Scissor Xs icon",
+    "tags": []
+  },
+  "ScreenPosition": {
+    "description": "Screen Position icon",
+    "tags": []
+  },
+  "Search": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "SearchConnector": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "SearchFeed": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "SearchXs": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "SelectText": {
+    "description": "Select Text icon",
+    "tags": []
+  },
+  "Settings": {
+    "description": "Settings or configuration icon",
+    "tags": []
+  },
+  "SettingsCircle": {
+    "description": "Settings or configuration icon",
+    "tags": []
+  },
+  "SettingsCog": {
+    "description": "Settings or configuration icon",
+    "tags": []
+  },
+  "SettingsSlider": {
+    "description": "Settings or configuration icon",
+    "tags": []
+  },
+  "SettingsWrench": {
+    "description": "Settings or configuration icon",
+    "tags": []
+  },
+  "Share": {
+    "description": "Share icon",
+    "tags": []
+  },
+  "ShareChat": {
+    "description": "Chat or messaging icon",
+    "tags": []
+  },
+  "ShareScreen": {
+    "description": "Share Screen icon",
+    "tags": []
+  },
+  "ShareScreenFilled": {
+    "description": "Share Screen Filled icon",
+    "tags": []
+  },
+  "ShareScreenOff": {
+    "description": "Share Screen Off icon",
+    "tags": []
+  },
+  "ShareScreenOffFilled": {
+    "description": "Share Screen Off Filled icon",
+    "tags": []
+  },
+  "ShieldCheck": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "ShieldKey": {
+    "description": "Lock or security icon",
+    "tags": []
+  },
+  "ShieldLock": {
+    "description": "Lock or security icon",
+    "tags": []
+  },
+  "ShieldPerson": {
+    "description": "User or member icon",
+    "tags": []
+  },
+  "ShoppingBag": {
+    "description": "Bookmark or pin icon",
+    "tags": []
+  },
+  "Shortcuts": {
+    "description": "Shortcuts icon",
+    "tags": []
+  },
+  "Shuffle": {
+    "description": "Shuffle icon",
+    "tags": []
+  },
+  "Sidebar": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarCollapseLeft": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarCollapseRight": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarFloatingLeft": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarFloatingOpenLeft": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarFloatingOpenRight": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarFloatingRight": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarLeft": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarMenuMobile": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarMenuMobileBadgeCutout": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarOpenLeft": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarOpenLeftAlt": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarOpenRight": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarOpenRightAlt": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SidebarRight": {
+    "description": "Analytics or data visualization icon",
+    "tags": []
+  },
+  "SimpleRelax": {
+    "description": "Simple Relax icon",
+    "tags": []
+  },
+  "SimpleSad": {
+    "description": "Simple Sad icon",
+    "tags": []
+  },
+  "SimpleSmile": {
+    "description": "Simple Smile icon",
+    "tags": []
+  },
+  "Skip": {
+    "description": "Media control icon",
+    "tags": []
+  },
+  "Sleep": {
+    "description": "Sleep icon",
+    "tags": []
+  },
+  "Snorkle": {
+    "description": "Snorkle icon",
+    "tags": []
+  },
+  "Snowflake": {
+    "description": "Snowflake icon",
+    "tags": []
+  },
+  "SoraBasicPopcorn": {
+    "description": "Sora Basic Popcorn icon",
+    "tags": []
+  },
+  "SoraProDirector": {
+    "description": "Sora Pro Director icon",
+    "tags": []
+  },
+  "SoundOffSimpleMute": {
+    "description": "Microphone or sound muted icon",
+    "tags": []
+  },
+  "SoundOffSpeaker": {
+    "description": "Microphone or sound muted icon",
+    "tags": []
+  },
+  "SoundOnReadOutLoudSpeaker": {
+    "description": "Microphone or sound enabled icon",
+    "tags": []
+  },
+  "Sparkle": {
+    "description": "AI or magic feature icon",
+    "tags": []
+  },
+  "SparkleDouble": {
+    "description": "AI or magic feature icon",
+    "tags": []
+  },
+  "SparkleFilledPlus": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "SparklePlus": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "Sparkles": {
+    "description": "AI or magic feature icon",
+    "tags": []
+  },
+  "SparklesFilled": {
+    "description": "AI or magic feature icon",
+    "tags": []
+  },
+  "Speak": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "SpeechToText": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "Speed": {
+    "description": "Speed icon",
+    "tags": []
+  },
+  "SpeedometerLatencySpeed": {
+    "description": "Speedometer Latency Speed icon",
+    "tags": []
+  },
+  "Spelling": {
+    "description": "Spelling icon",
+    "tags": []
+  },
+  "Spin": {
+    "description": "Bookmark or pin icon",
+    "tags": []
+  },
+  "SquareCheckCheckboxChecked": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "SquareCheckFilledCheckboxCheckedFilled": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "SquareCheckboxUnchecked": {
+    "description": "Success or completed action icon",
+    "tags": []
+  },
+  "SquareCode": {
+    "description": "Code or development icon",
+    "tags": []
+  },
+  "SquareFilledTableLegend": {
+    "description": "Grid or layout icon",
+    "tags": []
+  },
+  "SquareImage": {
+    "description": "Image or picture icon",
+    "tags": []
+  },
+  "SquarePlus": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "SquarePlusAlt": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "SquareTableLegend": {
+    "description": "Grid or layout icon",
+    "tags": []
+  },
+  "SquareText": {
+    "description": "Square Text icon",
+    "tags": []
+  },
+  "Stack": {
+    "description": "Stack icon",
+    "tags": []
+  },
+  "Star": {
+    "description": "Star or featured icon",
+    "tags": []
+  },
+  "StarFilled": {
+    "description": "Star or featured icon",
+    "tags": []
+  },
+  "StartStrokeMd": {
+    "description": "Star or featured icon",
+    "tags": []
+  },
+  "Status": {
+    "description": "Status icon",
+    "tags": []
+  },
+  "Stethoscope": {
+    "description": "Stethoscope icon",
+    "tags": []
+  },
+  "StickyNote": {
+    "description": "Sticky Note icon",
+    "tags": []
+  },
+  "Stop": {
+    "description": "Stop media icon",
+    "tags": []
+  },
+  "StopCircle": {
+    "description": "Stop media icon",
+    "tags": []
+  },
+  "StopCircleFilled": {
+    "description": "Stop media icon",
+    "tags": []
+  },
+  "StopOutline": {
+    "description": "Stop media icon",
+    "tags": []
+  },
+  "StopSm": {
+    "description": "Stop media icon",
+    "tags": []
+  },
+  "StopStrokeMd": {
+    "description": "Stop media icon",
+    "tags": []
+  },
+  "Stopwatch": {
+    "description": "Stop media icon",
+    "tags": []
+  },
+  "Storage": {
+    "description": "Storage icon",
+    "tags": []
+  },
+  "Storyboard": {
+    "description": "Storyboard icon",
+    "tags": []
+  },
+  "String": {
+    "description": "String icon",
+    "tags": []
+  },
+  "Studio": {
+    "description": "Studio icon",
+    "tags": []
+  },
+  "Stuff": {
+    "description": "Stuff icon",
+    "tags": []
+  },
+  "StuffTools": {
+    "description": "Stuff Tools icon",
+    "tags": []
+  },
+  "SubscriptionPlan": {
+    "description": "Code or development icon",
+    "tags": []
+  },
+  "SuggestEdit": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "Suitcase": {
+    "description": "Suitcase icon",
+    "tags": []
+  },
+  "SuitcaseFilledWorkBusiness": {
+    "description": "Business or workspace icon",
+    "tags": []
+  },
+  "SuitcaseWorkBusiness": {
+    "description": "Business or workspace icon",
+    "tags": []
+  },
+  "Sun": {
+    "description": "Theme or mode icon",
+    "tags": []
+  },
+  "SystemMode": {
+    "description": "System Mode icon",
+    "tags": []
+  },
+  "TBoneRaw": {
+    "description": "T Bone Raw icon",
+    "tags": []
+  },
+  "TableCellFilled": {
+    "description": "Grid or layout icon",
+    "tags": []
+  },
+  "TableCellsFilled": {
+    "description": "Grid or layout icon",
+    "tags": []
+  },
+  "TableColumnFilled": {
+    "description": "Grid or layout icon",
+    "tags": []
+  },
+  "TableFilled": {
+    "description": "Grid or layout icon",
+    "tags": []
+  },
+  "TableRowFilled": {
+    "description": "Grid or layout icon",
+    "tags": []
+  },
+  "Tag": {
+    "description": "Symbol or marker icon",
+    "tags": []
+  },
+  "Tap": {
+    "description": "Tap icon",
+    "tags": []
+  },
+  "Tasks": {
+    "description": "Tasks icon",
+    "tags": []
+  },
+  "Telescope": {
+    "description": "Search or find content icon",
+    "tags": []
+  },
+  "Terminal": {
+    "description": "Terminal icon",
+    "tags": []
+  },
+  "TerminalLg": {
+    "description": "Terminal Lg icon",
+    "tags": []
+  },
+  "Terms": {
+    "description": "Terms icon",
+    "tags": []
+  },
+  "Text": {
+    "description": "Text icon",
+    "tags": []
+  },
+  "TextLonger": {
+    "description": "Text Longer icon",
+    "tags": []
+  },
+  "TextPrompt": {
+    "description": "Text Prompt icon",
+    "tags": []
+  },
+  "TextShorter": {
+    "description": "Text Shorter icon",
+    "tags": []
+  },
+  "TextShorterConcise": {
+    "description": "Text Shorter Concise icon",
+    "tags": []
+  },
+  "TextToSpeech": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "ThumbDown": {
+    "description": "Thumb Down icon",
+    "tags": []
+  },
+  "ThumbDownFilled": {
+    "description": "Thumb Down Filled icon",
+    "tags": []
+  },
+  "ThumbMixed": {
+    "description": "Thumb Mixed icon",
+    "tags": []
+  },
+  "ThumbUp": {
+    "description": "Thumb Up icon",
+    "tags": []
+  },
+  "ThumbUpFilled": {
+    "description": "Thumb Up Filled icon",
+    "tags": []
+  },
+  "ThumbnailLarge": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "ThumbnailMedium": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "ThumbnailSmall": {
+    "description": "AI or automation icon",
+    "tags": []
+  },
+  "Thumbs": {
+    "description": "Thumbs icon",
+    "tags": []
+  },
+  "Timer": {
+    "description": "Time or clock icon",
+    "tags": []
+  },
+  "Tools": {
+    "description": "Tools icon",
+    "tags": []
+  },
+  "ToolsSkills": {
+    "description": "Tools Skills icon",
+    "tags": []
+  },
+  "Translate": {
+    "description": "Translate icon",
+    "tags": []
+  },
+  "Trash": {
+    "description": "Delete or remove item icon",
+    "tags": []
+  },
+  "TrashRemove": {
+    "description": "Delete or remove item icon",
+    "tags": []
+  },
+  "Trending": {
+    "description": "Trending icon",
+    "tags": []
+  },
+  "TriangleExclamationErrorWarning": {
+    "description": "Error or warning icon",
+    "tags": []
+  },
+  "TriangleExclamationFilledErrorWarning": {
+    "description": "Error or warning icon",
+    "tags": []
+  },
+  "TrophyTop": {
+    "description": "Trophy Top icon",
+    "tags": []
+  },
+  "TuningFork": {
+    "description": "Tuning Fork icon",
+    "tags": []
+  },
+  "Unarchive": {
+    "description": "File or document icon",
+    "tags": []
+  },
+  "Undo": {
+    "description": "Undo icon",
+    "tags": []
+  },
+  "Unlink": {
+    "description": "Link or connection icon",
+    "tags": []
+  },
+  "Unpin": {
+    "description": "Bookmark or pin icon",
+    "tags": []
+  },
+  "Upgrade": {
+    "description": "Upgrade icon",
+    "tags": []
+  },
+  "UpgradePlan": {
+    "description": "Upgrade Plan icon",
+    "tags": []
+  },
+  "UploadDocuments": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "Upscale": {
+    "description": "Upscale icon",
+    "tags": []
+  },
+  "UpscaleXs": {
+    "description": "Upscale Xs icon",
+    "tags": []
+  },
+  "Usage": {
+    "description": "Usage icon",
+    "tags": []
+  },
+  "User": {
+    "description": "User or member icon",
+    "tags": []
+  },
+  "UserAdd": {
+    "description": "Add user or member icon",
+    "tags": []
+  },
+  "UserGpts": {
+    "description": "User or member icon",
+    "tags": []
+  },
+  "UserHeart": {
+    "description": "User or member icon",
+    "tags": []
+  },
+  "UserLock": {
+    "description": "User or member icon",
+    "tags": []
+  },
+  "UserVoice": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "Users": {
+    "description": "User or member icon",
+    "tags": []
+  },
+  "Variation2v2": {
+    "description": "Variation2v2 icon",
+    "tags": []
+  },
+  "VariationV21": {
+    "description": "Variation V21 icon",
+    "tags": []
+  },
+  "VariationV31": {
+    "description": "Variation V31 icon",
+    "tags": []
+  },
+  "VariationV32": {
+    "description": "Variation V32 icon",
+    "tags": []
+  },
+  "VariationV33": {
+    "description": "Variation V33 icon",
+    "tags": []
+  },
+  "VariationV41": {
+    "description": "Variation V41 icon",
+    "tags": []
+  },
+  "VariationV42": {
+    "description": "Variation V42 icon",
+    "tags": []
+  },
+  "VariationV43": {
+    "description": "Variation V43 icon",
+    "tags": []
+  },
+  "VariationV44": {
+    "description": "Variation V44 icon",
+    "tags": []
+  },
+  "VersionsV1": {
+    "description": "Versions V1 icon",
+    "tags": []
+  },
+  "Video": {
+    "description": "Video content icon",
+    "tags": []
+  },
+  "VideoCaption": {
+    "description": "Video or image caption icon",
+    "tags": []
+  },
+  "VideoFilled": {
+    "description": "Video content icon",
+    "tags": []
+  },
+  "VideoFilledOff": {
+    "description": "Video content icon",
+    "tags": []
+  },
+  "VideoGrid": {
+    "description": "Video content icon",
+    "tags": []
+  },
+  "VideoList": {
+    "description": "Video content icon",
+    "tags": []
+  },
+  "VideoToText": {
+    "description": "Video content icon",
+    "tags": []
+  },
+  "Videos": {
+    "description": "Video content icon",
+    "tags": []
+  },
+  "Voice": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "Voice4Bars": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "Voice5BarsSoundwave": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "VoiceBold": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "VoiceInputAreaMobileFilledVoiceXs": {
+    "description": "Microphone or sound enabled icon",
+    "tags": []
+  },
+  "VoiceLight": {
+    "description": "Microphone or voice recording icon",
+    "tags": []
+  },
+  "Warning": {
+    "description": "Error or warning icon",
+    "tags": []
+  },
+  "WarningFilledWrapCenteredForCircle": {
+    "description": "Error or warning icon",
+    "tags": []
+  },
+  "WarningWrapCenteredForCircle": {
+    "description": "Error or warning icon",
+    "tags": []
+  },
+  "Wave": {
+    "description": "Wave icon",
+    "tags": []
+  },
+  "WebsiteNetwork": {
+    "description": "Website Network icon",
+    "tags": []
+  },
+  "Whisk": {
+    "description": "Whisk icon",
+    "tags": []
+  },
+  "WhisperAutoSubmit": {
+    "description": "Whisper Auto Submit icon",
+    "tags": []
+  },
+  "Widget": {
+    "description": "Widget icon",
+    "tags": []
+  },
+  "WidgetAdd": {
+    "description": "Add or create new item icon",
+    "tags": []
+  },
+  "WorkWithApps": {
+    "description": "Work With Apps icon",
+    "tags": []
+  },
+  "Workspace": {
+    "description": "Business or workspace icon",
+    "tags": []
+  },
+  "Wreath": {
+    "description": "Wreath icon",
+    "tags": []
+  },
+  "WriteAlt": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "WriteAlt2": {
+    "description": "Edit or modify content icon",
+    "tags": []
+  },
+  "Writing": {
+    "description": "Writing icon",
+    "tags": []
+  },
+  "XCircle": {
+    "description": "X Circle icon",
+    "tags": []
+  },
+  "XCircleCrossedClose": {
+    "description": "X Circle Crossed Close icon",
+    "tags": []
+  },
+  "XCircleFilled": {
+    "description": "X Circle Filled icon",
+    "tags": []
+  },
+  "XCircleFilledCrossedClose": {
+    "description": "X Circle Filled Crossed Close icon",
+    "tags": []
+  },
+  "XCrossed": {
+    "description": "X Crossed icon",
+    "tags": []
+  },
+  "XSquareCrossed": {
+    "description": "X Square Crossed icon",
+    "tags": []
+  },
+  "XSquareFilledCrossed": {
+    "description": "X Square Filled Crossed icon",
+    "tags": []
+  },
+  "XXs": {
+    "description": "X Xs icon",
+    "tags": []
+  },
+  "XXsCrossed": {
+    "description": "X Xs Crossed icon",
+    "tags": []
+  }
+}
